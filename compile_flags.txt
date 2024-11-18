@@ -1,0 +1,7 @@
+-Iincludes
+-Iminilibx-linux
+-Wall
+-Werror
+-Wextra
+-g
+-lreadline
