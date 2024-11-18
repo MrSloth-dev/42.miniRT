@@ -75,6 +75,15 @@ $(NAME): $(OBJS) $(HEADER)
 	@echo "$(GREEN)$(NAME) created[0m ✅"
 
 
+LIBX_DIR = minilibx-linux
+.PHONY: libx
+$(LIBX_DIR) :
+	wget https://cdn.intra.42.fr/document/document/22621/minilibx-linux.tgz
+	tar xf minilibx-linux.tgz
+	rm -fr minilibx-linux.tgz
+
+libx : $(LIBX_DIR)
+
 .PHONY: norm
 norm:
 	@norminette | grep -E 'Error:|rror!'
