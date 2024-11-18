@@ -1,1 +1,3 @@
 # miniRT
+
+Raytracer with minilibx
