@@ -38,21 +38,31 @@ vpath %.c src
 HEADER = minirt.h ft_printf.h
 PRINTDIR = ./includes/ft_printf/
 PRINTFT = ./includes/ft_printf/libftprintf.a
+GNLDIR = ./includes/get_next_line/
+GNLFT = ./includes/get_next_line/get_next_line.c
+GNLUFT = ./includes/get_next_line/get_next_line_utils.c
+GNL  = $(GNLFT) $(GNLUFT)
 
 HELPDIR = src/00_help
 INITDIR = src/00_init
 OPERDIR = src/01_oper
+PARSEDIR = src/02_parse
 
-HELPER =$(HELPDIR)/assert.c
+HELPER =$(HELPDIR)/assert.c \
+	$(HELPDIR)/ft_free.c
+
 INIT =	$(INITDIR)/main.c \
 	$(INITDIR)/events.c	
 
 OPER =	$(OPERDIR)/00_oper.c \
 	$(OPERDIR)/01_matrix.c
 
+PARSE = $(PARSEDIR)/00_checksyntax.c
 
 
-SRCS =	$(HELPER) $(INIT) $(OPER)
+
+
+SRCS =	$(HELPER) $(INIT) $(OPER) $(PARSE)
 
 OBJS = $(SRCS:.c=.o)
 
@@ -69,9 +79,9 @@ all: $(NAME)
 $(NAME): $(OBJS) $(HEADER)
 	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)..."
 	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)..."
-	@make -C ./minilibx-linux -s
 	@make -C $(PRINTDIR) -s
-	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJS) $(PRINTFT) $(MLXFLAGS) -o $(NAME)
+	@make -C ./minilibx-linux -s
+	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJS) $(MLXFLAGS) $(GNL) $(PRINTFT) -o $(NAME)
 	@echo "$(GREEN)$(NAME) created[0m ✅"
 
 
@@ -110,12 +120,14 @@ vgdb : re
 .PHONY: clean
 clean:
 	@ $(RM) -f $(OBJS)
+	@make clean -C $(PRINTDIR) -s
 	@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✅"
 
 
 .PHONY: fclean
 fclean: clean
 	@ $(RM) $(NAME) $(NAME_BONUS)
+	@make fclean -C $(PRINTDIR) -s
 	@echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✅"
 
 

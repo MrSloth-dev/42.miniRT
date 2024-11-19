@@ -126,12 +126,14 @@ int	main(int argc, char *argv[])
 
 	(void)argc;
 	canvas.name = argv[0] + 2;
+	ft_parse(&canvas, argv[1]);
+
 	// m = ft_create_matrix(4, 4);
 	// ft_set_matrix_values(&m,(double[4][4]){{1,2,3,4}, {5.5,6.5,7.5,8.5}, {9,10,11,12}, {13.5,14.5,15.5,16.5}});
 	// ft_print_matrix(m);
 	// operations_testing();
-	ft_setup(&canvas);
-	jumpingball(&canvas);
+	// ft_setup(&canvas);
+	// jumpingball(&canvas);
 	// ft_draw_square(&canvas, (t_tuple){150, 150, 0, 0}, (t_tuple){150, 150, 0, 0}, 0xFFFF0000);
 	// mlx_loop(canvas.mlx);
 	return (0);

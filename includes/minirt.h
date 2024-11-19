@@ -1,8 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <math.h>
+#include <fcntl.h>
+#include "ft_printf.h"
+#include "get_next_line.h"
 #include "../minilibx-linux/mlx.h"
+#include <math.h>
 #include <X11/keysym.h>
 #include <X11/X.h>
 
@@ -101,8 +104,13 @@ int		ft_printf(int fd, const char *str, ...);
 void ft_print_matrix(t_matrix m);
 t_matrix	ft_create_matrix(int rows, int cols);
 void	ft_set_matrix_values(t_matrix *m, double values[4][4]);
-
+//minilibx
 int	ft_refreshframe(t_canvas *canvas);
 int	close_handler(t_canvas *canvas);
 int	mouse_handler(int mousecode, int x, int y, t_canvas *canvas);
 int	key_handler(int keysym, t_canvas *canvas);
+
+//parse
+int	ft_check_syntax(t_canvas *canvas, char *file);
+int	ft_parse(t_canvas *canvas, char *file);
+
