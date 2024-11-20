@@ -25,6 +25,7 @@
 
 #define T_VECTOR 0
 #define T_POINT 1
+#define WHITESPACE " \t\n\r\v\f"
 
 typedef struct s_matrix
 {
@@ -88,6 +89,7 @@ typedef struct s_canvas
 
 void	ft_tuple_init(t_tuple *tuple, t_point coord, int type);
 void	ft_assert(int condition, char *message);
+void	*ft_free(void *ptr);
 //oper.c
 t_tuple	ft_add_tuple(t_tuple tuple1, t_tuple tuple2);
 double	ft_magn_tuple(t_tuple tuple);

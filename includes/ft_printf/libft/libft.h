@@ -6,7 +6,7 @@
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 11:22:35 by joao-pol          #+#    #+#             */
-/*   Updated: 2024/05/02 15:14:54 by joao-pol         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:38:00 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		ft_putstr_fd(char *str, int fd);
 int		ft_puthex_fd(int nbr, char x, int fd);
 int		ft_putpointer_fd(void *ptr, int fd);
 char	**ft_split(char *str, char c);
+char	**ft_split_charset(char *str, char *charset);
 char	*ft_strchr(const char *s, char c);
 char	*ft_strdup(const char *s);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
