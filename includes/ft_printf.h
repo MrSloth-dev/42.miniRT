@@ -6,7 +6,7 @@
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 10:47:20 by joao-pol          #+#    #+#             */
-/*   Updated: 2024/10/22 13:10:03 by isilva-t         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:43:30 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		ft_puthex_fd(unsigned int nbr, char x, int fd);
 int		ft_putpointer_fd(unsigned long long ptr, int fd);
 char	*ft_itoa(int nbr);
 char	**ft_split(char *str, char c);
+char	**ft_split_charset(char *str, char *charset);
 char	*ft_strchr(const char *s, char c);
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *s);
