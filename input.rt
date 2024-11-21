@@ -3,7 +3,7 @@ identifier: A
 lighting ratio [0.0-1.0] = 0.2
 RGB [0-255] = 255,255,255
 
-C -50.0,0,20		0,0,1		70
+C -50.0,0,20		0,0,1		70 1
 identifier: C
 x,y,z coordinates of the POV -50.0,0,20
 3D normalized  orientation vector. In range [-1,1] for each axis 0,0,1
@@ -36,7 +36,8 @@ The cylinder height: 21.42
 R,G,B colors in range [0,255]: 10, 0, 255
 
 Example:
-A 0.2 255,255,255
+A 0.2 255,255,180
+A 0.2 255,180,180
 C -50,0,20 0,0,0 70
 L -40,0,30 0.7 255,255,255
 pl 0,0,0 0,1.0,0 255,0,225

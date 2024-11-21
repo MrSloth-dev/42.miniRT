@@ -118,6 +118,10 @@ void	jumpingball(t_canvas *canvas)
 	}
 }
 
+void	ft_free_canvas(t_canvas *canvas)
+{
+	ft_free(canvas->ambient);
+}
 
 int	main(int argc, char *argv[])
 {
@@ -126,8 +130,22 @@ int	main(int argc, char *argv[])
 
 	(void)argc;
 	canvas.name = argv[0] + 2;
-	ft_parse(&canvas, argv[1]);
+	ft_init_canvas(&canvas);
 
+	ft_parse(&canvas, argv[1]);
+	// while (canvas.ambient)
+	// {
+	// 	int i = 0;
+	// 	printf("\n%d\n", i++);
+	// 	printf("ambient ratio %f\n", canvas.ambient->ratio);
+	// 	printf("ambient color r %f\n", canvas.ambient->color.r);
+	// 	printf("ambient color g %f\n", canvas.ambient->color.g);
+	// 	printf("ambient color b %f\n", canvas.ambient->color.b);
+	// 	canvas.ambient = canvas.ambient->next;
+	// 	
+	// }
+
+	ft_free_canvas(&canvas);
 	// m = ft_create_matrix(4, 4);
 	// ft_set_matrix_values(&m,(double[4][4]){{1,2,3,4}, {5.5,6.5,7.5,8.5}, {9,10,11,12}, {13.5,14.5,15.5,16.5}});
 	// ft_print_matrix(m);

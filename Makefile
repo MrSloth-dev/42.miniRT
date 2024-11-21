@@ -21,8 +21,7 @@ RM	    = rm -rf
 ################################################################################
 LEAKS_LOG              = ./leaks.log
 READLINE_SUPP          = readline.supp
-VALGRINDFLAGS          = -s --suppressions=$(READLINE_SUPP) \
-			 --tool=memcheck -q --leak-check=full \
+VALGRINDFLAGS          = --tool=memcheck -q --leak-check=full \
                          --show-leak-kinds=all --track-origins=yes \
                          --track-fds=yes --show-below-main=no \
 
@@ -52,12 +51,14 @@ HELPER =$(HELPDIR)/assert.c \
 	$(HELPDIR)/ft_free.c
 
 INIT =	$(INITDIR)/main.c \
-	$(INITDIR)/events.c	
+	$(INITDIR)/init.c\
+	$(INITDIR)/events.c \
+	$(INITDIR)/init_objects.c
 
 OPER =	$(OPERDIR)/00_oper.c \
 	$(OPERDIR)/01_matrix.c
 
-PARSE = $(PARSEDIR)/00_checksyntax.c
+PARSE = $(PARSEDIR)/00_parse.c
 
 
 
@@ -111,11 +112,14 @@ gdb : re
 .PHONY: vgdb
 vgdb : re
 	tmux new-window  -n vGdb
-	tmux send-keys 'valgrind -q --vgdb-error=0 ./minishell' C-m Escape
+	tmux send-keys 'valgrind -q --vgdb-error=0 ./minirt input.rt' C-m Escape
 	tmux split-window -h
-	tmux send-keys -t Gdb.2 'gdbtui ./minishell' C-m
+	tmux send-keys -t Gdb.2 'gdbtui ./minirt' C-m
 	tmux select-pane -t vGdb.1
 
+.PHONY: va
+va : re
+	valgrind $(VALGRINDFLAGS) ./$(NAME) input.rt
 
 .PHONY: clean
 clean:
