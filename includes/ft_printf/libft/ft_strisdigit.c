@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strisdigit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 13:35:53 by joao-pol          #+#    #+#             */
-/*   Updated: 2024/05/07 15:47:47 by joao-pol         ###   ########.fr       */
+/*   Created: 2024/11/21 13:31:12 by joao-pol          #+#    #+#             */
+/*   Updated: 2024/11/21 13:31:12 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
+int	ft_strisdigit(char *str)
+{
+	int	i;
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-#include <fcntl.h>
-#include <stdlib.h>
-
-void	ft_bzero(char *s, size_t n);
-void	*ft_calloc(size_t nmemb, size_t size);
-char	*ft_strdup(char *str);
-int		ft_strlen(char *str);
-char	*get_next_line(int fd);
-char	*ft_cleanfile(char *str);
-#endif
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] < '0' || str[i] > '9') && str[i] != '.'
+			&& str[i] != '-' && str[i] != '+')
+			return (0);
+		i++;
+	}
+	return (1);
+}

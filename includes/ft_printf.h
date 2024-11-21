@@ -17,7 +17,8 @@
 # include <stdarg.h>
 
 int		ft_printf(int fd, const char *str, ...);
-int		ft_atoi(const char *rstr);
+int		ft_atoi(const char *str);
+double		ft_atod(const char *str);
 int		ft_uputnbr_fd(unsigned int nb, int fd);
 int		ft_putchar_fd(char c, int fd);
 int		ft_putnbr_fd(int nb, int fd);
@@ -39,6 +40,7 @@ int		ft_isalpha(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
+int		ft_strisdigit(char *str);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);

@@ -6,6 +6,7 @@
 #include "get_next_line.h"
 #include "../minilibx-linux/mlx.h"
 #include <math.h>
+#include "objects.h"
 #include <X11/keysym.h>
 #include <X11/X.h>
 
@@ -26,41 +27,6 @@
 #define T_VECTOR 0
 #define T_POINT 1
 #define WHITESPACE " \t\n\r\v\f"
-
-typedef struct s_matrix
-{
-	int			rows;
-	int			cols;
-	double		data[4][4];
-}				t_matrix;
-
-typedef struct s_point
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_point;
-
-typedef struct s_tuple
-{
-	double	x;
-	double	y;
-	double	z;
-	int		type;
-}	t_tuple;
-
-typedef struct s_color
-{
-	double	r;
-	double	g;
-	double	b;
-}	t_color;
-
-typedef struct s_limit
-{
-	double	min;
-	double	max;
-}	t_limit;
 
 typedef struct s_img
 {
@@ -85,34 +51,43 @@ typedef struct s_canvas
 	double		scale;
 	int			help;
 	t_img		*menu;
-}				t_canvas;
+	t_ambient	*ambient;
+	t_camera	*camera;
+	t_light		*light;
+	t_sphere	*sphere;
+	t_plane		*plane;
+	t_cylinder	*cylinder;
 
-void	ft_tuple_init(t_tuple *tuple, t_point coord, int type);
-void	ft_assert(int condition, char *message);
-void	*ft_free(void *ptr);
+}	t_canvas;
+
+void		ft_tuple_init(t_tuple *tuple, t_point coord, int type);
+void		ft_assert(int condition, char *message);
+void		*ft_free(void *ptr);
+//init
+void		ft_init_canvas(t_canvas *canvas);
+
 //oper.c
-t_tuple	ft_add_tuple(t_tuple tuple1, t_tuple tuple2);
-double	ft_magn_tuple(t_tuple tuple);
-t_tuple	ft_sub_tuple(t_tuple tuple1, t_tuple tuple2);
-t_tuple	ft_neg_tuple(t_tuple tuple);
-t_tuple	ft_scalar_tuple(t_tuple tuple, double value);
-t_tuple	ft_mul_tuple(t_tuple tuple1, t_tuple tuple2);
-t_tuple ft_norm_vector(t_tuple tuple);
-double	ft_dotprod_vector(t_tuple a, t_tuple b);
-t_tuple	ft_crossprod_vector(t_tuple a, t_tuple b);
+t_tuple		ft_add_tuple(t_tuple tuple1, t_tuple tuple2);
+double		ft_magn_tuple(t_tuple tuple);
+t_tuple		ft_sub_tuple(t_tuple tuple1, t_tuple tuple2);
+t_tuple		ft_neg_tuple(t_tuple tuple);
+t_tuple		ft_scalar_tuple(t_tuple tuple, double value);
+t_tuple		ft_mul_tuple(t_tuple tuple1, t_tuple tuple2);
+t_tuple		ft_norm_vector(t_tuple tuple);
+double		ft_dotprod_vector(t_tuple a, t_tuple b);
+t_tuple		ft_crossprod_vector(t_tuple a, t_tuple b);
 
-int		ft_printf(int fd, const char *str, ...);
+int			ft_printf(int fd, const char *str, ...);
 
-void ft_print_matrix(t_matrix m);
+void		ft_print_matrix(t_matrix m);
 t_matrix	ft_create_matrix(int rows, int cols);
-void	ft_set_matrix_values(t_matrix *m, double values[4][4]);
+void		ft_set_matrix_values(t_matrix *m, double values[4][4]);
 //minilibx
-int	ft_refreshframe(t_canvas *canvas);
-int	close_handler(t_canvas *canvas);
-int	mouse_handler(int mousecode, int x, int y, t_canvas *canvas);
-int	key_handler(int keysym, t_canvas *canvas);
+int			ft_refreshframe(t_canvas *canvas);
+int			close_handler(t_canvas *canvas);
+int			mouse_handler(int mousecode, int x, int y, t_canvas *canvas);
+int			key_handler(int keysym, t_canvas *canvas);
 
 //parse
-int	ft_check_syntax(t_canvas *canvas, char *file);
-int	ft_parse(t_canvas *canvas, char *file);
-
+int			ft_check_syntax(t_canvas *canvas, char *file);
+int			ft_parse(t_canvas *canvas, char *file);

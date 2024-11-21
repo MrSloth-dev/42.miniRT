@@ -11,12 +11,9 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <fcntl.h>
-#include <stdlib.h>
-#include <unistd.h>
 
-char	*ft_concatenate(char *buffer, char *str);
-int		ft_check_newline(char *file);
+static char	*ft_concatenate(char *buffer, char *str);
+static int		ft_check_newline(char *file);
 static char	*ft_free_gnl(char **buffer, char **file);
 
 char	*get_next_line(int fd)
@@ -46,7 +43,7 @@ char	*get_next_line(int fd)
 	return (final);
 }
 
-int	ft_check_newline(char *file)
+static int	ft_check_newline(char *file)
 {
 	int	i;
 
@@ -70,7 +67,7 @@ static char	*ft_free_gnl(char **buffer, char **file)
 	return (NULL);
 }
 
-char	*ft_concatenate(char *buffer, char *file)
+static char	*ft_concatenate(char *buffer, char *file)
 {
 	int			i;
 	int			j;
