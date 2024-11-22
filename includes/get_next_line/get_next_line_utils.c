@@ -12,57 +12,6 @@
 
 #include "get_next_line.h"
 
-void	ft_bzero(char *s, size_t n)
-{
-	s[n - 1] = '\0';
-}
-
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	void	*ptr;
-
-	if (nmemb * size == 0)
-		return ((void *) malloc(0));
-	ptr = malloc(nmemb * size);
-	if (!ptr)
-		return (NULL);
-	ft_bzero(ptr, nmemb * size);
-	return (ptr);
-}
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strdup(char *str)
-{
-	int		i;
-	char	*result;
-
-	if (!str || !*str)
-		return (NULL);
-	i = 0;
-	while (str[i] && str[i] != '\n')
-		i++;
-	result = ft_calloc((i + 2), sizeof(char));
-	i = 0;
-	while (str[i] && str[i] != '\n')
-	{
-		result[i] = str[i];
-		i++;
-	}
-	result[i] = str[i];
-	return (result);
-}
-
 char	*ft_cleanfile(char *file)
 {
 	char	*result;

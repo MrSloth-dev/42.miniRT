@@ -25,7 +25,7 @@ void	ft_add_object(void **head, void *object)
 	*(void **)last = object;
 }
 
-t_ambient	*ft_lstnew_ambient(int ratio, t_color color)
+t_ambient	*ft_init_ambient(int ratio, t_color color)
 {
 	t_ambient	*new;
 
@@ -34,11 +34,10 @@ t_ambient	*ft_lstnew_ambient(int ratio, t_color color)
 		return (NULL);
 	new->ratio = ratio;
 	new->color = color;
-	new->next = NULL;
 	return (new);
 }
 
-t_camera	*ft_lstnew_camera(t_tuple coord, t_tuple norm, int fov)
+t_camera	*ft_init_camera(t_tuple coord, t_tuple norm, int fov)
 {
 	t_camera	*new;
 
@@ -48,11 +47,10 @@ t_camera	*ft_lstnew_camera(t_tuple coord, t_tuple norm, int fov)
 	new->coord = coord;
 	new->norm = norm;
 	new->fov = fov;
-	new->next = NULL;
 	return (new);
 }
 
-t_light	*ft_lstnew_light(t_tuple coord, int bright, t_color color)
+t_light	*ft_init_light(t_tuple coord, int bright, t_color color)
 {
 	t_light	*new;
 
@@ -62,11 +60,10 @@ t_light	*ft_lstnew_light(t_tuple coord, int bright, t_color color)
 	new->coord = coord;
 	new->bright = bright;
 	new->color = color;
-	new->next = NULL;
 	return (new);
 }
 
-t_sphere	*ft_lstnew_sphere(t_tuple coord, int diameter, t_color color)
+t_sphere	*ft_init_sphere(t_tuple coord, int diameter, t_color color)
 {
 	t_sphere	*new;
 
@@ -76,11 +73,10 @@ t_sphere	*ft_lstnew_sphere(t_tuple coord, int diameter, t_color color)
 	new->coord = coord;
 	new->diameter = diameter;
 	new->color = color;
-	new->next = NULL;
 	return (new);
 }
 
-t_plane	*ft_lstnew_plane(t_tuple coord, t_tuple norm, t_color color)
+t_plane	*ft_init_plane(t_tuple coord, t_tuple norm, t_color color)
 {
 	t_plane	*new;
 
@@ -90,11 +86,10 @@ t_plane	*ft_lstnew_plane(t_tuple coord, t_tuple norm, t_color color)
 	new->coord = coord;
 	new->norm = norm;
 	new->color = color;
-	new->next = NULL;
 	return (new);
 }
 
-t_cylinder	*ft_lstnew_cylinder(t_tuple coord, t_tuple norm,
+t_cylinder	*ft_init_cylinder(t_tuple coord, t_tuple norm,
 							t_cyl_size size, t_color color)
 {
 	t_cylinder	*new;
@@ -107,6 +102,5 @@ t_cylinder	*ft_lstnew_cylinder(t_tuple coord, t_tuple norm,
 	new->size.diameter = size.diameter;
 	new->size.height = size.height;
 	new->color = color;
-	new->next = NULL;
 	return (new);
 }

@@ -3,7 +3,7 @@
 ################################################################################
 
 NAME = minirt
-CC = cc
+CC = zig cc
 CFLAGS = -Iincludes -g
 EFLAGS = -Wall -Wextra -Werror
 MLXFLAGS = -Ofast -Lminilibx-linux -lm -lmlx -lX11 -lXext
@@ -58,7 +58,10 @@ INIT =	$(INITDIR)/main.c \
 OPER =	$(OPERDIR)/00_oper.c \
 	$(OPERDIR)/01_matrix.c
 
-PARSE = $(PARSEDIR)/00_parse.c
+PARSE = $(PARSEDIR)/00_parse.c \
+	$(PARSEDIR)/01_syntax.c \
+	$(PARSEDIR)/02_syntax_helper.c \
+	$(PARSEDIR)/03_create_objects.c
 
 
 

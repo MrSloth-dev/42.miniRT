@@ -17,6 +17,8 @@ int	ft_strisdigit(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 	{
 		if ((str[i] < '0' || str[i] > '9') && str[i] != '.'
