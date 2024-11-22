@@ -17,7 +17,7 @@ typedef struct s_tuple
 	double	x;
 	double	y;
 	double	z;
-	int		type;
+	int		w;
 }	t_tuple;
 
 typedef struct s_color

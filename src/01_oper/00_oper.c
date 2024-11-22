@@ -8,10 +8,10 @@ int	ft_floatcmp(double num1, double num2)
 		return (0);
 }
 
-void	ft_tuple_init(t_tuple *tuple, t_point coord, int type)
+void	ft_tuple_init(t_tuple *tuple, t_point coord, int w)
 {
-	ft_assert((type == T_POINT || type == T_VECTOR), "Invalid tuple type!\n");
-	tuple->type = type;
+	ft_assert((w == T_POINT || w == T_VECTOR), "Invalid tuple w!\n");
+	tuple->w = w;
 	tuple->x = coord.x;
 	tuple->y = coord.y;
 	tuple->z = coord.z;
@@ -21,7 +21,7 @@ t_tuple	ft_add_tuple(t_tuple tuple1, t_tuple tuple2)
 {
 	t_tuple	result;
 
-	result.type = tuple1.type + tuple2.type;
+	result.w = tuple1.w + tuple2.w;
 	result.x = tuple1.x + tuple2.x;
 	result.y = tuple1.y + tuple2.y;
 	result.z = tuple1.z + tuple2.z;
@@ -35,7 +35,7 @@ t_tuple	ft_sub_tuple(t_tuple tuple1, t_tuple tuple2)
 	result.x = tuple1.x - tuple2.x;
 	result.y = tuple1.y - tuple2.y;
 	result.z = tuple1.z - tuple2.z;
-	result.type = tuple1.type - tuple2.type;
+	result.w = tuple1.w - tuple2.w;
 	return (result);
 }
 
@@ -43,10 +43,10 @@ t_tuple	ft_mul_tuple(t_tuple tuple1, t_tuple tuple2)
 {
 	t_tuple	result;
 
-	if (tuple1.type || tuple2.type)
-		result.type = 1;
+	if (tuple1.w || tuple2.w)
+		result.w = 1;
 	else
-		result.type = 0;
+		result.w = 0;
 	result.x = tuple1.x * tuple2.x;
 	result.y = tuple1.y * tuple2.y;
 	result.z = tuple1.z * tuple2.z;
@@ -57,7 +57,7 @@ t_tuple	ft_scalar_tuple(t_tuple tuple, double value)
 {
 	t_tuple	result;
 
-	result.type = tuple.type;
+	result.w = tuple.w;
 	result.x = tuple.x * value;
 	result.y = tuple.y * value;
 	result.z = tuple.z * value;
@@ -68,7 +68,7 @@ t_tuple	ft_neg_tuple(t_tuple tuple)
 {
 	t_tuple	result;
 
-	result.type = tuple.type;
+	result.w = tuple.w;
 	result.x = - tuple.x;
 	result.y = - tuple.y;
 	result.z = - tuple.z;
@@ -83,7 +83,7 @@ double	ft_magn_tuple(t_tuple tuple)
 
 t_tuple	ft_norm_vector(t_tuple tuple)
 {
-	ft_assert(tuple.type == 0, "Not a Vector");
+	ft_assert(tuple.w == 0, "Not a Vector");
 	return ((t_tuple){tuple.x / ft_magn_tuple(tuple),
 		tuple.y / ft_magn_tuple(tuple),
 		tuple.z / ft_magn_tuple(tuple), 1});
@@ -91,18 +91,18 @@ t_tuple	ft_norm_vector(t_tuple tuple)
 
 double	ft_dotprod_vector(t_tuple a, t_tuple b)
 {
-	ft_assert(a.type == 0, "a is Not a Vector: dotprod");
-	ft_assert(b.type == 0, "b is Not a Vector: dotprod");
+	ft_assert(a.w == 0, "a is Not a Vector: dotprod");
+	ft_assert(b.w == 0, "b is Not a Vector: dotprod");
 	return (a.x * b.x
 		+ a.y * b.y
 		+ a.z * b.z
-		+ a.type * b.type);
+		+ a.w * b.w);
 }
 
 t_tuple	ft_crossprod_vector(t_tuple a, t_tuple b)
 {
-	ft_assert(a.type == 0, "a is Not a Vector: crossprod");
-	ft_assert(b.type == 0, "b is Not a Vector: crossprod");
+	ft_assert(a.w == 0, "a is Not a Vector: crossprod");
+	ft_assert(b.w == 0, "b is Not a Vector: crossprod");
 	return ((t_tuple){a.y * b.z - a.z * b.y,
 		a.z * b.x - a.x * b.z,
 		a.x * b.y - a.y * b.x,

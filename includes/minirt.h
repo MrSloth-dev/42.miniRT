@@ -37,11 +37,21 @@ typedef struct s_img
 	int			endian;
 }				t_img;
 
+typedef struct s_count
+{
+	int			ambient;
+	int			camera;
+	int			light;
+	int			sphere;
+	int			plane;
+	int			cylinder;
+} t_count;
 typedef struct s_canvas
 {
 	void		*mlx;
 	char		*program;
 	char		*name;
+	char		*file;
 	void		*win;
 	t_img		*img;
 	t_limit		winlimit_x;
@@ -57,12 +67,14 @@ typedef struct s_canvas
 	t_sphere	*sphere;
 	t_plane		*plane;
 	t_cylinder	*cylinder;
+	t_count		count;
 
 }	t_canvas;
 
 void		ft_tuple_init(t_tuple *tuple, t_point coord, int type);
 void		ft_assert(int condition, char *message);
 void		*ft_free(void *ptr);
+void	*ft_free_split(char **split);
 //init
 void		ft_init_canvas(t_canvas *canvas);
 
@@ -89,5 +101,19 @@ int			mouse_handler(int mousecode, int x, int y, t_canvas *canvas);
 int			key_handler(int keysym, t_canvas *canvas);
 
 //parse
+int			ft_count_members (char **split);
+int			ft_check_null_split(char **split);
 int			ft_check_syntax(t_canvas *canvas, char *file);
 int			ft_parse(t_canvas *canvas, char *file);
+int			ft_syntax_ambient(t_canvas *canvas, char **split);
+int			ft_syntax_camera(t_canvas *canvas, char **split);
+int			ft_syntax_light(t_canvas *canvas, char **split);
+int			ft_syntax_sphere(t_canvas *canvas, char **split);
+int			ft_syntax_plane(t_canvas *canvas, char **split);
+int			ft_syntax_cylinder(t_canvas *canvas, char **split);
+int			ft_create_ambient(t_canvas *canvas, char **split);
+int			ft_create_camera(t_canvas *canvas, char **split);
+int			ft_create_light(t_canvas *canvas, char **split);
+int			ft_create_sphere(t_canvas *canvas, char **split);
+int			ft_create_plane(t_canvas *canvas, char **split);
+int			ft_create_cylinder(t_canvas *canvas, char **split);

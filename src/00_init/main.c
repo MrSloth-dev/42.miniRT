@@ -84,7 +84,7 @@ void	ft_print_tuple(t_tuple tuple, char *name)
 	printf("x= %f\n",tuple.x);
 	printf("y= %f\n",tuple.y);
 	printf("z= %f\n",tuple.z);
-	if (tuple.type == 0)
+	if (tuple.w == 0)
 		printf("is a Vector\n");
 	else
 		printf("is a Point\n");
@@ -128,22 +128,37 @@ int	main(int argc, char *argv[])
 	t_canvas	canvas;
 	// t_matrix	m;
 
-	(void)argc;
 	canvas.name = argv[0] + 2;
+	if (argc != 2)
+		return (ft_printf(2, "Error in argv!\n"));
 	ft_init_canvas(&canvas);
 
 	ft_parse(&canvas, argv[1]);
-	// while (canvas.ambient)
-	// {
-	// 	int i = 0;
-	// 	printf("\n%d\n", i++);
-	// 	printf("ambient ratio %f\n", canvas.ambient->ratio);
-	// 	printf("ambient color r %f\n", canvas.ambient->color.r);
-	// 	printf("ambient color g %f\n", canvas.ambient->color.g);
-	// 	printf("ambient color b %f\n", canvas.ambient->color.b);
-	// 	canvas.ambient = canvas.ambient->next;
-	// 	
-	// }
+	int i = 0;
+	printf(YELLOW"\nAMBIENT\n"RESET);
+	while (canvas.count.ambient > i)
+	{
+		printf("\n%d\n", i);
+		printf("ambient ratio %f\n", canvas.ambient[i].ratio);
+		printf("ambient color r %f\n", canvas.ambient[i].color.r);
+		printf("ambient color g %f\n", canvas.ambient[i].color.g);
+		printf("ambient color b %f\n", canvas.ambient[i].color.b);
+		i++;
+	}
+	i = 0;
+	printf(RED"\nCAMERA\n"RESET);
+	while (canvas.count.camera > i)
+	{
+		printf("\n%d\n", i);
+		printf("camera fov %d\n", canvas.camera[i].fov);
+		printf("camera coord %f\n", canvas.camera[i].coord.x);
+		printf("camera coord %f\n", canvas.camera[i].coord.y);
+		printf("camera coord %f\n", canvas.camera[i].coord.z);
+		printf("camera norm %f\n", canvas.camera[i].norm.x);
+		printf("camera norm %f\n", canvas.camera[i].norm.y);
+		printf("camera norm %f\n", canvas.camera[i].norm.z);
+		i++;
+	}
 
 	ft_free_canvas(&canvas);
 	// m = ft_create_matrix(4, 4);
