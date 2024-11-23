@@ -3,7 +3,8 @@
 ################################################################################
 
 NAME = minirt
-CC = zig cc
+ZIG_FLAG = zig
+CC = cc
 CFLAGS = -Iincludes -g
 EFLAGS = -Wall -Wextra -Werror
 MLXFLAGS = -Ofast -Lminilibx-linux -lm -lmlx -lX11 -lXext
@@ -71,7 +72,7 @@ SRCS =	$(HELPER) $(INIT) $(OPER) $(PARSE)
 OBJS = $(SRCS:.c=.o)
 
 %.o: %.c
-	@$(CC) $(CFLAGS) $(EFLAGS) -c $< -o $@
+	@$(ZIG_FLAG) $(CC) $(CFLAGS) $(EFLAGS) -c $< -o $@
 
 ################################################################################
 #                                  Makefile  rules                             #
@@ -85,7 +86,7 @@ $(NAME): $(OBJS) $(HEADER)
 	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)..."
 	@make -C $(PRINTDIR) -s
 	@make -C ./minilibx-linux -s
-	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJS) $(MLXFLAGS) $(GNL) $(PRINTFT) -o $(NAME)
+	@$(ZIG_FLAG) $(CC) $(CFLAGS) $(EFLAGS) $(OBJS) $(MLXFLAGS) $(GNL) $(PRINTFT) -o $(NAME)
 	@echo "$(GREEN)$(NAME) created[0m ✅"
 
 
