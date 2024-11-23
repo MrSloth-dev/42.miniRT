@@ -1,3 +1,6 @@
+#ifndef MINIRT_H
+# define MINIRT_H
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -117,3 +120,9 @@ int			ft_create_light(t_canvas *canvas, char **split);
 int			ft_create_sphere(t_canvas *canvas, char **split);
 int			ft_create_plane(t_canvas *canvas, char **split);
 int			ft_create_cylinder(t_canvas *canvas, char **split);
+
+//mlx
+void	  ft_mlx_init(t_canvas *canvas);
+void  	ft_pixel_put(t_img *data, int x, int y, int color);
+
+#endif

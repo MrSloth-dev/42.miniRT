@@ -46,6 +46,7 @@ HELPDIR = src/00_help
 INITDIR = src/00_init
 OPERDIR = src/01_oper
 PARSEDIR = src/02_parse
+MLXDIR = src/91_mlx
 
 HELPER =$(HELPDIR)/assert.c \
 	$(HELPDIR)/ft_free.c
@@ -63,10 +64,10 @@ PARSE = $(PARSEDIR)/00_parse.c \
 	$(PARSEDIR)/02_syntax_helper.c \
 	$(PARSEDIR)/03_create_objects.c
 
+MLX = $(MLXDIR)/00_mlx_init.c \
+			$(MLXDIR)/01_pixel_put.c
 
-
-
-SRCS =	$(HELPER) $(INIT) $(OPER) $(PARSE)
+SRCS =	$(HELPER) $(INIT) $(OPER) $(PARSE) $(MLX)
 
 OBJS = $(SRCS:.c=.o)
 
