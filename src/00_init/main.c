@@ -39,6 +39,7 @@ void	ft_draw_square(t_canvas *canvas,t_tuple start, t_tuple sides, int color)
 	}
 	mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img->img, 0, 0);
 }
+
 void	ft_print_tuple(t_tuple tuple, char *name)
 {
 	printf("%s\n", name);
@@ -90,11 +91,13 @@ int	main(int argc, char *argv[])
 	// t_matrix	m;
 
 	canvas.name = argv[0] + 2;
-	if (argc != 2)
-		return (ft_printf(2, "Error in argv!\n"));
-	ft_init_canvas(&canvas);
 
-	ft_parse(&canvas, argv[1]);
+	(void)argc;
+	//if (argc != 2)
+	//	return (ft_printf(2, "Error in argv!\n"));
+	ft_init_canvas(&canvas);
+	ft_mlx_init(&canvas);
+	//ft_parse(&canvas, argv[1]);
 	int i = 0;
 	printf(YELLOW"\nAMBIENT\n"RESET);
 	while (canvas.count.ambient > i)
@@ -121,15 +124,20 @@ int	main(int argc, char *argv[])
 		i++;
 	}
 
-	ft_free_canvas(&canvas);
+	//ft_free_canvas(&canvas);
+	//
 	// m = ft_create_matrix(4, 4);
 	// ft_set_matrix_values(&m,(double[4][4]){{1,2,3,4}, {5.5,6.5,7.5,8.5}, {9,10,11,12}, {13.5,14.5,15.5,16.5}});
 	// ft_print_matrix(m);
 	// operations_testing();
 	// ft_setup(&canvas);
-	// jumpingball(&canvas);
-	// ft_draw_square(&canvas, (t_tuple){150, 150, 0, 0}, (t_tuple){150, 150, 0, 0}, 0xFFFF0000);
-	// mlx_loop(canvas.mlx);
+	//
+	//jumpingball(&canvas);
+	ft_draw_square(&canvas, (t_tuple){150, 150, 0, 0}, (t_tuple){150, 150, 0, 0}, 0xFFFF0000);
+
+	mlx_key_hook(canvas.win, key_handler, &canvas);
+	mlx_hook(canvas.win, DestroyNotify, 0L, &close_handler, &canvas);
+	mlx_loop(canvas.mlx);
 	return (0);
 }
 

@@ -77,7 +77,8 @@ typedef struct s_canvas
 void		ft_tuple_init(t_tuple *tuple, t_point coord, int type);
 void		ft_assert(int condition, char *message);
 void		*ft_free(void *ptr);
-void	*ft_free_split(char **split);
+void		*ft_free_split(char **split);
+int			ft_clean_exit(t_canvas *canvas);
 //init
 void		ft_init_canvas(t_canvas *canvas);
 
@@ -97,11 +98,6 @@ int			ft_printf(int fd, const char *str, ...);
 void		ft_print_matrix(t_matrix m);
 t_matrix	ft_create_matrix(int rows, int cols);
 void		ft_set_matrix_values(t_matrix *m, double values[4][4]);
-//minilibx
-int			ft_refreshframe(t_canvas *canvas);
-int			close_handler(t_canvas *canvas);
-int			mouse_handler(int mousecode, int x, int y, t_canvas *canvas);
-int			key_handler(int keysym, t_canvas *canvas);
 
 //parse
 int			ft_count_members (char **split);
@@ -121,8 +117,16 @@ int			ft_create_sphere(t_canvas *canvas, char **split);
 int			ft_create_plane(t_canvas *canvas, char **split);
 int			ft_create_cylinder(t_canvas *canvas, char **split);
 
-//mlx
-void	  ft_mlx_init(t_canvas *canvas);
-void  	ft_pixel_put(t_img *data, int x, int y, int color);
+//minilibx
+int			ft_refreshframe(t_canvas *canvas);
+int			close_handler(t_canvas *canvas);
+int			mouse_handler(int mousecode, int x, int y, t_canvas *canvas);
+int			key_handler(int keysym, t_canvas *canvas);
+void		ft_mlx_init(t_canvas *canvas);
+void  		ft_pixel_put(t_img *data, int x, int y, int color);
+
+
+int			ft_handle_key_hook(int key, t_canvas *canvas);
+int			ft_free_mlx(t_canvas *canvas);
 
 #endif
