@@ -52,8 +52,7 @@ HELPER =$(HELPDIR)/assert.c \
 	$(HELPDIR)/ft_free.c
 
 INIT =	$(INITDIR)/main.c \
-	$(INITDIR)/init.c\
-	$(INITDIR)/events.c \
+	$(INITDIR)/init.c \
 	$(INITDIR)/init_objects.c
 
 OPER =	$(OPERDIR)/00_oper.c \
@@ -65,7 +64,9 @@ PARSE = $(PARSEDIR)/00_parse.c \
 	$(PARSEDIR)/03_create_objects.c
 
 MLX = $(MLXDIR)/00_mlx_init.c \
-			$(MLXDIR)/01_pixel_put.c
+	$(MLXDIR)/01_pixel_put.c \
+	$(MLXDIR)/91_free_mlx.c \
+	$(MLXDIR)/events.c
 
 SRCS =	$(HELPER) $(INIT) $(OPER) $(PARSE) $(MLX)
 
