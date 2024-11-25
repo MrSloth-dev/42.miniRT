@@ -9,6 +9,7 @@ void	ft_tuple_init(t_tuple *tuple, t_point coord, int w)
 	tuple->z = coord.z;
 }
 
+// de que pagina e'esta ft?
 t_tuple	ft_mul_tuple(t_tuple tuple1, t_tuple tuple2)
 {
 	t_tuple	result;

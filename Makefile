@@ -64,8 +64,8 @@ PARSE = $(PARSEDIR)/00_parse.c \
 
 MLX = $(MLXDIR)/00_mlx_init.c \
 	$(MLXDIR)/01_pixel_put.c \
+	$(MLXDIR)/11_events.c
 	$(MLXDIR)/91_free_mlx.c \
-	$(MLXDIR)/events.c
 
 SRCS =	$(HELPER) $(INIT) $(OPER) $(PARSE) $(MLX)
 
