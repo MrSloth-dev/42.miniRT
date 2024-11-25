@@ -1,5 +1,4 @@
 #include "minirt.h"
-#include <stdio.h>
 
 t_matrix	ft_create_matrix(int rows, int cols)
 {
