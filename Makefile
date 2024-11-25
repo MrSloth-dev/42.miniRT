@@ -55,8 +55,7 @@ INIT =	$(INITDIR)/main.c \
 	$(INITDIR)/init.c \
 	$(INITDIR)/init_objects.c
 
-OPER =	$(OPERDIR)/00_oper.c \
-	$(OPERDIR)/01_matrix.c
+OPER =	$(wildcard $(OPERDIR)/*.c)
 
 PARSE = $(PARSEDIR)/00_parse.c \
 	$(PARSEDIR)/01_syntax.c \
