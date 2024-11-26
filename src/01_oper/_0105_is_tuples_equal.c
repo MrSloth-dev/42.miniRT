@@ -9,3 +9,16 @@ int	ft_is_tuples_equal(t_tuple tuple1, t_tuple tuple2)
 		return (0);
 	return (1);
 }
+
+void	ft_test_ft_is_tuples_equal()
+{
+	t_tuple t1, t2;
+
+	t1.x = 15, t1.y = 15, t1.z = 15 ,t1.w = 0;
+	t2.x = 15, t2.y = 15, t2.z = 15 ,t2.w = 0;
+	printf("tuple equal %d\n", ft_is_tuples_equal(t1, t2));
+	t1.x = 15, t1.y = 15, t1.z = 15 ,t1.w = 0;
+	t2.x = 15, t2.y = 10, t2.z = 15 ,t2.w = 0;
+	printf("tuple not equal %d\n", ft_is_tuples_equal(t1, t2));
+
+}
