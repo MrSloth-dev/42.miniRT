@@ -35,6 +35,7 @@ vpath %.h includes
 vpath %.c src
 
 HEADER = minirt.h ft_printf.h
+MAIN = src/main.c
 PRINTDIR = ./includes/ft_printf/
 PRINTFT = ./includes/ft_printf/libftprintf.a
 GNLDIR = ./includes/get_next_line/
@@ -67,7 +68,9 @@ MLX = $(MLXDIR)/00_mlx_init.c \
 	$(MLXDIR)/11_events.c \
 	$(MLXDIR)/91_free_mlx.c \
 
-SRCS =	$(HELPER) $(INIT) $(OPER) $(PARSE) $(MLX)
+# SRCS =	$(HELPER) $(INIT) $(OPER) $(PARSE) $(MLX)
+SRCS =	$(wildcard src/**/**.c)
+INCLUDES = $(MLXFLAGS) $(GNL) $(PRINTFT)
 
 OBJS = $(SRCS:.c=.o)
 
@@ -81,23 +84,26 @@ OBJS = $(SRCS:.c=.o)
 .PHONY: all
 all: $(NAME)
 
-$(NAME): $(OBJS) $(HEADER)
+$(NAME): $(OBJS) $(HEADER) libx
 	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)..."
 	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)..."
 	@make -C $(PRINTDIR) -s
-	@make -C ./minilibx-linux -s
-	@$(CC) $(CFLAGS) $(EFLAGS) $(OBJS) $(MLXFLAGS) $(GNL) $(PRINTFT) -o $(NAME)
+	@make -C $(LIBX_DIR) -s
+	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME)
 	@echo "$(GREEN)$(NAME) created[0m ✅"
 
 
 LIBX_DIR = minilibx-linux
-.PHONY: libx
-$(LIBX_DIR) :
-	wget https://cdn.intra.42.fr/document/document/22621/minilibx-linux.tgz
-	tar xf minilibx-linux.tgz
-	rm -fr minilibx-linux.tgz
+LIBX_HEADER = $(LIBX_DIR)/mlx.h
 
-libx : $(LIBX_DIR)
+.PHONY: libx $(LIBX_HEADER)
+.SILENT: $(LIBX_DIR)
+$(LIBX_DIR) : $(LIBX_HEADER)
+	@wget -q https://cdn.intra.42.fr/document/document/22621/minilibx-linux.tgz
+	@tar xf minilibx-linux.tgz
+	@rm -fr minilibx-linux.tgz
+
+libx : $(LIBX_DIR) $(LIBX_HEADER)
 
 .PHONY: norm
 norm:
@@ -141,6 +147,16 @@ fclean: clean
 
 .PHONY: re
 re : fclean all
+
+MAIN_T = src/teste.c
+NAME_T = $(NAME)_te
+.PHONY: te
+te : $(OBJS) $(HEADER) libx
+	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)..."
+	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)..."
+	@make -C $(PRINTDIR) -s
+	@make -C $(LIBX_DIR) -s
+	@$(CC) $(MAIN_T) $(CFLAGS) $(EFLAGS) $(OBJS) $(MLXFLAGS) $(GNL) $(PRINTFT) -o $(NAME_T)
 
 .SILENT: re all clean fclean
 
