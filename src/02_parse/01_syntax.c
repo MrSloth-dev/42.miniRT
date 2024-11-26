@@ -65,13 +65,12 @@ int	ft_syntax_line(char **split, t_canvas *canvas)
 		return (ft_syntax_camera(canvas, split));
 	else if (*split[0] == 'L')
 		return (ft_syntax_light(canvas, split));
-	// else if (!ft_strcmp(*split, "sp"))
-	// 	return (ft_syntax_sphere(canvas, split));
-	// else if (!ft_strcmp(*split, "pl"))
-	// 	return (ft_syntax_plane(canvas, split));
-	// else if (!ft_strcmp(*split, "cy"))
-	// 	return (ft_syntax_cylinder(canvas, split));
-	// ft_printf(1, line);
+	else if (!ft_strcmp(*split, "sp"))
+		return (ft_syntax_sphere(canvas, split));
+	else if (!ft_strcmp(*split, "pl"))
+		return (ft_syntax_plane(canvas, split));
+	else if (!ft_strcmp(*split, "cy"))
+		return (ft_syntax_cylinder(canvas, split));
 	return (1);
 }
 

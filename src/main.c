@@ -21,6 +21,7 @@ int	main(int argc, char *argv[])
 	// ft_mlx_init(&canvas);
 	// ft_setup(&canvas);
 	ft_parse(&canvas, argv[1]);
+	ft_print_objects(canvas);
 	//ft_free_canvas(&canvas);
 	//
 	// m = ft_create_matrix(4, 4);

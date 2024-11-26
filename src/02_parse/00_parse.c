@@ -23,9 +23,9 @@ void	ft_create_objects(t_canvas *canvas)
 	canvas->ambient = malloc(sizeof(t_ambient) * canvas->count.ambient);
 	canvas->camera = malloc(sizeof(t_camera) * canvas->count.camera);
 	canvas->light = malloc(sizeof(t_light) * canvas->count.light);
-	// canvas->sphere = malloc(sizeof(t_sphere) * canvas->count.sphere);
-	// canvas->plane = malloc(sizeof(t_plane) * canvas->count.plane);
-	// canvas->cylinder = malloc(sizeof(t_cylinder) * canvas->count.cylinder);
+	canvas->sphere = malloc(sizeof(t_sphere) * canvas->count.sphere);
+	canvas->plane = malloc(sizeof(t_plane) * canvas->count.plane);
+	canvas->cylinder = malloc(sizeof(t_cylinder) * canvas->count.cylinder);
 }
 
 int	ft_parse_line(char **split, t_canvas *canvas)
@@ -36,12 +36,14 @@ int	ft_parse_line(char **split, t_canvas *canvas)
 		return (ft_create_camera(canvas, split));
 	else if (*split[0] == 'L')
 		return (ft_create_light(canvas, split));
-	// else if (!ft_strcmp(*split, "sp"))
-	// 	return (ft_create_sphere(canvas, split));
-	// else if (!ft_strcmp(*split, "pl"))
-	// 	return (ft_create_plane(canvas, split));
-	// else if (!ft_strcmp(*split, "cy"))
-	// 	return (ft_create_cylinder(canvas, split));
+	else if (!ft_strcmp(*split, "sp"))
+		return (ft_create_sphere(canvas, split));
+	else if (!ft_strcmp(*split, "pl"))
+		return (ft_create_plane(canvas, split));
+	else if (!ft_strcmp(*split, "cy"))
+		return (ft_create_cylinder(canvas, split));
+	else
+		return (1);
 	return (1);
 }
 
@@ -72,6 +74,7 @@ int	ft_parse_objects(t_canvas *canvas)
 int	ft_parser(t_canvas *canvas)
 {
 	ft_create_objects(canvas);
+	canvas->count = (t_count){0, 0, 0, 0, 0, 0};
 	ft_parse_objects(canvas);
 	return (1);
 }
