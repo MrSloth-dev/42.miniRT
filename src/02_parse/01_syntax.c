@@ -63,8 +63,8 @@ int	ft_syntax_line(char **split, t_canvas *canvas)
 		return (ft_syntax_ambient(canvas, split));
 	else if (*split[0] == 'C')
 		return (ft_syntax_camera(canvas, split));
-	// else if (*split[0] == 'L')
-	// 	return (ft_syntax_light(canvas, split));
+	else if (*split[0] == 'L')
+		return (ft_syntax_light(canvas, split));
 	// else if (!ft_strcmp(*split, "sp"))
 	// 	return (ft_syntax_sphere(canvas, split));
 	// else if (!ft_strcmp(*split, "pl"))
@@ -86,7 +86,7 @@ int	ft_check_syntax(t_canvas *canvas, char *file)
 	error = 1;
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
-	while (line && ft_strlen(line) > 0)
+	while (*line && ft_strlen(line) > 0)
 	{
 		split = ft_split_charset(line, WHITESPACE);
 		if (split && *split)

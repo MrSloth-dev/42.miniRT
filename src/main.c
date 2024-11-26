@@ -19,7 +19,7 @@ int	main(int argc, char *argv[])
 		return (ft_printf(2, "Error in argv!\n"));
 	ft_init_canvas(&canvas);
 	// ft_mlx_init(&canvas);
-	ft_setup(&canvas);
+	// ft_setup(&canvas);
 	ft_parse(&canvas, argv[1]);
 	//ft_free_canvas(&canvas);
 	//
@@ -32,6 +32,6 @@ int	main(int argc, char *argv[])
 	// ft_draw_square(&canvas, (t_tuple){150, 150, 0, 0}, (t_tuple){150, 150, 0, 0}, 0xFFFF0000);
 	// mlx_key_hook(canvas.win, key_handler, &canvas);
 	// mlx_hook(canvas.win, DestroyNotify, 0L, &close_handler, &canvas);
-	mlx_loop(canvas.mlx);
+	// mlx_loop(canvas.mlx);
 	return (0);
 }
