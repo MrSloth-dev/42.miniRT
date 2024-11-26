@@ -154,8 +154,6 @@ void	operations_testing(void)
 	printf("\n");
 	ft_print_tuple(ft_neg_tuple(point1), "neg");
 	printf("\n");
-	ft_print_tuple(ft_mul_tuple(point1, point2), "mult");
-	printf("\n");
 	ft_print_tuple(ft_norm_vector(point2), "normalize");
 	printf("\n");
 	printf("dotprod = %lf\n", ft_dotprod_vector(point2, point2));
