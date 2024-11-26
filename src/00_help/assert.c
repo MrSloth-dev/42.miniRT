@@ -1,4 +1,5 @@
 #include "minirt.h"
+#include <assert.h>
 #include <stdio.h>
 
 void	ft_assert(int condition, char *message)
