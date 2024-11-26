@@ -20,10 +20,10 @@ void	test_ft_sub_tuple()
 	t1.x = 45, t1.y = 55, t1.z = 05 ,t1.w = 1;
 	t2.x = 15, t2.y = 15, t2.z = 15 ,t2.w = 0;
 	res = ft_sub_tuple(t1, t2);
-	ft_print_tuple(res, "ok\n");
+	ft_print_tuple(res, "\nsub test\n");
 
-	t1.x = 15, t1.y = 15, t1.z = 15 ,t1.w = 0;
-	t2.x = 15, t2.y = 10, t2.z = 15 ,t2.w = 1;
+	t1.x = 3, t1.y = 5, t1.z = 1 ,t1.w = 0;
+	t2.x = 15, t2.y = 10, t2.z = 15 ,t2.w = 0;
 	res = ft_sub_tuple(t1, t2);
-	ft_print_tuple(res, "ok\n");
+	ft_print_tuple(res, "\nsub test\n");
 }
