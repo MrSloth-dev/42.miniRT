@@ -2,10 +2,10 @@
 
 int	main()
 {
-	test_ft_is_tuples_equal();
-	printf("______\n");
-	test_ft_sub_tuple();
-	
-
+	t_canvas	canvas;
+	ft_init_canvas(&canvas);
+	// ft_mlx_init(&canvas);
+	ft_setup(&canvas);
+	jumpingball(&canvas);
 	return (0);
 }
