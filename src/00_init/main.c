@@ -93,11 +93,11 @@ int	main(int argc, char *argv[])
 	canvas.name = argv[0] + 2;
 
 	(void)argc;
-	//if (argc != 2)
-	//	return (ft_printf(2, "Error in argv!\n"));
+	if (argc != 2)
+		return (ft_printf(2, "Error in argv!\n"));
 	ft_init_canvas(&canvas);
-	ft_mlx_init(&canvas);
-	//ft_parse(&canvas, argv[1]);
+	// ft_mlx_init(&canvas);
+	ft_parse(&canvas, argv[1]);
 	int i = 0;
 	printf(YELLOW"\nAMBIENT\n"RESET);
 	while (canvas.count.ambient > i)
@@ -123,6 +123,20 @@ int	main(int argc, char *argv[])
 		printf("camera norm %f\n", canvas.camera[i].norm.z);
 		i++;
 	}
+	i = 0;
+	printf(RED"\nLIGHT\n"RESET);
+	while (canvas.count.light > i)
+	{
+		printf("\n%d\n", i);
+		printf("light bright %f\n", canvas.light[i].bright);
+		printf("light coord %f\n", canvas.light[i].coord.x);
+		printf("light coord %f\n", canvas.light[i].coord.y);
+		printf("light coord %f\n", canvas.light[i].coord.z);
+		printf("light color r = %f, ", canvas.light[i].color.r);
+		printf("g = %f, ", canvas.light[i].color.g);
+		printf("b = %f\n", canvas.light[i].color.b);
+		i++;
+	}
 
 	//ft_free_canvas(&canvas);
 	//
@@ -133,11 +147,10 @@ int	main(int argc, char *argv[])
 	// ft_setup(&canvas);
 	//
 	//jumpingball(&canvas);
-	ft_draw_square(&canvas, (t_tuple){150, 150, 0, 0}, (t_tuple){150, 150, 0, 0}, 0xFFFF0000);
-
-	mlx_key_hook(canvas.win, key_handler, &canvas);
-	mlx_hook(canvas.win, DestroyNotify, 0L, &close_handler, &canvas);
-	mlx_loop(canvas.mlx);
+	// ft_draw_square(&canvas, (t_tuple){150, 150, 0, 0}, (t_tuple){150, 150, 0, 0}, 0xFFFF0000);
+	// mlx_key_hook(canvas.win, key_handler, &canvas);
+	// mlx_hook(canvas.win, DestroyNotify, 0L, &close_handler, &canvas);
+	// mlx_loop(canvas.mlx);
 	return (0);
 }
 
