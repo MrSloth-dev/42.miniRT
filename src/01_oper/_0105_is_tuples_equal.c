@@ -10,7 +10,7 @@ int	ft_is_tuples_equal(t_tuple tuple1, t_tuple tuple2)
 	return (1);
 }
 
-void	ft_test_ft_is_tuples_equal()
+void	test_ft_is_tuples_equal()
 {
 	t_tuple t1, t2;
 
