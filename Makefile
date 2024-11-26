@@ -111,21 +111,21 @@ norm:
 
 .PHONY: gdb
 gdb : re
-	tmux set-option remain-on-exit off
-	tmux new-window  -n Gdb
-	tmux send-keys 'gdbtui ./minirt' C-m Escape
-	tmux split-window -h -l 30
-	tmux send-keys -t Gdb.2 'nvim .gdbinit' C-m
-	tmux select-pane -t Gdb.1
+	@tmux set-option remain-on-exit off
+	@tmux new-window  -n Gdb
+	@tmux send-keys 'gdbtui ./minirt' C-m Escape
+	@tmux split-window -h -l 30
+	@tmux send-keys -t Gdb.2 'nvim .gdbinit' C-m
+	@tmux select-pane -t Gdb.1
 
 
 .PHONY: vgdb
 vgdb : re
-	tmux new-window  -n vGdb
-	tmux send-keys 'valgrind -q --vgdb-error=0 ./minirt input.rt' C-m Escape
-	tmux split-window -h
-	tmux send-keys -t Gdb.2 'gdbtui ./minirt' C-m
-	tmux select-pane -t vGdb.1
+	@tmux new-window  -n vGdb
+	@tmux send-keys 'valgrind -q --vgdb-error=0 ./minirt input.rt' C-m Escape
+	@tmux split-window -h
+	@tmux send-keys -t Gdb.2 'gdbtui ./minirt' C-m
+	@tmux select-pane -t vGdb.1
 
 .PHONY: va
 va : re

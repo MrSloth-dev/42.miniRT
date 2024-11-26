@@ -52,8 +52,6 @@ int	ft_parse_objects(t_canvas *canvas)
 	int		fd;
 	int		error;
 
-	canvas->count.ambient = 0;
-	canvas->count.camera = 0;
 	error = 1;
 	fd = open(canvas->file, O_RDONLY);
 	line = get_next_line(fd);
@@ -77,6 +75,7 @@ int	ft_parser(t_canvas *canvas)
 	ft_parse_objects(canvas);
 	return (1);
 }
+
 int	ft_parse(t_canvas *canvas, char *file)
 {
 	canvas->file = file;
