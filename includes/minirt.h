@@ -131,4 +131,8 @@ void  		ft_pixel_put(t_img *data, int x, int y, int color);
 int			ft_handle_key_hook(int key, t_canvas *canvas);
 int			ft_free_mlx(t_canvas *canvas);
 
+
+//TESTING/////////////////////////////////////////////
+void	test_ft_is_tuples_equal();
+
 #endif
