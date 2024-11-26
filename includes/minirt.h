@@ -83,6 +83,8 @@ int			ft_clean_exit(t_canvas *canvas);
 void		ft_init_canvas(t_canvas *canvas);
 
 //oper.c
+int			ft_is_float_equal(double num1, double num2);
+int			ft_is_tuples_equal(t_tuple tuple1, t_tuple tuple2);
 t_tuple		ft_add_tuple(t_tuple tuple1, t_tuple tuple2);
 double		ft_magn_tuple(t_tuple tuple);
 t_tuple		ft_sub_tuple(t_tuple tuple1, t_tuple tuple2);
