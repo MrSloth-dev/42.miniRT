@@ -21,7 +21,7 @@ x,y,z coordinates of the sphere center: 0.0,0.0,20.6
 the sphere diameter: 12.6
 R,G,B colors in range [0-255]: 10, 0, 255
 
-pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225
+pl 0.0,0.0,-10.0	0.0,1.0,0.0	0,0,225
 identifier: pl
 x,y,z coordinates of a point in the plane: 0.0,0.0,-10.0
 3d normalized normal vector. In range [-1,1] for each x,y,z axis: 0.0,1.0,0.0
@@ -40,6 +40,6 @@ A 0.2 255,255,180
 A 0.2 255,180,180
 C -50,0,20 -1,0.020,0 170
 L -40,0,30 1.7 255,255,255
-pl 0,0,0 0,1.0,0 255,0,225
 sp 0,0,20 20 255,0,0
-cy 50.0,0.0,20.6 0,0,1.0 14.2 21.42 10,0,255
+pl 0,0,0 0,1.0,0 255,0,225
+cy 50.0,0.0,20.6	0,0,1.0		14.2 21.42	10,0,255
