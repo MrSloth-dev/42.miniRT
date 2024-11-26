@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-int	ft_floatcmp(double num1, double num2) //p5
+int	ft_is_float_equal(double num1, double num2)
 {
 	if (fabs(num1 - num2) < ROUND_ERROR)
 		return (1);
