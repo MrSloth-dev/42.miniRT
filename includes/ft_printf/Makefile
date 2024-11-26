@@ -29,14 +29,14 @@ $(NAME) : $(OBJECTS) $(LIB)
 	@ar rcs $(NAME) $(OBJECTS)
 
 $(LIB) : $(LIBDIR)
-	@make -C $(LIBDIR)
+	@make -C $(LIBDIR) -s
 
 clean :
-	make clean -C $(LIBDIR)
+	make clean -C $(LIBDIR) -s
 	@rm -f $(OBJECTS)
 
 fclean : clean 
-	make fclean -C $(LIBDIR)
+	make fclean -C $(LIBDIR) -s
 	@rm -f $(NAME)
 
 re : fclean all
