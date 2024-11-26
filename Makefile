@@ -157,6 +157,7 @@ te : $(OBJS) $(HEADER) libx
 	@make -C $(PRINTDIR) -s
 	@make -C $(LIBX_DIR) -s
 	@$(CC) $(MAIN_T) $(CFLAGS) $(EFLAGS) $(OBJS) $(MLXFLAGS) $(GNL) $(PRINTFT) -o $(NAME_T)
+	./$(NAME)_te
 
 .SILENT: re all clean fclean
 
