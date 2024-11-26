@@ -134,5 +134,6 @@ int			ft_free_mlx(t_canvas *canvas);
 
 //TESTING/////////////////////////////////////////////
 void	test_ft_is_tuples_equal();
+void	test_ft_sub_tuple();
 
 #endif

@@ -1,4 +1,5 @@
 #include "minirt.h"
+#include <assert.h>
 
 
 void	ft_print_tuple(t_tuple tuple, char *name)
@@ -93,6 +94,7 @@ void	jumpingball(t_canvas *canvas)
 int	main()
 {
 	test_ft_is_tuples_equal();
+//	test_ft_sub_tuple();
 	printf("Hello from tester\n");
 	return (0);
 }
