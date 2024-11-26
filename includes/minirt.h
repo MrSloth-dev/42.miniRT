@@ -135,5 +135,7 @@ int			ft_free_mlx(t_canvas *canvas);
 //TESTING/////////////////////////////////////////////
 void	test_ft_is_tuples_equal();
 void	test_ft_sub_tuple();
+void	ft_print_tuple(t_tuple tuple, char *name);
+void	ft_draw_square(t_canvas *canvas,t_tuple start, t_tuple sides, int color);
 
 #endif

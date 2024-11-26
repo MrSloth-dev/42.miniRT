@@ -20,5 +20,4 @@ void	test_ft_is_tuples_equal()
 	t1.x = 15, t1.y = 15, t1.z = 15 ,t1.w = 0;
 	t2.x = 15, t2.y = 10, t2.z = 15 ,t2.w = 0;
 	printf("tuple not equal %d\n", ft_is_tuples_equal(t1, t2));
-
 }
