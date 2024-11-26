@@ -16,7 +16,7 @@ typedef struct s_camera
 typedef struct s_light
 {
 	t_tuple			coord;
-	int				bright;
+	float			bright;
 	t_color			color;
 }	t_light;
 
