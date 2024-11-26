@@ -18,8 +18,8 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		return (ft_printf(2, "Error in argv!\n"));
 	ft_init_canvas(&canvas);
-	ft_setup(&canvas);
 	// ft_mlx_init(&canvas);
+	ft_setup(&canvas);
 	ft_parse(&canvas, argv[1]);
 	//ft_free_canvas(&canvas);
 	//
@@ -35,4 +35,3 @@ int	main(int argc, char *argv[])
 	mlx_loop(canvas.mlx);
 	return (0);
 }
-
