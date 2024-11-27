@@ -8,7 +8,9 @@ void	ft_print_tuple(t_tuple tuple, char *name)
 	printf("z= %f\n",tuple.z);
 	if (tuple.w == 0)
 		printf("is a Vector\n");
-	else
+	else if (tuple.w == 1)
 		printf("is a Point\n");
+	else if (tuple.w == 3)
+		printf("is a Color\n");
 }
 
