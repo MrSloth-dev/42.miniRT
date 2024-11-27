@@ -1,18 +1,23 @@
 #include "minirt.h"
 
-t_tuple	ft_op(t_tuple a, char op, t_tuple b)
+t_tuple	ft_operator(t_tuple a, char op, t_tuple b)
 {
-	double	ret_w;
+	double	w;
+	t_tuple	r;
 
-	ret_w = a.w || b .w;
+	r = (t_tuple){0, 0, 0, 0};
+	w = a.w || b .w;
 	if (a.w == 3)
-		ret_w = 3;
+		w = 3;
 	if (op == '+')
-		return ((t_tuple){a.x + b.x, a.y + b.y, a.z + b.z, ret_w});
+		r = (t_tuple){a.x + b.x, a.y + b.y, a.z + b.z, w};
 	else if (op == '-')
-		return ((t_tuple){a.x - b.x, a.y - b.y, a.z - b.z, ret_w});
+	{
+		if (a.w && b.w && a.w != 3)
+			w = 0;
+		r = (t_tuple){a.x - b.x, a.y - b.y, a.z - b.z, w};
+	}
 	else if (op == '*')
-		return ((t_tuple){a.x * b.x, a.y * b.y, a.z * b.z, ret_w});
-	else
-		return ((t_tuple){0, 0, 0, ret_w});
+		r = (t_tuple){a.x * b.x, a.y * b.y, a.z * b.z, w};
+	return (r);
 }
