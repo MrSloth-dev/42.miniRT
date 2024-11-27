@@ -31,6 +31,12 @@
 #define T_POINT 1
 #define WHITESPACE " \t\n\r\v\f"
 
+typedef struct s_list
+{
+	void			*object;
+	struct s_list	*next;
+}				t_list;
+
 typedef struct s_img
 {
 	void		*img;
@@ -49,6 +55,7 @@ typedef struct s_count
 	int			plane;
 	int			cylinder;
 } t_count;
+
 typedef struct s_canvas
 {
 	void		*mlx;
@@ -64,6 +71,7 @@ typedef struct s_canvas
 	double		scale;
 	int			help;
 	t_img		*menu;
+	t_list		*objects;
 	t_ambient	*ambient;
 	t_camera	*camera;
 	t_light		*light;
@@ -71,7 +79,6 @@ typedef struct s_canvas
 	t_plane		*plane;
 	t_cylinder	*cylinder;
 	t_count		count;
-
 }	t_canvas;
 
 void		ft_tuple_init(t_tuple *tuple, t_point coord, int type);
@@ -93,6 +100,7 @@ t_tuple		ft_scalar_tuple(t_tuple tuple, double value);
 t_tuple		ft_norm_vector(t_tuple tuple);
 double		ft_dotprod_vector(t_tuple a, t_tuple b);
 t_tuple		ft_crossprod_vector(t_tuple a, t_tuple b);
+t_matrix	ft_matrix_mult(t_matrix A, t_matrix B);
 
 int			ft_printf(int fd, const char *str, ...);
 
