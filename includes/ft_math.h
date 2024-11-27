@@ -20,12 +20,7 @@ typedef struct s_tuple
 	int		w;
 }	t_tuple;
 
-typedef struct s_color
-{
-	double	r;
-	double	g;
-	double	b;
-}	t_color;
+typedef t_tuple t_color;
 
 typedef struct s_limit
 {
