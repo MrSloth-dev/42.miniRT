@@ -90,6 +90,7 @@ int			ft_clean_exit(t_canvas *canvas);
 void		ft_init_canvas(t_canvas *canvas);
 
 //oper.c
+t_tuple		ft_operator(t_tuple a, char op, t_tuple b);
 int			ft_is_float_equal(double num1, double num2);
 int			ft_is_tuples_equal(t_tuple tuple1, t_tuple tuple2);
 t_tuple		ft_add_tuple(t_tuple tuple1, t_tuple tuple2);
@@ -138,7 +139,6 @@ void  		ft_pixel_put(t_img *data, int x, int y, int color);
 
 int			ft_handle_key_hook(int key, t_canvas *canvas);
 int			ft_free_mlx(t_canvas *canvas);
-
 
 //TESTING/////////////////////////////////////////////
 void	test_ft_is_tuples_equal();
