@@ -16,11 +16,11 @@ int	ft_vector_check(t_tuple tuple)
 
 int	ft_rgb_check(t_color color)
 {
-	if (color.r < 0 || color.r > 255)
+	if (color.x < 0 || color.x > 255)
 		return (0);
-	if (color.g < 0 || color.g > 255)
+	if (color.y < 0 || color.y > 255)
 		return (0);
-	if (color.b < 0 || color.b > 255)
+	if (color.z < 0 || color.z > 255)
 		return (0);
 	return (1);
 }
@@ -48,7 +48,7 @@ int	ft_create_ambient(t_canvas *canvas, char **split)
 	canvas->ambient[i].ratio = ft_atod(split[1]);
 	color_split = ft_split(split[2], ',');
 	color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
-		ft_atod(color_split[2])};
+		ft_atod(color_split[2]), 3};
 	if (ft_check_null_split(color_split)
 		&& ft_rgb_check(color))
 	{
@@ -114,7 +114,7 @@ int	ft_create_light(t_canvas *canvas, char **split)
 	ft_free_split(coord_split);
 	color_split = ft_split(split[3], ',');
 	color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
-		ft_atod(color_split[2])};
+		ft_atod(color_split[2]), 3};
 	if (ft_check_null_split(color_split) && ft_rgb_check(color))
 		canvas->light[i].color = color;
 	else
@@ -145,7 +145,7 @@ int	ft_create_sphere(t_canvas *canvas, char **split)
 	ft_free_split(coord_split);
 	color_split = ft_split(split[3], ',');
 	color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
-		ft_atod(color_split[2])};
+		ft_atod(color_split[2]), 3};
 	if (ft_check_null_split(color_split) && ft_rgb_check(color))
 		canvas->sphere[i].color = color;
 	else
@@ -178,7 +178,7 @@ int	ft_create_plane(t_canvas *canvas, char **split)
 	ft_free_split(coord_split);
 	color_split = ft_split(split[3], ',');
 	color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
-		ft_atod(color_split[2])};
+		ft_atod(color_split[2]), 3};
 	if (ft_check_null_split(color_split) && ft_rgb_check(color))
 		canvas->plane[i].color = color;
 	else
@@ -221,7 +221,7 @@ int	ft_create_cylinder(t_canvas *canvas, char **split)
 	ft_free_split(coord_split);
 	color_split = ft_split(split[5], ',');
 	color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
-		ft_atod(color_split[2])};
+		ft_atod(color_split[2]), 3};
 	if (ft_check_null_split(color_split) && ft_rgb_check(color))
 		canvas->cylinder[i].color = color;
 	else

@@ -27,7 +27,7 @@ x,y,z coordinates of a point in the plane: 0.0,0.0,-10.0
 3d normalized normal vector. In range [-1,1] for each x,y,z axis: 0.0,1.0,0.0
 R,G,B colors in range [0-255]: 0,0,225
 
-cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255
+cy 50.0,0.0,20.6	0.0,0.0,1.0		14.2	21.42	10,0,255
 Identifier: cy
 x,y,z coordinates of the center of the cylinder: 50.0,0.0,20.6
 3d normalized vector of axis of cylinder. In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
@@ -42,4 +42,4 @@ C -50,0,20 -1,0.020,0 170
 L -40,0,30 1.7 255,255,255
 sp 0,0,20 20 255,0,0
 pl 0,0,0 0,1.0,0 255,0,225
-cy 50.0,0.0,20.6	0,0,1.0		14.2 21.42	10,0,255
+cy 50.0,0.0,20.6	0,0,1.0		-4.2 21.42	10,0,255
