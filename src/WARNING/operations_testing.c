@@ -28,9 +28,9 @@ void	operations_testing(void)
 	t_matrix A;
 	t_matrix B;
 	t_matrix C;
-	A = ft_create_matrix(4, 4);
-	B = ft_create_matrix(4, 4);
-	C = ft_create_matrix(4, 4);
+	A = ft_create_matrix(4, 4, 0);
+	B = ft_create_matrix(4, 4, 0);
+	C = ft_create_matrix(4, 4, 0);
 	ft_set_matrix_values(&A, (double[4][4]){{1,2,3,4}, {5, 6, 7, 8}, {9, 8, 7, 6}, {5, 4, 3, 2}});
 	ft_set_matrix_values(&B, (double[4][4]){{-2,1,2,3}, {3, 2, 1, -1}, {4, 3, 6, 5}, {1, 2, 7, 8}});
 	printf("Matrix A:\n");
