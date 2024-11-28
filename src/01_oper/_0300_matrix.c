@@ -28,66 +28,66 @@ t_matrix	ft_create_matrix(int rows, int cols)
 
 void	ft_set_matrix_values(t_matrix *m, double values[4][4])
 {
-	int	i;
-	int	j;
+	int	r;
+	int	c;
 
-	i = 0;
-	while (i < m->rows)
+	r = 0;
+	while (r < m->rows)
 	{
-		j = 0;
-		while (j < m->cols)
+		c = 0;
+		while (c < m->cols)
 		{
-			m->data[i][j] = values[j][i];
-			j++;
+			m->data[r][c] = values[r][c];
+			c++;
 		}
-		i++;
+		r++;
 	}
 }
 
 void	ft_print_matrix(t_matrix m)
 {
-	int	i;
-	int	j;
+	int	c;
+	int	r;
 
-	i = 0;
-	while (i < m.rows)
+	r = 0;
+	while (r < m.rows)
 	{
-		j = 0;
-		while (j < m.cols)
+		c = 0;
+		while (c < m.cols)
 		{
-			printf("%.000f ", m.data[j][i]);
-			j++;
+			printf("%.000f ", m.data[r][c]);
+			c++;
 		}
 		printf("\n");
-		i++;
+		r++;
 	}
 }
 
 t_matrix	ft_matrix_mult(t_matrix A, t_matrix B)
 {
 	t_matrix	res;
-	int			i;
-	int			j;
+	int			c;
+	int			r;
 	int			k;
 
 	ft_assert(A.cols == B.rows, "diff array size");
 	res = ft_create_matrix(A.cols, B.rows);
-	i = 0;
-	while (i < A.cols)
+	c = 0;
+	while (c < A.cols)
 	{
-		j = 0;
-		while (j < B.rows)
+		r = 0;
+		while (r < B.rows)
 		{
-			res.data[j][i] = 0;
+			res.data[r][c] = 0;
 			k = 0;
 			while (k < B.rows)
 			{
-				res.data[j][i] += A.data[k][i] * B.data[j][k];
+				res.data[r][c] += A.data[k][c] * B.data[r][k];
 				k++;
 			}
-			j++;
+			r++;
 		}
-		i++;
+		c++;
 	}
 	return (res);
 }
