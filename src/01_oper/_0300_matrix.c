@@ -122,3 +122,26 @@ int	ft_are_matrixes_equal(t_matrix a, t_matrix b)
 	}
 	return (1);
 }
+
+t_matrix	ft_transpose_matrix(t_matrix src)
+{
+	int		r;
+	int		c;
+	double	tmp;
+
+	r = -1;
+	while (++r < src.rows)
+	{
+		c = r;
+		while(++c < src.cols)
+		{
+			if (c != r)
+			{
+				tmp = src.data[r][c];
+				src.data[r][c] = src.data[c][r];
+				src.data[c][r] = tmp;
+			}
+		}
+	}
+	return (src);
+}

@@ -110,6 +110,7 @@ t_matrix	ft_create_matrix(int rows, int cols);
 void		ft_set_matrix_values(t_matrix *m, double values[4][4]);
 int			ft_are_matrixes_equal(t_matrix a, t_matrix b);
 t_tuple	ft_mult_matrix_tuple(t_matrix A, t_tuple B);
+t_matrix	ft_transpose_matrix(t_matrix src);
 
 //parse
 int			ft_count_members (char **split);
