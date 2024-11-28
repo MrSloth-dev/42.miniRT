@@ -37,12 +37,15 @@ int	main()
 	c = ft_transpose_matrix(c);
 	ft_print_matrix(c);
 
-	t_tuple b = (t_tuple){1, 2, 3, 1};
+	t_tuple b = (t_tuple){-1, 24, 3.2, 0};
 	ft_print_tuple(b, "b");
 	t_matrix A;
 	
-	A = ft_create_matrix(4, 4);
-	ft_set_matrix_values(&A, (double[4][4]){{1,2,3,4},{2,4,4,2},{8,6,4,1},{0,0,0,1}});
+	A = ft_create_matrix(4, 5, 1);
+	t_matrix temp;
+
+	temp = ft_create_matrix(A.cols, A.rows, int identity)
+	// ft_set_matrix_values(&A, (double[4][4]){{1,2,3,4},{2,4,4,2},{8,6,4,1},{0,0,0,1}});
 	ft_print_matrix(A);
 	t_tuple res = ft_mult_matrix_tuple(A, b);
 	ft_print_tuple(res, "res");
