@@ -2,25 +2,40 @@
 
 int	main()
 {
-	// t_canvas	canvas;
-	// ft_init_canvas(&canvas);
-	// ft_mlx_init(&canvas);
-	// ft_setup(&canvas);
-	//jumpingball(&canvas);
+	t_matrix a, b, c;
+	double m_a[4][4] = {
+		{1, 2, 3, 4},
+		{5, 6, 7, 8},
+		{9, 8, 7, 6},
+		{5, 4, 3, 2}
+	};
+	double m_b[4][4] = {
+		{-2, 1, 2, 3},
+		{3, 2, 1, -1},
+		{4, 3, 6, 5},
+		{1, 2, 7, 8}
+	};
+
+
+	a = ft_create_matrix(4, 4);
+	b = ft_create_matrix(4, 4);
+
+	for (int c = 0; c < 4; c++) {
+        for (int r = 0; r < 4; r++) {
+            a.data[r][c] = m_a[c][r];
+        }
+    }
+	for (int c = 0; c < 4; c++) {
+        for (int r = 0; r < 4; r++) {
+            b.data[r][c] = m_b[c][r];
+        }
+    }
 	
-//	t_color color1, color2, color;
-//
-//	color1 = (t_tuple){0.15, 0.40, 0.60, 3};
-//	color2 = (t_tuple){0.10, 0.30, 0.20, 3};
-//
-//	color = ft_operator(color1, '+', color2);
-//	ft_print_tuple((t_tuple)color, "teste cor");
-//
-//	color = ft_operator(color1, '-', color2);
-//	ft_print_tuple((t_tuple)color, "teste cor");
-//
-//	color = ft_operator(color1, '*', color2);
-//	ft_print_tuple((t_tuple)color, "teste cor");
+	c = ft_matrix_mult(a, b);
+	ft_print_matrix(c);
+	printf("\n");
+	c = ft_transpose_matrix(c);
+	ft_print_matrix(c);
 
 	t_tuple b = (t_tuple){1, 2, 3, 1};
 	ft_print_tuple(b, "b");
