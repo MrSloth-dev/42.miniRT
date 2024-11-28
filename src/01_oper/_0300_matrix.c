@@ -107,7 +107,7 @@ int	ft_are_matrixes_equal(t_matrix a, t_matrix b)
 {
 	int	r;
 	int c;
-	if (a.cols != b.cols || a.rows != b.cols)
+	if (a.rows != b.rows || a.cols != b.cols)
 		return (0);
 	r = -1;
 	while (++r < a.rows)
