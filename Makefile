@@ -72,10 +72,12 @@ MLX = $(MLXDIR)/00_mlx_init.c \
 SRCS =	$(wildcard src/**/**.c)
 INCLUDES = $(MLXFLAGS) $(GNL) $(PRINTFT)
 
-OBJS = $(SRCS:.c=.o)
-
-%.o: %.c
+OBJ_DIR = obj
+OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(EFLAGS) -c $< -o $@
+
 
 ################################################################################
 #                                  Makefile  rules                             #
@@ -91,7 +93,6 @@ $(NAME): $(OBJS) $(HEADER) libx
 	@make -C $(LIBX_DIR) -s
 	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME)
 	@echo "$(GREEN)$(NAME) created[0m ✅"
-
 
 LIBX_DIR = minilibx-linux
 LIBX_HEADER = $(LIBX_DIR)/mlx.h
@@ -140,7 +141,7 @@ clean:
 
 .PHONY: fclean
 fclean: clean
-	@ $(RM) $(NAME) $(NAME_BONUS)
+	@ $(RM) $(OBJ_DIR) $(NAME) $(NAME_BONUS)
 	@make fclean -C $(PRINTDIR) -s
 	@echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✅"
 
