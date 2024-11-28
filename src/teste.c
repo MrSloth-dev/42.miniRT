@@ -8,10 +8,19 @@ int	main()
 	ft_setup(&canvas);
 	//jumpingball(&canvas);
 	
-	t_color color;
-	color = ft_add_tuple((t_tuple){0,0,0,3}, (t_tuple){15, 30, 25, 3});
+	t_color color1, color2, color;
+
+	color1 = (t_tuple){0.15, 0.40, 0.60, 3};
+	color2 = (t_tuple){0.10, 0.30, 0.20, 3};
+
+	color = ft_operator(color1, '+', color2);
 	ft_print_tuple((t_tuple)color, "teste cor");
-	
-	
+
+	color = ft_operator(color1, '-', color2);
+	ft_print_tuple((t_tuple)color, "teste cor");
+
+	color = ft_operator(color1, '*', color2);
+	ft_print_tuple((t_tuple)color, "teste cor");
+
 	return (0);
 }
