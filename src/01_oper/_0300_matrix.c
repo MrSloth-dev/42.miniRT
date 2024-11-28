@@ -102,3 +102,20 @@ t_tuple	ft_mult_matrix_tuple(t_matrix A, t_tuple B)
 	result.x = A.data[0][0];
 	return (result);
 } */
+
+int	ft_are_matrixes_equal(t_matrix a, t_matrix b)
+{
+	int	r;
+	int c;
+	if (a.cols != b.cols || a.rows != b.cols)
+		return (0);
+	r = -1;
+	while (++r < a.rows)
+	{
+		c = -1;
+		while (++c < a.cols)
+			if (ft_is_float_equal(a.data[r][c], b.data[r][c]) == 0)
+				return (0);
+	}
+	return (1);
+}
