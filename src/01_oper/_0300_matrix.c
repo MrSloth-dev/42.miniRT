@@ -69,7 +69,8 @@ t_matrix	ft_matrix_mult(t_matrix A, t_matrix B)
 	int			j;
 	int			k;
 
-	res = ft_create_matrix(4, 4);
+	ft_assert(A.cols == B.rows, "diff array size");
+	res = ft_create_matrix(A.cols, B.rows);
 	i = 0;
 	while (i < A.rows)
 	{
