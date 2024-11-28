@@ -1,7 +1,7 @@
 #include "minirt.h"
 #include <math.h>
 
-t_matrix	ft_create_matrix(int rows, int cols)
+t_matrix	ft_create_matrix(int rows, int cols, int identity)
 {
 	t_matrix	m;
 	int			r;
@@ -15,7 +15,7 @@ t_matrix	ft_create_matrix(int rows, int cols)
 		c = 0;
 		while (c < cols)
 		{
-			if (c == r)
+			if (identity && rows == cols && c == r)
 				m.data[r][c] = 1;
 			else
 				m.data[r][c] = 0;
@@ -71,14 +71,14 @@ t_matrix	ft_matrix_mult(t_matrix A, t_matrix B)
 	int			k;
 
 	ft_assert(A.cols == B.rows, "diff array size");
-	res = ft_create_matrix(A.cols, B.rows);
+	res = ft_create_matrix(A.cols, B.rows, 0);
 	c = 0;
 	while (c < A.cols)
 	{
 		r = 0;
 		while (r < B.rows)
 		{
-			res.data[r][c] = 0;
+			// res.data[r][c] = 0;
 			k = 0;
 			while (k < B.rows)
 			{
