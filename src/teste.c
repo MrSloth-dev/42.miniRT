@@ -2,6 +2,7 @@
 
 void teste_tuple_op()
 {
+	printf("\n%stest_tuple_op\n%s", GREEN, RESET);
 	t_tuple	result;
 	t_tuple	point1;
 	t_tuple	point2;
@@ -26,8 +27,10 @@ void teste_tuple_op()
 	ft_print_tuple(result, "Cross Prod");
 	printf("\n");
 }
+
 void teste_matrix_mult()
 {
+	printf("\n%stest_matrix_multi\n%s", GREEN, RESET);
 	t_matrix a, b, c;
 	double m_a[4][4] = {
 		{1, 2, 3, 4},
@@ -41,33 +44,27 @@ void teste_matrix_mult()
 		{4, 3, 6, 5},
 		{1, 2, 7, 8}
 	};
-
-
 	a = ft_create_matrix(4, 4, 0);
 	b = ft_create_matrix(4, 4, 0);
-
 	for (int c = 0; c < 4; c++) {
         for (int r = 0; r < 4; r++) {
             a.data[r][c] = m_a[c][r];
-        }
-    }
+        }}
 	for (int c = 0; c < 4; c++) {
         for (int r = 0; r < 4; r++) {
             b.data[r][c] = m_b[c][r];
-        }
-    }
-	
+        }}
 	c = ft_matrix_mult(a, b);
 	ft_print_matrix(c);
 	printf("\n");
 	c = ft_transpose_matrix(c);
 	ft_print_matrix(c);
-
 }
 
 //testing multiplication matrix by  tuple
 void	teste_matrix_mult_tuple()
 {
+	printf("\n%steste_matrix_mult_tuple\n%s", GREEN, RESET);
 	t_tuple b = (t_tuple){-1, 24, 3.2, 0};
 	ft_print_tuple(b, "b");
 	t_matrix A;
@@ -78,10 +75,77 @@ void	teste_matrix_mult_tuple()
 	ft_print_tuple(res, "res");
 }
 
+void	test_ft_determinant_mtx_two_by_two()
+{
+	printf("\n%stest_ft_determinant_mtx_two_by_two\n%s", GREEN, RESET);
+	t_matrix a ;
+	double m_a[4][4] = {
+		{1, 5, 2, 6},
+		{-3, 2, -2, 3},
+		{3, 8, 7, 6},
+		{5, 7, 3, 2}
+	};
+	double deter;
+	a = ft_create_matrix(3, 3, 0);  
+	for (int r = 0; r < a.rows; r++) {
+        for (int c = 0; c < a.cols; c++) {
+            a.data[r][c] = m_a[r][c];
+        }}
+	deter = ft_determinant_mtx_two_by_two(a, 0, 0);
+	printf("determinant: %f\n", deter);
+deter = ft_determinant_mtx_two_by_two(a, 0, 1);
+printf("determinant: %f\n", deter);
+	deter = ft_determinant_mtx_two_by_two(a, 1, 0);
+	printf("determinant: %f\n", deter);
+deter = ft_determinant_mtx_two_by_two(a, 2, 2);
+printf("determinant: %f\n", deter);
+}
+
+void	test_ft_submatrix()
+{
+	printf("\n%stest_ft_submatrix\n%s", GREEN, RESET);
+	t_matrix a, b;
+	double m_a[4][4] = {
+		{1, 5, 2, 6},
+		{-3, 2, -2, 3},
+		{3, 8, 7, 6},
+		{5, 7, 3, 2}
+	};
+
+	a = ft_create_matrix(3, 3, 0); 
+	for (int r = 0; r < a.rows; r++) {
+        for (int c = 0; c < a.cols; c++) {
+            a.data[r][c] = m_a[r][c];
+        }}
+		ft_print_matrix(a);
+	printf("\n");
+	printf("rem 0 0\n");
+	b = ft_submatrix(a, 0, 0);
+	ft_print_matrix(b);
+		printf("\n");
+		printf("rem 1 0\n");
+		b = ft_submatrix(a, 1, 0);
+		ft_print_matrix(b);
+	printf("\n");
+	printf("rem 2 2\n");
+	b = ft_submatrix(a, 2, 2);
+	ft_print_matrix(b);
+		printf("\n");
+		printf("rem 3 3\n");
+		b = ft_submatrix(a, 3, 3);
+		ft_print_matrix(b);
+	printf("\n");
+	printf("rem 0 3\n");
+	b = ft_submatrix(a, 0, 3);
+	ft_print_matrix(b);
+}
+
 int	main()
 {
     teste_tuple_op();
     teste_matrix_mult();
     teste_matrix_mult_tuple();
+	test_ft_determinant_mtx_two_by_two();
+	test_ft_submatrix();
 	return (0);
 }

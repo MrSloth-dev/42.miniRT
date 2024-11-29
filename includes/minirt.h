@@ -31,6 +31,10 @@
 #define T_POINT 1
 #define WHITESPACE " \t\n\r\v\f"
 
+#ifndef ASSERT
+# define ASSERT 0
+#endif
+
 typedef struct s_list
 {
 	void			*object;
