@@ -59,7 +59,7 @@ int	main()
 	};
 	double deter;
 
-	a = ft_create_matrix(4, 4, 0);  
+	a = ft_create_matrix(3, 3, 0);  
 	for (int r = 0; r < a.rows; r++) {
         for (int c = 0; c < a.cols; c++) {
             a.data[r][c] = m_a[r][c];
@@ -69,10 +69,10 @@ int	main()
 	deter = ft_determinant_mtx_two_by_two(a, 0, 0);
 	printf("determinant: %f\n", deter);
 
-	deter = ft_determinant_mtx_two_by_two(a, 0, 2);
+	deter = ft_determinant_mtx_two_by_two(a, 0, 1);
 	printf("determinant: %f\n", deter);
 
-	deter = ft_determinant_mtx_two_by_two(a, 2, 0);
+	deter = ft_determinant_mtx_two_by_two(a, 1, 0);
 	printf("determinant: %f\n", deter);
 
 	deter = ft_determinant_mtx_two_by_two(a, 2, 2);

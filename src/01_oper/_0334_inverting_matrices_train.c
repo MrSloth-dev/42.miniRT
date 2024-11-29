@@ -2,8 +2,7 @@
 
 double ft_determinant_mtx_two_by_two(t_matrix m, int r, int c)
 {
-	ft_assert(!(r + 2 <= m.rows || c + 2 <= m.cols), 
-		   "ft_determinant_mtx_two_by_two\n");
+	ft_assert(!(r + 2 > m.rows || c + 2 > m.cols), "ft_determinant_mtx_two_by_two\n");
 	return (m.data[r][c] * m.data[r + 1][c + 1] - m.data[r + 1][c] * m.data[r][c + 1]);
 }
 
