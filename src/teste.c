@@ -156,10 +156,10 @@ void	test_ft_submatrix()
 
 int	main()
 {
-	teste_tuple_op();
-	teste_matrix_mult();
-	teste_matrix_mult_tuple();
-	test_ft_determinant_mtx_two_by_two();
+    //teste_tuple_op();
+    //teste_matrix_mult();
+    //teste_matrix_mult_tuple();
+	//test_ft_determinant_mtx_two_by_two();
 	test_ft_submatrix();
 	teste_minor_cofactor();
 	return (0);
