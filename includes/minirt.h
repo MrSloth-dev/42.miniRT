@@ -85,6 +85,14 @@ typedef struct s_canvas
 	t_count		count;
 }	t_canvas;
 
+typedef struct s_iter
+{
+	int		r;
+	int		c;
+	int		rs;
+	int		cs;
+}	t_iter;
+
 void		ft_tuple_init(t_tuple *tuple, t_point coord, int type);
 void		ft_assert(int condition, char *message);
 void		*ft_free(void *ptr);
@@ -92,7 +100,7 @@ void		*ft_free_split(char **split);
 int			ft_clean_exit(t_canvas *canvas);
 //init
 void		ft_init_canvas(t_canvas *canvas);
-
+t_iter		ft_iter(int n);
 
 int			ft_printf(int fd, const char *str, ...);
 
