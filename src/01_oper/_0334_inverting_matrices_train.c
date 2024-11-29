@@ -35,4 +35,3 @@ t_matrix	ft_submatrix(t_matrix src, int row, int col)
 	}
 	return (dst);
 }
-

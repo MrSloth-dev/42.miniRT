@@ -6,7 +6,7 @@ void	ft_assert(int condition, char *message)
 {
 	if (!condition)
 	{
-		ft_printf(2, RED"%s\n"RESET, message);
-		exit(1);
+		ft_printf(2, RED"%s"RESET, message);
+		//exit(1);
 	}
 }
