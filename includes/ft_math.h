@@ -46,4 +46,6 @@ t_matrix	ft_matrix_mult(t_matrix A, t_matrix B);
 
 t_tuple		ft_mult_matrix_tuple(t_matrix A, t_tuple B);
 t_matrix	ft_transpose_matrix(t_matrix src);
+//invert matrix
 double 		ft_determinant_mtx_two_by_two(t_matrix m, int r, int c);
+t_matrix	ft_submatrix(t_matrix src, int row, int col);
