@@ -89,19 +89,6 @@ int			ft_clean_exit(t_canvas *canvas);
 //init
 void		ft_init_canvas(t_canvas *canvas);
 
-//oper.c
-t_tuple		ft_operator(t_tuple a, char op, t_tuple b);
-int			ft_is_float_equal(double num1, double num2);
-int			ft_is_tuples_equal(t_tuple tuple1, t_tuple tuple2);
-t_tuple		ft_add_tuple(t_tuple tuple1, t_tuple tuple2);
-double		ft_magn_tuple(t_tuple tuple);
-t_tuple		ft_sub_tuple(t_tuple tuple1, t_tuple tuple2);
-t_tuple		ft_neg_tuple(t_tuple tuple);
-t_tuple		ft_scalar_tuple(t_tuple tuple, double value);
-t_tuple		ft_norm_vector(t_tuple tuple);
-double		ft_dotprod_vector(t_tuple a, t_tuple b);
-t_tuple		ft_crossprod_vector(t_tuple a, t_tuple b);
-t_matrix	ft_matrix_mult(t_matrix A, t_matrix B);
 
 int			ft_printf(int fd, const char *str, ...);
 
@@ -109,8 +96,6 @@ void		ft_print_matrix(t_matrix m);
 t_matrix	ft_create_matrix(int rows, int cols, int identity);
 void		ft_set_matrix_values(t_matrix *m, double values[4][4]);
 int			ft_are_matrixes_equal(t_matrix a, t_matrix b);
-t_tuple	ft_mult_matrix_tuple(t_matrix A, t_tuple B);
-t_matrix	ft_transpose_matrix(t_matrix src);
 
 //parse
 int			ft_count_members (char **split);
