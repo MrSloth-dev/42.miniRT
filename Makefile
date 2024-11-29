@@ -160,17 +160,5 @@ te : $(OBJS) $(HEADER) libx
 	@$(CC) $(MAIN_T) $(CFLAGS) $(EFLAGS) $(OBJS) $(MLXFLAGS) $(GNL) $(PRINTFT) -o $(NAME_T)
 	./$(NAME)_te
 
-MAIN_GO = src/go.c
-NAME_GO = $(NAME)_go
-.PHONY: go
-go : $(OBJS) $(HEADER) libx
-	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)..."
-	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)..."
-	@make -C $(PRINTDIR) -s
-	@make -C $(LIBX_DIR) -s
-	@$(CC) $(MAIN_GO) $(CFLAGS) $(EFLAGS) $(OBJS) $(MLXFLAGS) $(GNL) $(PRINTFT) -o $(NAME_GO)
-	./$(NAME)_go
-
-
 .SILENT: re all clean fclean
 
