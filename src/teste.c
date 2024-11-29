@@ -60,6 +60,30 @@ void teste_matrix_mult()
 	c = ft_transpose_matrix(c);
 	ft_print_matrix(c);
 }
+
+void	test_put_together_mtx()
+{
+	t_matrix a, b, c;
+	double m_a[4][4] = {
+		{1, 2, 3, 4},
+		{5, -6, 7, 8},
+		{-9, 8, -7, 6},
+		{5, 4, 3, -2}
+	};
+	a = ft_create_matrix(4, 4, 0);
+	b = ft_create_matrix(4, 4, 0);
+	c = ft_create_matrix(4, 4, 0);
+	printf(GREEN"\nMatrix multi by its inverse\n"RESET);
+	ft_set_matrix_values(&a, m_a);
+	b = ft_invert_matrix(a);
+	printf(GREEN"\nMatrix A\n"RESET);
+	ft_print_matrix(a);
+	printf(GREEN"\nMatrix B\n"RESET);
+	ft_print_matrix(b);
+	printf(GREEN"\nMult\n"RESET);
+	c = ft_matrix_mult(a, b);
+	ft_print_matrix(c);
+}
 void	teste_minor_cofactor()
 {
 	printf(GREEN"\nteste_matrix_minor_Cofator\n"RESET);
@@ -205,7 +229,7 @@ void	test_invertion()
 	printf("\ncofator[3][2] = %f\n", ft_cofactor(a, 3, 2));
 	printf("\ncofator[2][3] = %f\n", ft_cofactor(a, 2, 3));
 	printf(GREEN"\nInverting\n"RESET);
-	temp = ft_invert(a);
+	temp = ft_invert_matrix(a);
 	ft_print_matrix(temp);
 
 	(void)temp;
@@ -222,5 +246,6 @@ int	main()
 	test_cofators();
 	test_determinant();
 	test_invertion();
+	test_put_together_mtx();
 	return (0);
 }
