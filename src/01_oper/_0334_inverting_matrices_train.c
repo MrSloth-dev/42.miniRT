@@ -35,3 +35,16 @@ t_matrix	ft_submatrix(t_matrix src, int row, int col)
 	}
 	return (dst);
 }
+
+double ft_minor(t_matrix m, int row, int col)
+{
+	return (ft_determinant_mtx_two_by_two(ft_submatrix(m, row, col), 0, 0));
+}
+
+double ft_cofactor(t_matrix m, int row, int col)
+{
+	if ((row + col) % 2 == 1)
+		return (-ft_minor(m, row, col));
+	else
+		return (ft_minor(m, row, col));
+}
