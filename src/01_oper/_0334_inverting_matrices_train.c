@@ -1,5 +1,4 @@
 #include "minirt.h"
-#include <stdio.h>
 
 t_matrix	ft_submatrix(t_matrix src, int row, int col)
 {
@@ -60,30 +59,22 @@ double	ft_determinant(t_matrix m)
 	return (det);
 }
 
-t_matrix ft_invert(t_matrix m)
+t_matrix ft_invert_matrix(t_matrix m)
 {
 	t_matrix temp;
-	double	cofactor;
 	double det;
-	int	r;
-	int	c;
+	t_iter	h;
 
+	h = ft_iter(-1);
 	det = ft_determinant(m);
+	printf("%f\n\n", det);
 	ft_assert(det != 0, "Matrix not invertible!\n");
-
 	temp = ft_create_matrix(m.rows, m.cols, 0);
-	r = 0;
-	while (r < m.rows)
+	while (++h.r < m.rows)
 	{
-		c = 0;
-		while (c < m.cols)
-		{
-			cofactor = ft_cofactor(m, r, c);
-			temp.data[r][c] = cofactor / det;
-			c++;
-		}
-		r++;
+		h.c = -1;
+		while (++h.c < m.cols)
+			temp.data[h.c][h.r] = ft_cofactor(m, h.r, h.c) / det;
 	}
-
-	return (temp = ft_transpose_matrix(temp));
+	return (temp);
 }

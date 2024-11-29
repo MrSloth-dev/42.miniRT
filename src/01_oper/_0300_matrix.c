@@ -55,7 +55,7 @@ void	ft_print_matrix(t_matrix m)
 		c = 0;
 		while (c < m.cols)
 		{
-			printf("%.000f ", m.data[r][c]);
+			printf("% .5f    ", m.data[r][c]);
 			c++;
 		}
 		printf("\n");
