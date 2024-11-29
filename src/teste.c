@@ -60,6 +60,20 @@ void teste_matrix_mult()
 	c = ft_transpose_matrix(c);
 	ft_print_matrix(c);
 }
+void	teste_minor_cofactor()
+{
+    double data[4][4] = {{ 3, 5, 0},
+	    {2, -1, -7},
+	    {6, -1, 5}};
+    t_matrix m;
+    m = ft_create_matrix(4, 4, 0);
+    ft_set_matrix_values(&m, data);
+    printf("Matrix M\n");
+    ft_print_matrix(m);
+    printf("\nminor is %f\n", ft_minor(m, 1, 1));
+    printf("\ncafactor is %f\n", ft_cofactor(m, 1, 1));
+
+}
 
 //testing multiplication matrix by  tuple
 void	teste_matrix_mult_tuple()
@@ -148,4 +162,12 @@ int	main()
 	test_ft_determinant_mtx_two_by_two();
 	test_ft_submatrix();
 	return (0);
+
+int	main()
+{
+    // teste_tuple_op();
+    // teste_matrix_mult();
+    // teste_matrix_mult_tuple();
+    teste_minor_cofactor();
+    return (0);
 }

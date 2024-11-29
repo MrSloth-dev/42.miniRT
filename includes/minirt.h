@@ -100,6 +100,8 @@ void		ft_print_matrix(t_matrix m);
 t_matrix	ft_create_matrix(int rows, int cols, int identity);
 void		ft_set_matrix_values(t_matrix *m, double values[4][4]);
 int			ft_are_matrixes_equal(t_matrix a, t_matrix b);
+double		ft_minor(t_matrix m, int row, int col);
+double ft_cofactor(t_matrix m, int row, int col);
 
 //parse
 int			ft_count_members (char **split);
