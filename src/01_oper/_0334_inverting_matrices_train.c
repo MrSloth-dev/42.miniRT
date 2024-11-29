@@ -1,33 +1,28 @@
 #include "minirt.h"
-
-double ft_determinant_mtx_two_by_two(t_matrix m, int r, int c)
-{
-	ft_assert(!(r + 2 > m.rows || c + 2 > m.cols), "ft_determinant_mtx_two_by_two\n");
-	return (m.data[r][c] * m.data[r + 1][c + 1] - m.data[r + 1][c] * m.data[r][c + 1]);
-}
+#include <stdio.h>
 
 t_matrix	ft_submatrix(t_matrix src, int row, int col)
 {
-	t_matrix dst;
-	int	r;
-	int	c;
-	int	rs;
-	int	cs;
+	t_matrix	dst;
+	int			r;
+	int			c;
+	int			rs;
+	int			cs;
 
 	ft_assert(!(src.rows <= row || src.cols <= col), "ft_submatrix\n");
 	dst = ft_create_matrix(src.rows - 1, src.cols - 1, 0);
 	r = 0;
 	rs = -1;
-	while(++rs < src.rows)
+	while (++rs < src.rows)
 	{
 		if (rs == row)
 			continue ;
 		cs = -1;
 		c = 0;
-		while(++cs < src.cols)
+		while (++cs < src.cols)
 		{
 			if (cs == col)
-				continue;
+				continue ;
 			dst.data[r][c] = src.data[rs][cs];
 			c++;
 		}
@@ -36,15 +31,59 @@ t_matrix	ft_submatrix(t_matrix src, int row, int col)
 	return (dst);
 }
 
-double ft_minor(t_matrix m, int row, int col)
+double	ft_minor(t_matrix m, int row, int col)
 {
-	return (ft_determinant_mtx_two_by_two(ft_submatrix(m, row, col), 0, 0));
+	return (ft_determinant(ft_submatrix(m, row, col)));
 }
 
-double ft_cofactor(t_matrix m, int row, int col)
+double	ft_cofactor(t_matrix m, int row, int col)
 {
 	if ((row + col) % 2 == 1)
 		return (-ft_minor(m, row, col));
 	else
 		return (ft_minor(m, row, col));
+}
+
+double	ft_determinant(t_matrix m)
+{
+	double	det;
+	int		c;
+
+	c = -1;
+	det = 0;
+	ft_assert(m.cols ==m.rows, "Matrix not square!");
+	if (m.cols == 2)
+		det = m.data[0][0] * m.data[1][1] - m.data[1][0] * m.data[0][1];
+	else
+		while (++c < m.cols)
+			det += m.data[0][c] * ft_cofactor(m, 0, c);
+	return (det);
+}
+
+t_matrix ft_invert(t_matrix m)
+{
+	t_matrix temp;
+	double	cofactor;
+	double det;
+	int	r;
+	int	c;
+
+	det = ft_determinant(m);
+	ft_assert(det != 0, "Matrix not invertible!\n");
+
+	temp = ft_create_matrix(m.rows, m.cols, 0);
+	r = 0;
+	while (r < m.rows)
+	{
+		c = 0;
+		while (c < m.cols)
+		{
+			cofactor = ft_cofactor(m, r, c);
+			temp.data[r][c] = cofactor / det;
+			c++;
+		}
+		r++;
+	}
+
+	return (temp = ft_transpose_matrix(temp));
 }
