@@ -62,23 +62,25 @@ void teste_matrix_mult()
 }
 void	teste_minor_cofactor()
 {
-    double data[4][4] = {{ 3, 5, 0},
-	    {2, -1, -7},
-	    {6, -1, 5}};
-    t_matrix m;
-    m = ft_create_matrix(4, 4, 0);
-    ft_set_matrix_values(&m, data);
-    printf("Matrix M\n");
-    ft_print_matrix(m);
-    printf("\nminor is %f\n", ft_minor(m, 1, 1));
-    printf("\ncafactor is %f\n", ft_cofactor(m, 1, 1));
+	printf(GREEN"\nteste_matrix_minor_Cofator\n"RESET);
+	double data[4][4] = {{ 3, 5, 0},
+	        {2, -1, -7},
+	        {6, -1, 5}};
+	t_matrix m;
+	m = ft_create_matrix(3, 3, 0);
+	ft_set_matrix_values(&m, data);
+	printf("Matrix M\n");
+	ft_print_matrix(m);
+	printf("\nminor[0][0] is %f\n", ft_minor(m, 0, 0));
+	printf("\ncafactor[0][0] is %f\n", ft_cofactor(m, 0, 0));
+	printf("\nminor[1][0] is %f\n", ft_minor(m, 1, 0));
+	printf("\ncafactor[1][0] is %f\n", ft_cofactor(m, 1, 0));
 
 }
 
 //testing multiplication matrix by  tuple
 void	teste_matrix_mult_tuple()
 {
-	printf("\n%steste_matrix_mult_tuple\n%s", GREEN, RESET);
 	t_tuple b = (t_tuple){-1, 24, 3.2, 0};
 	ft_print_tuple(b, "b");
 	t_matrix A;
@@ -89,9 +91,9 @@ void	teste_matrix_mult_tuple()
 	ft_print_tuple(res, "res");
 }
 
-void	test_ft_determinant_mtx_two_by_two()
+void	test_ft_determinant_size_two()
 {
-	printf("\n%stest_ft_determinant_mtx_two_by_two\n%s", GREEN, RESET);
+	printf("\n%stest_ft_determinant_size_two\n%s", GREEN, RESET);
 	t_matrix a ;
 	double m_a[4][4] = {
 		{1, 5, 2, 6},
@@ -105,14 +107,8 @@ void	test_ft_determinant_mtx_two_by_two()
         for (int c = 0; c < a.cols; c++) {
             a.data[r][c] = m_a[r][c];
         }}
-	deter = ft_determinant_mtx_two_by_two(a, 0, 0);
+	deter = ft_determinant(a);
 	printf("determinant: %f\n", deter);
-deter = ft_determinant_mtx_two_by_two(a, 0, 1);
-printf("determinant: %f\n", deter);
-	deter = ft_determinant_mtx_two_by_two(a, 1, 0);
-	printf("determinant: %f\n", deter);
-deter = ft_determinant_mtx_two_by_two(a, 2, 2);
-printf("determinant: %f\n", deter);
 }
 
 void	test_ft_submatrix()
@@ -154,13 +150,77 @@ void	test_ft_submatrix()
 	ft_print_matrix(b);
 }
 
+void	test_cofators()
+{
+	printf(GREEN"\ntest_ft_determinant\n"RESET);
+	t_matrix a ;
+	double data[4][4] = {
+		{-2, -8, 3, 5},
+		{-3, 1, 7, 3},
+		{1, 2, -9, 6},
+		{-6, 7, 7, -9}
+	};
+	a = ft_create_matrix(4, 4,0);
+	ft_set_matrix_values(&a, data);
+	ft_print_matrix(a);
+	printf("\nmatrix col size is %d\n", a.cols);
+	for( int c = 0; c < a.cols; c++)
+		printf("\ncofator is %f\n", ft_cofactor(a, 0, c));
+}
+
+void	test_determinant()
+{
+	printf(GREEN"\ntest_ft_determinant\n"RESET);
+	t_matrix a ;
+	double data[4][4] = {
+		{-2, -8, 3, 5},
+		{-3, 1, 7, 3},
+		{1, 2, -9, 6},
+		{-6, 7, 7, -9}
+	};
+	a = ft_create_matrix(4, 4,0);
+	ft_set_matrix_values(&a, data);
+	ft_print_matrix(a);
+	printf("\ndeterminant is %f\n", ft_determinant(a));
+
+}
+
+void	test_invertion()
+{
+	printf(GREEN"\ntest_ft_invertion\n"RESET);
+	t_matrix a ;
+	t_matrix temp;
+	double data[4][4] = {
+		{-5, 2, 6, -8},
+		{1, -5, 1, 8},
+		{7, 7, -6, -7},
+		{1, -3, 7, 4}
+	};
+	printf(GREEN"\nMatrix A\n"RESET);
+	a = ft_create_matrix(4, 4,0);
+	ft_set_matrix_values(&a, data);
+	ft_print_matrix(a);
+	double det = ft_determinant(a);
+	printf("\ndeter = %f\n", det);
+	printf("\ncofator[3][2] = %f\n", ft_cofactor(a, 3, 2));
+	printf("\ncofator[2][3] = %f\n", ft_cofactor(a, 2, 3));
+	printf(GREEN"\nInverting\n"RESET);
+	temp = ft_invert(a);
+	ft_print_matrix(temp);
+
+	(void)temp;
+}
+
 int	main()
 {
-    //teste_tuple_op();
-    //teste_matrix_mult();
-    //teste_matrix_mult_tuple();
-	//test_ft_determinant_mtx_two_by_two();
+	teste_tuple_op();
+	teste_matrix_mult();
+	teste_matrix_mult_tuple();
+	test_ft_determinant_size_two();
 	test_ft_submatrix();
 	teste_minor_cofactor();
+	test_cofators();
+	test_determinant();
+	test_invertion();
 	return (0);
 }
