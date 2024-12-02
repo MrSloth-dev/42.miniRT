@@ -1,5 +1,12 @@
 #include "ft_math.h"
 //OBJECTS
+
+typedef struct s_ray
+{
+	t_tuple pos;
+	t_tuple dir;
+}	t_ray;
+
 typedef struct s_ambient
 {
 	double				ratio;
@@ -48,6 +55,40 @@ typedef struct s_cylinder
 	t_color				color;
 }	t_cylinder;
 
+enum e_type
+{
+	PLANE,
+	CYLINDER,
+	SPHERE,
+	// CONE,
+	// CUBE,
+	// TRIANGLE
+};
+
+typedef struct s_shapes
+{
+	enum e_type		type;
+	union
+	{
+		t_plane		pla;
+		t_cylinder	cyl;
+		t_sphere	sph;
+		// t_cone		cone;
+		// t_cube		cube;
+		// t_triangle	triangle;
+	};
+	// t_matrix		transform;
+	// t_matrix		inverted;
+	// t_matrix		transposed;
+	// t_material		material;
+}	t_shapes;
+
+typedef struct s_inter
+{
+	double	value;
+	t_shapes *shape;
+}	t_inter;
+
 // WILL NOT USE
 t_ambient	*ft_init_ambient(int ratio, t_color color);
 t_camera	*ft_init_camera(t_tuple coord, t_tuple norm, int fov);
@@ -56,5 +97,4 @@ t_sphere	*ft_init_sphere(t_tuple coord, int diameter, t_color color);
 t_plane		*ft_init_plane(t_tuple coord, t_tuple norm, t_color color);
 t_cylinder	*ft_init_cylinder(t_tuple coord, t_tuple norm,
 				t_cyl_size size, t_color color);
-void	*ft_lstlast(void *head);
 void	ft_add_object(void **head, void *object);
