@@ -21,7 +21,7 @@ void	ft_mlx_init(t_canvas *canvas)
 		free(canvas->mlx);
 		exit (ERR_MLX);
 	}
-	canvas->img->img = mlx_new_image(canvas->mlx, IMG_WIDTH, IMG_HEIGHT);
+	canvas->img->img = mlx_new_image(canvas->mlx, IMAGE_WIDTH, IMAGE_HEIGHT);
 	canvas->img->addr = mlx_get_data_addr(canvas->img->img,
 			&canvas->img->bits_per_pixel, &canvas->img->size_line,
 			&canvas->img->endian);

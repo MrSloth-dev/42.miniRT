@@ -86,7 +86,7 @@ $(OBJ_DIR)/%.o: %.c
 .PHONY: all
 all: $(NAME)
 
-$(NAME): $(OBJS) $(HEADER) libx
+$(NAME): $(OBJS) $(HEADER)
 	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)..."
 	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)..."
 	@make -C $(PRINTDIR) -s
@@ -152,7 +152,7 @@ re : fclean all
 MAIN_T = src/teste.c
 NAME_T = $(NAME)_te
 .PHONY: te
-te : $(OBJS) $(HEADER) libx
+te : $(OBJS) $(HEADER)
 	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)..."
 	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)..."
 	@make -C $(PRINTDIR) -s
