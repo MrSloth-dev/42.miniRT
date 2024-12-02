@@ -6,8 +6,9 @@ void teste_tuple_op()
 	t_tuple	result;
 	t_tuple	point1;
 	t_tuple	point2;
-	ft_tuple_init(&point1, (t_point){1,2,3}, T_VECTOR);
-	ft_tuple_init(&point2, (t_point) {0,0,1}, T_VECTOR);
+
+	ft_tuple_init(&point1, (t_point){1, 2, 3}, T_VECTOR);
+	ft_tuple_init(&point2, (t_point){0, 0, 1}, T_VECTOR);
 	ft_print_tuple(point1, "point1");
 	ft_print_tuple(point2, "point2");
 	ft_print_tuple(ft_add_tuple(point1, point2), "add");
@@ -235,17 +236,86 @@ void	test_invertion()
 	(void)temp;
 }
 
+void	test_translation()
+{
+	printf(GREEN"\nTransformation\n"RESET);
+	t_tuple vector = {-3, 4, 5, 0};
+	t_tuple point = {-3, 4, 5, 1};
+	ft_print_tuple(ft_translate(vector, vector), "translate vector");
+	ft_print_tuple(ft_translate(point, point), "translate point");
+}
+
+void	test_scale()
+{
+	printf(GREEN"\nTransformation\n"RESET);
+	t_tuple vector = {-4, 6, 8, 1};
+	t_tuple point = {-4, 6, 8, 1};
+	ft_print_tuple(ft_scale((t_tuple){2, 3, 4, 1}, vector), "scale vector");
+	ft_print_tuple(ft_scale((t_tuple){2, 3, 4, 1}, point), "scale point");
+}
+
+void	test_rotation_x()
+{
+	t_tuple temp;
+	printf(GREEN"\nTransformation\n"RESET);
+	t_tuple point = {1, 0, 1, 1};
+	temp = ft_rotation_x(point, 90);
+	ft_print_tuple(temp, "\nrotation x \n");
+	temp = ft_scale((t_tuple){5, 5, 5, 1}, temp);
+	ft_print_tuple(temp, "\nscale (5, 5, 5)\n");
+	temp = ft_translate((t_tuple){10, 5, 7, 1}, temp);
+	ft_print_tuple(temp, "\ntranslate (10, 5, 7)\n");
+}
+
+void	ft_free_canvas(t_canvas *canvas)
+{
+	ft_free(canvas->ambient);
+}
+
+void	test_mlx(t_canvas *canvas)
+{
+	ft_init_canvas(canvas);
+	ft_setup(canvas);
+	float radius = (float)WIN_HEIGHT / 4;
+	t_tuple point = {0, 0, 0, 1};
+
+	ft_pixel_put(canvas->img, (float)WIN_WIDTH / 2, (float)WIN_HEIGHT / 2, 0x00ff00); // center
+	t_tuple temp = ft_translate((t_tuple){0, -radius, 0, 0} , point);
+	(void)temp;
+	// printf("windows width = %d, height =  %d\n\n", WIN_WIDTH, WIN_HEIGHT);
+	// printf("image width = %d, height =  %d\n\n", IMG_WIDTH, IMG_HEIGHT);
+	for (int i = 0; i < 12; i++)
+	{
+		ft_pixel_put(canvas->img, temp.x + (float)WIN_WIDTH / 2, temp.y + (float)WIN_HEIGHT / 2, 0xffffff);
+		temp = ft_rotation_z(temp, ((float)360 / (12)));
+		printf("x = %f, y = %f\n", temp.x+ (float)WIN_WIDTH / 2, temp.y+ (float)WIN_HEIGHT / 2);
+		// ft_draw_square(canvas, (t_tuple){0,0,0,1}, (t_tuple){WIN_WIDTH,WIN_HEIGHT,0,1}, 0xff0000);
+		mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img->img, 0, 0);
+		sleep(1);
+		
+	}
+	// mlx_key_hook(canvas->win, key_handler, &canvas);
+	mlx_hook(canvas->win, DestroyNotify, 0L, &close_handler, &canvas);
+	mlx_loop(canvas->mlx);
+	ft_free_canvas(canvas);
+}
+
 int	main()
 {
-	teste_tuple_op();
-	teste_matrix_mult();
-	teste_matrix_mult_tuple();
-	test_ft_determinant_size_two();
-	test_ft_submatrix();
-	teste_minor_cofactor();
-	test_cofators();
-	test_determinant();
-	test_invertion();
-	test_put_together_mtx();
+	t_canvas	canvas;
+	test_mlx(&canvas);
+	// teste_tuple_op();
+	// teste_matrix_mult();
+	// teste_matrix_mult_tuple();
+	// test_ft_determinant_size_two();
+	// test_ft_submatrix();
+	// teste_minor_cofactor();
+	// test_cofators();
+	// test_determinant();
+	// test_invertion();
+	// test_put_together_mtx();
+	// test_translation();
+	// test_scale();
+	test_rotation_x();
 	return (0);
 }

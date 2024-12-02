@@ -46,6 +46,17 @@ t_matrix	ft_matrix_mult(t_matrix A, t_matrix B);
 
 t_tuple		ft_mult_matrix_tuple(t_matrix A, t_tuple B);
 t_matrix	ft_transpose_matrix(t_matrix src);
-//invert matrix
-double 		ft_determinant_mtx_two_by_two(t_matrix m, int r, int c);
+//Matrix
 t_matrix	ft_submatrix(t_matrix src, int row, int col);
+t_matrix	ft_create_matrix(int rows, int cols, int identity);
+void		ft_set_matrix_values(t_matrix *m, double values[4][4]);
+int			ft_are_matrixes_equal(t_matrix a, t_matrix b);
+double		ft_minor(t_matrix m, int row, int col);
+double		ft_cofactor(t_matrix m, int row, int col);
+double		ft_determinant(t_matrix m);
+t_matrix	ft_invert_matrix(t_matrix m);
+t_tuple		ft_translate(t_tuple translation, t_tuple to_translate);
+t_tuple	ft_scale(t_tuple scale, t_tuple to_scale);
+t_tuple		ft_rotation_x(t_tuple tuple, double angle);
+t_tuple		ft_rotation_y(t_tuple tuple, double angle);
+t_tuple		ft_rotation_z(t_tuple tuple, double angle);

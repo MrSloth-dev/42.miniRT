@@ -18,10 +18,10 @@
 #define YELLOW "\e[1;3;93m"
 #define RESET "\e[0m"
 
-#define WIN_HEIGHT 600
-#define WIN_WIDTH 920
-#define IMG_HEIGHT 600
-#define IMG_WIDTH 920
+#define WIN_HEIGHT 1000
+#define WIN_WIDTH 1000
+#define IMAGE_HEIGHT 1000
+#define IMAGE_WIDTH 1000
 
 #define ROUND_ERROR 0.00001
 #define ERR_INPUT 1
@@ -101,17 +101,11 @@ int			ft_clean_exit(t_canvas *canvas);
 //init
 void		ft_init_canvas(t_canvas *canvas);
 t_iter		ft_iter(int n);
+void	ft_free_canvas(t_canvas *canvas);
 
 int			ft_printf(int fd, const char *str, ...);
 
 void		ft_print_matrix(t_matrix m);
-t_matrix	ft_create_matrix(int rows, int cols, int identity);
-void		ft_set_matrix_values(t_matrix *m, double values[4][4]);
-int			ft_are_matrixes_equal(t_matrix a, t_matrix b);
-double		ft_minor(t_matrix m, int row, int col);
-double		ft_cofactor(t_matrix m, int row, int col);
-double		ft_determinant(t_matrix m);
-t_matrix	ft_invert_matrix(t_matrix m);
 
 //parse
 int			ft_count_members (char **split);
