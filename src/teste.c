@@ -300,10 +300,36 @@ void	test_mlx(t_canvas *canvas)
 	ft_free_canvas(canvas);
 }
 
+void	test_ray_distance()
+{
+	t_ray	ray;
+	ray = ft_create_ray((t_tuple){2, 3, 4, 1}, (t_tuple){1, 0, 0, 0});
+	ft_print_tuple(ft_distance_ray(ray, 0), "point time 0");
+	ft_print_tuple(ft_distance_ray(ray, 1), "point time 1");
+	ft_print_tuple(ft_distance_ray(ray, -1), "point time -1");
+	ft_print_tuple(ft_distance_ray(ray, 2.5), "point time 2.5");
+}
+
+void	test_intersect_sphere()
+{
+	t_sphere	sph;
+	t_ray		ray;
+	t_interlst	*lst;
+
+	sph.diameter = 2;
+	sph.coord = (t_tuple){0, 0, 0, 1};
+	sph.color = (t_color){255, 0, 0, 1};
+	ray.pos = (t_tuple){0, 0, -5, 1};
+	ray.dir =  (t_tuple){0, 0, 1, 0};
+	// ft_intersection_sphere(ray, sph);
+	ft_intersection_sphere(&lst, ray, (t_shapes *)&sph);
+}
+
+
 int	main()
 {
-	t_canvas	canvas;
-	test_mlx(&canvas);
+	// t_canvas	canvas;
+	// test_mlx(&canvas);
 	// teste_tuple_op();
 	// teste_matrix_mult();
 	// teste_matrix_mult_tuple();
@@ -316,6 +342,9 @@ int	main()
 	// test_put_together_mtx();
 	// test_translation();
 	// test_scale();
-	test_rotation_x();
+	// test_ray_distance();
+	test_intersect_sphere();
+	
+	// test_rotation_x();
 	return (0);
 }

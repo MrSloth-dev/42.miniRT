@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include "ft_printf/libft/libft.h"
 #include "ft_printf.h"
 #include "get_next_line.h"
 #include "../minilibx-linux/mlx.h"
@@ -35,11 +36,7 @@
 # define ASSERT 0
 #endif
 
-typedef struct s_list
-{
-	void			*object;
-	struct s_list	*next;
-}				t_list;
+typedef t_list t_interlst;
 
 typedef struct s_img
 {
@@ -91,6 +88,9 @@ typedef struct s_iter
 	int		c;
 	int		rs;
 	int		cs;
+	double	a;
+	double	b;
+	double	d;
 }	t_iter;
 
 void		ft_tuple_init(t_tuple *tuple, t_point coord, int type);
@@ -106,6 +106,13 @@ void	ft_free_canvas(t_canvas *canvas);
 int			ft_printf(int fd, const char *str, ...);
 
 void		ft_print_matrix(t_matrix m);
+
+
+//RAYS
+t_tuple		ft_distance_ray(t_ray ray, double time);
+t_ray		ft_create_ray(t_tuple pos, t_tuple dir);
+void		ft_lstadd_sort_inter(t_interlst **lst, double value, t_shapes *shap);
+void	ft_intersection_sphere(t_interlst **lst, t_ray ray, t_shapes *shap);
 
 //parse
 int			ft_count_members (char **split);
@@ -147,5 +154,7 @@ void	ft_print_objects(t_canvas canvas);
 void	operations_testing(void);
 void	jumpingball(t_canvas *canvas);
 void	ft_draw_square(t_canvas *canvas,t_tuple start, t_tuple sides, int color);
+
+
 
 #endif

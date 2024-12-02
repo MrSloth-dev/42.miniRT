@@ -1,3 +1,4 @@
+#include "minirt.h"
 typedef struct s_matrix
 {
 	int			rows;
