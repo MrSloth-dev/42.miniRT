@@ -77,9 +77,9 @@ typedef struct s_shapes
 		// t_cube		cube;
 		// t_triangle	triangle;
 	};
-	// t_matrix		transform;
-	// t_matrix		inverted;
-	// t_matrix		transposed;
+	t_matrix		inverted;
+	t_matrix		transform;
+	t_matrix		transposed;
 	// t_material		material;
 }	t_shapes;
 
