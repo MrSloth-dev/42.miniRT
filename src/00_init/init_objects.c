@@ -1,30 +1,5 @@
 #include "minirt.h"
 
-void	*ft_lstlast(void *head)
-{
-	void	*current;
-
-	current = head;
-	if (!head)
-		return (NULL);
-	while ((void *)current)
-		current = (void *)current;
-	return (current);
-}
-
-void	ft_add_object(void **head, void *object)
-{
-	void	*last;
-
-	if (!*head)
-	{
-		*head = object;
-		return ;
-	}
-	last = ft_lstlast(*head);
-	*(void **)last = object;
-}
-
 t_ambient	*ft_init_ambient(int ratio, t_color color)
 {
 	t_ambient	*new;

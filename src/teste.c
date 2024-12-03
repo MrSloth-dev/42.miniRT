@@ -316,15 +316,44 @@ void	test_intersect_sphere()
 	t_ray		ray;
 	t_interlst	*lst;
 
-	sph.diameter = 2;
+	lst = NULL;
+	sph.diameter = 1;
 	sph.coord = (t_tuple){0, 0, 0, 1};
 	sph.color = (t_color){255, 0, 0, 1};
-	ray.pos = (t_tuple){0, 0, -5, 1};
+	ray.pos = (t_tuple){0, 0, 5, 1};
 	ray.dir =  (t_tuple){0, 0, 1, 0};
-	// ft_intersection_sphere(ray, sph);
 	ft_intersection_sphere(&lst, ray, (t_shapes *)&sph);
 }
 
+void	test_multiple_intersect()
+{
+	t_shapes	sph;
+	t_shapes	sph2;
+	t_shapes	sph3;
+	t_ray		ray;
+	t_interlst	*lst;
+
+	lst = NULL;
+	ray.pos = (t_tuple){0, 0, 5, 1};
+	ray.dir =  (t_tuple){0, 0, 1, 0};
+
+	sph3.sph.diameter = 0.65;
+	sph3.sph.coord = (t_tuple){0, 0.1, -7, 1};
+	sph3.sph.color = (t_color){130, 0, 0, 1};
+
+	sph2.sph.diameter = 0.5;
+	sph2.sph.coord = (t_tuple){0, 0.1, 0.1, 1};
+	sph2.sph.color = (t_color){130, 0, 0, 1};
+
+	sph.sph.diameter = 1;
+	sph.sph.coord = (t_tuple){0, 0, 0, 1};
+	sph.sph.color = (t_color){255, 0, 0, 1};
+
+	ft_intersection_sphere(&lst, ray, &sph);
+	ft_intersection_sphere(&lst, ray, &sph2);
+	ft_intersection_sphere(&lst, ray, &sph3);
+	ft_hit_inter(&lst);
+}
 
 int	main()
 {
@@ -343,7 +372,8 @@ int	main()
 	// test_translation();
 	// test_scale();
 	// test_ray_distance();
-	test_intersect_sphere();
+	// test_intersect_sphere();
+	test_multiple_intersect();
 	
 	// test_rotation_x();
 	return (0);

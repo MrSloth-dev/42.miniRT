@@ -21,8 +21,8 @@
 
 #define WIN_HEIGHT 1000
 #define WIN_WIDTH 1000
-#define IMAGE_HEIGHT 1000
-#define IMAGE_WIDTH 1000
+#define IMG_HEIGHT 1000
+#define IMG_WIDTH 1000
 
 #define ROUND_ERROR 0.00001
 #define ERR_INPUT 1
@@ -112,7 +112,8 @@ void		ft_print_matrix(t_matrix m);
 t_tuple		ft_distance_ray(t_ray ray, double time);
 t_ray		ft_create_ray(t_tuple pos, t_tuple dir);
 void		ft_lstadd_sort_inter(t_interlst **lst, double value, t_shapes *shap);
-void	ft_intersection_sphere(t_interlst **lst, t_ray ray, t_shapes *shap);
+void		ft_intersection_sphere(t_interlst **lst, t_ray ray, t_shapes *shap);
+t_inter		*ft_hit_inter(t_interlst **lst);
 
 //parse
 int			ft_count_members (char **split);
