@@ -101,7 +101,7 @@ int			ft_clean_exit(t_canvas *canvas);
 //init
 void		ft_init_canvas(t_canvas *canvas);
 t_iter		ft_iter(int n);
-void	ft_free_canvas(t_canvas *canvas);
+void		ft_free_canvas(t_canvas *canvas);
 
 int			ft_printf(int fd, const char *str, ...);
 
@@ -114,6 +114,11 @@ t_ray		ft_create_ray(t_tuple pos, t_tuple dir);
 void		ft_lstadd_sort_inter(t_interlst **lst, double value, t_shapes *shap);
 void		ft_intersection_sphere(t_interlst **lst, t_ray ray, t_shapes *shap);
 t_inter		*ft_hit_inter(t_interlst **lst);
+t_ray		ft_translate_ray(t_tuple translation, t_ray ray);
+t_ray		ft_scale_ray(t_tuple scaling, t_ray ray);
+t_ray		ft_set_transf_ray(t_ray ray, t_matrix inverted);
+void		ft_get_transf_obj(t_shapes *s, t_tuple coord, t_tuple orientation, double diam);
+t_ray	ft_set_transf_ray(t_ray ray, t_matrix inverted);
 
 //parse
 int			ft_count_members (char **split);

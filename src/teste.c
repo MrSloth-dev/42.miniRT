@@ -355,6 +355,50 @@ void	test_multiple_intersect()
 	ft_hit_inter(&lst);
 }
 
+void	test_transform_ray()
+{
+	t_ray		ray;
+	t_ray		ray2;
+
+	ray.pos = (t_tuple){1, 2, 3, 1};
+	ray.dir =  (t_tuple){0, 1, 0, 0};
+	ray2 = ft_translate_ray((t_tuple) {3, 4, 5, 0}, ray);
+	ft_print_tuple(ray2.dir, "ray2 dir");
+	ft_print_tuple(ray2.pos, "ray2 pos");
+	ray2 = ft_scale_ray((t_tuple) {2, 3, 4, 0}, ray);
+	ft_print_tuple(ray2.dir, "ray2 dir");
+	ft_print_tuple(ray2.pos, "ray2 pos");
+}
+
+void	test_transformed_ray()
+{
+	t_shapes	shape;
+	t_ray		ray;
+	t_ray		ray2;
+	t_interlst	*lst;
+
+	lst = NULL;
+	ray.pos = (t_tuple){0, 0, -5, 1};
+	ray.dir =  (t_tuple){0, 0, 1, 0};
+	shape.type = SPHERE;
+	shape.sph.diameter = 1;
+	shape.sph.coord = (t_tuple){0, 0, 0, 1};
+	shape.sph.color = (t_color){255, 0, 0, 1};
+	ft_get_transf_obj(&shape, (t_tuple){0}, (t_tuple){0}, 2);
+	// ft_get_transf_obj(&shape, (t_tuple){0.0,0.0,20.6, 1}, (t_tuple){0.0, 0.0, 0.0, 0}, 12.6);
+	ray2 = ft_set_transf_ray(ray, shape.inverted);
+	ft_intersection_sphere(&lst, ray2, &shape);
+	ft_hit_inter(&lst);
+	shape.sph.diameter = 1;
+	shape.sph.coord = (t_tuple){0, 0, 0, 1};
+	shape.sph.color = (t_color){255, 0, 0, 1};
+	ft_get_transf_obj(&shape, (t_tuple){5, 0, 0, 1}, (t_tuple){0}, 1);
+	// ft_get_transf_obj(&shape, (t_tuple){0.0,0.0,20.6, 1}, (t_tuple){0.0, 0.0, 0.0, 0}, 12.6);
+	ray2 = ft_set_transf_ray(ray, shape.inverted);
+	ft_intersection_sphere(&lst, ray2, &shape);
+	ft_hit_inter(&lst);
+}
+
 int	main()
 {
 	// t_canvas	canvas;
@@ -371,10 +415,10 @@ int	main()
 	// test_put_together_mtx();
 	// test_translation();
 	// test_scale();
+	// test_rotation_x();
 	// test_ray_distance();
 	// test_intersect_sphere();
-	test_multiple_intersect();
-	
-	// test_rotation_x();
+	// test_multiple_intersect();
+	test_transformed_ray();
 	return (0);
 }
