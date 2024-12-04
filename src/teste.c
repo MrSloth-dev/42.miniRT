@@ -411,7 +411,7 @@ void	ft_start_rays(t_canvas *canvas, t_shapes shape)
 	t_ray 	ray;
 	t_ray 	ray2;
 	t_tuple dir;
-	t_tuple	ray_origin = {0, 0, -5, 1};
+	t_tuple	ray_origin = {0, 1, -5, 1};
 	ft_refreshframe(canvas);
 	int x_step;
 	int y_step;
@@ -436,7 +436,10 @@ void	ft_start_rays(t_canvas *canvas, t_shapes shape)
 				{
 					x_step = 0;
 					while(x_step < STEP)
-						ft_pixel_put(canvas->img, x + x_step++, y + y_step, 0xff0000);
+					{
+						int color = ft_color_rgb_to_int(shape.sph.color);
+						ft_pixel_put(canvas->img, x + x_step++, y + y_step, color);
+					}
 					y_step++;
 				}
 			else
@@ -475,9 +478,9 @@ void	test_draw_circle_with_ray(t_canvas *canvas)
 			vel.z = -vel.z;
 		if (point.y > 7.5 || point.y < -7.5)
 			vel.y = -vel.y * 0.95;
-		if (point.x > 5.5 || point.x < -5.5)
+		if (point.x > 5.5 || point.x < -3.5)
 			vel.x = -vel.x / 0.95;
-		ft_get_transf_obj(&shape, point, (t_tuple){0.0, 0.0, 0.0, 0}, 1.0);
+		ft_get_transf_obj(&shape, point, (t_tuple){0.0, 0.0, 0.0, 0}, 15.5);
 		ft_start_rays(canvas, shape);
 		usleep(15000);
 	}
