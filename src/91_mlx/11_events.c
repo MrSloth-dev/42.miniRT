@@ -17,10 +17,6 @@ int	key_handler(int keysym, t_canvas *canvas)
 	if (keysym == XK_Escape || keysym == XK_q)
 
 		close_handler(canvas);
-	else if (keysym == 65451)
-		canvas->iter.max += 1;
-	else if ((keysym == XK_minus || keysym == 65453) && canvas->iter.max > 1)
-		canvas->iter.max -= 1;
 	else if (keysym == XK_r)
 	{
 		// canvas->offset_x = 0;
@@ -44,9 +40,9 @@ int	key_handler(int keysym, t_canvas *canvas)
 // 			canvas->offset_y += (0.75 * (y - (double)IMG_HEIGHT / 2)
 // 					/ IMG_HEIGHT * canvas->scale);
 // 		}
-// 	}
+// 	C
 // 	else if (mousecode == 5)
-// 		canvas->scale /= 0.9;
+// 		canvas->scale /= 0.9C
 // 	ft_refreshframe(canvas);
 // 	return (0);
 // }
