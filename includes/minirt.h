@@ -10,7 +10,6 @@
 #include "get_next_line.h"
 #include "../minilibx-linux/mlx.h"
 #include <math.h>
-#include "objects.h"
 #include <X11/keysym.h>
 #include <X11/X.h>
 
@@ -19,12 +18,13 @@
 #define YELLOW "\e[1;3;93m"
 #define RESET "\e[0m"
 
-#define WIN_H 200
-#define WIN_W 200
+#define WIN_H 499
+#define WIN_W 500
 
-#define IMG_H 200
-#define IMG_W 200
+#define IMG_H 499
+#define IMG_W 500
 
+#define STEP 2
 #define ROUND_ERROR 0.00001
 #define ERR_INPUT 1
 #define ERR_MLX 2
@@ -36,63 +36,7 @@
 #ifndef ASSERT
 # define ASSERT 0
 #endif
-
-typedef t_list t_interlst;
-
-typedef struct s_img
-{
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-}				t_img;
-
-typedef struct s_count
-{
-	int			ambient;
-	int			camera;
-	int			light;
-	int			sphere;
-	int			plane;
-	int			cylinder;
-} t_count;
-
-typedef struct s_canvas
-{
-	void		*mlx;
-	char		*program;
-	char		*name;
-	char		*file;
-	void		*win;
-	t_img		*img;
-	t_limit		winlimit_x;
-	t_limit		winlimit_y;
-	t_limit		color;
-	t_limit		iter;
-	double		scale;
-	int			help;
-	t_img		*menu;
-	t_list		*objects;
-	t_ambient	*ambient;
-	t_camera	*camera;
-	t_light		*light;
-	t_sphere	*sphere;
-	t_plane		*plane;
-	t_cylinder	*cylinder;
-	t_count		count;
-}	t_canvas;
-
-typedef struct s_iter
-{
-	int		r;
-	int		c;
-	int		rs;
-	int		cs;
-	double	a;
-	double	b;
-	double	d;
-}	t_iter;
+#include "structs.h"
 
 void		ft_tuple_init(t_tuple *tuple, t_point coord, int type);
 void		ft_assert(int condition, char *message);
@@ -107,6 +51,7 @@ void		ft_free_canvas(t_canvas *canvas);
 int			ft_printf(int fd, const char *str, ...);
 
 void		ft_print_matrix(t_matrix m);
+int	ft_color_rgb_to_int(t_color color);
 
 
 //RAYS
@@ -163,5 +108,43 @@ void	jumpingball(t_canvas *canvas);
 void	ft_draw_square(t_canvas *canvas,t_tuple start, t_tuple sides, int color);
 
 
+t_tuple		ft_operator(t_tuple a, char op, t_tuple b);
+int			ft_is_float_equal(double num1, double num2);
+int			ft_is_tuples_equal(t_tuple tuple1, t_tuple tuple2);
+t_tuple		ft_add_tuple(t_tuple tuple1, t_tuple tuple2);
+double		ft_magn_tuple(t_tuple tuple);
+t_tuple		ft_sub_tuple(t_tuple tuple1, t_tuple tuple2);
+t_tuple		ft_neg_tuple(t_tuple tuple);
+t_tuple		ft_scalar_tuple(t_tuple tuple, double value);
+t_tuple		ft_norm_vector(t_tuple tuple);
+double		ft_dotprod_vector(t_tuple a, t_tuple b);
+t_tuple		ft_crossprod_vector(t_tuple a, t_tuple b);
+t_matrix	ft_matrix_mult(t_matrix A, t_matrix B);
 
+
+t_tuple		ft_mult_matrix_tuple(t_matrix A, t_tuple B);
+t_matrix	ft_transpose_matrix(t_matrix src);
+//Matrix
+t_matrix	ft_submatrix(t_matrix src, int row, int col);
+t_matrix	ft_create_matrix(int rows, int cols, int identity);
+void		ft_set_matrix_values(t_matrix *m, double values[4][4]);
+int			ft_are_matrixes_equal(t_matrix a, t_matrix b);
+double		ft_minor(t_matrix m, int row, int col);
+double		ft_cofactor(t_matrix m, int row, int col);
+double		ft_determinant(t_matrix m);
+t_matrix	ft_invert_matrix(t_matrix m);
+t_tuple		ft_translate(t_tuple translation, t_tuple to_translate);
+t_tuple	ft_scale(t_tuple scale, t_tuple to_scale);
+t_tuple		ft_rotation_x(t_tuple tuple, double angle);
+t_tuple		ft_rotation_y(t_tuple tuple, double angle);
+t_tuple		ft_rotation_z(t_tuple tuple, double angle);
+
+t_ambient	*ft_init_ambient(int ratio, t_color color);
+t_camera	*ft_init_camera(t_tuple coord, t_tuple norm, int fov);
+t_light		*ft_init_light(t_tuple coord, int bright, t_color color);
+t_sphere	*ft_init_sphere(t_tuple coord, int diameter, t_color color);
+t_plane		*ft_init_plane(t_tuple coord, t_tuple norm, t_color color);
+t_cylinder	*ft_init_cylinder(t_tuple coord, t_tuple norm,
+				t_cyl_size size, t_color color);
+void	ft_add_object(void **head, void *object);
 #endif
