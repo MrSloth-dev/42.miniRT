@@ -19,10 +19,11 @@
 #define YELLOW "\e[1;3;93m"
 #define RESET "\e[0m"
 
-#define WIN_HEIGHT 1000
-#define WIN_WIDTH 1000
-#define IMG_HEIGHT 1000
-#define IMG_WIDTH 1000
+#define WIN_H 200
+#define WIN_W 200
+
+#define IMG_H 200
+#define IMG_W 200
 
 #define ROUND_ERROR 0.00001
 #define ERR_INPUT 1
