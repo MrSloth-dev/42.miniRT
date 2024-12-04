@@ -2,6 +2,6 @@
 
 double	ft_magn_tuple(t_tuple tuple) //p7
 {
-	return (sqrt(pow(tuple.x, 2) + pow(tuple.y, 2) + pow(tuple.z, 2)
-			+ pow(tuple.y, 2)));
+	return (sqrt(tuple.x * tuple.x + tuple.y * tuple.y + tuple.z * tuple.z
+			 + tuple.w * tuple.w));
 }

@@ -32,7 +32,8 @@ void	ft_intersection_sphere(t_interlst **lst, t_ray ray, t_shapes *shap)
 	// printf("discriminant = %f\n", discriminant);
 	// printf("quadratic = %f\n", quadratic);
 	if (discriminant < 0)
-		printf(RED"Missed discriminant negative\n"RESET);
+		return ;
+		// printf(RED"Missed discriminant negative\n"RESET);
 	else
 	{
 		// printf("hello from here = %f\n", ((-h.b - sqrt(discriminant)) / (2 * h.a)));
@@ -51,8 +52,8 @@ t_inter	*ft_hit_inter(t_interlst **lst)
 	{
 		if (((t_inter *)head->cont)->value > 0)
 		{
-			printf("value %f\n", ((t_inter *)head->cont)->value);
-			printf("diameter %f\n", ((t_inter *)head->cont)->shape->sph.diameter);
+			// printf("value %f\n", ((t_inter *)head->cont)->value);
+			// printf("diameter %f\n", ((t_inter *)head->cont)->shape->sph.diameter);
 			return ((t_inter *)head);
 		}
 		head = head->next;

@@ -1,5 +1,53 @@
-#include "ft_math.h"
-//OBJECTS
+#include "libft.h"
+typedef struct s_matrix
+{
+	int			rows;
+	int			cols;
+	double		data[4][4];
+}				t_matrix;
+
+typedef struct s_point
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_point;
+
+typedef struct s_tuple
+{
+	double	x;
+	double	y;
+	double	z;
+	int		w;
+}	t_tuple;
+
+typedef t_tuple t_color;
+
+typedef struct s_limit
+{
+	double	min;
+	double	max;
+}	t_limit;
+typedef t_list t_interlst;
+
+typedef struct s_img
+{
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			size_line;
+	int			endian;
+}				t_img;
+
+typedef struct s_count
+{
+	int			ambient;
+	int			camera;
+	int			light;
+	int			sphere;
+	int			plane;
+	int			cylinder;
+} t_count;
 
 typedef struct s_ray
 {
@@ -89,12 +137,35 @@ typedef struct s_inter
 	t_shapes *shape;
 }	t_inter;
 
-// WILL NOT USE
-t_ambient	*ft_init_ambient(int ratio, t_color color);
-t_camera	*ft_init_camera(t_tuple coord, t_tuple norm, int fov);
-t_light		*ft_init_light(t_tuple coord, int bright, t_color color);
-t_sphere	*ft_init_sphere(t_tuple coord, int diameter, t_color color);
-t_plane		*ft_init_plane(t_tuple coord, t_tuple norm, t_color color);
-t_cylinder	*ft_init_cylinder(t_tuple coord, t_tuple norm,
-				t_cyl_size size, t_color color);
-void	ft_add_object(void **head, void *object);
+typedef struct s_canvas
+{
+	void		*mlx;
+	char		*program;
+	char		*name;
+	char		*file;
+	void		*win;
+	t_img		*img;
+	double		scale;
+	int			help;
+	t_img		*menu;
+	t_list		*objects;
+	t_ambient	*ambient;
+	t_camera	*camera;
+	t_light		*light;
+	t_sphere	*sphere;
+	t_plane		*plane;
+	t_cylinder	*cylinder;
+	t_count		count;
+}	t_canvas;
+
+typedef struct s_iter
+{
+	int		r;
+	int		c;
+	int		rs;
+	int		cs;
+	double	a;
+	double	b;
+	double	d;
+}	t_iter;
+

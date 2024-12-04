@@ -1,32 +1,36 @@
 #include "minirt.h"
+#include <limits.h>
+#include <unistd.h>
 
 void teste_tuple_op()
 {
 	printf("\n%stest_tuple_op\n%s", GREEN, RESET);
-	t_tuple	result;
+	// t_tuple	result;
 	t_tuple	point1;
 	t_tuple	point2;
 
-	ft_tuple_init(&point1, (t_point){1, 2, 3}, T_VECTOR);
-	ft_tuple_init(&point2, (t_point){0, 0, 1}, T_VECTOR);
-	ft_print_tuple(point1, "point1");
-	ft_print_tuple(point2, "point2");
-	ft_print_tuple(ft_add_tuple(point1, point2), "add");
-	ft_print_tuple(ft_sub_tuple(point1, point2), "sub");
-	printf("\n");
-	printf("magn %f\n", ft_magn_tuple(point2));
-	printf("\n");
-	ft_print_tuple(ft_neg_tuple(point1), "neg");
-	printf("\n");
-	ft_print_tuple(ft_norm_vector(point2), "normalize");
-	printf("\n");
-	printf("dotprod = %lf\n", ft_dotprod_vector(point2, point2));
-	printf("\n");
-	printf("dotprod = %lf\n", ft_dotprod_vector(point1, point2));
-	printf("\n");
-	result = ft_crossprod_vector((t_tuple){1,0,0,T_VECTOR}, (t_tuple){0,1,0,T_VECTOR});
-	ft_print_tuple(result, "Cross Prod");
-	printf("\n");
+	ft_tuple_init(&point1, (t_point){4, 0, 0}, T_VECTOR);
+	point1 = ft_norm_vector(point1);
+	ft_tuple_init(&point2, (t_point){1, 2, 3}, T_VECTOR);
+	point2 = ft_norm_vector(point2);
+	ft_print_tuple(point1, "point1 normalize");
+	ft_print_tuple(point2, "point2 normalized");
+	// ft_print_tuple(ft_add_tuple(point1, point2), "add");
+	// ft_print_tuple(ft_sub_tuple(point1, point2), "sub");
+	// printf("\n");
+	// printf("magn %f\n", ft_magn_tuple(point2));
+	// printf("\n");
+	// ft_print_tuple(ft_neg_tuple(point1), "neg");
+	// printf("\n");
+	// ft_print_tuple(ft_norm_vector(point2), "normalize");
+	// printf("\n");
+	// printf("dotprod = %lf\n", ft_dotprod_vector(point2, point2));
+	// printf("\n");
+	// printf("dotprod = %lf\n", ft_dotprod_vector(point1, point2));
+	// printf("\n");
+	// result = ft_crossprod_vector((t_tuple){1,0,0,T_VECTOR}, (t_tuple){0,1,0,T_VECTOR});
+	// ft_print_tuple(result, "Cross Prod");
+	// printf("\n");
 }
 
 void teste_matrix_mult()
@@ -394,18 +398,10 @@ void	test_mlx_clock(t_canvas *canvas)
 	}
 }
 
-void	ft_start_rays(t_canvas *canvas)
+void	ft_start_rays(t_canvas *canvas, t_shapes shape)
 {
-	t_interlst	*lst;
-	t_shapes	shape;
-
-	lst = NULL;
-	shape.sph.diameter = 1;
-	shape.sph.coord = (t_tuple){0, 0, 0, 1};
-	shape.sph.color = (t_color){255, 0, 0, 1};
-
-	double	wall_z = 10;
-	double	wall_size = 7.0;
+	double	wall_z = 1;
+	double	wall_size = 10.0;
 	double	pixel_size = wall_size / IMG_W;
 	double	half = wall_size / 2;
 
@@ -413,28 +409,44 @@ void	ft_start_rays(t_canvas *canvas)
 	double 	world_x;
 	t_tuple position;
 	t_ray 	ray;
+	t_ray 	ray2;
 	t_tuple dir;
 	t_tuple	ray_origin = {0, 0, -5, 1};
-
-	for(int y = 0; y < IMG_H; y += 3)
+	ft_refreshframe(canvas);
+	int x_step;
+	int y_step;
+	for(int y = 0; y < IMG_H; y += STEP)
 	{
 		world_y = half - pixel_size * y;
 
-		for(int x = 0; x < IMG_H; x += 3)
+		for(int x = 0; x < IMG_H; x += STEP - 1)
 		{
+			y_step = 0;
+			t_interlst	*lst;
+			lst = NULL;
 			world_x = -half + pixel_size * x;
 			position = (t_tuple){ world_x, world_y, wall_z, 1};
-
 			dir = ft_norm_vector(ft_sub_tuple(position, ray_origin));
-			
 			ray = ft_create_ray(ray_origin, dir);
-
-			ft_intersection_sphere(&lst, ray, &shape);
-			printf("x = %d y = %d\n", x, y);
+			ray2 = ft_set_transf_ray(ray, shape.inverted);
+			ft_intersection_sphere(&lst, ray2, &shape);
+				// ft_pixel_put(canvas->img, x, y, ft_color_rgb_to_int(((t_sphere *)lst)->color));
 			if (ft_hit_inter(&lst) != NULL)
-				ft_pixel_put(canvas->img, x, y, 0xff0000);
+				while (y_step < STEP)
+				{
+					x_step = 0;
+					while(x_step < STEP)
+						ft_pixel_put(canvas->img, x + x_step++, y + y_step, 0xff0000);
+					y_step++;
+				}
 			else
-				ft_pixel_put(canvas->img, x, y, 0x9f99);
+				while (y_step < STEP)
+				{
+					x_step = 0;
+					while(x_step < STEP)
+						ft_pixel_put(canvas->img, x + x_step++, y + y_step, 0x7f7f);
+					y_step++;
+				}
 		}
 	}
 	mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img->img, 0, 0);
@@ -442,11 +454,35 @@ void	ft_start_rays(t_canvas *canvas)
 
 void	test_draw_circle_with_ray(t_canvas *canvas)
 {
-	//
-	// t_shapes	shape;
-	// t_ray		ray;
-	// t_interlst	*lst;
-	ft_start_rays(canvas);
+	t_shapes	shape;
+	shape.type = SPHERE;
+	shape.sph.coord = (t_tuple){0, 0, 0, 1};
+	shape.sph.diameter = 0.5;
+	shape.sph.color = (t_color){255, 0, 0, 1};
+	t_tuple point;
+	t_tuple grav;
+	t_tuple wind;
+	t_tuple vel;
+	ft_tuple_init(&point, (t_point){0,0,5}, T_POINT);
+	ft_tuple_init(&vel, (t_point){0.1,0,0.2}, T_VECTOR);
+	ft_tuple_init(&grav, (t_point){0,-0.06,0}, T_VECTOR);
+	ft_tuple_init(&wind, (t_point){0,0,0.0}, T_VECTOR);
+	while (1)
+	{
+		point = ft_add_tuple(point, vel);
+		vel = ft_add_tuple(vel, ft_add_tuple(grav, wind));
+		if (point.z > 17.5 || point.z < -4.5)
+			vel.z = -vel.z;
+		if (point.y > 7.5 || point.y < -7.5)
+			vel.y = -vel.y * 0.95;
+		if (point.x > 5.5 || point.x < -5.5)
+			vel.x = -vel.x / 0.95;
+		ft_get_transf_obj(&shape, point, (t_tuple){0.0, 0.0, 0.0, 0}, 1.0);
+		ft_start_rays(canvas, shape);
+		usleep(15000);
+	}
+	
+
 }
 
 void	test_mlx_start(t_canvas *canvas)
