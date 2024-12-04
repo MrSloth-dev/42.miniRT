@@ -2,9 +2,9 @@
 
 int	ft_color_rgb_to_int(t_color color)
 {
-	return ((int)(color.x * 255.0f) << 16
-	| (int)(color.y * 255.0f) << 8
-	| (int)(color.z * 255.0f));
+	return ((int)(color.x) << 16
+	| (int)(color.y) << 8
+	| (int)(color.z));
 }
 
 t_color	ft_color_int_to_rgb(int color)
