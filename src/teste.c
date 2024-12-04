@@ -393,6 +393,7 @@ void	test_mlx_clock(t_canvas *canvas)
 		
 	}
 }
+
 void	ft_start_rays(t_canvas *canvas)
 {
 	t_interlst	*lst;
@@ -402,30 +403,38 @@ void	ft_start_rays(t_canvas *canvas)
 	shape.sph.diameter = 1;
 	shape.sph.coord = (t_tuple){0, 0, 0, 1};
 	shape.sph.color = (t_color){255, 0, 0, 1};
-	double	wall_z = 100;
-	double	wall_size = 70;
+
+	double	wall_z = 10;
+	double	wall_size = 7.0;
 	double	pixel_size = wall_size / IMG_W;
 	double	half = wall_size / 2;
-	double world_y;
-	double world_x;
+
+	double 	world_y;
+	double 	world_x;
 	t_tuple position;
-	for(int y = 0; y < IMG_H; y++)
+	t_ray 	ray;
+	t_tuple dir;
+	t_tuple	ray_origin = {0, 0, -5, 1};
+
+	for(int y = 0; y < IMG_H; y += 3)
 	{
 		world_y = half - pixel_size * y;
-		for(int x = 0; x < IMG_H; x++)
+
+		for(int x = 0; x < IMG_H; x += 3)
 		{
-			t_ray ray;
-			t_tuple dir;
-			world_x = half - pixel_size * x;
+			world_x = -half + pixel_size * x;
 			position = (t_tuple){ world_x, world_y, wall_z, 1};
-			dir = ft_norm_vector(ft_sub_tuple(position, (t_tuple) {0, 0, -1500, 1}));
-			ray = ft_create_ray((t_tuple) {0, 0, -1500, 1},dir);
+
+			dir = ft_norm_vector(ft_sub_tuple(position, ray_origin));
+			
+			ray = ft_create_ray(ray_origin, dir);
+
 			ft_intersection_sphere(&lst, ray, &shape);
 			printf("x = %d y = %d\n", x, y);
-			if (ft_hit_inter(&lst))
-				ft_pixel_put(canvas->img, x, y, 0xffffff);
+			if (ft_hit_inter(&lst) != NULL)
+				ft_pixel_put(canvas->img, x, y, 0xff0000);
 			else
-				ft_pixel_put(canvas->img, x, y, 0x000000);
+				ft_pixel_put(canvas->img, x, y, 0x9f99);
 		}
 	}
 	mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img->img, 0, 0);
