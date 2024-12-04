@@ -141,7 +141,7 @@ clean:
 
 .PHONY: fclean
 fclean: clean
-	@ $(RM) $(OBJ_DIR) $(NAME) $(NAME_BONUS)
+	@ $(RM) $(OBJ_DIR) $(NAME)
 	@make fclean -C $(PRINTDIR) -s
 	@echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✅"
 
@@ -153,6 +153,7 @@ MAIN_T = src/teste.c
 NAME_T = $(NAME)_te
 .PHONY: te
 te : $(OBJS) $(HEADER)
+	rm -fr $(NAME)_te
 	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)..."
 	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)..."
 	@make -C $(PRINTDIR) -s
