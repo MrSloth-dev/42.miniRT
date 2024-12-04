@@ -272,33 +272,6 @@ void	ft_free_canvas(t_canvas *canvas)
 	ft_free(canvas->ambient);
 }
 
-void	test_mlx(t_canvas *canvas)
-{
-	ft_init_canvas(canvas);
-	ft_setup(canvas);
-	float radius = (float)WIN_HEIGHT / 4;
-	t_tuple point = {0, 0, 0, 1};
-
-	ft_pixel_put(canvas->img, (float)WIN_WIDTH / 2, (float)WIN_HEIGHT / 2, 0x00ff00); // center
-	t_tuple temp = ft_translate((t_tuple){0, -radius, 0, 0} , point);
-	(void)temp;
-	// printf("windows width = %d, height =  %d\n\n", WIN_WIDTH, WIN_HEIGHT);
-	// printf("image width = %d, height =  %d\n\n", IMG_WIDTH, IMG_HEIGHT);
-	for (int i = 0; i < 12; i++)
-	{
-		ft_pixel_put(canvas->img, temp.x + (float)WIN_WIDTH / 2, temp.y + (float)WIN_HEIGHT / 2, 0xffffff);
-		temp = ft_rotation_z(temp, ((float)360 / (12)));
-		printf("x = %f, y = %f\n", temp.x+ (float)WIN_WIDTH / 2, temp.y+ (float)WIN_HEIGHT / 2);
-		// ft_draw_square(canvas, (t_tuple){0,0,0,1}, (t_tuple){WIN_WIDTH,WIN_HEIGHT,0,1}, 0xff0000);
-		mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img->img, 0, 0);
-		sleep(1);
-		
-	}
-	// mlx_key_hook(canvas->win, key_handler, &canvas);
-	mlx_hook(canvas->win, DestroyNotify, 0L, &close_handler, &canvas);
-	mlx_loop(canvas->mlx);
-	ft_free_canvas(canvas);
-}
 
 void	test_ray_distance()
 {
@@ -399,10 +372,94 @@ void	test_transformed_ray()
 	ft_hit_inter(&lst);
 }
 
+void	test_mlx_clock(t_canvas *canvas)
+{
+	float radius = (float)WIN_H / 4;
+	t_tuple point = {0, 0, 0, 1};
+
+	ft_pixel_put(canvas->img, (float)WIN_W / 2, (float)WIN_H / 2, 0x00ff00); // center
+	t_tuple temp = ft_translate((t_tuple){0, -radius, 0, 0} , point);
+	(void)temp;
+	// printf("windows width = %d, height =  %d\n\n", WIN_W, WIN_H);
+	// printf("image width = %d, height =  %d\n\n", IMG_W, IMG_H);
+	for (int i = 0; i < 12; i++)
+	{
+		ft_pixel_put(canvas->img, temp.x + (float)WIN_W / 2, temp.y + (float)WIN_H / 2, 0xffffff);
+		temp = ft_rotation_z(temp, ((float)360 / (12)));
+		printf("x = %f, y = %f\n", temp.x+ (float)WIN_W / 2, temp.y+ (float)WIN_H / 2);
+		// ft_draw_square(canvas, (t_tuple){0,0,0,1}, (t_tuple){WIN_W,WIN_H,0,1}, 0xff0000);
+		mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img->img, 0, 0);
+		sleep(1);
+		
+	}
+}
+void	ft_start_rays(t_canvas *canvas)
+{
+	t_interlst	*lst;
+	t_shapes	shape;
+
+	lst = NULL;
+	shape.sph.diameter = 1;
+	shape.sph.coord = (t_tuple){0, 0, 0, 1};
+	shape.sph.color = (t_color){255, 0, 0, 1};
+	double	wall_z = 100;
+	double	wall_size = 70;
+	double	pixel_size = wall_size / IMG_W;
+	double	half = wall_size / 2;
+	double world_y;
+	double world_x;
+	t_tuple position;
+	for(int y = 0; y < IMG_H; y++)
+	{
+		world_y = half - pixel_size * y;
+		for(int x = 0; x < IMG_H; x++)
+		{
+			t_ray ray;
+			t_tuple dir;
+			world_x = half - pixel_size * x;
+			position = (t_tuple){ world_x, world_y, wall_z, 1};
+			dir = ft_norm_vector(ft_sub_tuple(position, (t_tuple) {0, 0, -1500, 1}));
+			ray = ft_create_ray((t_tuple) {0, 0, -1500, 1},dir);
+			ft_intersection_sphere(&lst, ray, &shape);
+			printf("x = %d y = %d\n", x, y);
+			if (ft_hit_inter(&lst))
+				ft_pixel_put(canvas->img, x, y, 0xffffff);
+			else
+				ft_pixel_put(canvas->img, x, y, 0x000000);
+		}
+	}
+	mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img->img, 0, 0);
+}
+
+void	test_draw_circle_with_ray(t_canvas *canvas)
+{
+	//
+	// t_shapes	shape;
+	// t_ray		ray;
+	// t_interlst	*lst;
+	ft_start_rays(canvas);
+}
+
+void	test_mlx_start(t_canvas *canvas)
+{
+	ft_init_canvas(canvas);
+	ft_setup(canvas);
+	mlx_hook(canvas->win, DestroyNotify, 0l, &close_handler, &canvas);
+}
+
+void	test_mlx_end(t_canvas *canvas)
+{
+	mlx_loop(canvas->mlx);
+	ft_free_canvas(canvas);
+}
+
 int	main()
 {
-	// t_canvas	canvas;
-	// test_mlx(&canvas);
+	t_canvas	canvas;
+	test_mlx_start(&canvas);
+	// test_mlx_clock(&canvas);
+	test_draw_circle_with_ray(&canvas);
+	test_mlx_end(&canvas);
 	// teste_tuple_op();
 	// teste_matrix_mult();
 	// teste_matrix_mult_tuple();
@@ -419,6 +476,7 @@ int	main()
 	// test_ray_distance();
 	// test_intersect_sphere();
 	// test_multiple_intersect();
-	test_transformed_ray();
+	// test_transformed_ray();
+	// test_draw_circle_with_ray(&canvas);
 	return (0);
 }
