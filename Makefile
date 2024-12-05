@@ -121,9 +121,9 @@ gdb : re
 
 
 .PHONY: vgdb
-vgdb : te
+vgdb :
 	@tmux new-window  -n vGdb
-	@tmux send-keys 'valgrind -q --vgdb-error=0 ./minirt_te input.rt' C-m Escape
+	@tmux send-keys 'valgrind -q --vgdb-error=0 ./minirt_te' C-m Escape
 	@tmux split-window -h
 	@tmux send-keys -t Gdb.2 'gdbtui ./minirt' C-m
 	@tmux select-pane -t vGdb.1

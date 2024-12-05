@@ -29,16 +29,11 @@ void	ft_intersection_sphere(t_interlst **lst, t_ray ray, t_shapes *shap)
 	h.b = 2 * ft_dotprod_vector(ray.dir, sphere_to_ray);
 	h.d = ft_dotprod_vector(sphere_to_ray, sphere_to_ray) - 1;
 	discriminant = (h.b * h.b) - (4 * h.a * h.d);
-	// printf("discriminant = %f\n", discriminant);
-	// printf("quadratic = %f\n", quadratic);
 	if (discriminant < 0)
 		return ;
-		// printf(RED"Missed discriminant negative\n"RESET);
 	else
 	{
-		// printf("hello from here = %f\n", ((-h.b - sqrt(discriminant)) / (2 * h.a)));
 		ft_lstadd_sort_inter(lst, ((-h.b - sqrt(discriminant)) / (2 * h.a)), shap);
-		// printf("hello from here = %f\n", ((-h.b + sqrt(discriminant)) / (2 * h.a)));
 		ft_lstadd_sort_inter(lst, ((-h.b + sqrt(discriminant)) / (2 * h.a)), shap);
 	}
 }
@@ -52,9 +47,11 @@ t_inter	*ft_hit_inter(t_interlst **lst)
 	{
 		if (((t_inter *)head->cont)->value > 0)
 		{
-			// printf("value %f\n", ((t_inter *)head->cont)->value);
+			ft_print_tuple(((t_inter *)head->cont)->shape->material.color, "color material");
+			printf("color %f\n", ((t_inter *)head->cont)->shape->sph.diameter);
+			// printf("value hit = %f\n", ((t_inter *)head->cont)->value);
 			// printf("diameter %f\n", ((t_inter *)head->cont)->shape->sph.diameter);
-			return ((t_inter *)head);
+			return ((t_inter *)head->cont);
 		}
 		head = head->next;
 	}
@@ -104,18 +101,26 @@ t_matrix	ft_create_scale_matrix(double x, double y, double z)
 	return (temp);
 }
 
-void ft_get_transf_obj(t_shapes *s, t_tuple coord, t_tuple orientation, double diam)
+// t_matrix	ft_get_rotation_obj(t_tuple orientation)
+// {
+// 	t_maxtrix rotate_x;
+// 	t_maxtrix rotate_y;
+// 	t_maxtrix rotate_z;
+//
+// }
+void ft_get_transf_obj(t_shapes *s, t_tuple coord, t_tuple orientation, t_tuple scale)
 {
 	t_matrix translation;
-	t_matrix scale;
+	// t_matrix rotation;
+	t_matrix scaled;
 
 	translation = ft_create_transf_matrix(coord.x, coord.y, coord.z);
-	scale = ft_create_matrix(4, 4, 1);
+	scaled = ft_create_matrix(4, 4, 1);
 	if (s->type != PLANE)
-		scale = ft_create_scale_matrix(diam, diam, diam);
+		scaled = ft_create_scale_matrix(scale.x, scale.y, scale.z);
 	// if (s->type != SPHERE)
 	(void)orientation; //rotation rotation rotation
-	s->transform = ft_matrix_mult(translation, scale);
+	s->transform = ft_matrix_mult(translation, scaled);
 	s->transposed = ft_transpose_matrix(s->transform);
 	s->inverted = ft_invert_matrix(s->transform);
 }

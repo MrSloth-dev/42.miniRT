@@ -1,24 +1,24 @@
 #include "minirt.h"
 
-t_inter	*ft_create_inter(double value, t_shapes *shap)
+t_inter	*ft_create_inter(double value, t_shapes *shape)
 {
 	t_inter	*temp;
 
 	temp = malloc(sizeof(t_inter));
 	if (!temp)
 		return (NULL);
-	temp->shape = shap;
+	temp->shape = shape;
 	temp->value= value;
 	return (temp);
 }
 
-void	ft_lstadd_sort_inter(t_interlst **lst, double value, t_shapes *shap)
+void	ft_lstadd_sort_inter(t_interlst **lst, double value, t_shapes *shape)
 {
 	t_interlst	*temp;
 	t_interlst	*new;
 	t_inter		*node;
 
-	node = ft_create_inter(value, shap);
+	node = ft_create_inter(value, shape);
 	new = ft_lstnew(node);
 	if (!*lst)
 		*lst = new;
