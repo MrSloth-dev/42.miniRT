@@ -49,9 +49,10 @@ t_iter		ft_iter(int n);
 void		ft_free_canvas(t_canvas *canvas);
 
 int			ft_printf(int fd, const char *str, ...);
-
 void		ft_print_matrix(t_matrix m);
 int	ft_color_rgb_to_int(t_color color);
+t_color	ft_color_int_to_rgb(int color);
+int	ft_get_mlx_color(t_color color);
 
 
 //RAYS
@@ -63,8 +64,17 @@ t_inter		*ft_hit_inter(t_interlst **lst);
 t_ray		ft_translate_ray(t_tuple translation, t_ray ray);
 t_ray		ft_scale_ray(t_tuple scaling, t_ray ray);
 t_ray		ft_set_transf_ray(t_ray ray, t_matrix inverted);
-void		ft_get_transf_obj(t_shapes *s, t_tuple coord, t_tuple orientation, double diam);
+void		ft_get_transf_obj(t_shapes *s, t_tuple coord, t_tuple orientation, t_tuple scale);
 t_ray	ft_set_transf_ray(t_ray ray, t_matrix inverted);
+
+// LIGHT
+t_tuple	ft_normal_at_sph(t_shapes *sphere, t_tuple w_point);
+t_tuple	ft_reflect(t_tuple incoming, t_tuple normal);
+t_color	ft_lighting(t_material m, t_tuple point, t_light light, t_camera camera, t_tuple normal);
+void	ft_material_to_shape(t_material m, t_shapes *shape);
+t_camera	ft_create_camera_a(t_tuple pos, t_tuple norm, float fov); // this must go to the parser
+t_light	ft_create_light_a(t_tuple pos, t_color color, float bright); // this must go to the parser
+t_material ft_create_material(void);
 
 //parse
 int			ft_count_members (char **split);

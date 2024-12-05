@@ -1,4 +1,5 @@
 #include "libft.h"
+
 typedef struct s_matrix
 {
 	int			rows;
@@ -113,6 +114,15 @@ enum e_type
 	// TRIANGLE
 };
 
+typedef struct s_material
+{
+	t_color	color; //0 -255
+	double	ambient; //0- 1
+	double	diffuse; // 0-1
+	double	specular; // 0 -1
+	double	shininess; //10 -200 (bigger the number lower the shininess)
+} t_material;
+
 typedef struct s_shapes
 {
 	enum e_type		type;
@@ -128,7 +138,7 @@ typedef struct s_shapes
 	t_matrix		inverted;
 	t_matrix		transform;
 	t_matrix		transposed;
-	// t_material		material;
+	t_material		material;
 }	t_shapes;
 
 typedef struct s_inter
