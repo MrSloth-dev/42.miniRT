@@ -1,5 +1,6 @@
 #include "minirt.h"
 #include <limits.h>
+#include <math.h>
 #include <unistd.h>
 
 void teste_tuple_op()
@@ -361,7 +362,7 @@ void	test_transformed_ray()
 	shape.sph.diameter = 1;
 	shape.sph.coord = (t_tuple){0, 0, 0, 1};
 	shape.sph.color = (t_color){255, 0, 0, 1};
-	ft_get_transf_obj(&shape, (t_tuple){0}, (t_tuple){0}, 2);
+	ft_get_transf_obj(&shape, (t_tuple){0}, (t_tuple){0}, (t_tuple){2, 2, 2, 0});
 	// ft_get_transf_obj(&shape, (t_tuple){0.0,0.0,20.6, 1}, (t_tuple){0.0, 0.0, 0.0, 0}, 12.6);
 	ray2 = ft_set_transf_ray(ray, shape.inverted);
 	ft_intersection_sphere(&lst, ray2, &shape);
@@ -369,7 +370,7 @@ void	test_transformed_ray()
 	shape.sph.diameter = 1;
 	shape.sph.coord = (t_tuple){0, 0, 0, 1};
 	shape.sph.color = (t_color){255, 0, 0, 1};
-	ft_get_transf_obj(&shape, (t_tuple){5, 0, 0, 1}, (t_tuple){0}, 1);
+	ft_get_transf_obj(&shape, (t_tuple){5, 0, 0, 1}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
 	// ft_get_transf_obj(&shape, (t_tuple){0.0,0.0,20.6, 1}, (t_tuple){0.0, 0.0, 0.0, 0}, 12.6);
 	ray2 = ft_set_transf_ray(ray, shape.inverted);
 	ft_intersection_sphere(&lst, ray2, &shape);
@@ -408,13 +409,15 @@ void	ft_start_rays(t_canvas *canvas, t_shapes shape)
 	double 	world_y;
 	double 	world_x;
 	t_tuple position;
+	t_tuple normal;
 	t_ray 	ray;
-	t_ray 	ray2;
 	t_tuple dir;
-	t_tuple	ray_origin = {0, 1, -5, 1};
-	ft_refreshframe(canvas);
+	t_camera  camera = ft_create_camera_a((t_tuple){0 , 0, -15, 1}, (t_tuple){0, 0, 1, 0}, 70);
+	t_light	light = ft_create_light_a((t_tuple){-10,10,-10, 1}, (t_color){10, 10, 10, 3}, 1);
+	ray.pos = camera.coord;
 	int x_step;
 	int y_step;
+	// ft_refreshframe(canvas);
 	for(int y = 0; y < IMG_H; y += STEP)
 	{
 		world_y = half - pixel_size * y;
@@ -426,30 +429,36 @@ void	ft_start_rays(t_canvas *canvas, t_shapes shape)
 			lst = NULL;
 			world_x = -half + pixel_size * x;
 			position = (t_tuple){ world_x, world_y, wall_z, 1};
-			dir = ft_norm_vector(ft_sub_tuple(position, ray_origin));
-			ray = ft_create_ray(ray_origin, dir);
-			ray2 = ft_set_transf_ray(ray, shape.inverted);
-			ft_intersection_sphere(&lst, ray2, &shape);
-				// ft_pixel_put(canvas->img, x, y, ft_color_rgb_to_int(((t_sphere *)lst)->color));
-			if (ft_hit_inter(&lst) != NULL)
+			dir = ft_norm_vector(ft_sub_tuple(position, ray.pos));
+			ray = ft_set_transf_ray(ft_create_ray(ray.pos, dir), shape.inverted);
+			ft_intersection_sphere(&lst, ray, &shape);
+			t_inter	*hit;
+			hit = ft_hit_inter(&lst);
+			if (hit != NULL)
+			{
+				t_tuple point = ft_add_tuple(ray.pos, ft_scalar_tuple(ray.dir, hit->value));
+				normal = ft_normal_at_sph(hit->shape, point);
+				camera.norm = ft_neg_tuple(ray.dir);
 				while (y_step < STEP)
 				{
 					x_step = 0;
 					while(x_step < STEP)
 					{
-						int color = ft_color_rgb_to_int(shape.sph.color);
+						t_color lighting = ft_lighting(hit->shape->material, point, light, camera, normal);
+						int color = ft_get_mlx_color(lighting);
 						ft_pixel_put(canvas->img, x + x_step++, y + y_step, color);
 					}
 					y_step++;
 				}
-			else
+			}
+			/* else
 				while (y_step < STEP)
 				{
 					x_step = 0;
 					while(x_step < STEP)
 						ft_pixel_put(canvas->img, x + x_step++, y + y_step, 0x7f7f);
 					y_step++;
-				}
+				} */
 		}
 	}
 	mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img->img, 0, 0);
@@ -458,15 +467,17 @@ void	ft_start_rays(t_canvas *canvas, t_shapes shape)
 void	test_draw_circle_with_ray(t_canvas *canvas)
 {
 	t_shapes	shape;
+	t_tuple point;
+	shape.material = ft_create_material();
+	shape.material.color = (t_color){1, 0.2, 1, 3};
 	shape.type = SPHERE;
 	shape.sph.coord = (t_tuple){0, 0, 0, 1};
-	shape.sph.diameter = 0.5;
-	shape.sph.color = (t_color){255, 0, 0, 1};
-	t_tuple point;
+	shape.sph.diameter = 1;
+	shape.sph.color = (t_color){10, 10, 0, 1};
+	ft_tuple_init(&point, (t_point){0,0,5}, T_POINT);
 	t_tuple grav;
 	t_tuple wind;
 	t_tuple vel;
-	ft_tuple_init(&point, (t_point){0,0,5}, T_POINT);
 	ft_tuple_init(&vel, (t_point){0.1,0,0.2}, T_VECTOR);
 	ft_tuple_init(&grav, (t_point){0,-0.06,0}, T_VECTOR);
 	ft_tuple_init(&wind, (t_point){0,0,0.0}, T_VECTOR);
@@ -480,7 +491,7 @@ void	test_draw_circle_with_ray(t_canvas *canvas)
 			vel.y = -vel.y * 0.95;
 		if (point.x > 5.5 || point.x < -3.5)
 			vel.x = -vel.x / 0.95;
-		ft_get_transf_obj(&shape, point, (t_tuple){0.0, 0.0, 0.0, 0}, 15.5);
+		ft_get_transf_obj(&shape, point, (t_tuple){0.0, 0.0, 0.0, 0}, (t_tuple){15.5, 15.5, 15.5, 0});
 		ft_start_rays(canvas, shape);
 		usleep(15000);
 	}
@@ -501,13 +512,128 @@ void	test_mlx_end(t_canvas *canvas)
 	ft_free_canvas(canvas);
 }
 
+void	test_norm_sphere()
+{
+	t_shapes	shape;
+	t_tuple point;
+	ft_tuple_init(&point, (t_point){1,0,0}, T_POINT);
+	shape.type = SPHERE;
+	shape.sph.coord = (t_tuple){0, 0, 0, 1};
+	shape.sph.diameter = 1;
+	shape.sph.color = (t_color){255, 0, 0, 1};
+	ft_print_tuple(ft_normal_at_sph(&shape, point), "point (1, 0, 0)");
+	ft_tuple_init(&point, (t_point){0,1,0}, T_POINT);
+	ft_print_tuple(ft_normal_at_sph(&shape, point), "point (0, 1, 0)");
+	ft_tuple_init(&point, (t_point){0,0,1}, T_POINT);
+	ft_print_tuple(ft_normal_at_sph(&shape, point), "point (0, 0, 1)");
+	ft_tuple_init(&point, (t_point){sqrt(3) / 3,sqrt(3) / 3,sqrt(3) / 3}, T_POINT);
+	ft_print_tuple(ft_norm_vector(ft_normal_at_sph(&shape, point)), "point (0, 0, 1)");
+}
+
+void	test_norm_sphere_transf()
+{
+	t_shapes	shape;
+	t_tuple point;
+	shape.type = SPHERE;
+	shape.sph.coord = (t_tuple){0, 0, 0, 1};
+	shape.sph.diameter = 1;
+	shape.sph.color = (t_color){1, 0, 0, 1};
+	ft_get_transf_obj(&shape, (t_tuple){0, 1, 0, 1}, (t_tuple) {0}, (t_tuple) {1, 1, 1, 0});
+	ft_tuple_init(&point, (t_point){0,1.70711,-0.70711}, T_POINT);
+	ft_print_tuple(ft_normal_at_sph(&shape, point), "point (0,1.70711,-0.70711)");
+
+	ft_get_transf_obj(&shape, ft_rotation_z((t_tuple){0, 0, 0, 1}, M_PI /5), (t_tuple) {0}, (t_tuple) {1, 0.5, 1, 0});
+	ft_tuple_init(&point, (t_point){0,sqrt(2)/2,-sqrt(2)/2}, T_POINT);
+	ft_print_tuple(ft_normal_at_sph(&shape, point), "point (0,sqrt(2)/2,-sqrt(2)/2)");
+}
+
+void	test_reflect()
+{
+	t_tuple incoming;
+	t_tuple normal;
+	ft_tuple_init(&incoming, (t_point){0,-1,0}, T_VECTOR);
+	ft_tuple_init(&normal, (t_point){sqrt(2) /2,sqrt(2) /2, 0}, T_VECTOR);
+	ft_print_tuple(ft_reflect(incoming, normal), "reflected ray");
+	ft_tuple_init(&incoming, (t_point){1,-1,0}, T_VECTOR);
+	ft_tuple_init(&normal, (t_point){0, 1, 0}, T_VECTOR);
+	ft_print_tuple(ft_reflect(incoming, normal), "reflected ray");
+}
+
+// t_color	ft_lighting(t_material m, t_tuple point, t_light light, t_camera camera, t_tuple normal)
+void	test_reflect_light()
+{
+	t_shapes	shape;
+	shape.type = SPHERE;
+	shape.sph.coord = (t_tuple){0, 0, 0, 1};
+	shape.sph.diameter = 1;
+	shape.sph.color = (t_color){0, 0, 0, 1};
+	t_tuple		point;
+	t_light		light;
+	t_camera	camera;
+	t_color		final;
+
+	ft_tuple_init(&point, (t_point){0, 0, 1}, 1);
+	light = ft_create_light_a((t_tuple){0,0,-10 ,1}, (t_color){1,1, 1, 3}, 1);
+	camera = ft_create_camera_a((t_tuple){0,0,-10 ,1}, (t_tuple){0, 0, -1, 0}, 10);
+	final = ft_lighting(shape.material, point, light, camera, (t_tuple){0,0,-1 ,0});
+	ft_print_tuple(final, "final color");
+}
+
+void	test_draw_ball_light(t_canvas *canvas)
+{
+	t_shapes	shape;
+	shape.type = SPHERE;
+	shape.sph.coord = (t_tuple){0, 0, 0, 1};
+	shape.sph.diameter = 1;
+	shape.material = ft_create_material();
+	shape.sph.color = (t_color){1, 0.2, 1, 1};
+
+	shape.material.color = shape.sph.color;
+	shape.material.shininess = 10;
+	shape.material.specular = 0.9;
+	shape.material.diffuse = 0.9;
+	shape.material.ambient = 0.9;
+	t_tuple point;
+	ft_tuple_init(&point, (t_point){0,0,5}, T_POINT);
+	// t_tuple grav;
+	// t_tuple wind;
+	// t_tuple vel;
+	// ft_tuple_init(&vel, (t_point){0.1,0,0.2}, T_VECTOR);
+	// ft_tuple_init(&grav, (t_point){0,-0.06,0}, T_VECTOR);
+	// ft_tuple_init(&wind, (t_point){0,0,0.0}, T_VECTOR);
+	// while (1)
+	// {
+	// 	point = ft_add_tuple(point, vel);
+	// 	vel = ft_add_tuple(vel, ft_add_tuple(grav, wind));
+	// 	if (point.z > 17.5 || point.z < -4.5)
+	// 		vel.z = -vel.z;
+	// 	if (point.y > 7.5 || point.y < -7.5)
+	// 		vel.y = -vel.y * 0.95;
+	// 	if (point.x > 5.5 || point.x < -3.5)
+	// 		vel.x = -vel.x / 0.95;
+		ft_get_transf_obj(&shape, point, (t_tuple){0.0, 0.0, 0.0, 0}, (t_tuple){1, 1, 1, 0});
+		ft_start_rays(canvas, shape);
+	// 	usleep(15000);
+	// }
+	
+
+}
+
 int	main()
 {
 	t_canvas	canvas;
 	test_mlx_start(&canvas);
 	// test_mlx_clock(&canvas);
-	test_draw_circle_with_ray(&canvas);
+	// test_draw_circle_with_ray(&canvas);
+	test_draw_ball_light(&canvas);
 	test_mlx_end(&canvas);
+	// test_norm_sphere();
+	// test_norm_sphere_transf();
+	// test_reflect();
+	// test_reflect_light();
+
+
+
 	// teste_tuple_op();
 	// teste_matrix_mult();
 	// teste_matrix_mult_tuple();
