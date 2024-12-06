@@ -10,12 +10,15 @@ TO-DO list
 - [x] Chapter 4
 - [x] Chapter 5
 - [x] Chapter 6
-- [ ] Chapter 7
-- [ ] Chapter 8
-- [ ] Chapter 9
-- [ ] Chapter 10
-- [ ] Chapter 11
-- [ ] Chapter 12
+- [ ] Make parser great again.
+- [ ] Reorganize and norminette(kinda)  functions.
+- [ ] Chapter 7 - Scene
+- [ ] Chapter 8 - Shadows
+- [ ] Chapter 9 - Planes
+- [ ] Chapter 10 - Patterns
+- [ ] Chapter 11 - Reflection and Refraction
+- [ ] Chapter 12 - Cubes
+- [ ] Chapter 13 - Cylinders
 - [ ] Maybe use fucking quaternions????
 - [ ] Make it work
 - [ ] Make it robust

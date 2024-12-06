@@ -20,7 +20,8 @@ int	main(int argc, char *argv[])
 	ft_init_canvas(&canvas);
 	// ft_mlx_init(&canvas);
 	// ft_setup(&canvas);
-	ft_parse(&canvas, argv[1]);
+	if (ft_parse(&canvas, argv[1]) == 0)
+		return (1);
 	ft_print_objects(canvas);
 	//ft_free_canvas(&canvas);
 	//

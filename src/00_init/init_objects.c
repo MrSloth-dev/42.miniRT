@@ -34,7 +34,7 @@ t_light	*ft_init_light(t_tuple coord, int bright, t_color color)
 		return (NULL);
 	new->coord = coord;
 	new->bright = bright;
-	new->color = color;
+	new->color = ft_scalar_tuple(color, bright);
 	return (new);
 }
 

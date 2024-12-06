@@ -31,6 +31,8 @@ typedef struct s_limit
 }	t_limit;
 typedef t_list t_interlst;
 
+typedef t_list t_objects;
+
 typedef struct s_img
 {
 	void		*img;
@@ -72,8 +74,8 @@ typedef struct s_camera
 typedef struct s_light
 {
 	t_tuple			coord;
-	float			bright;
 	t_color			color;
+	float			bright;
 }	t_light;
 
 typedef struct s_sphere
@@ -158,10 +160,12 @@ typedef struct s_canvas
 	double		scale;
 	int			help;
 	t_img		*menu;
-	t_list		*objects;
-	t_ambient	*ambient;
-	t_camera	*camera;
+	t_objects	*objects;
 	t_light		*light;
+	t_camera	*camera;
+
+
+	t_ambient	*ambient;
 	t_sphere	*sphere;
 	t_plane		*plane;
 	t_cylinder	*cylinder;
