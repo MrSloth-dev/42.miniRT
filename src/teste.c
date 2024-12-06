@@ -6,7 +6,7 @@
 void	ft_start_rays(t_canvas *canvas, t_shapes shape)
 {
 	double	wall_z = 10;
-	double	wall_size = 15.0;
+	double	wall_size = 17.0;
 	double	pixel_size = wall_size / IMG_W;
 	double	half = wall_size / 2;
 
@@ -16,8 +16,8 @@ void	ft_start_rays(t_canvas *canvas, t_shapes shape)
 	t_tuple normal;
 	t_ray 	ray;
 	t_tuple dir;
-	t_camera  camera = ft_create_camera_a((t_tuple){0 , 0, -15, 1}, (t_tuple){0, 0, 1, 0}, 70);
-	t_light	light = ft_create_light_a((t_tuple){-10,10,-10, 1}, (t_color){10, 10, 10, 3}, 1);
+	t_camera  camera = ft_create_camera_a((t_tuple){0 , 0, -5, 1}, (t_tuple){0, 0, 1, 0}, 70);
+	t_light	light = ft_create_light_a((t_tuple){-10 , 10, -15, 1}, (t_color){1, 1, 1, 3}, 10);
 	ray.pos = camera.coord;
 	int x_step;
 	int y_step;
@@ -40,7 +40,7 @@ void	ft_start_rays(t_canvas *canvas, t_shapes shape)
 			hit = ft_hit_inter(&lst);
 			if (hit != NULL)
 			{
-				t_tuple point = ft_add_tuple(ray.pos, ft_scalar_tuple(ray.dir, hit->value));
+				t_tuple point = ft_distance_ray(ray, hit->value);
 				normal = ft_normal_at_sph(hit->shape, point);
 				camera.norm = ft_neg_tuple(ray.dir);
 				while (y_step < STEP)
@@ -88,18 +88,17 @@ void	test_draw_ball_light(t_canvas *canvas)
 	t_shapes	shape;
 	shape.type = SPHERE;
 	shape.sph.coord = (t_tuple){0, 0, 0, 1};
-	shape.sph.diameter = 2;
+	shape.sph.diameter = 1;
 	shape.material = ft_create_material();
-	shape.sph.color = (t_color){1, 1, 0, 1};
-
+	shape.sph.color = (t_color){1, 0.2, 1, 1};
 	shape.material.color = shape.sph.color;
-	shape.material.shininess = 10;
+	shape.material.shininess = 200;
 	shape.material.specular = 0.9;
-	shape.material.diffuse = 0.9;
-	shape.material.ambient = 0.9;
+	shape.material.diffuse = 0.5;
+	shape.material.ambient = 0.1;
 	t_tuple point;
-	ft_tuple_init(&point, (t_point){0,0,5}, T_POINT);
-	t_tuple grav;
+	 ft_tuple_init(&point, (t_point){0,0,0}, T_POINT);
+	/*t_tuple grav;
 	t_tuple wind;
 	t_tuple vel;
 	ft_tuple_init(&vel, (t_point){0.1,0,0.2}, T_VECTOR);
@@ -114,11 +113,11 @@ void	test_draw_ball_light(t_canvas *canvas)
 		if (point.y > 7.5 || point.y < -7.5)
 			vel.y = -vel.y * 0.95;
 		if (point.x > 5.5 || point.x < -3.5)
-			vel.x = -vel.x / 0.95;
-		ft_get_transf_obj(&shape, point, (t_tuple){0.0, 0.0, 0.0, 0}, (t_tuple){1, 1, 1, 0});
+			vel.x = -vel.x / 0.95; */
+		ft_get_transf_obj(&shape, point, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
 		ft_start_rays(canvas, shape);
-		usleep(15000);
-	}
+	// 	usleep(15000);
+	// }
 }
 
 int	main()
