@@ -11,10 +11,7 @@ t_ray	ft_create_ray(t_tuple pos, t_tuple dir)
 
 t_tuple ft_distance_ray(t_ray ray, double time)
 {
-	t_tuple final;
-	
-	return (final = ft_add_tuple(ray.pos,
-		ft_scalar_tuple(ray.dir, time)));
+	return (ft_add_tuple(ray.pos, ft_scalar_tuple(ray.dir, time)));
 }
 
 void	ft_intersection_sphere(t_interlst **lst, t_ray ray, t_shapes *shap)
@@ -47,8 +44,6 @@ t_inter	*ft_hit_inter(t_interlst **lst)
 	{
 		if (((t_inter *)head->cont)->value > 0)
 		{
-			ft_print_tuple(((t_inter *)head->cont)->shape->material.color, "color material");
-			printf("color %f\n", ((t_inter *)head->cont)->shape->sph.diameter);
 			// printf("value hit = %f\n", ((t_inter *)head->cont)->value);
 			// printf("diameter %f\n", ((t_inter *)head->cont)->shape->sph.diameter);
 			return ((t_inter *)head->cont);
