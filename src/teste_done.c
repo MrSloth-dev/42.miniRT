@@ -56,15 +56,34 @@ void	test_reflect_light()
 	shape.sph.diameter = 1;
 	shape.sph.color = (t_color){0, 0, 0, 1};
 	t_tuple		point;
+	t_tuple		normal;
 	t_light		light;
 	t_camera	camera;
 	t_color		final;
 
-	ft_tuple_init(&point, (t_point){0, 0, 1}, 1);
-	light = ft_create_light_a((t_tuple){0,0,-10 ,1}, (t_color){1,1, 1, 3}, 1);
+	shape.material = ft_create_material();
+	ft_tuple_init(&point, (t_point){0, 0, 0}, 1);
 	camera = ft_create_camera_a((t_tuple){0,0,-10 ,1}, (t_tuple){0, 0, -1, 0}, 10);
-	final = ft_lighting(shape.material, point, light, camera, (t_tuple){0,0,-1 ,0});
-	ft_print_tuple(final, "final color");
+	light = ft_create_light_a((t_tuple){0,0,-10 ,1}, (t_color){1,1, 1, 3}, 1);
+	normal = (t_tuple){0,0,-1 ,0};
+	final = ft_lighting(shape.material, point, light, camera, normal);
+	ft_print_tuple(final, "final color 1st test");
+	camera = ft_create_camera_a((t_tuple){0,0,-10 ,1}, (t_tuple){0,sqrt(2) / 2, -sqrt(2) / 2 ,0}, 10);
+	light = ft_create_light_a((t_tuple){0,0,-10 ,1}, (t_color){1,1, 1, 3}, 1);
+	final = ft_lighting(shape.material, point, light, camera, normal);
+	ft_print_tuple(final, "final color 2nd test");
+	camera = ft_create_camera_a((t_tuple){0,0,-10 ,1}, (t_tuple){0, 0, -1,0}, 10);
+	light = ft_create_light_a((t_tuple){0,10,-10 ,1}, (t_color){1,1, 1, 3}, 1);
+	final = ft_lighting(shape.material, point, light, camera, normal);
+	ft_print_tuple(final, "final color 3rd test");
+	camera = ft_create_camera_a((t_tuple){0,0,-10 ,1}, (t_tuple){0,-sqrt(2) / 2,-sqrt(2) / 2 ,0}, 10);
+	light = ft_create_light_a((t_tuple){0,10,-10 ,1}, (t_color){1,1, 1, 3}, 1);
+	final = ft_lighting(shape.material, point, light, camera, normal);
+	ft_print_tuple(final, "final color 4th test");
+	camera = ft_create_camera_a((t_tuple){0,0,-10 ,1}, (t_tuple){0, 0, -1,0}, 10);
+	light = ft_create_light_a((t_tuple){0,0,10 ,1}, (t_color){1,1, 1, 3}, 1);
+	final = ft_lighting(shape.material, point, light, camera, normal);
+	ft_print_tuple(final, "final color 5th test");
 }
 /* void	test_draw_circle_with_ray(t_canvas *canvas)
 {
