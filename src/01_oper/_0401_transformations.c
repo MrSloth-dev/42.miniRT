@@ -30,7 +30,7 @@ t_tuple	ft_scale(t_tuple scale, t_tuple to_scale)
 	return (ft_mult_matrix_tuple(m, to_scale));
 }
 
-t_tuple ft_rotation_x(t_tuple tuple, double rad)
+t_tuple	ft_rotation_x(t_tuple tuple, double rad)
 {
 	t_matrix	m;
 
@@ -43,7 +43,7 @@ t_tuple ft_rotation_x(t_tuple tuple, double rad)
 	return (ft_mult_matrix_tuple(m, tuple));
 }
 
-t_tuple ft_rotation_y(t_tuple tuple, double rad)
+t_tuple	ft_rotation_y(t_tuple tuple, double rad)
 {
 	t_matrix	m;
 
@@ -56,7 +56,7 @@ t_tuple ft_rotation_y(t_tuple tuple, double rad)
 	return (ft_mult_matrix_tuple(m, tuple));
 }
 
-t_tuple ft_rotation_z(t_tuple tuple, double rad)
+t_tuple	ft_rotation_z(t_tuple tuple, double rad)
 {
 	t_matrix	m;
 
