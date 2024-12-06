@@ -178,6 +178,7 @@ typedef struct s_iter
 	int		c;
 	int		rs;
 	int		cs;
+	int		k;
 	double	a;
 	double	b;
 	double	d;
