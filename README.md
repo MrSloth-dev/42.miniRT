@@ -11,7 +11,9 @@ TO-DO list
 - [x] Chapter 5
 - [x] Chapter 6
 - [ ] Make parser great again.
-- [ ] Reorganize and norminette(kinda)  functions.
+- [x] Reorganize files (chapter 1 to 6).
+- [ ] Reorganize Makefile sources.
+- [ ] Norminette previous chapters 1 to 6(kinda) .
 - [ ] Chapter 7 - Scene
 - [ ] Chapter 8 - Shadows
 - [ ] Chapter 9 - Planes

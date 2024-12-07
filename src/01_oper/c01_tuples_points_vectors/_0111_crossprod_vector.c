@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-t_tuple	ft_crossprod_vector(t_tuple a, t_tuple b)//p11
+t_tuple	ft_crossprod_vector(t_tuple a, t_tuple b)
 {
 	ft_assert(a.w == 0, "a is Not a Vector: crossprod");
 	ft_assert(b.w == 0, "b is Not a Vector: crossprod");

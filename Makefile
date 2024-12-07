@@ -69,7 +69,7 @@ MLX = $(MLXDIR)/00_mlx_init.c \
 	$(MLXDIR)/91_free_mlx.c \
 
 # SRCS =	$(HELPER) $(INIT) $(OPER) $(PARSE) $(MLX)
-SRCS =	$(wildcard src/**/**.c)
+SRCS =	$(wildcard src/**/**.c) $(wildcard src/**/**/**.c) 
 INCLUDES = $(MLXFLAGS) $(GNL) $(PRINTFT)
 
 OBJ_DIR = obj
