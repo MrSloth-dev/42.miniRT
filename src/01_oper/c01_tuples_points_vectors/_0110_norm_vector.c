@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-t_tuple	ft_norm_vector(t_tuple tuple)//p10
+t_tuple	ft_norm_vector(t_tuple tuple)
 {
 	double	magn;
 
