@@ -51,13 +51,13 @@ void		ft_free_canvas(t_canvas *canvas);
 int		ft_printf(int fd, const char *str, ...);
 
 // Init objects
-t_ambient	*ft_init_ambient(int ratio, t_color color);
-t_camera	*ft_init_camera(t_tuple coord, t_tuple norm, int fov);
-t_light		*ft_init_light(t_tuple coord, int bright, t_color color);
-t_sphere	*ft_init_sphere(t_tuple coord, int diameter, t_color color);
-t_plane		*ft_init_plane(t_tuple coord, t_tuple norm, t_color color);
-t_cylinder	*ft_init_cylinder(t_tuple coord, t_tuple norm,
-				t_cyl_size size, t_color color);
+t_ambient	ft_init_ambient(int ratio, t_color color);
+t_camera	ft_init_camera(t_tuple coord, t_tuple norm, int fov);
+t_light		ft_init_light(t_tuple coord, int bright, t_color color);
+t_sphere	ft_init_sphere(t_tuple coord, int diameter);
+t_plane		ft_init_plane(t_tuple coord, t_tuple norm);
+t_cylinder	ft_init_cylinder(t_tuple coord, t_tuple norm,
+				t_cyl_size size);
 void		ft_add_object(void **head, void *object);
 
 //parse
