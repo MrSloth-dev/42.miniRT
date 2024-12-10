@@ -8,7 +8,7 @@ void	test_norm_sphere()
 	shape.type = SPHERE;
 	shape.sph.coord = (t_tuple){0, 0, 0, 1};
 	shape.sph.diameter = 1;
-	shape.sph.color = (t_color){255, 0, 0, 1};
+	shape.material.color = (t_color){255, 0, 0, 1};
 	ft_print_tuple(ft_normal_at_sph(&shape, point), "point (1, 0, 0)");
 	ft_tuple_init(&point, (t_point){0,1,0}, T_POINT);
 	ft_print_tuple(ft_normal_at_sph(&shape, point), "point (0, 1, 0)");
@@ -25,7 +25,7 @@ void	test_norm_sphere_transf()
 	shape.type = SPHERE;
 	shape.sph.coord = (t_tuple){0, 0, 0, 1};
 	shape.sph.diameter = 1;
-	shape.sph.color = (t_color){1, 0, 0, 1};
+	shape.material.color = (t_color){1, 0, 0, 1};
 	ft_get_transf_obj(&shape, (t_tuple){0, 1, 0, 1}, (t_tuple) {0}, (t_tuple) {1, 1, 1, 0});
 	ft_tuple_init(&point, (t_point){0,1.70711,-0.70711}, T_POINT);
 	ft_print_tuple(ft_normal_at_sph(&shape, point), "point (0,1.70711,-0.70711)");
@@ -54,7 +54,7 @@ void	test_reflect_light()
 	shape.type = SPHERE;
 	shape.sph.coord = (t_tuple){0, 0, 0, 1};
 	shape.sph.diameter = 1;
-	shape.sph.color = (t_color){0, 0, 0, 1};
+	shape.material.color = (t_color){0, 0, 0, 1};
 	t_tuple		point;
 	t_tuple		normal;
 	t_light		light;
@@ -390,7 +390,8 @@ void	test_rotation_x()
 
 void	ft_free_canvas(t_canvas *canvas)
 {
-	ft_free(canvas->ambient);
+	(void)canvas;
+	return;
 }
 
 
@@ -413,7 +414,6 @@ void	test_intersect_sphere()
 	lst = NULL;
 	sph.diameter = 1;
 	sph.coord = (t_tuple){0, 0, 0, 1};
-	sph.color = (t_color){255, 0, 0, 1};
 	ray.pos = (t_tuple){0, 0, 5, 1};
 	ray.dir =  (t_tuple){0, 0, 1, 0};
 	ft_intersection_sphere(&lst, ray, (t_shapes *)&sph);
@@ -433,15 +433,15 @@ void	test_multiple_intersect()
 
 	sph3.sph.diameter = 0.65;
 	sph3.sph.coord = (t_tuple){0, 0.1, -7, 1};
-	sph3.sph.color = (t_color){130, 0, 0, 1};
+	sph3.material.color = (t_color){130, 0, 0, 1};
 
 	sph2.sph.diameter = 0.5;
 	sph2.sph.coord = (t_tuple){0, 0.1, 0.1, 1};
-	sph2.sph.color = (t_color){130, 0, 0, 1};
+	sph2.material.color = (t_color){130, 0, 0, 1};
 
 	sph.sph.diameter = 1;
 	sph.sph.coord = (t_tuple){0, 0, 0, 1};
-	sph.sph.color = (t_color){255, 0, 0, 1};
+	sph.material.color = (t_color){255, 0, 0, 1};
 
 	ft_intersection_sphere(&lst, ray, &sph);
 	ft_intersection_sphere(&lst, ray, &sph2);
@@ -477,7 +477,7 @@ void	test_transformed_ray()
 	shape.type = SPHERE;
 	shape.sph.diameter = 1;
 	shape.sph.coord = (t_tuple){0, 0, 0, 1};
-	shape.sph.color = (t_color){255, 0, 0, 1};
+	shape.material.color = (t_color){255, 0, 0, 1};
 	ft_get_transf_obj(&shape, (t_tuple){0}, (t_tuple){0}, (t_tuple){2, 2, 2, 0});
 	// ft_get_transf_obj(&shape, (t_tuple){0.0,0.0,20.6, 1}, (t_tuple){0.0, 0.0, 0.0, 0}, 12.6);
 	ray2 = ft_set_transf_ray(ray, shape.inverted);
@@ -485,7 +485,7 @@ void	test_transformed_ray()
 	ft_hit_inter(&lst);
 	shape.sph.diameter = 1;
 	shape.sph.coord = (t_tuple){0, 0, 0, 1};
-	shape.sph.color = (t_color){255, 0, 0, 1};
+	shape.material.color = (t_color){255, 0, 0, 1};
 	ft_get_transf_obj(&shape, (t_tuple){5, 0, 0, 1}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
 	// ft_get_transf_obj(&shape, (t_tuple){0.0,0.0,20.6, 1}, (t_tuple){0.0, 0.0, 0.0, 0}, 12.6);
 	ray2 = ft_set_transf_ray(ray, shape.inverted);

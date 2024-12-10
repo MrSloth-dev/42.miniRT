@@ -23,3 +23,14 @@ void	*ft_free_split(char **split)
 	return (NULL);
 }
 
+void	ft_free_objects(t_objects *list)
+{
+	t_objects *temp;
+	while (list)
+	{
+		temp = list;
+		list = list->next;
+		ft_free(temp->cont);
+		ft_free(temp);
+	}
+}

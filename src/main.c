@@ -2,18 +2,6 @@
 #include "minirt.h"
 #include <unistd.h>
 
-
-void	ft_free_objects(t_objects *list)
-{
-	t_objects *temp;
-	while (list)
-	{
-		temp = list;
-		temp->cont = 0;
-		list = list->next;
-		ft_free(temp);
-	}
-}
 void	ft_free_canvas(t_canvas *canvas)
 {
 	ft_free_objects(canvas->objects);
@@ -24,7 +12,6 @@ int	main(int argc, char *argv[])
 	t_canvas	canvas;
 
 	canvas.name = argv[0] + 2;
-
 	(void)argc;
 	if (argc != 2)
 		return (ft_printf(2, "Error in argv!\n"));
@@ -33,16 +20,19 @@ int	main(int argc, char *argv[])
 	// ft_setup(&canvas);
 	if (ft_parse(&canvas, argv[1]) == 0)
 		return (1);
-	((t_shapes *)canvas.objects->cont)->material = ft_create_material();
-	while (canvas.objects && (t_shapes *)canvas.objects->cont)
-	{
-		if (((t_shapes *)canvas.objects->cont))
-			printf("ok %d\n\n", ((t_shapes *)canvas.objects->cont)->type);
-		// canvas.objects = canvas.objects->next;
-		break;
+	t_objects *current = canvas.objects;
+	while (current) {
+		if (current->cont) {
+			t_shapes *shape = (t_shapes *)current->cont;
+			printf("ok %d\n", shape->type);
+			ft_print_tuple(((t_shapes *)shape)->sph.coord, "sphere coord");
+			ft_print_tuple(((t_shapes *)shape)->material.color, "sphere color");
+		} else {
+			fprintf(stderr, "Warning: current->cont is null\n");
+		}
+		current = current->next;
 	}
-	// ft_print_tuple(((t_shapes *)canvas.objects)->sph.coord, "sphere coord");
-	// ft_free_canvas(&canvas);
+	ft_free_canvas(&canvas);
 	// ft_print_objects(canvas);
 	//
 	// m = ft_create_matrix(4, 4);
