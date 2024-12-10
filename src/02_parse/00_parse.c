@@ -21,16 +21,6 @@ int	ft_check_file(char *file)
 	return (close(fd), perror("Error, file not valid\n"), 0);
 }
 
-void	ft_create_objects(t_canvas *canvas)
-{
-	canvas->ambient = malloc(sizeof(t_ambient) * canvas->count.ambient);
-	canvas->camera = malloc(sizeof(t_camera) * canvas->count.camera);
-	canvas->light = malloc(sizeof(t_light) * canvas->count.light);
-	canvas->sphere = malloc(sizeof(t_sphere) * canvas->count.sphere);
-	canvas->plane = malloc(sizeof(t_plane) * canvas->count.plane);
-	canvas->cylinder = malloc(sizeof(t_cylinder) * canvas->count.cylinder);
-}
-
 int	ft_parse_line(char **split, t_canvas *canvas)
 {
 	if (*split[0] == 'A')
@@ -76,8 +66,6 @@ int	ft_parse_objects(t_canvas *canvas)
 
 int	ft_parser(t_canvas *canvas)
 {
-	ft_create_objects(canvas);
-	canvas->count = (t_count){0, 0, 0, 0, 0, 0};
 	ft_parse_objects(canvas);
 	return (1);
 }

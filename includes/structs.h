@@ -75,21 +75,18 @@ typedef struct s_light
 {
 	t_tuple			coord;
 	t_color			color;
-	float			bright;
 }	t_light;
 
 typedef struct s_sphere
 {
 	t_tuple			coord;
 	double			diameter;
-	t_color			color;
 }	t_sphere;
 
 typedef struct s_plane
 {
 	t_tuple			coord;
 	t_tuple			norm;//[0-1]
-	t_color			color;
 }	t_plane;
 
 typedef struct s_cyl_size
@@ -103,7 +100,6 @@ typedef struct s_cylinder
 	t_tuple				coord;
 	t_tuple				norm;//[0-1]
 	t_cyl_size			size;
-	t_color				color;
 }	t_cylinder;
 
 enum e_type
@@ -118,7 +114,7 @@ enum e_type
 
 typedef struct s_material
 {
-	t_color	color; //0 -255
+	t_color	color; //0 -1
 	double	ambient; //0- 1
 	double	diffuse; // 0-1
 	double	specular; // 0 -1
@@ -160,12 +156,12 @@ typedef struct s_canvas
 	double		scale;
 	int			help;
 	t_img		*menu;
+	t_ambient	ambient;
+	t_camera	camera;
+	t_light		light;
 	t_objects	*objects;
-	t_light		*light;
-	t_camera	*camera;
 
 
-	t_ambient	*ambient;
 	t_sphere	*sphere;
 	t_plane		*plane;
 	t_cylinder	*cylinder;

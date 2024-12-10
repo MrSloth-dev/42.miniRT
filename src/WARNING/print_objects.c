@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-void	ft_print_objects(t_canvas canvas)
+/* void	ft_print_objects(t_canvas canvas)
 {
 	printf(YELLOW"\nAMBIENT\n"RESET);
 	printf("\nambient count = %d\n", canvas.count.ambient);
@@ -18,7 +18,7 @@ void	ft_print_objects(t_canvas canvas)
 	printf("\nlight count = %d\n", canvas.count.light);
 	for (int i = 0; i < canvas.count.light; i++)
 	{
-		printf("L %f, %f, %f |%f |%f, %f, %f\n", canvas.light[i].coord.x, canvas.light[i].coord.y, canvas.light[i].coord.z, canvas.light[i].bright, canvas.light[i].color.x, canvas.light[i].color.y, canvas.light[i].color.z);
+		printf("L %f, %f, %f |%f, %f, %f\n", canvas.light[i].coord.x, canvas.light[i].coord.y, canvas.light[i].coord.z, canvas.light[i].color.x, canvas.light[i].color.y, canvas.light[i].color.z);
 	}
 	printf(YELLOW"\nSphere\n"RESET);
 	printf("\nsphere count = %d\n", canvas.count.sphere);
@@ -38,4 +38,4 @@ void	ft_print_objects(t_canvas canvas)
 	{
 		printf("cy %f,%f,%f   %f,%f,%f | %f %f |%f, %f, %f\n", canvas.cylinder[i].norm.x, canvas.cylinder[i].norm.y, canvas.cylinder[i].norm.z, canvas.cylinder[i].coord.x, canvas.cylinder[i].coord.y, canvas.cylinder[i].coord.z, canvas.cylinder[i].size.height, canvas.cylinder[i].size.diameter, canvas.cylinder[i].color.x, canvas.cylinder[i].color.y, canvas.cylinder[i].color.z);
 	}
-}
+} */

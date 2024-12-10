@@ -1,16 +1,27 @@
+#include "libft.h"
 #include "minirt.h"
 #include <unistd.h>
 
 
+void	ft_free_objects(t_objects *list)
+{
+	t_objects *temp;
+	while (list)
+	{
+		temp = list;
+		temp->cont = 0;
+		list = list->next;
+		ft_free(temp);
+	}
+}
 void	ft_free_canvas(t_canvas *canvas)
 {
-	ft_free(canvas->ambient);
+	ft_free_objects(canvas->objects);
 }
 
 int	main(int argc, char *argv[])
 {
 	t_canvas	canvas;
-	// t_matrix	m;
 
 	canvas.name = argv[0] + 2;
 
@@ -22,8 +33,17 @@ int	main(int argc, char *argv[])
 	// ft_setup(&canvas);
 	if (ft_parse(&canvas, argv[1]) == 0)
 		return (1);
-	ft_print_objects(canvas);
-	//ft_free_canvas(&canvas);
+	((t_shapes *)canvas.objects->cont)->material = ft_create_material();
+	while (canvas.objects && (t_shapes *)canvas.objects->cont)
+	{
+		if (((t_shapes *)canvas.objects->cont))
+			printf("ok %d\n\n", ((t_shapes *)canvas.objects->cont)->type);
+		// canvas.objects = canvas.objects->next;
+		break;
+	}
+	// ft_print_tuple(((t_shapes *)canvas.objects)->sph.coord, "sphere coord");
+	// ft_free_canvas(&canvas);
+	// ft_print_objects(canvas);
 	//
 	// m = ft_create_matrix(4, 4);
 	// ft_set_matrix_values(&m,(double[4][4]){{1,2,3,4}, {5.5,6.5,7.5,8.5}, {9,10,11,12}, {13.5,14.5,15.5,16.5}});
