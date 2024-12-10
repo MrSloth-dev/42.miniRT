@@ -94,13 +94,13 @@ int	ft_create_light(t_canvas *canvas, char **split)
 	char	**coord_split;
 	t_light light;
 	char	**color_split;
-	float	bright;
+	double	bright;
 
 	coord_split = ft_split(split[1], ',');
 	light.coord = (t_tuple){ft_atod(coord_split[0]), ft_atod(coord_split[1]),
 		ft_atod(coord_split[2]), 1};
 	if (ft_check_null_split(coord_split) && ft_vector_check(light.coord))
-		canvas->light.coord = light.coord;
+		light.coord = light.coord;
 	else
 		return (ft_free_split(coord_split),
 			ft_printf(2, "Error, light format is wrong\n"), 0);
@@ -108,10 +108,10 @@ int	ft_create_light(t_canvas *canvas, char **split)
 	color_split = ft_split(split[3], ',');
 	light.color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
 		ft_atod(color_split[2]), 3};
-	bright = ft_atoi(split[2]);
+	bright = ft_atod(split[2]);
 	light.color = ft_scalar_tuple(light.color, bright);
 	if (ft_check_null_split(color_split) && ft_rgb_check(light.color))
-		canvas->light.color = light.color;
+		light.color = ft_scalar_tuple(light.color, 1.0f / 25.5f);
 	else
 		return (ft_free_split(color_split),
 			ft_printf(2, "Error, light format is wrong\n"), 0);
@@ -123,20 +123,20 @@ int	ft_create_light(t_canvas *canvas, char **split)
 int	ft_create_sphere(t_canvas *canvas, char **split)
 {
 	char	**coord_split;
-	t_shapes	shape;
+	t_shapes	*shape;
 	t_tuple	coord;
 	char	**color_split;
 	t_color	color;
 
-	shape.type = SPHERE;
-	// shape.material = ft_create_material();
-
+	shape = malloc (sizeof(t_shapes));
+	shape->type = SPHERE;
+	shape->material = ft_create_material();
 
 	coord_split = ft_split(split[1], ',');
 	coord = (t_tuple){ft_atod(coord_split[0]), ft_atod(coord_split[1]),
 		ft_atod(coord_split[2]), 1};
 	if (ft_check_null_split(coord_split) && ft_vector_check(coord))
-		shape.sph.coord = coord;
+		shape->sph.coord = coord;
 	else
 		return (ft_free_split(coord_split),
 			ft_printf(2, "Error, sphere format is wrong\n"), 0);
@@ -147,17 +147,17 @@ int	ft_create_sphere(t_canvas *canvas, char **split)
 		ft_atod(color_split[2]), 3};
 
 	if (ft_check_null_split(color_split) && ft_rgb_check(color))
-		shape.material.color = color;
+		shape->material.color = ft_scalar_tuple(color, 1.0f / 255.0f);
 	else
 		return (ft_free_split(color_split),
 			ft_printf(2, "Error, sphere color format is wrong\n"), 0);
 	ft_free_split(color_split);
 
-	shape.sph.diameter = ft_atod(split[2]);
+	shape->sph.diameter = ft_atod(split[2]);
 
-	ft_get_transf_obj(&shape, shape.sph.coord, (t_tuple) {0}, (t_tuple) {shape.sph.diameter, shape.sph.diameter, shape.sph.diameter, 0});
+	ft_get_transf_obj(shape, shape->sph.coord, (t_tuple) {0}, (t_tuple) {shape->sph.diameter, shape->sph.diameter, shape->sph.diameter, 0});
 
-	ft_lstadd_front(&canvas->objects, ft_lstnew(&shape));
+	ft_lstadd_front(&canvas->objects, ft_lstnew(shape));
 	return (canvas->count.sphere++, 0);
 }
 

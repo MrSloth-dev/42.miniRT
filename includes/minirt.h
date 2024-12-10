@@ -42,6 +42,7 @@
 void		ft_assert(int condition, char *message);
 void		*ft_free(void *ptr);
 void		*ft_free_split(char **split);
+void	ft_free_objects(t_objects *list);
 int		ft_clean_exit(t_canvas *canvas);
 
 //init

@@ -17,7 +17,6 @@ void	ft_start_rays(t_canvas *canvas, t_shapes shape)
 	t_ray 	ray;
 	t_tuple dir;
 	t_camera  camera = ft_create_camera_a((t_tuple){0 , 0, -5, 1}, (t_tuple){0, 0, 1, 0}, 70);
-	t_light	light = ft_create_light_a((t_tuple){-10 , 10, -15, 1}, (t_color){1, 1, 1, 3}, 10);
 	ray.pos = camera.coord;
 	int x_step;
 	int y_step;
@@ -48,7 +47,7 @@ void	ft_start_rays(t_canvas *canvas, t_shapes shape)
 					x_step = 0;
 					while(x_step < STEP)
 					{
-						t_color lighting = ft_lighting(hit->shape->material, point, light, camera, normal);
+						t_color lighting = ft_lighting(hit->shape->material, point, canvas->light, camera, normal);
 						int color = ft_get_mlx_color(lighting);
 						ft_pixel_put(canvas->img, x + x_step++, y + y_step, color);
 					}
@@ -85,19 +84,6 @@ void	test_mlx_end(t_canvas *canvas)
 
 void	test_draw_ball_light(t_canvas *canvas)
 {
-	t_shapes	shape;
-	shape.type = SPHERE;
-	shape.sph.coord = (t_tuple){0, 0, 0, 1};
-	shape.sph.diameter = 1;
-	shape.material = ft_create_material();
-	shape.sph.color = (t_color){1, 0.2, 1, 1};
-	shape.material.color = shape.sph.color;
-	shape.material.shininess = 100;
-	shape.material.specular = 0.9;
-	shape.material.diffuse = 0.9;
-	shape.material.ambient = 0.1;
-	t_tuple point;
-	 ft_tuple_init(&point, (t_point){0,0,0}, T_POINT);
 	// t_tuple grav;
 	// t_tuple wind;
 	// t_tuple vel;
@@ -114,27 +100,45 @@ void	test_draw_ball_light(t_canvas *canvas)
 	// 		vel.y = -vel.y * 0.95;
 	// 	if (point.x > 5.5 || point.x < -3.5)
 	// 		vel.x = -vel.x / 0.95;
-		ft_get_transf_obj(&shape, point, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
-		ft_start_rays(canvas, shape);
+	ft_start_rays(canvas, *(t_shapes *)canvas->objects->cont);
 	// 	usleep(150);
 	// }
 }
 
-int	main()
+int	main(int argc, char *argv[])
 {
-	t_canvas	canvas;
+	(void)argc;
+	t_canvas canvas;
 	test_mlx_start(&canvas);
 	// test_mlx_clock(&canvas);
 	// test_draw_circle_with_ray(&canvas);
-	test_draw_ball_light(&canvas);
-	test_mlx_end(&canvas);
 	// test_norm_sphere();
 	// test_norm_sphere_transf();
 	// test_reflect();
 	// test_reflect_light();
+	ft_init_canvas(&canvas);
+	// ft_mlx_init(&canvas);
+	// ft_setup(&canvas);
+	if (ft_parse(&canvas, argv[1]) == 0)
+		return 1;
+	/* t_objects *current = canvas.objects;
+	while (current) {
+		if (current->cont) {
+			t_shapes *shape = (t_shapes *)current->cont;
+			printf("ok %d\n", shape->type);
+			ft_print_tuple(((t_shapes *)shape)->sph.coord, "sphere coord");
+			ft_print_tuple(((t_shapes *)shape)->material.color, "sphere color");
+		} else {
+			fprintf(stderr, "Warning: current->cont is null\n");
+		}
+		current = current->next;
+	}
+	ft_print_tuple(canvas.light.coord, "light coord");
+	ft_print_tuple(canvas.light.color, "light color"); */
 
 
-
+	test_draw_ball_light(&canvas);
+	test_mlx_end(&canvas);
 	// teste_tuple_op();
 	// teste_matrix_mult();
 	// teste_matrix_mult_tuple();
