@@ -11,6 +11,7 @@ TO-DO list
 - [x] Chapter 5
 - [x] Chapter 6
 - [ ] Make parser great again.
+- [ ] Limit Light,Ambient and Camera to 1
 - [x] Reorganize files (chapter 1 to 6).
 - [ ] Reorganize Makefile sources.
 - [ ] Norminette previous chapters 1 to 6(kinda) .

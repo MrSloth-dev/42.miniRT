@@ -17,7 +17,7 @@ void	ft_start_rays(t_canvas *canvas, t_shapes shape)
 	t_ray 	ray;
 	t_tuple dir;
 	t_camera  camera = ft_create_camera_a((t_tuple){0 , 0, -5, 1}, (t_tuple){0, 0, 1, 0}, 70);
-	t_light	light = ft_create_light_a((t_tuple){-10 , 10, -15, 1}, (t_color){10, 10, 10, 3}, 10);
+	t_light	light = ft_create_light_a((t_tuple){-10 , 10, -15, 1}, (t_color){1, 1, 1, 3}, 10);
 	ray.pos = camera.coord;
 	int x_step;
 	int y_step;
