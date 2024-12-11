@@ -3,14 +3,14 @@
 Raytracer with minilibx
 
 TO-DO list
-- [ ] Parser
+- [x] Parser
 - [x] Chapter 1
 - [x] Chapter 2
 - [x] Chapter 3
 - [x] Chapter 4
 - [x] Chapter 5
 - [x] Chapter 6
-- [ ] Make parser great again.
+- [x] Make parser great again.
 - [ ] Limit Light,Ambient and Camera to 1
 - [x] Reorganize files (chapter 1 to 6).
 - [ ] Reorganize Makefile sources.
