@@ -24,9 +24,11 @@ int	main(int argc, char *argv[])
 	while (current) {
 		if (current->cont) {
 			t_shapes *shape = (t_shapes *)current->cont;
-			printf("ok %d\n", shape->type);
-			ft_print_tuple(((t_shapes *)shape)->sph.coord, "sphere coord");
-			ft_print_tuple(((t_shapes *)shape)->material.color, "sphere color");
+			switch (shape->type) {
+				case PLANE: printf(YELLOW"PLANE\n"RESET); break;
+				case CYLINDER: printf(YELLOW"CYLINDER\n"RESET); break;
+				case SPHERE: printf(YELLOW"SPHERE\n"RESET); break;
+			}
 		} else {
 			fprintf(stderr, "Warning: current->cont is null\n");
 		}

@@ -87,12 +87,12 @@ $(OBJ_DIR)/%.o: %.c
 all: $(NAME)
 
 $(NAME): $(OBJS) $(HEADER)
-	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)..."
-	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)..."
+	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
+	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
 	@make -C $(PRINTDIR) -s
 	@make -C $(LIBX_DIR) -s
 	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME)
-	@echo "$(GREEN)$(NAME) created[0m ✅"
+	@printf "$(GREEN)$(NAME) created$(CLR_RMV) ✅\n"
 
 LIBX_DIR = minilibx-linux
 LIBX_HEADER = $(LIBX_DIR)/mlx.h
@@ -123,7 +123,7 @@ gdb : re
 .PHONY: vgdb
 vgdb :
 	@tmux new-window  -n vGdb
-	@tmux send-keys 'valgrind -q --vgdb-error=0 ./minirt teste.rt' C-m Escape
+	@tmux send-keys 'valgrind -q --vgdb-error=0 ./minirt_te teste.rt' C-m Escape
 	@tmux split-window -h
 	@tmux send-keys -t Gdb.2 'gdbtui ./minirt' C-m
 	@tmux select-pane -t vGdb.1
@@ -136,14 +136,14 @@ va : re
 clean:
 	@ $(RM) -f $(OBJS)
 	@make clean -C $(PRINTDIR) -s
-	@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✅"
+	@ printf "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✅\n"
 
 
 .PHONY: fclean
 fclean: clean
 	@ $(RM) $(OBJ_DIR) $(NAME)
 	@make fclean -C $(PRINTDIR) -s
-	@echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✅"
+	@printf "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✅\n"
 
 
 .PHONY: re
@@ -154,8 +154,8 @@ NAME_T = $(NAME)_te
 .PHONY: te
 te : $(OBJS) $(HEADER)
 	rm -fr $(NAME)_te
-	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)..."
-	@echo "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)..."
+	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
+	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
 	@make -C $(PRINTDIR) -s
 	@make -C $(LIBX_DIR) -s
 	@$(CC) $(MAIN_T) $(CFLAGS) $(EFLAGS) $(OBJS) $(MLXFLAGS) $(GNL) $(PRINTFT) -o $(NAME_T)
