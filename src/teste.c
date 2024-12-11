@@ -167,11 +167,13 @@ void	test_mlx_end(t_canvas *canvas)
 
 void	test_draw_ball_light(t_canvas *canvas)
 {
+	// t_tuple point;
 	// t_tuple grav;
 	// t_tuple wind;
 	// t_tuple vel;
-	// ft_tuple_init(&vel, (t_point){0.1,0,0.2}, T_VECTOR);
-	// ft_tuple_init(&grav, (t_point){0,-0.06,0}, T_VECTOR);
+	// ft_tuple_init(&point, (t_point){0.1,0,0.2}, T_POINT);
+	// ft_tuple_init(&vel, (t_point){0.0,0,0.2}, T_VECTOR);
+	// ft_tuple_init(&grav, (t_point){0,-0.03,0}, T_VECTOR);
 	// ft_tuple_init(&wind, (t_point){0,0,0.0}, T_VECTOR);
 	// while (1)
 	// {
@@ -183,7 +185,8 @@ void	test_draw_ball_light(t_canvas *canvas)
 	// 		vel.y = -vel.y * 0.95;
 	// 	if (point.x > 5.5 || point.x < -3.5)
 	// 		vel.x = -vel.x / 0.95;
-	ft_start_rays_mult_objs(canvas, *(t_shapes *)canvas->objects->cont);
+	// 	ft_get_transf_obj(canvas->objects->cont, point, (t_tuple){0}, (t_tuple) {1, 1, 1, 0});
+		ft_start_rays_mult_objs(canvas, *(t_shapes *)canvas->objects->cont);
 	// 	usleep(150);
 	// }
 }
@@ -204,7 +207,7 @@ int	main(int argc, char *argv[])
 	// ft_setup(&canvas);
 	if (ft_parse(&canvas, argv[1]) == 0)
 		return 1;
-	ft_start_rays_mult_objs(&canvas, *(t_shapes *)canvas.objects->cont);
+	// ft_start_rays_mult_objs(&canvas, *(t_shapes *)canvas.objects->cont);
 
 
 	test_draw_ball_light(&canvas);
