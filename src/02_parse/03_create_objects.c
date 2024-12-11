@@ -42,51 +42,50 @@ int	ft_norm_check(t_tuple norm)
 int	ft_create_ambient(t_canvas *canvas, char **split)
 {
 	char	**color_split;
-	t_color	color;
+	t_ambient amb;
 
-	canvas->ambient.ratio = ft_atod(split[1]);
+	amb.ratio = ft_atod(split[1]);
 	color_split = ft_split(split[2], ',');
-	color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
+	amb.color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
 		ft_atod(color_split[2]), 3};
 	if (ft_check_null_split(color_split)
-		&& ft_rgb_check(color))
-		canvas->ambient.color = color;
+		&& ft_rgb_check(amb.color))
+		canvas->ambient.color = ft_scalar_tuple(ft_scalar_tuple(amb.color, amb.ratio), 1.0f / 25.5f);
 	else
 		return (ft_free_split(color_split),
 			ft_printf(2, "Error, ambient format is wrong\n"), 0);
-	return (ft_free_split(color_split), canvas->count.ambient++, 0);
+	return (ft_free_split(color_split), 0);
 }
 
 int	ft_create_camera(t_canvas *canvas, char **split)
 {
 	char	**coord_split;
-	t_tuple	coord;
+	t_camera cam;
 	char	**norm_split;
-	t_tuple	norm;
 
 	coord_split = ft_split(split[1], ',');
-	coord = (t_tuple){ft_atod(coord_split[0]), ft_atod(coord_split[1]),
+	cam.coord = (t_tuple){ft_atod(coord_split[0]), ft_atod(coord_split[1]),
 		ft_atod(coord_split[2]), 1};
-	if (ft_check_null_split(coord_split) && ft_vector_check(coord))
+	if (ft_check_null_split(coord_split) && ft_vector_check(cam.coord))
 		ft_free_split(coord_split);
 	else
 		return (ft_free_split(coord_split),
 			ft_printf(2, "Error, camera coord values is wrong\n"), 0);
-	canvas->camera.coord = coord;
+	canvas->camera.coord = cam.coord;
 	norm_split = ft_split(split[2], ',');
-	norm = (t_tuple){ft_atod(norm_split[0]), ft_atod(norm_split[1]),
+	cam.norm = (t_tuple){ft_atod(norm_split[0]), ft_atod(norm_split[1]),
 		ft_atod(norm_split[2]), 0};
 	if (ft_check_null_split(norm_split)
-		&& ft_norm_check(norm))
+		&& ft_norm_check(cam.norm))
 	{
-		canvas->camera.norm = norm;
+		canvas->camera.norm = cam.norm;
 		ft_free_split(norm_split);
 	}
 	else
 		return (ft_free_split(norm_split),
 			ft_printf(2, "Error, camera norm value is wrong\n"), 0);
-	canvas->camera.fov = ft_atoi(split[2]);
-	return (canvas->count.camera++, 0);
+	canvas->camera.fov = ft_atod(split[2]);
+	return (0);
 }
 
 int	ft_create_light(t_canvas *canvas, char **split)
@@ -123,10 +122,10 @@ int	ft_create_light(t_canvas *canvas, char **split)
 int	ft_create_sphere(t_canvas *canvas, char **split)
 {
 	char	**coord_split;
-	t_shapes	*shape;
 	t_tuple	coord;
 	char	**color_split;
 	t_color	color;
+	t_shapes	*shape;
 
 	shape = malloc (sizeof(t_shapes));
 	shape->type = SPHERE;
@@ -165,17 +164,21 @@ int	ft_create_plane(t_canvas *canvas, char **split)
 {
 	char	**coord_split;
 	t_tuple	coord;
-	char	**color_split;
 	t_color	color;
+	char	**color_split;
 	char	**norm_split;
 	t_tuple	norm;
+	t_shapes	*shape;
 
-	return 0;
+	shape = malloc (sizeof(t_shapes));
+	shape->type = PLANE;
+	shape->material = ft_create_material();
+
 	coord_split = ft_split(split[1], ',');
 	coord = (t_tuple){ft_atod(coord_split[0]), ft_atod(coord_split[1]),
 		ft_atod(coord_split[2]), 1};
 	if (ft_check_null_split(coord_split) && ft_vector_check(coord))
-		canvas->plane->coord = coord;
+		shape->pla.coord = coord;
 	else
 		return (ft_free_split(coord_split),
 			ft_printf(2, "Error, plane format is wrong\n"), 0);
@@ -184,8 +187,8 @@ int	ft_create_plane(t_canvas *canvas, char **split)
 	color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
 		ft_atod(color_split[2]), 3};
 	if (ft_check_null_split(color_split) && ft_rgb_check(color))
-	// 	canvas->plane.color = color;
-	// else
+		shape->material.color = color;
+	else
 		return (ft_free_split(color_split),
 			ft_printf(2, "Error, plane color format is wrong\n"), 0);
 	ft_free_split(color_split);
@@ -194,11 +197,15 @@ int	ft_create_plane(t_canvas *canvas, char **split)
 		ft_atod(norm_split[2]), 0};
 	if (ft_check_null_split(norm_split) && ft_norm_check(norm))
 	{
+		shape->pla.norm = norm;
 		ft_free_split(norm_split);
 	}
 	else
 		return (ft_free_split(norm_split),
 			ft_printf(2, "Error, plane norm value is wrong\n"), 0);
+	ft_get_transf_obj(shape, shape->pla.coord, shape->pla.norm, (t_tuple) {1, 1, 1, 0});
+
+	ft_lstadd_front(&canvas->objects, ft_lstnew(shape));
 	return (canvas->count.plane++, 0);
 }
 
@@ -210,15 +217,17 @@ int	ft_create_cylinder(t_canvas *canvas, char **split)
 	t_color	color;
 	char	**norm_split;
 	t_tuple	norm;
-	int		i;
+	t_shapes	*shape;
 
-	return 0;
-	i = canvas->count.cylinder;
+	shape = malloc (sizeof(t_shapes));
+	shape->type = CYLINDER;
+	shape->material = ft_create_material();
+
 	coord_split = ft_split(split[1], ',');
 	coord = (t_tuple){ft_atod(coord_split[0]), ft_atod(coord_split[1]),
 		ft_atod(coord_split[2]), 1};
 	if (ft_check_null_split(coord_split) && ft_vector_check(coord))
-		canvas->cylinder[i].coord = coord;
+		shape->cyl.coord = coord;
 	else
 		return (ft_free_split(coord_split),
 			ft_printf(2, "Error, cylinder format is wrong\n"), 0);
@@ -227,8 +236,8 @@ int	ft_create_cylinder(t_canvas *canvas, char **split)
 	color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
 		ft_atod(color_split[2]), 3};
 	if (ft_check_null_split(color_split) && ft_rgb_check(color))
-	// 	canvas->cylinder[i].color = color;
-	// else
+		shape->material.color = color;
+	else
 		return (ft_free_split(color_split),
 			ft_printf(2, "Error, cylinder color format is wrong\n"), 0);
 	ft_free_split(color_split);
@@ -237,13 +246,16 @@ int	ft_create_cylinder(t_canvas *canvas, char **split)
 		ft_atod(norm_split[2]), 0};
 	if (ft_check_null_split(norm_split) && ft_norm_check(norm))
 	{
-		canvas->cylinder[i].norm = norm;
+		shape->cyl.norm = norm;
 		ft_free_split(norm_split);
 	}
 	else
 		return (ft_free_split(norm_split),
 			ft_printf(2, "Error, cylinder norm value is wrong\n"), 0);
-	canvas->cylinder[i].size.diameter = ft_atod(split[3]);
-	canvas->cylinder[i].size.height = ft_atod(split[4]);
-	return (canvas->count.cylinder++, 0);
+	shape->cyl.size.diameter = ft_atod(split[3]);
+	shape->cyl.size.height = ft_atod(split[4]);
+	ft_get_transf_obj(shape, shape->cyl.coord, shape->cyl.norm, (t_tuple) {shape->cyl.size.diameter, shape->cyl.size.height, shape->cyl.size.diameter, 0});
+
+	ft_lstadd_front(&canvas->objects, ft_lstnew(shape));
+	return (0);
 }
