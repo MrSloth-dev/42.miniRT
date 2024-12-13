@@ -6,10 +6,10 @@ void ft_get_transf_obj(t_shapes *s, t_tuple coord, t_tuple orientation, t_tuple 
 	t_matrix scaled;
 	// t_matrix rotation;
 
-	translation = ft_create_transf_matrix(coord.x, coord.y, coord.z);
+	translation = ft_translation_matrix(coord.x, coord.y, coord.z);
 	scaled = ft_create_matrix(4, 4, 1);
 	if (s->type != PLANE)
-		scaled = ft_create_scale_matrix(scale.x, scale.y, scale.z);
+		scaled = ft_scale_matrix(scale.x, scale.y, scale.z);
 	// if (s->type != SPHERE)
 	(void)orientation; //rotation rotation rotation
 	s->transform = ft_matrix_mult(translation, scaled);

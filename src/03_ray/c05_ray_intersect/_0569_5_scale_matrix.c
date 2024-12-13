@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-t_matrix	ft_create_scale_matrix(double x, double y, double z)
+t_matrix	ft_scale_matrix(double x, double y, double z)
 {
 	t_matrix	temp;
 
