@@ -158,6 +158,9 @@ t_color		ft_lighting(t_material m, t_tuple point, t_light light, t_camera camera
 
 t_comp	ft_prepare_comp(t_inter *inter, t_ray ray);
 t_color	ft_shade_hit(t_canvas *canvas, t_comp comp);
+t_interlst	*ft_inter_world(t_canvas *canvas, t_ray ray);
+t_color	ft_color_at(t_canvas *canvas, t_ray ray);
+t_matrix	ft_view_transformation(t_tuple from, t_tuple to, t_tuple up);
 
 
 

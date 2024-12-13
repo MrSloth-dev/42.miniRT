@@ -5,6 +5,7 @@ void	ft_print_matrix(t_matrix m)
 	t_iter	h;
 
 	h = ft_iter(0);
+	printf("\n");
 	while (h.r < m.rows)
 	{
 		h.c = 0;
@@ -16,4 +17,5 @@ void	ft_print_matrix(t_matrix m)
 		printf("\n");
 		h.r++;
 	}
+	printf("\n");
 }
