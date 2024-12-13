@@ -33,4 +33,11 @@ void	ft_free_objects(t_objects *list)
 		ft_free(temp->cont);
 		ft_free(temp);
 	}
+	ft_free(list);
 }
+
+void	ft_free_canvas(t_canvas *canvas)
+{
+	ft_free_objects(canvas->objects);
+}
+

@@ -1,3 +1,4 @@
+#include "ft_printf/libft/libft.h"
 #include "minirt.h"
 
 t_inter	*ft_create_inter(double value, t_shapes *shape)
@@ -20,6 +21,8 @@ void	ft_lstadd_sort_inter(t_interlst **lst, double value, t_shapes *shape)
 
 	node = ft_create_inter(value, shape);
 	new = ft_lstnew(node);
+	if (!lst)
+		lst = &new;
 	if (!*lst)
 		*lst = new;
 	else
