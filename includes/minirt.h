@@ -138,8 +138,8 @@ t_inter		*ft_hit_inter(t_interlst **lst);
 t_ray		ft_translate_ray(t_tuple translation, t_ray ray);
 t_ray		ft_scale_ray(t_tuple scaling, t_ray ray);
 t_ray		ft_set_transf_ray(t_ray ray, t_matrix inverted);
-t_matrix	ft_create_transf_matrix(double x, double y, double z);
-t_matrix	ft_create_scale_matrix(double x, double y, double z);
+t_matrix	ft_translation_matrix(double x, double y, double z);
+t_matrix	ft_scale_matrix(double x, double y, double z);
 void		ft_get_transf_obj(t_shapes *s, t_tuple coord, t_tuple orientation, t_tuple scale);
 
 void		ft_lstadd_sort_inter(t_interlst **lst, double value, t_shapes *shap);
