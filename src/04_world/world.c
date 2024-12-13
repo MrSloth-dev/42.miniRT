@@ -82,6 +82,6 @@ t_matrix	ft_view_transformation(t_tuple from, t_tuple to, t_tuple up)
 		{true_up.x, true_up.y, true_up.z, 0},
 		{-forward.x, -forward.y, -forward.z, 0},
 		{0, 0, 0, 1}});
-	m = ft_matrix_mult(m, ft_create_transf_matrix(-from.x, -from.y, -from.z));
+	m = ft_matrix_mult(m, ft_translation_matrix(-from.x, -from.y, -from.z));
 	return (m);
 }
