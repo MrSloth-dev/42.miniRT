@@ -154,8 +154,7 @@ int	ft_create_sphere(t_canvas *canvas, char **split)
 
 	shape->sph.diameter = ft_atod(split[2]);
 
-	ft_get_transf_obj(shape, shape->sph.coord, (t_tuple) {0}, (t_tuple) {shape->sph.diameter, shape->sph.diameter, shape->sph.diameter, 0});
-
+	ft_get_transf_obj(shape, shape->sph.coord, (t_tuple) {0}, (t_tuple){shape->sph.diameter, shape->sph.diameter, shape->sph.diameter, 0});
 	ft_lstadd_back(&canvas->objects, ft_lstnew(shape));
 	return (0);
 }
