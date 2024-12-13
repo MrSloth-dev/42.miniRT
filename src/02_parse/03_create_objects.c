@@ -156,8 +156,8 @@ int	ft_create_sphere(t_canvas *canvas, char **split)
 
 	ft_get_transf_obj(shape, shape->sph.coord, (t_tuple) {0}, (t_tuple) {shape->sph.diameter, shape->sph.diameter, shape->sph.diameter, 0});
 
-	ft_lstadd_front(&canvas->objects, ft_lstnew(shape));
-	return (canvas->count.sphere++, 0);
+	ft_lstadd_back(&canvas->objects, ft_lstnew(shape));
+	return (0);
 }
 
 int	ft_create_plane(t_canvas *canvas, char **split)
@@ -205,7 +205,7 @@ int	ft_create_plane(t_canvas *canvas, char **split)
 			ft_printf(2, "Error, plane norm value is wrong\n"), 0);
 	ft_get_transf_obj(shape, shape->pla.coord, shape->pla.norm, (t_tuple) {1, 1, 1, 0});
 
-	ft_lstadd_front(&canvas->objects, ft_lstnew(shape));
+	ft_lstadd_back(&canvas->objects, ft_lstnew(shape));
 	return (canvas->count.plane++, 0);
 }
 
@@ -256,6 +256,6 @@ int	ft_create_cylinder(t_canvas *canvas, char **split)
 	shape->cyl.size.height = ft_atod(split[4]);
 	ft_get_transf_obj(shape, shape->cyl.coord, shape->cyl.norm, (t_tuple) {shape->cyl.size.diameter, shape->cyl.size.height, shape->cyl.size.diameter, 0});
 
-	ft_lstadd_front(&canvas->objects, ft_lstnew(shape));
+	ft_lstadd_back(&canvas->objects, ft_lstnew(shape));
 	return (0);
 }

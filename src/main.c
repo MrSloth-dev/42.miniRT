@@ -2,11 +2,6 @@
 #include "minirt.h"
 #include <unistd.h>
 
-void	ft_free_canvas(t_canvas *canvas)
-{
-	ft_free_objects(canvas->objects);
-}
-
 int	main(int argc, char *argv[])
 {
 	t_canvas	canvas;
