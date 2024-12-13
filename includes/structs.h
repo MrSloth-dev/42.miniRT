@@ -1,5 +1,7 @@
 #include "libft.h"
 
+#include <stdbool.h>
+
 typedef struct s_matrix
 {
 	int			rows;
@@ -180,3 +182,12 @@ typedef struct s_iter
 	double	d;
 }	t_iter;
 
+typedef struct s_comp
+{
+	double		value;
+	t_shapes	*shape;
+	t_tuple		point;
+	t_tuple		eyev;
+	t_tuple		normalv;
+	bool		inside;
+} t_comp;

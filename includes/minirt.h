@@ -8,8 +8,8 @@
 #include "ft_printf/libft/libft.h"
 #include "ft_printf.h"
 #include "get_next_line.h"
-#include "../minilibx-linux/mlx.h"
 #include <math.h>
+#include "../minilibx-linux/mlx.h"
 #include <X11/keysym.h>
 #include <X11/X.h>
 
@@ -155,6 +155,9 @@ t_color		ft_lighting(t_material m, t_tuple point, t_light light, t_camera camera
 
 
 // Chapter 7 - Making a Scene
+
+t_comp	ft_prepare_comp(t_inter *inter, t_ray ray);
+t_color	ft_shade_hit(t_canvas *canvas, t_comp comp);
 
 
 
