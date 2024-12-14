@@ -16,7 +16,7 @@ t_matrix	ft_matrix_mult(t_matrix A, t_matrix B)
 			h.k = 0;
 			while (h.k < B.rows)
 			{
-				res.data[h.r][h.c] += A.data[h.k][h.c] * B.data[h.r][h.k];
+				res.data[h.r][h.c] += A.data[h.r][h.k] * B.data[h.k][h.c];
 				h.k++;
 			}
 			h.r++;
