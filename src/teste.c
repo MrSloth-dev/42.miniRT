@@ -15,6 +15,7 @@
 #include "minirt.h"
 
 #include "teste_done.c"
+#include <math.h>
 #include <stdio.h>
 
 void	test_inter_world(t_canvas *canvas, char *argv[])
@@ -90,6 +91,37 @@ void	test_viewtransform()
 	to = (t_tuple){4, -2, 8, 1};
 	up = (t_tuple){1, 1, 0, 0};
 	ft_print_matrix(ft_view_transformation(from, to, up));
+}
+
+void	test_camera()
+{
+	t_camera	cam;
+	t_ray		ray;
+
+	printf("test creation camera\n");
+	cam = ft_create_world_camera(200, 125, M_PI / 2);
+	printf("cam 200, 125, pi/2 -> px_size 0.01? check %f\n", cam.px_size);
+	cam = ft_create_world_camera(125, 200, M_PI / 2);
+	printf("cam 200, 125, pi/2 -> px_size 0.01? check %f\n", cam.px_size);
+
+	printf("\ntest ray_for_pixel\n");
+	cam = ft_create_world_camera(201, 101, M_PI / 2);
+
+	ray = ft_ray_for_pixel(cam, 100, 50);
+	printf("\nConstructing a ray through the CENTER of the canvas\n");
+	ft_print_tuple(ray.pos, "ray.pos (origin)\n0, 0, 0 ?");
+	ft_print_tuple(ray.dir, "ray.direction\n0, 0, -1 ?");
+
+	printf("\nConstructing a ray through a CORNER of the canvas\n");
+	ray = ft_ray_for_pixel(cam, 0, 0);
+	ft_print_tuple(ray.pos, "ray.pos (origin)\n0, 0, 0?");
+	ft_print_tuple(ray.dir, "ray.direction \n0.66519, 0.33259, -0,66851?");
+
+/* 	printf("\nConstructing a ray when the camera is transformed\n"); */
+	// cam.transf = ft_rotation_y(t_tuple tuple, double angle)
+	// ray = ft_ray_for_pixel(cam, 100, 50);
+	// ft_print_tuple(ray.pos, "ray.pos (origin)\n0\t\t2\t\t-5?");
+	// ft_print_tuple(ray.dir, "ray.direction sqrt(2) / 2, 0, sqrt(2) / 2?");
 
 }
 
@@ -100,9 +132,9 @@ int	main(int argc, char *argv[])
 	ft_init_canvas(&canvas);
 	if (ft_parse(&canvas, argv[1]) == 0)
 		return 1;
+	test_camera();
 	(void)argc;
 	(void)argv;
-	test_viewtransform();
 	ft_free_canvas(&canvas);
 	return (0);
 }
@@ -110,6 +142,7 @@ int	main(int argc, char *argv[])
 void	test_list()
 {
 	/*
+	test_viewtransform();
 	test_color_at_mult(&canvas);
 	test_shade(&canvas);
 	test_mlx(argv);
