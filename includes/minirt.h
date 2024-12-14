@@ -42,14 +42,14 @@
 void		ft_assert(int condition, char *message);
 void		*ft_free(void *ptr);
 void		*ft_free_split(char **split);
-void	ft_free_objects(t_objects *list);
-int		ft_clean_exit(t_canvas *canvas);
+void		ft_free_objects(t_objects *list);
+int			ft_clean_exit(t_canvas *canvas);
 
 //init
 void		ft_init_canvas(t_canvas *canvas);
 t_iter		ft_iter(int n);
 void		ft_free_canvas(t_canvas *canvas);
-int		ft_printf(int fd, const char *str, ...);
+int			ft_printf(int fd, const char *str, ...);
 
 // Init objects
 t_ambient	ft_init_ambient(int ratio, t_color color);
@@ -161,9 +161,9 @@ t_color	ft_shade_hit(t_canvas *canvas, t_comp comp);
 t_interlst	*ft_inter_world(t_canvas *canvas, t_ray ray);
 t_color	ft_color_at(t_canvas *canvas, t_ray ray);
 t_matrix	ft_view_transformation(t_tuple from, t_tuple to, t_tuple up);
-
-
-
+// page 101
+t_camera	ft_create_world_camera(double h_size, double v_size, double field_v);
+t_ray		ft_ray_for_pixel(t_camera cam, double px, double py);
 
 
 //TESTING/////////////////////////////////////////////

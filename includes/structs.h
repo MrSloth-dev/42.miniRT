@@ -68,9 +68,19 @@ typedef struct s_ambient
 
 typedef struct s_camera
 {
+	// VARS ON PARSING
 	t_tuple			coord;
 	t_tuple			norm;//[0-1]
 	int				fov; //0-180
+	//VARS ON BOOK PAGE 100
+	double			h_size;
+	double			v_size;
+	double			field_v;
+	t_matrix		transf;
+	double			px_size;
+	double			half_view;
+	double			half_width;
+	double			half_height;
 }	t_camera;
 
 typedef struct s_light
