@@ -21,6 +21,7 @@ t_camera	ft_create_world_camera(double h_size, double v_size, double field_v)
 	cam.v_size = v_size;
 	cam.field_v = field_v;
 	cam.transf = ft_create_matrix(4, 4, 1);
+	cam.inverted = ft_invert_matrix(cam.transf);
 	cam.half_view = tan(cam.field_v / 2);
 	aspect = cam.h_size / cam.v_size;
 	if (aspect >= 1)
