@@ -188,6 +188,10 @@ typedef struct s_iter
 	int		rs;
 	int		cs;
 	int		k;
+	int		x;
+	int		y;
+	int		y_step;
+	int		x_step;
 	double	a;
 	double	b;
 	double	d;

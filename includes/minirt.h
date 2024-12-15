@@ -20,11 +20,11 @@
 #define YELLOW "\e[1;3;93m"
 #define RESET "\e[0m"
 
-#define WIN_H 499
-#define WIN_W 500
+#define WIN_H 11
+#define WIN_W 11
 
-#define IMG_H 499
-#define IMG_W 500
+#define IMG_H 11
+#define IMG_W 11
 
 #define STEP 1
 #define ROUND_ERROR 0.00001
@@ -129,6 +129,9 @@ t_tuple		ft_scale(t_tuple scale, t_tuple to_scale);
 t_tuple		ft_rotation_x(t_tuple tuple, double angle);
 t_tuple		ft_rotation_y(t_tuple tuple, double angle);
 t_tuple		ft_rotation_z(t_tuple tuple, double angle);
+t_matrix 	ft_rotate_matrix_x(double rad);
+t_matrix 	ft_rotate_matrix_y(double rad);
+t_matrix 	ft_rotate_matrix_z(double rad);
 
 // Chapter 5 - Rays - Sphere intersections
 t_ray		ft_create_ray(t_tuple pos, t_tuple dir);
@@ -164,7 +167,7 @@ t_matrix	ft_view_transformation(t_tuple from, t_tuple to, t_tuple up);
 // page 101
 t_camera	ft_create_world_camera(double h_size, double v_size, double field_v);
 t_ray		ft_ray_for_pixel(t_camera cam, double px, double py);
-
+void		ft_render(t_canvas *canvas, t_camera cam);
 
 //TESTING/////////////////////////////////////////////
 void	test_ft_is_tuples_equal();
