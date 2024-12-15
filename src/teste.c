@@ -126,23 +126,102 @@ void	test_camera()
 	ft_print_tuple(ray.pos, "ray.pos (origin)\n0\t\t2\t\t-5  ?????");
 	printf("ray.direction 0.707106781, 0, -0.707106781?\n");
 	ft_print_tuple(ray.dir, "ray.direction sqrt(2) / 2, 0, sqrt(2) / 2 ?????");
-
 }
 
-void	test_render(t_canvas *canvas)
-{
+// void	test_render(t_canvas *canvas)
+// {
+// 	// needs this on parse
+// 	//A 1.0		0,0,0
+// 	//L -10,10.0,-10.0		0.1		255,255,255
+// 	// sp 0.0,0,0.0			1.0		204,255,153
+// 	((t_shapes *)canvas->objects->cont)->material.color = (t_color){0.8, 1.0, 0.6, 3};
+// 	((t_shapes *)canvas->objects->cont)->material.diffuse = 0.7;
+// 	((t_shapes *)canvas->objects->cont)->material.specular = 0.2;
+// 	t_camera cam = ft_create_world_camera(IMG_W, IMG_H, M_PI / 2);
+// 	t_tuple	from = {0, 0, -5, 1};
+// 	t_tuple	to = {0, 0, 0, 1};
+// 	t_tuple	up = {0, 1, 0, 0};
+// 	cam.transf = ft_view_transformation(from, to, up);
+// 	cam.inverted = ft_invert_matrix(cam.transf);
+// 	ft_render(canvas, cam);
+// }
 
-	((t_shapes *)canvas->objects->cont)->material.color = (t_color){0.8, 1.0, 0.6, 3};
-	((t_shapes *)canvas->objects->cont)->material.diffuse = 0.7;
-	((t_shapes *)canvas->objects->cont)->material.specular = 0.2;
-	t_camera cam = ft_create_world_camera(IMG_W, IMG_H, M_PI / 2);
-	t_tuple	from = {0, 0, -5, 1};
-	t_tuple	to = {0, 0, 0, 1};
+void	test_render_together(t_canvas *canvas)
+{
+	t_shapes	*_1 = (t_shapes *)canvas->objects->cont;
+	t_shapes	*_2 = (t_shapes *)canvas->objects->next->cont;
+	t_shapes	*_3 = (t_shapes *)canvas->objects->next->next->cont;
+	t_shapes	*_4 = (t_shapes *)canvas->objects->next->next->next->cont;
+	t_shapes	*_5 = (t_shapes *)canvas->objects->next->next->next->next->cont;
+	t_shapes	*_6 = (t_shapes *)canvas->objects->next->next->next->next->next->cont;
+	
+	//floor
+	_1->transform = ft_scale_matrix(10, 0.01, 10);
+	_1->inverted = ft_invert_matrix(_1->transform);
+	_1->material.color = (t_color){1, 0.9, 0.9, 3};
+	_1->material.specular = 0;
+
+	//left wall
+	_2->transform = ft_matrix_mult(ft_matrix_mult(
+		ft_matrix_mult(ft_translation_matrix(0, 0, 5),
+				 ft_rotate_matrix_y( -M_PI / 4 )),
+						ft_rotate_matrix_x( M_PI / 2 )), ft_scale_matrix(10, 0.01, 10));
+	_2->inverted = ft_invert_matrix(_2->transform);
+	_2->material = _1->material;
+
+	//right_wall
+	_3->transform = ft_matrix_mult(ft_matrix_mult(
+		ft_matrix_mult(ft_translation_matrix(0, 0, 5),
+				 ft_rotate_matrix_y( M_PI / 4 )),
+				ft_rotate_matrix_x( M_PI / 2 )), ft_scale_matrix(10, 0.01, 10)) ;
+	_3->inverted = ft_invert_matrix(_3->transform);
+	_3->material = _1->material;
+
+	//large middle sphere
+	_4->transform = ft_translation_matrix(-0.5, 1, 0.5);
+	_4->inverted = ft_invert_matrix(_4->transform);
+	_4->material.color = (t_color){0.1, 1, 0.5, 3};
+	_4->material.diffuse = 0.7;
+	_4->material.specular = 0.3;
+
+	//smaller right shpere
+	_5->transform = ft_matrix_mult(ft_translation_matrix(1.5, 0.5, -0.5), 
+								ft_scale_matrix(0.5, 0.5, 0.5));
+	_5->inverted = ft_invert_matrix(_5->transform);
+	_5->material.color = (t_tuple){0.5, 1, 0.1, 3};
+	_5->material.diffuse = 0.7;
+	_5->material.specular = 0.3;
+
+	//smallest sphere
+	_6->transform =  ft_matrix_mult(ft_translation_matrix(-1.5, 0.33, -0.75), 
+								ft_scale_matrix(0.33, 0.33, 0.33));
+	_6->inverted = ft_invert_matrix(_6->transform);
+	_6->material.color = (t_tuple){1, 0.8, 0.1, 3};
+	_6->material.diffuse = 0.7;
+	_6->material.specular = 0.3;
+
+	t_camera cam = ft_create_world_camera(IMG_W, IMG_H, M_PI / 3 );
+
+	t_tuple	from = {0, 1.5, -40, 1};
+	t_tuple	to = {0, 1, 0, 1};
 	t_tuple	up = {0, 1, 0, 0};
 	cam.transf = ft_view_transformation(from, to, up);
 	cam.inverted = ft_invert_matrix(cam.transf);
 
 	ft_render(canvas, cam);
+}
+
+
+void	test_mlx_start(t_canvas *canvas)
+{
+	ft_setup(canvas);
+	mlx_hook(canvas->win, DestroyNotify, 0l, &close_handler, &canvas);
+}
+
+void	test_mlx_end(t_canvas *canvas)
+{
+	mlx_loop(canvas->mlx);
+	ft_free_canvas(canvas);
 }
 
 int	main(int argc, char *argv[])
@@ -151,10 +230,15 @@ int	main(int argc, char *argv[])
 	ft_init_canvas(&canvas);
 	if (ft_parse(&canvas, argv[1]) == 0)
 		return 1;
-	test_render(&canvas);
+
+	test_mlx_start(&canvas);
+	ft_refreshframe(&canvas);
+	test_render_together(&canvas);
+
+	test_mlx_end(&canvas);
 	(void)argc;
 	(void)argv;
-	ft_free_canvas(&canvas);
+	//ft_free_canvas(&canvas);
 	return (0);
 }
 
