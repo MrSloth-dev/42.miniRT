@@ -17,14 +17,12 @@ t_ray	ft_ray_for_pixel(t_camera cam, double px, double py)
 	t_ray		ret_ray;
 	double		world_x;
 	double		world_y;
-	t_matrix	inverted;
 	t_tuple		pixel;
 
 	world_x = cam.half_width - ((px + 0.5) * cam.px_size);
 	world_y = cam.half_height - ((py + 0.5) * cam.px_size);
-	inverted = ft_invert_matrix(cam.transf);
-	pixel = ft_mult_matrix_tuple(inverted, (t_tuple){world_x, world_y, -1, 1});
-	ret_ray.pos = ft_mult_matrix_tuple(inverted, (t_tuple){0, 0, 0, 1});
+	pixel = ft_mult_matrix_tuple(cam.inverted, (t_tuple){world_x, world_y, -1, 1});
+	ret_ray.pos = ft_mult_matrix_tuple(cam.inverted, (t_tuple){0, 0, 0, 1});
 	ret_ray.dir = ft_norm_vector(ft_sub_tuple(pixel, ret_ray.pos));
 	return (ret_ray);
 }
