@@ -115,24 +115,43 @@ void	test_camera()
 	printf("\nConstructing a ray through a CORNER of the canvas\n");
 	ray = ft_ray_for_pixel(cam, 0, 0);
 	ft_print_tuple(ray.pos, "ray.pos (origin)\n0, 0, 0?");
-	ft_print_tuple(ray.dir, "ray.direction \n0.66519, 0.33259, -0,66851?");
+	ft_print_tuple(ray.dir, "ray.direction \n0.66519, 0.33259, -0,66851?");  
 
-/* 	printf("\nConstructing a ray when the camera is transformed\n"); */
-	// cam.transf = ft_rotation_y(t_tuple tuple, double angle)
-	// ray = ft_ray_for_pixel(cam, 100, 50);
-	// ft_print_tuple(ray.pos, "ray.pos (origin)\n0\t\t2\t\t-5?");
-	// ft_print_tuple(ray.dir, "ray.direction sqrt(2) / 2, 0, sqrt(2) / 2?");
+	printf("\nConstructing a ray when the camera is transformed\n"); 
+	t_matrix rotated = ft_rotate_matrix_y(M_PI / 4);
+	t_matrix translated = ft_translation_matrix(0, -2, 5);
+	cam.transf = ft_matrix_mult(rotated, translated);
+	cam.inverted = ft_invert_matrix(cam.transf);
+	ray = ft_ray_for_pixel(cam, 100, 50);
+	ft_print_tuple(ray.pos, "ray.pos (origin)\n0\t\t2\t\t-5  ?????");
+	printf("ray.direction 0.707106781, 0, -0.707106781?\n");
+	ft_print_tuple(ray.dir, "ray.direction sqrt(2) / 2, 0, sqrt(2) / 2 ?????");
 
+}
+
+void	test_render(t_canvas *canvas)
+{
+
+	((t_shapes *)canvas->objects->cont)->material.color = (t_color){0.8, 1.0, 0.6, 3};
+	((t_shapes *)canvas->objects->cont)->material.diffuse = 0.7;
+	((t_shapes *)canvas->objects->cont)->material.specular = 0.2;
+	t_camera cam = ft_create_world_camera(IMG_W, IMG_H, M_PI / 2);
+	t_tuple	from = {0, 0, -5, 1};
+	t_tuple	to = {0, 0, 0, 1};
+	t_tuple	up = {0, 1, 0, 0};
+	cam.transf = ft_view_transformation(from, to, up);
+	cam.inverted = ft_invert_matrix(cam.transf);
+
+	ft_render(canvas, cam);
 }
 
 int	main(int argc, char *argv[])
 {
-
 	t_canvas canvas;
 	ft_init_canvas(&canvas);
 	if (ft_parse(&canvas, argv[1]) == 0)
 		return 1;
-	test_camera();
+	test_render(&canvas);
 	(void)argc;
 	(void)argv;
 	ft_free_canvas(&canvas);
@@ -142,6 +161,7 @@ int	main(int argc, char *argv[])
 void	test_list()
 {
 	/*
+	test_camera();
 	test_viewtransform();
 	test_color_at_mult(&canvas);
 	test_shade(&canvas);
