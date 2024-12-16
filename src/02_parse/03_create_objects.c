@@ -1,6 +1,7 @@
 #include "ft_printf.h"
 #include "libft.h"
 #include "minirt.h"
+#include <math.h>
 
 int	ft_vector_check(t_tuple tuple)
 {
@@ -37,6 +38,19 @@ int	ft_norm_check(t_tuple norm)
 	if (norm.w < -1 || norm.w > 1)
 		return (0);
 	return (1);
+}
+
+t_shapes	*ft_create_default_shape(int type)
+{
+	t_shapes	*new;
+
+	new = malloc(sizeof(t_shapes));
+	new->type = type;
+	new->material = ft_create_material();
+	new->inverted = ft_create_matrix(4, 4, 1);
+	new->transposed = ft_create_matrix(4, 4, 1);
+	new->transform = ft_create_matrix(4, 4, 1);
+	return (new);
 }
 
 int	ft_create_ambient(t_canvas *canvas, char **split)
@@ -84,7 +98,7 @@ int	ft_create_camera(t_canvas *canvas, char **split)
 	else
 		return (ft_free_split(norm_split),
 			ft_printf(2, "Error, camera norm value is wrong\n"), 0);
-	canvas->camera.fov = ft_atod(split[2]);
+	canvas->camera.fov = ft_atod(split[2]) * M_PI / 180;
 	return (0);
 }
 
