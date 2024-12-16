@@ -53,6 +53,7 @@ void		ft_free_canvas(t_canvas *canvas);
 int			ft_printf(int fd, const char *str, ...);
 
 // Init objects
+t_shapes	*ft_create_default_shape(int type);
 t_ambient	ft_init_ambient(int ratio, t_color color);
 t_camera	ft_init_camera(t_tuple coord, t_tuple norm, int fov);
 t_light		ft_init_light(t_tuple coord, int bright, t_color color);
