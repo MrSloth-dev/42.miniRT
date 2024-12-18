@@ -71,7 +71,7 @@ typedef struct s_camera
 	// VARS ON PARSING
 	t_tuple			coord;
 	t_tuple			norm;//[0-1]
-	int				fov; //0-180
+	double			fov; //0-180
 	//VARS ON BOOK PAGE 100
 	double			h_size;
 	double			v_size;
