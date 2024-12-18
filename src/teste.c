@@ -10,13 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "libft.h"
 #include "minirt.h"
 
 #include "teste_done.c"
-#include <math.h>
-#include <stdio.h>
 
 void	test_inter_world(t_canvas *canvas, char *argv[])
 {
@@ -228,47 +224,33 @@ void	test_render_together(t_canvas *canvas)
 // 	//large middle sphere
 	_4->transform = ft_matrix_mult(_4->inverted,_4->transform);
 	_4->transform = ft_matrix_mult(_4->transform, ft_translation_matrix(-0.5, 1, 0.5));
-_4->inverted = ft_invert_matrix(_4->transform);
-_4->material = ft_create_material();
-_4->material.color = (t_color){0.1, 1, 0.5, 3};
-_4->material.diffuse = 0.7;
-_4->material.specular = 0.3;
-//
-// 	//smaller right shpere
+	_4->inverted = ft_invert_matrix(_4->transform);
+
+		//smaller right shpere
 	_5->transform = _4->inverted;
 	_5->transform = ft_matrix_mult(_5->transform, ft_translation_matrix(1.5, 0.5, -0.5));
 	_5->transform =  ft_matrix_mult(_5->transform, ft_scale_matrix(0.5, 0.5, 0.5));
-_5->inverted = ft_invert_matrix(_5->transform);
-_5->material.color = (t_tuple){0.5, 1, 0.1, 3};
-_5->material.diffuse = 0.7;
-_5->material.specular = 0.3;
+	_5->inverted = ft_invert_matrix(_5->transform);
 
-// 	//smallest sphere
+	// 	//smallest sphere
 	_6->transform = ft_matrix_mult(_5->inverted, _4->inverted);
 	_6->transform = ft_matrix_mult(_6->transform, ft_translation_matrix(-1.5, 0.33, -0.75));
 	_6->transform = ft_matrix_mult(_6->transform,  ft_scale_matrix(0.33, 0.33, 0.33));
-_6->inverted = ft_invert_matrix(_6->transform);
-_6->material.color = (t_tuple){1, 0.8, 0.1, 3};
-_6->material.diffuse = 0.7;
-_6->material.specular = 0.3;
+	_6->inverted = ft_invert_matrix(_6->transform);
 
 	//floor
 	_1->transform = ft_matrix_mult(ft_matrix_mult(_6->inverted, _5->inverted), _4->inverted);
 
- 	_1->transform = ft_matrix_mult(_1->transform, ft_scale_matrix(10, 0.01, 10));
+	_1->transform = ft_matrix_mult(_1->transform, ft_scale_matrix(10, 0.01, 10));
 	_1->inverted = ft_invert_matrix(_1->transform);
-_1->material.color = (t_color){1, 0.9, 0.9, 3};
-_1->material.specular = 0;
 
 	//left wall
 	_2->transform = ft_matrix_mult(ft_matrix_mult(ft_matrix_mult(_1->inverted, _6->inverted), _5->inverted), _4->inverted);
 	_2->transform = ft_matrix_mult(_2->transform, ft_translation_matrix(0, 0, 5));
-	_2->transform = ft_matrix_mult(_2->transform, ft_rotate_matrix_y(-M_PI / 4));
 	_2->transform = ft_matrix_mult(_2->transform, ft_rotate_matrix_x( M_PI / 2 ));
+	_2->transform = ft_matrix_mult(_2->transform, ft_rotate_matrix_y(-M_PI / 4));
 	_2->transform = ft_matrix_mult(_2->transform, ft_scale_matrix(10, 0.01, 10));
-_2->inverted = ft_invert_matrix(_2->transform);
-_2->material.color = (t_color){1, 0.9, 0.9, 3};
-_2->material.specular = 0;
+	_2->inverted = ft_invert_matrix(_2->transform);
 
 	//right_wall
 	_3->transform = ft_matrix_mult(ft_matrix_mult(ft_matrix_mult(ft_matrix_mult(_2->inverted, _1->inverted), _6->inverted), _5->inverted), _4->inverted);
@@ -276,21 +258,57 @@ _2->material.specular = 0;
 	_3->transform = ft_matrix_mult(_3->transform, ft_rotate_matrix_y( M_PI / 4 ));
 	_3->transform = ft_matrix_mult(_3->transform, ft_rotate_matrix_x( M_PI / 2 ));
 	_3->transform = ft_matrix_mult(_3->transform, ft_scale_matrix(10, 0.01, 10)) ;
-_3->inverted = ft_invert_matrix(_3->transform);
-_3->material.color = (t_color){1, 0.9, 0.9, 3};
-_3->material.specular = 0;
+	_3->inverted = ft_invert_matrix(_3->transform);
+	/* ft_get_transf_obj(_1, (t_tuple){0}, (t_tuple){0}, (t_tuple){10, 0.01, 10, 0});
+	ft_get_transf_obj(_2, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, -M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
+	ft_get_transf_obj(_3, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
+	ft_get_transf_obj(_4, (t_tuple){-0.5, 1, 0.5, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
+	ft_get_transf_obj(_5, (t_tuple){1.5, 0.5, -0.5, 0}, (t_tuple){0}, (t_tuple){0.5, 0.5, 0.5, 0});
+	ft_get_transf_obj(_6, (t_tuple){-1.5, 0.33, -0.75, 0}, (t_tuple){0}, (t_tuple){0.33, 0.33, 0.33, 0}); */
+	printf("Matrix _1");
+	ft_print_matrix(_1->transform);
+	printf("Matrix _2");
+	ft_print_matrix(_2->transform);
+	printf("Matrix _3");
+	ft_print_matrix(_3->transform);
+	printf("Matrix _4");
+	ft_print_matrix(_4->transform);
+	printf("Matrix _5");
+	ft_print_matrix(_5->transform);
+	printf("Matrix _6");
+	ft_print_matrix(_6->transform);
+	_1->material.color = (t_color){1, 0.9, 0.9, 3};
+	_1->material.specular = 0;
+	_2->material.color = (t_color){1, 0.9, 0.9, 3};
+	_2->material.specular = 0;
+	_3->material.color = (t_color){1, 0.9, 0.9, 3};
+	_3->material.specular = 0;
+	_4->material = ft_create_material();
+	_4->material.color = (t_color){0.1, 1, 0.5, 3};
+	_4->material.diffuse = 0.7;
+	_4->material.specular = 0.3;
+	_5->material.color = (t_tuple){0.5, 1, 0.1, 3};
+	_5->material.diffuse = 0.7;
+	_5->material.specular = 0.3;
+	_6->material.color = (t_tuple){1, 0.8, 0.1, 3};
+	_6->material.diffuse = 0.7;
+	_6->material.specular = 0.3;
 
 
 	ft_print_tuple(canvas->light.coord, "light");
 
 	t_camera cam = ft_create_world_camera(IMG_W, IMG_H, M_PI / 3 );
+
 	cam.coord = canvas->camera.coord;
 	cam.norm = canvas->camera.norm;
 	cam.fov = canvas->camera.fov;
 
+	ft_print_tuple(cam.norm, "norm");
+	printf("fov = %f",cam.fov);
+	ft_print_tuple(cam.coord, "coor");
 
 	t_tuple	from = {0, 1.5, -5, 1};
-	t_tuple	to = {0, 1, 0, 1};
+	t_tuple	to = {0, 1, 1, 1};
 	t_tuple	up = {0, 1, 0, 0};
 
 	cam.transf = ft_view_transformation(from, to, up);
@@ -320,7 +338,7 @@ int	main(int argc, char *argv[])
 
 	test_mlx_start(&canvas);
 	ft_refreshframe(&canvas);
-	//test_render_together_joao(&canvas);
+	// test_render_together_joao(&canvas);
 	test_render_together(&canvas);
 
 	test_mlx_end(&canvas);
