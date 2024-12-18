@@ -20,10 +20,10 @@
 #define YELLOW "\e[1;3;93m"
 #define RESET "\e[0m"
 
-#define WIN_H 620
+#define WIN_H 840
 #define WIN_W 840
 
-#define IMG_H 620
+#define IMG_H 840
 #define IMG_W 840
 
 
@@ -167,7 +167,8 @@ t_interlst	*ft_inter_world(t_canvas *canvas, t_ray ray);
 t_color	ft_color_at(t_canvas *canvas, t_ray ray);
 t_matrix	ft_view_transformation(t_tuple from, t_tuple to, t_tuple up);
 // page 101
-t_camera	ft_create_world_camera(double h_size, double v_size, double field_v);
+t_camera	ft_create_world_camera(double h_size, double v_size, double fov);
+void		ft_create_world_camera_test(double h_size, double v_size, t_canvas *canvas);
 t_ray		ft_ray_for_pixel(t_camera cam, double px, double py);
 void		ft_render(t_canvas *canvas, t_camera cam);
 

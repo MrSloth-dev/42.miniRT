@@ -238,27 +238,27 @@ void	test_render_together(t_canvas *canvas)
 	_6->transform = ft_matrix_mult(_6->transform,  ft_scale_matrix(0.33, 0.33, 0.33));
 	_6->inverted = ft_invert_matrix(_6->transform);
 
-	//floor
-	_1->transform = ft_matrix_mult(ft_matrix_mult(_6->inverted, _5->inverted), _4->inverted);
-
-	_1->transform = ft_matrix_mult(_1->transform, ft_scale_matrix(10, 0.01, 10));
-	_1->inverted = ft_invert_matrix(_1->transform);
-
-	//left wall
-	_2->transform = ft_matrix_mult(ft_matrix_mult(ft_matrix_mult(_1->inverted, _6->inverted), _5->inverted), _4->inverted);
-	_2->transform = ft_matrix_mult(_2->transform, ft_translation_matrix(0, 0, 5));
-	_2->transform = ft_matrix_mult(_2->transform, ft_rotate_matrix_x( M_PI / 2 ));
-	_2->transform = ft_matrix_mult(_2->transform, ft_rotate_matrix_y(-M_PI / 4));
-	_2->transform = ft_matrix_mult(_2->transform, ft_scale_matrix(10, 0.01, 10));
-	_2->inverted = ft_invert_matrix(_2->transform);
-
-	//right_wall
-	_3->transform = ft_matrix_mult(ft_matrix_mult(ft_matrix_mult(ft_matrix_mult(_2->inverted, _1->inverted), _6->inverted), _5->inverted), _4->inverted);
-	_3->transform = ft_matrix_mult(_3->transform, ft_translation_matrix(0, 0, 5));
-	_3->transform = ft_matrix_mult(_3->transform, ft_rotate_matrix_y( M_PI / 4 ));
-	_3->transform = ft_matrix_mult(_3->transform, ft_rotate_matrix_x( M_PI / 2 ));
-	_3->transform = ft_matrix_mult(_3->transform, ft_scale_matrix(10, 0.01, 10)) ;
-	_3->inverted = ft_invert_matrix(_3->transform);
+	/*//floor*/
+	/*_1->transform = ft_matrix_mult(ft_matrix_mult(_6->inverted, _5->inverted), _4->inverted);*/
+	/**/
+	/*_1->transform = ft_matrix_mult(_1->transform, ft_scale_matrix(10, 0.01, 10));*/
+	/*_1->inverted = ft_invert_matrix(_1->transform);*/
+	/**/
+	/*//left wall*/
+	/*_2->transform = ft_matrix_mult(ft_matrix_mult(ft_matrix_mult(_1->inverted, _6->inverted), _5->inverted), _4->inverted);*/
+	/*_2->transform = ft_matrix_mult(_2->transform, ft_translation_matrix(0, 0, 5));*/
+	/*_2->transform = ft_matrix_mult(_2->transform, ft_rotate_matrix_x( M_PI / 2 ));*/
+	/*_2->transform = ft_matrix_mult(_2->transform, ft_rotate_matrix_y(-M_PI / 4));*/
+	/*_2->transform = ft_matrix_mult(_2->transform, ft_scale_matrix(10, 0.01, 10));*/
+	/*_2->inverted = ft_invert_matrix(_2->transform);*/
+	/**/
+	/*//right_wall*/
+	/*_3->transform = ft_matrix_mult(ft_matrix_mult(ft_matrix_mult(ft_matrix_mult(_2->inverted, _1->inverted), _6->inverted), _5->inverted), _4->inverted);*/
+	/*_3->transform = ft_matrix_mult(_3->transform, ft_translation_matrix(0, 0, 5));*/
+	/*_3->transform = ft_matrix_mult(_3->transform, ft_rotate_matrix_y( M_PI / 4 ));*/
+	/*_3->transform = ft_matrix_mult(_3->transform, ft_rotate_matrix_x( M_PI / 2 ));*/
+	/*_3->transform = ft_matrix_mult(_3->transform, ft_scale_matrix(10, 0.01, 10)) ;*/
+	/*_3->inverted = ft_invert_matrix(_3->transform);*/
 	/* ft_get_transf_obj(_1, (t_tuple){0}, (t_tuple){0}, (t_tuple){10, 0.01, 10, 0});
 	ft_get_transf_obj(_2, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, -M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
 	ft_get_transf_obj(_3, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
@@ -297,24 +297,26 @@ void	test_render_together(t_canvas *canvas)
 
 	ft_print_tuple(canvas->light.coord, "light");
 
-	t_camera cam = ft_create_world_camera(IMG_W, IMG_H, M_PI / 3 );
+	//t_camera cam = ft_create_world_camera(IMG_W, IMG_H, M_PI / 3 );
+	
+	ft_create_world_camera_test(IMG_W, IMG_H, canvas);
 
-	cam.coord = canvas->camera.coord;
-	cam.norm = canvas->camera.norm;
-	cam.fov = canvas->camera.fov;
+	//cam.coord = canvas->camera.coord;
+	//cam.norm = canvas->camera.norm;
+	//cam.fov = canvas->camera.fov;
 
-	ft_print_tuple(cam.norm, "norm");
-	printf("fov = %f",cam.fov);
-	ft_print_tuple(cam.coord, "coor");
+	//ft_print_tuple(cam.norm, "norm");
+	//printf("fov = %f",cam.fov);
+	//ft_print_tuple(cam.coord, "coor");
 
-	t_tuple	from = {0, 1.5, -5, 1};
-	t_tuple	to = {0, 1, 1, 1};
+	//t_tuple	from = {0, 1.5, -5, 1};
+	//t_tuple	to = {0, 1, 1, 1};
 	t_tuple	up = {0, 1, 0, 0};
 
-	cam.transf = ft_view_transformation(from, to, up);
-	cam.inverted = ft_invert_matrix(cam.transf);
+	canvas->camera.transf = ft_view_transformation(canvas->camera.coord, canvas->camera.norm, up);
+	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
 
-	ft_render(canvas, cam);
+	ft_render(canvas, (t_camera)canvas->camera);
 }
 
 void	test_mlx_start(t_canvas *canvas)
@@ -329,18 +331,163 @@ void	test_mlx_end(t_canvas *canvas)
 	ft_free_canvas(canvas);
 }
 
+void	ft_start_rays(t_canvas *canvas, t_shapes shape);
+void	test_draw_ball_light(t_canvas *canvas)
+{
+	t_shapes	shape;
+	shape.type = SPHERE;
+	shape.sph.coord = (t_tuple){0, 0, 0, 1};
+	shape.sph.diameter = 1;
+	shape.material = ft_create_material();
+	shape.material.color = (t_color){1, 0.2, 1, 1};
+	shape.material.shininess = 100;
+	shape.material.specular = 0.9;
+	shape.material.diffuse = 0.9;
+	shape.material.ambient = 0.1;
+	t_tuple point;
+	 ft_tuple_init(&point, (t_point){0,0,0}, T_POINT);
+	ft_get_transf_obj(&shape, point, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
+	ft_start_rays(canvas, shape);
+}
+
+void	ft_start_rays(t_canvas *canvas, t_shapes shape)
+{
+	double	wall_z = 10;
+	double	wall_size = 7.0;
+	double	pixel_size = wall_size / IMG_W;
+	double	half = wall_size / 2;
+
+	double 	world_y;
+	double 	world_x;
+	t_tuple position;
+	t_tuple normal;
+	t_ray 	ray;
+	t_tuple dir;
+	t_camera  camera = ft_create_camera_a((t_tuple){0 , 0, -25, 1}, (t_tuple){0, 0, 0, 0}, 70);
+	t_light	light = ft_create_light_a((t_tuple){-10 , 10, -10, 1}, (t_color){1, 1, 1, 3}, 10);
+	ray.pos = camera.coord;
+	int x_step;
+	int y_step;
+	ft_refreshframe(canvas);
+	for(int y = 0; y < IMG_H; y += STEP)
+	{
+		world_y = half - pixel_size * y;
+
+		for(int x = 0; x < IMG_H; x += STEP)
+		{
+			y_step = 0;
+			t_interlst	*lst;
+			lst = NULL;
+			world_x = -half + pixel_size * x;
+			position = (t_tuple){ world_x, world_y, wall_z, 1};
+			dir = ft_norm_vector(ft_sub_tuple(position, ray.pos));
+			ray = ft_set_transf_ray(ft_create_ray(ray.pos, dir), shape.inverted);
+			ft_intersection_sphere(&lst, ray, &shape);
+			t_inter	*hit;
+			hit = ft_hit_inter(&lst);
+			if (hit != NULL)
+			{
+				t_tuple point = ft_distance_ray(ray, hit->value);
+				normal = ft_normal_at_sph(hit->shape, point);
+				camera.norm = ft_neg_tuple(ray.dir);
+				while (y_step < STEP)
+				{
+					x_step = 0;
+					while(x_step < STEP)
+					{
+						t_color lighting = ft_lighting(hit->shape->material, point, light, camera, normal);
+						int color = ft_get_mlx_color(lighting);
+						ft_pixel_put(canvas->img, x + x_step++, y + y_step, color);
+					}
+					y_step++;
+				}
+			}
+			/* else
+				while (y_step < STEP)
+				{
+					x_step = 0;
+					while(x_step < STEP)
+						ft_pixel_put(canvas->img, x + x_step++, y + y_step, 0x7f7f);
+					y_step++;
+				} */
+		}
+	}
+	mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img->img, 0, 0);
+}
+
+void	ft_start_rays_2(t_canvas *canvas);
+void	test_draw_ball_light_2(t_canvas *canvas)
+{
+	/*t_shapes	shape;*/
+	/*shape.type = SPHERE;*/
+	/*shape.sph.coord = (t_tuple){0, 0, 0, 1};*/
+	/*shape.sph.diameter = 1;*/
+	/*shape.material = ft_create_material();*/
+	/*shape.material.color = (t_color){1, 0.2, 1, 1};*/
+	/*shape.material.shininess = 100;*/
+	/*shape.material.specular = 0.9;*/
+	/*shape.material.diffuse = 0.9;*/
+	/*shape.material.ambient = 0.1;*/
+	/*t_tuple point;*/
+	/* ft_tuple_init(&point, (t_point){0,0,0}, T_POINT);*/
+	/*ft_get_transf_obj(&shape, point, (t_tuple){0}, (t_tuple){1, 1, 1, 0});*/
+
+
+	ft_start_rays_2(canvas);
+}
+
+void	ft_start_rays_2(t_canvas *canvas)
+{
+
+
+
+	//t_camera  camera = ft_create_camera_a((t_tuple){0 , 0, -3, 1}, (t_tuple){0, 0, 0, 0}, 70);
+
+//	ray.pos = camera.coord;
+
+	//t_light	light = ft_create_light_a((t_tuple){-10 , 10, -10, 1}, (t_color){1, 1, 1, 3}, 10);
+	//canvas->light = light;
+
+	ft_refreshframe(canvas);
+
+
+	ft_create_world_camera_test(IMG_W, IMG_H, canvas);
+
+
+
+
+	//t_tuple	from = {0, 0, -5, 1};
+	//t_tuple	to = {0, 0, 1, 1};
+	t_tuple	up = {0, 1, 0, 0};
+
+	canvas->camera.transf = ft_view_transformation(canvas->camera.coord,
+						canvas->camera.norm, up);
+	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
+
+
+
+
+	ft_render(canvas, (t_camera)(canvas->camera));
+
+}
 int	main(int argc, char *argv[])
 {
 	t_canvas canvas;
 	ft_init_canvas(&canvas);
 	if (ft_parse(&canvas, argv[1]) == 0)
 		return 1;
-
 	test_mlx_start(&canvas);
 	ft_refreshframe(&canvas);
-	// test_render_together_joao(&canvas);
-	test_render_together(&canvas);
+	
 
+
+	//test_draw_ball_light(&canvas);
+	//test_draw_ball_light_2(&canvas);
+	test_render_together(&canvas);
+	
+
+
+	// test_render_together_joao(&canvas);
 	test_mlx_end(&canvas);
 	(void)argc;
 	(void)argv;

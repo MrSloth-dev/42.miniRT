@@ -33,6 +33,8 @@ void	ft_render(t_canvas *canvas, t_camera cam)
 	t_iter	h;
 	t_tuple	color;
 	t_ray	ray;
+	double	y_convert;
+	double	x_convert;
 
 	h = ft_iter(0);
 	while (h.y < IMG_H)
@@ -40,7 +42,10 @@ void	ft_render(t_canvas *canvas, t_camera cam)
 		h.x = 0;
 		while (h.x < IMG_W)
 		{
-			ray = ft_ray_for_pixel(cam, (double)h.x, (double)h.y);
+			x_convert = IMG_W - h.x;
+			y_convert = IMG_H - h.y;
+
+			ray = ft_ray_for_pixel(cam, x_convert, y_convert);
 			color = ft_color_at(canvas, ray);	
 			// LINES COMMENTED, WAS OF THE TEST PAGE 105
 			// if (h.x == 5 && h.y == 5)
