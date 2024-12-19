@@ -28,7 +28,7 @@ void	ft_lstadd_sort_inter(t_interlst **lst, double value, t_shapes *shape)
 	else
 	{
 		temp = *lst;
-		if (!temp->next && ((t_inter *)temp->cont)->value > value)
+		if (((t_inter *)temp->cont)->value > value)
 		{
 			new->next = temp;
 			*lst = new;
