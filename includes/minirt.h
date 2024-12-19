@@ -20,11 +20,11 @@
 #define YELLOW "\e[1;3;93m"
 #define RESET "\e[0m"
 
-#define WIN_H 840
-#define WIN_W 840
+#define WIN_H 350
+#define WIN_W 600
 
-#define IMG_H 840
-#define IMG_W 840
+#define IMG_H 350
+#define IMG_W 600
 
 
 #define STEP 1
