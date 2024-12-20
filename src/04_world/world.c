@@ -62,6 +62,7 @@ t_color	ft_color_at(t_canvas *canvas, t_ray ray)
 		return (canvas->ambient.color); // maybe black??
 	comp = ft_prepare_comp(hit, ray);
 	color = ft_shade_hit(canvas, comp);
+	ft_free_objects(lst);
 	return (color);
 }
 
