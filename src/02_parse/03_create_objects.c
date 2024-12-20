@@ -141,10 +141,7 @@ int	ft_create_sphere(t_canvas *canvas, char **split)
 	t_color	color;
 	t_shapes	*shape;
 
-	shape = malloc (sizeof(t_shapes));
-	shape->type = SPHERE;
-	shape->material = ft_create_material();
-
+	shape = ft_create_default_shape(SPHERE);
 	coord_split = ft_split(split[1], ',');
 	coord = (t_tuple){ft_atod(coord_split[0]), ft_atod(coord_split[1]),
 		ft_atod(coord_split[2]), 1};
@@ -166,9 +163,9 @@ int	ft_create_sphere(t_canvas *canvas, char **split)
 			ft_printf(2, "Error, sphere color format is wrong\n"), 0);
 	ft_free_split(color_split);
 
-	shape->sph.diameter = ft_atod(split[2]);
+	shape->sph.diameter = ft_atod(split[2]) / 2;
 
-	ft_get_transf_obj(shape, shape->sph.coord, (t_tuple) {0}, (t_tuple){shape->sph.diameter, shape->sph.diameter, shape->sph.diameter, 0});
+	ft_get_transf_obj(shape, coord, (t_tuple) {0}, (t_tuple){shape->sph.diameter, shape->sph.diameter, shape->sph.diameter, 0});
 	ft_lstadd_back(&canvas->objects, ft_lstnew(shape));
 	return (0);
 }
