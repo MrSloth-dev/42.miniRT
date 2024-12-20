@@ -17,12 +17,9 @@ int	key_handler(int keysym, t_canvas *canvas)
 	if (keysym == XK_Escape || keysym == XK_q)
 
 		close_handler(canvas);
-	else if (keysym == XK_r)
+	else if (keysym == XK_A)
 	{
-		// canvas->offset_x = 0;
-		// canvas->offset_y = 0;
-		// canvas->scale = 1;
-		// canvas->iter.max = 42;
+		// canvas->camera.norm.x++;
 	}
 	ft_refreshframe(canvas);
 	return (0);

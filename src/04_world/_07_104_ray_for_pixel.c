@@ -23,7 +23,7 @@ t_ray	ft_ray_for_pixel(t_camera cam, double px, double py)
 	world_y = cam.half_height - ((py + 0.5) * cam.px_size);
 	pixel = ft_mult_matrix_tuple(cam.inverted, (t_tuple){world_x, world_y, -1, 1});
 	ret_ray.pos = ft_mult_matrix_tuple(cam.inverted, (t_tuple){0, 0, 0, 1});
-	ret_ray.dir = ft_norm_vector(ft_sub_tuple(pixel, ret_ray.pos));
+	ret_ray.dir = ft_norm_vector(ft_operator(pixel, '-', ret_ray.pos));
 	return (ret_ray);
 }
 // #ifndef _07101_RAY_FOR_PIXEL_H

@@ -13,6 +13,7 @@
 #include "minirt.h"
 
 #include "teste_done.c"
+#include <math.h>
 
 void	test_inter_world(t_canvas *canvas, char *argv[])
 {
@@ -124,23 +125,25 @@ void	test_camera()
 	ft_print_tuple(ray.dir, "ray.direction sqrt(2) / 2, 0, sqrt(2) / 2 ?????");
 }
 
-// void	test_render(t_canvas *canvas)
-// {
-// 	// needs this on parse
-// 	//A 1.0		0,0,0
-// 	//L -10,10.0,-10.0		0.1		255,255,255
-// 	// sp 0.0,0,0.0			1.0		204,255,153
-// 	((t_shapes *)canvas->objects->cont)->material.color = (t_color){0.8, 1.0, 0.6, 3};
-// 	((t_shapes *)canvas->objects->cont)->material.diffuse = 0.7;
-// 	((t_shapes *)canvas->objects->cont)->material.specular = 0.2;
-// 	t_camera cam = ft_create_world_camera(IMG_W, IMG_H, M_PI / 2);
-// 	t_tuple	from = {0, 0, -5, 1};
-// 	t_tuple	to = {0, 0, 0, 1};
-// 	t_tuple	up = {0, 1, 0, 0};
-// 	cam.transf = ft_view_transformation(from, to, up);
-// 	cam.inverted = ft_invert_matrix(cam.transf);
-// 	ft_render(canvas, cam);
-// }
+void	test_render(t_canvas *canvas)
+{
+	// needs this on parse
+	//A 1.0		0,0,0
+	//L -10,10.0,-10.0		0.1		255,255,255
+	// sp 0.0,0,0.0			1.0		204,255,153
+	((t_shapes *)canvas->objects->cont)->material.color = (t_color){0.8, 1.0, 0.6, 3};
+	((t_shapes *)canvas->objects->cont)->material.diffuse = 0.7;
+	((t_shapes *)canvas->objects->cont)->material.specular = 0.9;
+	t_camera cam = ft_create_world_camera(IMG_W, IMG_H, M_PI / 4);
+	t_tuple	from = {0, 0, -5, 1};
+	t_tuple	to = {0, 0, 0, 1};
+	t_tuple	up = {0, 1, 0, 0};
+	cam.norm = (t_tuple){0, 0, 1, 1};
+	cam.transf = ft_view_transformation(from, to, up);
+	cam.inverted = ft_invert_matrix(cam.transf);
+	cam.fov = 30 * M_PI / 180;
+	ft_render(canvas, cam);
+}
 
 void	test_mlx_start(t_canvas *canvas)
 {
@@ -167,9 +170,9 @@ void	test_render_together(t_canvas *canvas)
 	ft_get_transf_obj(_2, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, -M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
 	ft_get_transf_obj(_3, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
 
-	ft_get_transf_obj(_4, (t_tuple){0, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
+	/* ft_get_transf_obj(_4, (t_tuple){0, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
 	ft_get_transf_obj(_5, (t_tuple){2.5, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
-	ft_get_transf_obj(_6, (t_tuple){-2.5, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0}); 
+	ft_get_transf_obj(_6, (t_tuple){-2.5, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});  */
 	printf("Matrix _1");
 	ft_print_matrix(_1->transform);
 	printf("Matrix _2");
@@ -190,26 +193,26 @@ void	test_render_together(t_canvas *canvas)
 
 	//_4->material = ft_create_material();
 
-	_4->material.color = (t_color){0.1, 1, 0.5, 3};
 	_4->material.diffuse = 0.7;
-	_4->material.specular = 0.9;
+	_4->material.specular = 0.3;
 
-	_5->material.color = (t_color){0.1, 1, 0.5, 3};
 	_5->material.diffuse = 0.7;
-	_5->material.specular = 0.9;
+	_5->material.specular = 0.3;
 
-	_6->material.color = (t_color){0.1, 1, 0.5, 3};
 	_6->material.diffuse = 0.7;
-	_6->material.specular = 0.9;
+	_6->material.specular = 0.3;
 
 	ft_print_tuple(canvas->light.coord, "light");
 	ft_create_world_camera_test(IMG_W, IMG_H, canvas);
 
-	t_tuple	to = {0, 1, 1, 1};
+	t_tuple	to = {0, 1, 0, 1};
 	t_tuple	up = {0, 1, 0, 0};
 
-	//from, to up
+	ft_print_tuple(ft_norm_vector(ft_sub_tuple(canvas->camera.coord, to)), "new norm");
+	to = ft_add_tuple(canvas->camera.coord, ft_norm_vector(canvas->camera.norm));
 	canvas->camera.transf = ft_view_transformation(canvas->camera.coord, to, up);
+	ft_print_tuple(to, "to");
+	ft_print_tuple(canvas->camera.norm, "camera norm");
 	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
 	ft_render(canvas, (t_camera)canvas->camera);
 }
@@ -302,7 +305,7 @@ void	ft_start_rays_2(t_canvas *canvas)
 	ft_refreshframe(canvas);
 
 	ft_create_world_camera_test(IMG_W, IMG_H, canvas);
-	//t_tuple	from = {0, 0, -5, 1};
+	// t_tuple	from = {0, 0, -5, 1};
 	t_tuple	to = {0, 0, 1, 1};
 	t_tuple	up = {0, 1, 0, 0};
 
@@ -324,8 +327,9 @@ int	main(int argc, char *argv[])
 	ft_refreshframe(&canvas);
 
 	//test_draw_ball_light(&canvas);
-	//test_draw_ball_light_2(&canvas);
+	// test_draw_ball_light_2(&canvas);
 	test_render_together(&canvas);
+	// test_render(&canvas);
 
 	test_mlx_end(&canvas);
 	(void)argc;
