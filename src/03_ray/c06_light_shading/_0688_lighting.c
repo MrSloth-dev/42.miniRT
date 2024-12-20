@@ -31,8 +31,8 @@ t_color	ft_lighting(t_material m, t_tuple point, t_light light, t_camera camera,
 	{
 		double factor = pow(reflect_dot_eye, m.shininess);
 
-		specular = ft_scalar_tuple(ft_scalar_tuple(light.color, m.specular), factor);
-
+		//specular = ft_scalar_tuple(ft_scalar_tuple(light.color, m.specular), factor);
+		specular = ft_scalar_tuple(light.color, m.specular * factor);
 	}
 	return (ft_add_tuple(ft_add_tuple(specular, ambient), diffuse));
 }
