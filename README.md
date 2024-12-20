@@ -10,19 +10,19 @@ TO-DO list
 - [x] Chapter 4
 - [x] Chapter 5
 - [x] Chapter 6
+- [x] Chapter 7 - Scene
 - [x] Make parser great again.
+    - [ ] Again.
 - [ ] Limit Light,Ambient and Camera to 1
-- [x] Reorganize files (chapter 1 to 6).
-- [ ] Reorganize Makefile sources.
-- [ ] Norminette previous chapters 1 to 6(kinda) .
-- [ ] Chapter 7 - Scene
+- [ ] Camera parser must be integrated with world and view transformation.
 - [ ] Chapter 8 - Shadows
 - [ ] Chapter 9 - Planes
 - [ ] Chapter 10 - Patterns
 - [ ] Chapter 11 - Reflection and Refraction
 - [ ] Chapter 12 - Cubes
 - [ ] Chapter 13 - Cylinders
-- [ ] Maybe use fucking quaternions????
+- [ ] Reorganize Makefile sources.
+- [ ] Norminette previous chapters 1 to 6(kinda) .
 - [ ] Make it work
 - [ ] Make it robust
 - [ ] Finish

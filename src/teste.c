@@ -162,9 +162,6 @@ void	test_render_together(t_canvas *canvas)
 	t_shapes	*_1 = (t_shapes *)canvas->objects->cont;
 	t_shapes	*_2 = (t_shapes *)canvas->objects->next->cont;
 	t_shapes	*_3 = (t_shapes *)canvas->objects->next->next->cont;
-	t_shapes	*_4 = (t_shapes *)canvas->objects->next->next->next->cont;
-	t_shapes	*_5 = (t_shapes *)canvas->objects->next->next->next->next->cont;
-	t_shapes	*_6 = (t_shapes *)canvas->objects->next->next->next->next->next->cont;
 	
 	ft_get_transf_obj(_1, (t_tuple){0}, (t_tuple){0}, (t_tuple){10, 0.01, 10, 0});
 	ft_get_transf_obj(_2, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, -M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
@@ -179,39 +176,17 @@ void	test_render_together(t_canvas *canvas)
 	ft_print_matrix(_2->transform);
 	printf("Matrix _3");
 	ft_print_matrix(_3->transform);
-	printf("Matrix _4");
-	ft_print_matrix(_4->transform);
-	printf("Matrix _5");
-	ft_print_matrix(_5->transform);
-	printf("Matrix _6");
-	ft_print_matrix(_6->transform);
 	_1->material.color = (t_color){1, 0.9, 0.9, 3};
 	_1->material.specular = 0;
 
 	_2->material = _1->material;
 	_3->material = _1->material;
 
-	//_4->material = ft_create_material();
-
-	_4->material.diffuse = 0.7;
-	_4->material.specular = 0.3;
-
-	_5->material.diffuse = 0.7;
-	_5->material.specular = 0.3;
-
-	_6->material.diffuse = 0.7;
-	_6->material.specular = 0.3;
-
-	ft_print_tuple(canvas->light.coord, "light");
+	//put inside create camera of parser
 	ft_create_world_camera_test(IMG_W, IMG_H, canvas);
-
-	t_tuple	to = {0, 1, 0, 1};
-	t_tuple	up = {0, 1, 0, 0};
-
-	ft_print_tuple(ft_norm_vector(ft_sub_tuple(canvas->camera.coord, to)), "new norm");
-	to = ft_add_tuple(canvas->camera.coord, ft_norm_vector(canvas->camera.norm));
-	canvas->camera.transf = ft_view_transformation(canvas->camera.coord, to, up);
-	ft_print_tuple(to, "to");
+	canvas->camera.transf = ft_view_transformation(canvas->camera.coord,
+												ft_add_tuple(canvas->camera.coord, canvas->camera.norm),
+												(t_tuple){0, 1, 0, 0});
 	ft_print_tuple(canvas->camera.norm, "camera norm");
 	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
 	ft_render(canvas, (t_camera)canvas->camera);
