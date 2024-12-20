@@ -159,9 +159,9 @@ void	test_render_together(t_canvas *canvas)
 	t_shapes	*_1 = (t_shapes *)canvas->objects->cont;
 	t_shapes	*_2 = (t_shapes *)canvas->objects->next->cont;
 	t_shapes	*_3 = (t_shapes *)canvas->objects->next->next->cont;
-	 t_shapes	*_4 = (t_shapes *)canvas->objects->next->next->next->cont;
-	 t_shapes	*_5 = (t_shapes *)canvas->objects->next->next->next->next->cont;
-	 t_shapes	*_6 = (t_shapes *)canvas->objects->next->next->next->next->next->cont;
+	t_shapes	*_4 = (t_shapes *)canvas->objects->next->next->next->cont;
+	t_shapes	*_5 = (t_shapes *)canvas->objects->next->next->next->next->cont;
+	t_shapes	*_6 = (t_shapes *)canvas->objects->next->next->next->next->next->cont;
 	
 	ft_get_transf_obj(_1, (t_tuple){0}, (t_tuple){0}, (t_tuple){10, 0.01, 10, 0});
 	ft_get_transf_obj(_2, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, -M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
