@@ -15,20 +15,7 @@ int	main(int argc, char *argv[])
 	// ft_setup(&canvas);
 	if (ft_parse(&canvas, argv[1]) == 0)
 		return (1);
-	t_objects *current = canvas.objects;
-	while (current) {
-		if (current->cont) {
-			t_shapes *shape = (t_shapes *)current->cont;
-			switch (shape->type) {
-				case PLANE: printf(YELLOW"PLANE\n"RESET); break;
-				case CYLINDER: printf(YELLOW"CYLINDER\n"RESET); break;
-				case SPHERE: printf(YELLOW"SPHERE\n"RESET); break;
-			}
-		} else {
-			fprintf(stderr, "Warning: current->cont is null\n");
-		}
-		current = current->next;
-	}
+	ft_render(&canvas);
 	ft_free_canvas(&canvas);
 	// ft_print_objects(canvas);
 	//
