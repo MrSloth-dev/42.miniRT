@@ -166,9 +166,10 @@ void	test_render_together(t_canvas *canvas)
 	ft_get_transf_obj(_1, (t_tuple){0}, (t_tuple){0}, (t_tuple){10, 0.01, 10, 0});
 	ft_get_transf_obj(_2, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, -M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
 	ft_get_transf_obj(_3, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
-	ft_get_transf_obj(_4, (t_tuple){-0.5, 1, 0.5, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
-	ft_get_transf_obj(_5, (t_tuple){1.5, 0.5, -0.5, 0}, (t_tuple){0}, (t_tuple){0.5, 0.5, 0.5, 0});
-	ft_get_transf_obj(_6, (t_tuple){-1.5, 0.33, -0.75, 0}, (t_tuple){0}, (t_tuple){0.33, 0.33, 0.33, 0}); 
+
+	ft_get_transf_obj(_4, (t_tuple){0, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
+	ft_get_transf_obj(_5, (t_tuple){2.5, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
+	ft_get_transf_obj(_6, (t_tuple){-2.5, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0}); 
 	printf("Matrix _1");
 	ft_print_matrix(_1->transform);
 	printf("Matrix _2");
@@ -187,16 +188,19 @@ void	test_render_together(t_canvas *canvas)
 	_2->material = _1->material;
 	_3->material = _1->material;
 
-	_4->material = ft_create_material();
+	//_4->material = ft_create_material();
+
 	_4->material.color = (t_color){0.1, 1, 0.5, 3};
 	_4->material.diffuse = 0.7;
-	_4->material.specular = 0.3;
-	_5->material.color = (t_tuple){0.5, 1, 0.1, 3};
+	_4->material.specular = 0.9;
+
+	_5->material.color = (t_color){0.1, 1, 0.5, 3};
 	_5->material.diffuse = 0.7;
-	_5->material.specular = 0.3;
-	_6->material.color = (t_tuple){1, 0.8, 0.1, 3};
+	_5->material.specular = 0.9;
+
+	_6->material.color = (t_color){0.1, 1, 0.5, 3};
 	_6->material.diffuse = 0.7;
-	_6->material.specular = 0.3;
+	_6->material.specular = 0.9;
 
 	ft_print_tuple(canvas->light.coord, "light");
 	ft_create_world_camera_test(IMG_W, IMG_H, canvas);
