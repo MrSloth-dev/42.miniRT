@@ -164,6 +164,7 @@ int	ft_create_sphere(t_canvas *canvas, char **split)
 	ft_free_split(color_split);
 
 	shape->sph.diameter = ft_atod(split[2]) / 2;
+	shape->material.ambient = shape->material.ambient;
 
 	ft_get_transf_obj(shape, coord, (t_tuple) {0}, (t_tuple){shape->sph.diameter, shape->sph.diameter, shape->sph.diameter, 0});
 	ft_lstadd_back(&canvas->objects, ft_lstnew(shape));
@@ -213,6 +214,7 @@ int	ft_create_plane(t_canvas *canvas, char **split)
 	else
 		return (ft_free_split(norm_split),
 			ft_printf(2, "Error, plane norm value is wrong\n"), 0);
+	shape->material.ambient = shape->material.ambient;
 	ft_get_transf_obj(shape, shape->pla.coord, shape->pla.norm, (t_tuple) {1, 1, 1, 0});
 
 	ft_lstadd_back(&canvas->objects, ft_lstnew(shape));
@@ -229,9 +231,7 @@ int	ft_create_cylinder(t_canvas *canvas, char **split)
 	t_tuple	norm;
 	t_shapes	*shape;
 
-	shape = malloc (sizeof(t_shapes));
-	shape->type = CYLINDER;
-	shape->material = ft_create_material();
+	shape = ft_create_default_shape(CYLINDER);
 
 	coord_split = ft_split(split[1], ',');
 	coord = (t_tuple){ft_atod(coord_split[0]), ft_atod(coord_split[1]),

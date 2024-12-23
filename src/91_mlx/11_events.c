@@ -15,12 +15,9 @@
 int	key_handler(int keysym, t_canvas *canvas)
 {
 	if (keysym == XK_Escape || keysym == XK_q)
-
 		close_handler(canvas);
 	else if (keysym == XK_A)
-	{
-		// canvas->camera.norm.x++;
-	}
+		canvas->camera.norm.x++;
 	ft_refreshframe(canvas);
 	return (0);
 }
@@ -49,6 +46,7 @@ int	close_handler(t_canvas *canvas)
 	mlx_destroy_image(canvas->mlx, canvas->img->img);
 	mlx_destroy_window(canvas->mlx, canvas->win);
 	mlx_destroy_display(canvas->mlx);
+	ft_free_canvas(canvas);
 	free(canvas->img);
 	free(canvas->mlx);
 	exit (0);

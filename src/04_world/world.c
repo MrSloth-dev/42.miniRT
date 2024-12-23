@@ -67,17 +67,16 @@ t_color	ft_color_at(t_canvas *canvas, t_ray ray)
 	t_interlst	*lst;
 	t_inter		*hit;
 	t_comp		comp;
+	t_interlst	*head;
 
 	lst = ft_inter_world(canvas, ray);
+	head = lst;
 	hit = ft_hit_inter(&lst);
 	if (!hit)
-		return (canvas->ambient.color);
-	// if (hit && hit->shape->type == SPHERE)
-	// 	ft_print_intersections(lst);
+		return (ft_free_objects(head), (t_color){0, 0, 0, 3});
 	comp = ft_prepare_comp(hit, ray);
 	color = ft_shade_hit_shadow(canvas, comp);
-	ft_free_objects(lst);
-	return (color);
+	return (ft_free_objects(head), color);
 }
 
 t_matrix	ft_view_transformation(t_tuple from, t_tuple to, t_tuple up)
