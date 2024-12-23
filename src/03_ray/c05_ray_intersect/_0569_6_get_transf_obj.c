@@ -1,16 +1,30 @@
 #include "minirt.h"
 
-t_matrix	ft_get_rotation_obj(t_tuple orientation)
+t_matrix	ft_get_rotation_obj(t_tuple orien)
 {
-	t_matrix rotate;
+	t_matrix	rotate_y;
+	t_matrix	rotate_z;
+	t_matrix	rotate;
 
 	rotate = ft_create_matrix(4, 4, 1);
-	if (orientation.z)
-		rotate = ft_matrix_mult(rotate, ft_rotate_matrix_z(orientation.z));
-	if (orientation.y)
-		rotate = ft_matrix_mult(rotate, ft_rotate_matrix_y(orientation.y));
-	if (orientation.x)
-		rotate = ft_matrix_mult(rotate, ft_rotate_matrix_x(orientation.x));
+	if (orien.x)
+		rotate = ft_rotate_matrix_z(orien.x * M_PI / 2);
+	if (orien.y)
+	{
+		rotate_y = ft_rotate_matrix_y( orien.y * M_PI / 2);
+		if (orien.x)
+			rotate = ft_matrix_mult(rotate, rotate_y);
+		else
+			rotate = rotate_y;
+	}
+	if (orien.z)
+	{
+		rotate_z = ft_rotate_matrix_x(orien.z * M_PI / 2);
+		if (orien.x || orien.y)
+			rotate = ft_matrix_mult(rotate, rotate_z);
+		else
+			rotate = rotate_z;
+	}
 	return (rotate);
 }
 
