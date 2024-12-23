@@ -6,7 +6,7 @@
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:46:04 by joao-pol          #+#    #+#             */
-/*   Updated: 2024/12/13 11:25:15 by joao-pol         ###   ########.fr       */
+/*   Updated: 2024/12/23 10:54:59 by isilva-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,40 +157,6 @@ void	test_mlx_end(t_canvas *canvas)
 	ft_free_canvas(canvas);
 }
 
-void	test_render_together(t_canvas *canvas)
-{
-	t_shapes	*_1 = (t_shapes *)canvas->objects->cont;
-	t_shapes	*_2 = (t_shapes *)canvas->objects->next->cont;
-	t_shapes	*_3 = (t_shapes *)canvas->objects->next->next->cont;
-	
-	ft_get_transf_obj(_1, (t_tuple){0}, (t_tuple){0}, (t_tuple){10, 0.01, 10, 0});
-	ft_get_transf_obj(_2, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, -M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
-	ft_get_transf_obj(_3, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
-
-	/* ft_get_transf_obj(_4, (t_tuple){0, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
-	ft_get_transf_obj(_5, (t_tuple){2.5, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
-	ft_get_transf_obj(_6, (t_tuple){-2.5, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});  */
-	printf("Matrix _1");
-	ft_print_matrix(_1->transform);
-	printf("Matrix _2");
-	ft_print_matrix(_2->transform);
-	printf("Matrix _3");
-	ft_print_matrix(_3->transform);
-	_1->material.color = (t_color){1, 0.9, 0.9, 3};
-	_1->material.specular = 0;
-
-	_2->material = _1->material;
-	_3->material = _1->material;
-
-	//put inside create camera of parser
-	ft_create_world_camera_test(IMG_W, IMG_H, canvas);
-	canvas->camera.transf = ft_view_transformation(canvas->camera.coord,
-												ft_add_tuple(canvas->camera.coord, canvas->camera.norm),
-												(t_tuple){0, 1, 0, 0});
-	ft_print_tuple(canvas->camera.norm, "camera norm");
-	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
-	ft_render(canvas, (t_camera)canvas->camera);
-}
 
 
 
@@ -291,6 +257,125 @@ void	ft_start_rays_2(t_canvas *canvas)
 	ft_render(canvas, (t_camera)(canvas->camera));
 }
 
+void	test_render_scene_shadow(t_canvas *canvas)
+{
+	t_shapes	*_1 = (t_shapes *)canvas->objects->cont;
+	t_shapes	*_2 = (t_shapes *)canvas->objects->next->cont;
+	t_shapes	*_3 = (t_shapes *)canvas->objects->next->next->cont;
+	
+	ft_get_transf_obj(_1, (t_tuple){0}, (t_tuple){0}, (t_tuple){10, 0.01, 10, 0});
+	ft_get_transf_obj(_2, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, -M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
+	ft_get_transf_obj(_3, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
+
+	/* ft_get_transf_obj(_4, (t_tuple){0, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
+	ft_get_transf_obj(_5, (t_tuple){2.5, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
+	ft_get_transf_obj(_6, (t_tuple){-2.5, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});  */
+	printf("Matrix _1");
+	ft_print_matrix(_1->transform);
+	printf("Matrix _2");
+	ft_print_matrix(_2->transform);
+	printf("Matrix _3");
+	ft_print_matrix(_3->transform);
+	_1->material.color = (t_color){1, 0.9, 0.9, 3};
+	_1->material.specular = 0;
+
+	_2->material = _1->material;
+	_3->material = _1->material;
+
+	//put inside create camera of parser
+	ft_create_world_camera_test(IMG_W, IMG_H, canvas);
+	canvas->camera.transf = ft_view_transformation(canvas->camera.coord,
+												ft_add_tuple(canvas->camera.coord, canvas->camera.norm),
+												(t_tuple){0, 1, 0, 0});
+	ft_print_tuple(canvas->camera.norm, "camera norm");
+	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
+	ft_render(canvas, (t_camera)canvas->camera);
+}
+
+void	test_shadow_110(t_canvas *canvas)
+{
+	t_tuple color;
+	t_material	m;
+	t_light		light;
+
+	m = ft_create_material();
+	light.coord = (t_tuple){0, 0, -10, 1};
+	light.color= (t_tuple){1, 1, 1, 3};
+	ft_create_world_camera_test(IMG_W, IMG_H, canvas);
+	canvas->camera.transf = ft_view_transformation(canvas->camera.coord,
+												ft_add_tuple(canvas->camera.coord, canvas->camera.norm),
+												(t_tuple){0, 1, 0, 0});
+	ft_print_tuple(canvas->camera.norm, "camera norm");
+	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
+	color = OLD_ft_lighting_shadow(m,
+							(t_tuple){0, 0, 0, 1},
+							light, 
+							canvas->camera, 
+							(t_tuple){0, 0, -1, 0}, 
+							true);
+	ft_print_tuple(color, "color in shaddow");
+}
+
+void	test_shadow_111(t_canvas *canvas)
+{
+	t_shapes	*_1 = (t_shapes *)canvas->objects->cont;
+//	t_shapes	*_2 = (t_shapes *)canvas->objects->next->cont;
+//	t_shapes	*_3 = (t_shapes *)canvas->objects->next->next->cont;
+	bool result;
+
+	_1->material.color = (t_color){0.8, 1.0, 0.6, 3};
+	_1->material.diffuse = 0.7;
+	_1->material.specular = 0.2;
+
+	printf("\ntests IN_SHADOW or NOT page 111 - VERIFY VALUES ON PARSE LIKE BOOK!\n");
+	result = ft_is_shadowed(canvas, (t_tuple){0, 10, 0, 1});
+	printf("\n1st test\nshould NOT in shadow = %d\n", result);
+
+	result = ft_is_shadowed(canvas, (t_tuple){10, -10, 10, 1});
+	printf("\n2nd test \npoint is colinear: light -> shpere -> point\nshould IN shadow = %d\n", result);
+
+	result = ft_is_shadowed(canvas, (t_tuple){-20, 20, -20, 1});
+	printf("\n3rd test \npoint is behind light and sphere\nshould NOT in shadow = %d\n", result);
+
+	result = ft_is_shadowed(canvas, (t_tuple){-2, 2, -2, 1});
+	printf("\n4th test \npoint is between light and sphere\nshould NOT in shadow = %d\n", result);
+}
+
+void	test_shadow_114(t_canvas *canvas)
+{
+	t_shapes	*_1 = (t_shapes *)canvas->objects->cont;
+	t_shapes	*_2 = (t_shapes *)canvas->objects->next->cont;
+	//t_tuple color;
+	//t_material	m;
+	t_light		light;
+	light.coord = (t_tuple){0, 0, -10, 1};
+	light.color= (t_tuple){1, 1, 1, 3};
+	_1->material.color = (t_color){0.8, 1.0, 0.6, 3};
+	_1->material.diffuse = 0.7;
+	_1->material.specular = 0.2;
+	_2->material.diffuse = 0.7;
+	_2->material.specular = 0.2;
+
+	
+
+	ft_create_world_camera_test(IMG_W, IMG_H, canvas);
+	canvas->camera.transf = ft_view_transformation(canvas->camera.coord,
+												ft_add_tuple(canvas->camera.coord, canvas->camera.norm),
+												(t_tuple){0, 1, 0, 0});
+	ft_print_tuple(canvas->camera.norm, "camera norm");
+	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
+
+	t_ray	ray = {.pos = canvas->camera.coord, .dir = canvas->camera.norm};
+	t_interlst *lst =ft_inter_world(canvas, ray);
+	t_inter	*hit = ft_hit_inter(&lst);
+	printf("Hit value = %f", hit->value);
+	t_comp comp = ft_prepare_comp(hit, ray);
+	t_color color = ft_shade_hit_shadow(canvas, comp);
+	ft_print_tuple(color, "color in shaddow");
+
+
+}
+
 
 int	main(int argc, char *argv[])
 {
@@ -301,10 +386,11 @@ int	main(int argc, char *argv[])
 	test_mlx_start(&canvas);
 	ft_refreshframe(&canvas);
 
-	//test_draw_ball_light(&canvas);
-	// test_draw_ball_light_2(&canvas);
-	test_render_together(&canvas);
-	// test_render(&canvas);
+	test_render_scene_shadow(&canvas);
+	
+	// test_shadow_110(&canvas);
+	// test_shadow_111(&canvas);
+	// test_shadow_114(&canvas);
 
 	test_mlx_end(&canvas);
 	(void)argc;
@@ -315,6 +401,12 @@ int	main(int argc, char *argv[])
 
 void	test_list()
 {
+
+	//test_draw_ball_light(&canvas);
+	// test_draw_ball_light_2(&canvas);
+	// test_render(&canvas);
+	
+
 	/*
 	test_camera();
 	test_viewtransform();

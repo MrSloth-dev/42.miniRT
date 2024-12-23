@@ -202,7 +202,9 @@ typedef struct s_comp
 	double		value;
 	t_shapes	*shape;
 	t_tuple		point;
+	t_tuple		over_point;
 	t_tuple		eyev;
 	t_tuple		normalv;
 	bool		inside;
+	bool		in_shadow;
 } t_comp;

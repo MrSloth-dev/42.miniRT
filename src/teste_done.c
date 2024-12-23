@@ -706,3 +706,39 @@
 //		
 //	}
 //}
+
+// void	test_render_scene(t_canvas *canvas)
+// {
+// 	t_shapes	*_1 = (t_shapes *)canvas->objects->cont;
+// 	t_shapes	*_2 = (t_shapes *)canvas->objects->next->cont;
+// 	t_shapes	*_3 = (t_shapes *)canvas->objects->next->next->cont;
+// 	
+// 	ft_get_transf_obj(_1, (t_tuple){0}, (t_tuple){0}, (t_tuple){10, 0.01, 10, 0});
+// 	ft_get_transf_obj(_2, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, -M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
+// 	ft_get_transf_obj(_3, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
+//
+// 	/* ft_get_transf_obj(_4, (t_tuple){0, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
+// 	ft_get_transf_obj(_5, (t_tuple){2.5, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
+// 	ft_get_transf_obj(_6, (t_tuple){-2.5, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});  */
+// 	printf("Matrix _1");
+// 	ft_print_matrix(_1->transform);
+// 	printf("Matrix _2");
+// 	ft_print_matrix(_2->transform);
+// 	printf("Matrix _3");
+// 	ft_print_matrix(_3->transform);
+// 	_1->material.color = (t_color){1, 0.9, 0.9, 3};
+// 	_1->material.specular = 0;
+//
+// 	_2->material = _1->material;
+// 	_3->material = _1->material;
+//
+// 	//put inside create camera of parser
+// 	ft_create_world_camera_test(IMG_W, IMG_H, canvas);
+// 	canvas->camera.transf = ft_view_transformation(canvas->camera.coord,
+// 												ft_add_tuple(canvas->camera.coord, canvas->camera.norm),
+// 												(t_tuple){0, 1, 0, 0});
+// 	ft_print_tuple(canvas->camera.norm, "camera norm");
+// 	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
+// 	ft_render(canvas, (t_camera)canvas->camera);
+// }
+//
