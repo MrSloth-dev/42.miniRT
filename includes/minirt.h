@@ -152,6 +152,7 @@ void		ft_lstadd_sort_inter(t_interlst **lst, double value, t_shapes *shap);
 // Chapter 6 - Lightning
 t_camera	ft_create_camera_a(t_tuple pos, t_tuple norm, float fov); // this must go to the parser
 t_light		ft_create_light_a(t_tuple pos, t_color color, float bright); // this must go to the parser
+t_tuple		ft_normal_at(t_shapes *shape, t_tuple w_point);
 t_tuple		ft_normal_at_sph(t_shapes *sphere, t_tuple w_point);
 t_tuple		ft_reflect(t_tuple incoming, t_tuple normal);
 t_material	ft_create_material(void);
@@ -179,6 +180,9 @@ t_color		OLD_ft_lighting_shadow(t_material m, t_tuple point, t_light light, t_ca
 t_color	ft_lighting_shadow(t_canvas *canvas, t_comp comp);
 t_color	ft_shade_hit_shadow(t_canvas *canvas, t_comp comp);
 
+//Chapter 9 - Plane
+void	ft_intersection_plane(t_interlst **lst, t_ray ray, t_shapes *shap);
+
 
 
 //TESTING/////////////////////////////////////////////
@@ -186,10 +190,11 @@ void	test_ft_is_tuples_equal();
 void	test_ft_sub_tuple();
 void	ft_print_tuple(t_tuple tuple, char *name);
 void	ft_draw_square(t_canvas *canvas,t_tuple start, t_tuple sides, int color);
-void	ft_print_objects(t_canvas canvas);
+void	ft_print_objects(t_canvas *canvas);
 void	operations_testing(void);
 void	jumpingball(t_canvas *canvas);
 void	ft_draw_square(t_canvas *canvas,t_tuple start, t_tuple sides, int color);
+void	ft_print_intersections(t_interlst *lst);
 
 
 

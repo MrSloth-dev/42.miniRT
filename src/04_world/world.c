@@ -15,7 +15,7 @@ t_comp	ft_prepare_comp(t_inter *hit, t_ray ray)
 	temp.shape = hit->shape;
 	temp.eyev = ft_neg_tuple(ray.dir);
 	temp.point = ft_distance_ray(ray, temp.value);
-	temp.normalv = ft_normal_at_sph(temp.shape, temp.point);
+	temp.normalv = ft_normal_at(temp.shape, temp.point);
 	temp.over_point = ft_add_tuple(temp.point, ft_scalar_tuple(temp.normalv, ROUND_ERROR));
 	if (ft_dotprod_vector(temp.normalv, temp.eyev) < 0)
 	{
@@ -39,7 +39,6 @@ t_color	ft_shade_hit_shadow(t_canvas *canvas, t_comp comp)
 	return (ft_lighting_shadow(canvas, comp));
 }
 
-
 t_interlst	*ft_inter_world(t_canvas *canvas, t_ray ray)
 {
 	t_interlst	*lst;
@@ -51,7 +50,12 @@ t_interlst	*ft_inter_world(t_canvas *canvas, t_ray ray)
 	while (temp_o)
 	{
 		new_ray = ft_set_transf_ray(ray, ((t_shapes *)temp_o->cont)->inverted);
-		ft_intersection_sphere(&lst, new_ray, temp_o->cont);
+		if (((t_shapes *)temp_o->cont)->type == SPHERE)
+			ft_intersection_sphere(&lst, new_ray, temp_o->cont);
+		if (((t_shapes *)temp_o->cont)->type == PLANE)
+			ft_intersection_plane(&lst, new_ray, temp_o->cont);
+		/* if (((t_shapes *)temp_o->cont)->type == CYLINDER)
+			ft_intersection_cyl(&lst, new_ray, temp_o->cont); */
 		temp_o = temp_o->next;
 	}
 	return (lst);
@@ -67,7 +71,9 @@ t_color	ft_color_at(t_canvas *canvas, t_ray ray)
 	lst = ft_inter_world(canvas, ray);
 	hit = ft_hit_inter(&lst);
 	if (!hit)
-		return (canvas->ambient.color); // maybe black??
+		return (canvas->ambient.color);
+	// if (hit && hit->shape->type == SPHERE)
+	// 	ft_print_intersections(lst);
 	comp = ft_prepare_comp(hit, ray);
 	color = ft_shade_hit_shadow(canvas, comp);
 	ft_free_objects(lst);

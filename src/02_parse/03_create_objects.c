@@ -180,10 +180,7 @@ int	ft_create_plane(t_canvas *canvas, char **split)
 	t_tuple	norm;
 	t_shapes	*shape;
 
-	shape = malloc (sizeof(t_shapes));
-	shape->type = PLANE;
-	shape->material = ft_create_material();
-
+	shape = ft_create_default_shape(PLANE);
 	coord_split = ft_split(split[1], ',');
 	coord = (t_tuple){ft_atod(coord_split[0]), ft_atod(coord_split[1]),
 		ft_atod(coord_split[2]), 1};
@@ -197,7 +194,7 @@ int	ft_create_plane(t_canvas *canvas, char **split)
 	color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
 		ft_atod(color_split[2]), 3};
 	if (ft_check_null_split(color_split) && ft_rgb_check(color))
-		shape->material.color = color;
+		shape->material.color = ft_scalar_tuple(color, 1 / 255.f);
 	else
 		return (ft_free_split(color_split),
 			ft_printf(2, "Error, plane color format is wrong\n"), 0);
