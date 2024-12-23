@@ -432,7 +432,7 @@ int	main(int argc, char *argv[])
 	test_mlx_end(&canvas);
 	(void)argc;
 	(void)argv;
-	//ft_free_canvas(&canvas);
+	ft_free_canvas(&canvas);
 	return (0);
 }
 
