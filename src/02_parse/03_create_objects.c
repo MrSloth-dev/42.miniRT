@@ -204,7 +204,10 @@ int	ft_create_plane(t_canvas *canvas, char **split)
 		ft_atod(norm_split[2]), 0};
 	if (ft_check_null_split(norm_split) && ft_norm_check(norm))
 	{
-		shape->pla.norm = norm;
+		if (ft_is_tuples_equal(norm, (t_tuple){0}))
+			shape->pla.norm = (t_tuple){0, 1, 0 ,0};
+		else
+			shape->pla.norm = norm;
 		ft_free_split(norm_split);
 	}
 	else
