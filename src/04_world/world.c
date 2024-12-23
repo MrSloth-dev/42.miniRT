@@ -16,6 +16,7 @@ t_comp	ft_prepare_comp(t_inter *hit, t_ray ray)
 	temp.eyev = ft_neg_tuple(ray.dir);
 	temp.point = ft_distance_ray(ray, temp.value);
 	temp.normalv = ft_normal_at_sph(temp.shape, temp.point);
+	temp.over_point = ft_add_tuple(temp.point, ft_scalar_tuple(temp.normalv, ROUND_ERROR));
 	if (ft_dotprod_vector(temp.normalv, temp.eyev) < 0)
 	{
 		temp.inside = true;
@@ -31,6 +32,13 @@ t_color	ft_shade_hit(t_canvas *canvas, t_comp comp)
 	return (ft_lighting(comp.shape->material, comp.point,
 			canvas->light, canvas->camera, comp.normalv));
 }
+
+t_color	ft_shade_hit_shadow(t_canvas *canvas, t_comp comp)
+{
+	comp.in_shadow = ft_is_shadowed(canvas, comp.over_point);
+	return (ft_lighting_shadow(canvas, comp));
+}
+
 
 t_interlst	*ft_inter_world(t_canvas *canvas, t_ray ray)
 {
@@ -61,7 +69,7 @@ t_color	ft_color_at(t_canvas *canvas, t_ray ray)
 	if (!hit)
 		return (canvas->ambient.color); // maybe black??
 	comp = ft_prepare_comp(hit, ray);
-	color = ft_shade_hit(canvas, comp);
+	color = ft_shade_hit_shadow(canvas, comp);
 	ft_free_objects(lst);
 	return (color);
 }
