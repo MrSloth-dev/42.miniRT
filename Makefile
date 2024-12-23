@@ -152,7 +152,7 @@ re : fclean all
 MAIN_T = src/teste.c
 NAME_T = $(NAME)_te
 .PHONY: te
-te : $(OBJS) $(HEADER)
+te : re
 	rm -fr $(NAME)_te
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
