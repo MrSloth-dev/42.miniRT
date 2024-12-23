@@ -6,7 +6,7 @@
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 10:46:04 by joao-pol          #+#    #+#             */
-/*   Updated: 2024/12/23 10:54:59 by isilva-t         ###   ########.fr       */
+/*   Updated: 2024/12/23 13:29:05 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,21 @@
 #include "teste_done.c"
 #include <math.h>
 
+void	ft_print_intersections(t_interlst *lst)
+{
+	for (t_interlst *temp = lst; temp; temp = temp->next)
+	{
+		switch (((t_inter *)temp->cont)->shape->type) {
+			case SPHERE: printf(YELLOW"SPHERE "RESET); break;
+			case PLANE: printf(YELLOW"PLANE "RESET); break;
+			case CYLINDER: printf(YELLOW"cylinder "RESET); break;
+			default:printf(YELLOW"NO TYPE???"RESET); break;
+		}
+		printf("inter value %f\n", ((t_inter *)temp->cont)->value);
+
+	}
+	printf("\n");
+}
 void	test_inter_world(t_canvas *canvas, char *argv[])
 {
 	t_interlst	*lst;
@@ -259,29 +274,6 @@ void	ft_start_rays_2(t_canvas *canvas)
 
 void	test_render_scene_shadow(t_canvas *canvas)
 {
-	t_shapes	*_1 = (t_shapes *)canvas->objects->cont;
-	t_shapes	*_2 = (t_shapes *)canvas->objects->next->cont;
-	t_shapes	*_3 = (t_shapes *)canvas->objects->next->next->cont;
-	
-	ft_get_transf_obj(_1, (t_tuple){0}, (t_tuple){0}, (t_tuple){10, 0.01, 10, 0});
-	ft_get_transf_obj(_2, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, -M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
-	ft_get_transf_obj(_3, (t_tuple){0, 0, 5, 0}, (t_tuple){M_PI / 2, M_PI / 4, 0, 0}, (t_tuple){10, 0.01, 10, 0});
-
-	/* ft_get_transf_obj(_4, (t_tuple){0, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
-	ft_get_transf_obj(_5, (t_tuple){2.5, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
-	ft_get_transf_obj(_6, (t_tuple){-2.5, 1, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});  */
-	printf("Matrix _1");
-	ft_print_matrix(_1->transform);
-	printf("Matrix _2");
-	ft_print_matrix(_2->transform);
-	printf("Matrix _3");
-	ft_print_matrix(_3->transform);
-	_1->material.color = (t_color){1, 0.9, 0.9, 3};
-	_1->material.specular = 0;
-
-	_2->material = _1->material;
-	_3->material = _1->material;
-
 	//put inside create camera of parser
 	ft_create_world_camera_test(IMG_W, IMG_H, canvas);
 	canvas->camera.transf = ft_view_transformation(canvas->camera.coord,
@@ -375,7 +367,53 @@ void	test_shadow_114(t_canvas *canvas)
 
 
 }
+void	ft_print_objects(t_canvas *canvas)
+{
+	t_objects *current = canvas->objects;
+	while (current) {
+		if (current->cont) {
+			t_shapes *shape = (t_shapes *)current->cont;
+			switch (shape->type) {
+				case PLANE:
+					printf(YELLOW"PLANE\n"RESET);
+					ft_print_tuple(shape->pla.norm, "PLANE NORM");
+					ft_print_tuple(shape->pla.coord, "PLANE COORD");
+					break;
 
+				case CYLINDER: printf(YELLOW"CYLINDER\n"RESET);
+					ft_print_tuple(shape->sph.coord, "CYL COORD");
+					break;
+				case SPHERE: printf(YELLOW"SPHERE\n"RESET);
+					ft_print_tuple(shape->sph.coord, "SPHERE COORD");
+					break;
+			}
+		} else {
+			fprintf(stderr, "Warning: current->cont is null\n");
+		}
+		current = current->next;
+	}
+}
+
+void	test_plane_125(t_canvas *canvas)
+{
+	ft_print_tuple(((t_shapes *)canvas->objects->cont)->pla.norm, "plane norm");
+	ft_print_tuple(((t_shapes *)canvas->objects->cont)->pla.coord, "plane coord");
+	ft_print_objects(canvas);
+}
+void	test_inter_plane_123()
+{
+	t_shapes	plane;
+	t_ray		ray;
+	t_interlst	*lst;
+
+	lst = NULL;
+	plane.pla.norm = (t_tuple){0, 1, 0, 0};
+	plane.pla.coord = (t_tuple){1, -2, 0, 1};
+	ray.pos = (t_tuple){0, 1, 0, 1};
+	ray.dir =  (t_tuple){0, -1, 0, 0};
+	ft_intersection_plane(&lst, ray, &plane);
+	ft_print_intersections(lst);
+}
 
 int	main(int argc, char *argv[])
 {
@@ -387,10 +425,9 @@ int	main(int argc, char *argv[])
 	ft_refreshframe(&canvas);
 
 	test_render_scene_shadow(&canvas);
+	// test_inter_plane_123();
+	// test_plane_125(&canvas);
 	
-	// test_shadow_110(&canvas);
-	// test_shadow_111(&canvas);
-	// test_shadow_114(&canvas);
 
 	test_mlx_end(&canvas);
 	(void)argc;
@@ -402,12 +439,16 @@ int	main(int argc, char *argv[])
 void	test_list()
 {
 
-	//test_draw_ball_light(&canvas);
-	// test_draw_ball_light_2(&canvas);
-	// test_render(&canvas);
 	
 
 	/*
+	test_inter_plane_123();
+	test_draw_ball_light(&canvas);
+	test_draw_ball_light_2(&canvas);
+	test_render(&canvas);
+	test_shadow_110(&canvas);
+	test_shadow_111(&canvas);
+	test_shadow_114(&canvas);
 	test_camera();
 	test_viewtransform();
 	test_color_at_mult(&canvas);
