@@ -54,8 +54,8 @@ t_interlst	*ft_inter_world(t_canvas *canvas, t_ray ray)
 			ft_intersection_sphere(&lst, new_ray, temp_o->cont);
 		if (((t_shapes *)temp_o->cont)->type == PLANE)
 			ft_intersection_plane(&lst, new_ray, temp_o->cont);
-		/* if (((t_shapes *)temp_o->cont)->type == CYLINDER)
-			ft_intersection_cyl(&lst, new_ray, temp_o->cont); */
+		if (((t_shapes *)temp_o->cont)->type == CYLINDER)
+			ft_intersection_cyl(&lst, new_ray, temp_o->cont);
 		temp_o = temp_o->next;
 	}
 	return (lst);

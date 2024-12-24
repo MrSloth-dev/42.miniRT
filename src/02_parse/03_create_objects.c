@@ -242,14 +242,22 @@ int	ft_create_cylinder(t_canvas *canvas, char **split)
 		return (ft_free_split(coord_split),
 			ft_printf(2, "Error, cylinder format is wrong\n"), 0);
 	ft_free_split(coord_split);
+
+
 	color_split = ft_split(split[5], ',');
+
+	/*for (int i = 0; color_split[i]; i++)*/
+	/*	printf("color %s\n", color_split[i]);*/
+	/**/
 	color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
 		ft_atod(color_split[2]), 3};
 	if (ft_check_null_split(color_split) && ft_rgb_check(color))
-		shape->material.color = color;
+		shape->material.color = ft_scalar_tuple(color, 1 / 255.f);
 	else
 		return (ft_free_split(color_split),
 			ft_printf(2, "Error, cylinder color format is wrong\n"), 0);
+
+	ft_print_tuple(shape->material.color, "cyl color");
 	ft_free_split(color_split);
 	norm_split = ft_split(split[2], ',');
 	norm = (t_tuple){ft_atod(norm_split[0]), ft_atod(norm_split[1]),
@@ -264,6 +272,7 @@ int	ft_create_cylinder(t_canvas *canvas, char **split)
 			ft_printf(2, "Error, cylinder norm value is wrong\n"), 0);
 	shape->cyl.size.diameter = ft_atod(split[3]);
 	shape->cyl.size.height = ft_atod(split[4]);
+
 	ft_get_transf_obj(shape, shape->cyl.coord, shape->cyl.norm, (t_tuple) {shape->cyl.size.diameter, shape->cyl.size.height, shape->cyl.size.diameter, 0});
 
 	ft_lstadd_back(&canvas->objects, ft_lstnew(shape));
