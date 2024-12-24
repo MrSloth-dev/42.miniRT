@@ -15,17 +15,21 @@ TO-DO list
     - [ ] Again.
 - [ ] Limit Light,Ambient and Camera to 1
 - [ ] Camera parser must be integrated with world and view transformation.
-- [ ] Chapter 8 - Shadows
-- [ ] Chapter 9 - Planes
-- [ ] Chapter 10 - Patterns
-- [ ] Chapter 11 - Reflection and Refraction
-- [ ] Chapter 12 - Cubes
-- [ ] Chapter 13 - Cylinders
+- [x] Chapter 8 - Shadows
+- [x] Chapter 9 - Planes
+- [0] Chapter 10 - Patterns
+- [0] Chapter 11 - Reflection and Refraction
+- [0] Chapter 12 - Cubes
+- [!] Chapter 13 - Cylinders
+- [ ] Need to check third test on page 181, and norm at cyl.
+- [ ] upgrade atod ft
 - [ ] Reorganize Makefile sources.
 - [ ] Norminette previous chapters 1 to 6(kinda) .
 - [ ] Make it work
 - [ ] Make it robust
+- [ ] Program name are "miniRT" ?
 - [ ] Finish
+
 
 At the end of project (or in advanced state)
 - [ ] Remove wildcards from Makefile
