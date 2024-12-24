@@ -183,6 +183,9 @@ t_color	ft_shade_hit_shadow(t_canvas *canvas, t_comp comp);
 //Chapter 9 - Plane
 void	ft_intersection_plane(t_interlst **lst, t_ray ray, t_shapes *shap);
 
+//Chapter 13 - Cylinder
+void	ft_intersection_cyl(t_interlst **lst, t_ray ray, t_shapes *shap);
+
 
 
 //TESTING/////////////////////////////////////////////

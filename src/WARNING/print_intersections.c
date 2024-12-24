@@ -2,6 +2,8 @@
 
 void	ft_print_intersections(t_interlst *lst)
 {
+	if (!lst)
+		printf(YELLOW"There is no intersections!"RESET);
 	for (t_interlst *temp = lst; temp; temp = temp->next)
 	{
 		switch (((t_inter *)temp->cont)->shape->type) {
