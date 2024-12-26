@@ -106,6 +106,8 @@ typedef struct s_cyl_size
 {
 	double				diameter;
 	double				height;
+	double				min;
+	double				max;
 } t_cyl_size;
 
 typedef struct s_cylinder
@@ -196,6 +198,8 @@ typedef struct s_iter
 	double	b;
 	double	cc;
 	double	d;
+	double	inter_one;
+	double	inter_two;
 }	t_iter;
 
 typedef struct s_comp
