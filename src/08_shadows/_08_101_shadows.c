@@ -26,7 +26,7 @@ bool	ft_is_shadowed(t_canvas *canvas, t_tuple point)
 	ray.pos = point;
 	inter_lst = ft_inter_world(canvas, ray);
 	hit = ft_hit_inter(&inter_lst);
-	if (hit && hit->value < distance)
+	if (hit && hit->value < distance && !ft_is_float_equal(hit->value, distance))
 	{
 		ft_free_objects((t_objects *)inter_lst);
 		return (true);

@@ -21,7 +21,7 @@ void	ft_custom_pixel_put(t_canvas *canvas, t_iter h, t_tuple color)
 		while (h.x_step < STEP)
 		{
 			h.x_step++;
-			ft_pixel_put(canvas->img, h.x + h.x_step++, h.y + h.y_step,
+			ft_pixel_put(canvas->img, h.x + h.x_step, h.y + h.y_step,
 				ft_get_mlx_color(color));
 		}
 		h.y_step++;
