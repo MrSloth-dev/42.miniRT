@@ -5,8 +5,8 @@ void	ft_intersection_cyl(t_interlst **lst, t_ray ray, t_shapes *shap)
 	t_iter	h;
 	double	discriminant;
 
-	h.a = (ray.dir.x * ray.dir.x) + (ray.dir.z * ray.dir.z);
-	if (h.a < ROUND_ERROR)
+	h.a = ray.dir.x * ray.dir.x + ray.dir.z * ray.dir.z;
+	if (ft_is_float_equal(h.a, 0))
 		return ;
 	h.b = 2 * ray.pos.x * ray.dir.x + 2 * ray.pos.z * ray.dir.z;
 	h.c = ray.pos.x * ray.pos.x + ray.pos.z * ray.pos.z - 1;
