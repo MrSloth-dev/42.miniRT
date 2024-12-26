@@ -124,11 +124,16 @@ int	ft_create_light(t_canvas *canvas, char **split)
 	bright = ft_atod(split[2]);
 	light.color = ft_scalar_tuple(light.color, bright);
 	if (ft_check_null_split(color_split) && ft_rgb_check(light.color))
+	{
 		light.color = ft_scalar_tuple(light.color, 1.0f / 25.5f);
+		light.intensity = ft_scalar_tuple(light.color, bright / 90);
+	}
 	else
 		return (ft_free_split(color_split),
 			ft_printf(2, "Error, light format is wrong\n"), 0);
 	ft_free_split(color_split);
+	//ft_print_tuple(light.color, "light color?");
+	//exit (1);
 	canvas->light = light;
 	return (0);
 }
