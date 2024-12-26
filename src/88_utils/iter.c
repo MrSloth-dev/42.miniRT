@@ -15,6 +15,7 @@ t_iter	ft_iter(int n)
 	h.x_step = n;
 	h.a = n;
 	h.b = n;
+	h.cc = n;
 	h.d = n;
 	return (h);
 }

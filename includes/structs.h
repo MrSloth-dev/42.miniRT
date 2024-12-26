@@ -194,6 +194,7 @@ typedef struct s_iter
 	int		x_step;
 	double	a;
 	double	b;
+	double	cc;
 	double	d;
 }	t_iter;
 

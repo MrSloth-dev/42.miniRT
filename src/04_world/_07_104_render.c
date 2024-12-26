@@ -40,9 +40,18 @@ void	ft_render(t_canvas *canvas, t_camera cam)
 		h.x = 0;
 		while (h.x < IMG_W)
 		{
+			/*if (h.y >= 110 || (h.y >= 100 && h.x > 100))*/
+			/*	break ;*/
+
 			ray = ft_ray_for_pixel(cam, h.x, h.y);
-			color = ft_color_at(canvas, ray);	
-			// LINES COMMENTED, test page 105
+			color = ft_color_at(canvas, ray);
+
+			/*ft_print_tuple(color, "color");*/
+			/*printf("x = %d, y = %d\n", h.x, h.y);*/
+			/*printf("\n__________________________\n\n");*/
+			/**/
+
+						// LINES COMMENTED, test page 105
 			// if (h.x == 5 && h.y == 5)
 			// {
 			// 	printf("\nx = %d, y = %d\n", h.x, h.y);

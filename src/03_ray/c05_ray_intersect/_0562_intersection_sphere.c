@@ -5,6 +5,8 @@ void	ft_intersection_sphere(t_interlst **lst, t_ray ray, t_shapes *shap)
 	t_iter	h;
 	double	discriminant;
 	t_tuple	sphere_to_ray;
+	double	sqrt_discriminant;
+	double	two_a;
 	
 	sphere_to_ray = ft_sub_tuple(ray.pos, (t_tuple){0, 0, 0, 1});
 	h.a = ft_dotprod_vector(ray.dir, ray.dir);
@@ -15,7 +17,9 @@ void	ft_intersection_sphere(t_interlst **lst, t_ray ray, t_shapes *shap)
 		return ;
 	else
 	{
-		ft_lstadd_sort_inter(lst, ((-h.b - sqrt(discriminant)) / (2 * h.a)), shap);
-		ft_lstadd_sort_inter(lst, ((-h.b + sqrt(discriminant)) / (2 * h.a)), shap);
+		two_a = 2 * h.a;
+		sqrt_discriminant = sqrt(discriminant);
+		ft_lstadd_sort_inter(lst, ((-h.b - sqrt_discriminant) / two_a), shap);
+		ft_lstadd_sort_inter(lst, ((-h.b + sqrt_discriminant) / two_a), shap);
 	}
 }
