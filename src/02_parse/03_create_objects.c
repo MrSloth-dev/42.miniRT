@@ -275,7 +275,7 @@ int	ft_create_cylinder(t_canvas *canvas, char **split)
 	shape->cyl.size.height = ft_atod(split[4]);
 	shape->cyl.size.max = shape->cyl.size.height / 2;
 	shape->cyl.size.min = -shape->cyl.size.max; 
-	ft_get_transf_obj(shape, shape->cyl.coord, shape->cyl.norm, (t_tuple) {shape->cyl.size.diameter, shape->cyl.size.height, shape->cyl.size.diameter, 0});
+	ft_get_transf_obj(shape, shape->cyl.coord, shape->cyl.norm, (t_tuple) {shape->cyl.size.diameter, shape->cyl.size.height / 2, shape->cyl.size.diameter, 0});
 	ft_lstadd_back(&canvas->objects, ft_lstnew(shape));
 	return (0);
 }
