@@ -67,7 +67,10 @@ t_color	ft_lighting_shadow(t_canvas *canvas, t_comp comp)
 	else
 	{
 		double factor = pow(reflect_dot_eye, comp.shape->material.shininess);
-		specular = ft_scalar_tuple(canvas->light.color, comp.shape->material.specular * factor);
+		specular = ft_scalar_tuple(canvas->light.intensity, comp.shape->material.specular * factor);
+		//ft_print_tuple(specular, "specular");
+		//ft_print_tuple(canvas->light.color, "canvas color");
+		//exit (1);
 	}
 	return (ft_add_tuple(ft_add_tuple(specular, ambient), diffuse));
 }

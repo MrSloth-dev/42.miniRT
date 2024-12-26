@@ -88,6 +88,7 @@ typedef struct s_light
 {
 	t_tuple			coord;
 	t_color			color;
+	t_tuple			intensity;
 }	t_light;
 
 typedef struct s_sphere
