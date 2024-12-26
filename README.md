@@ -21,6 +21,7 @@ TO-DO list
 - [0] Chapter 11 - Reflection and Refraction
 - [0] Chapter 12 - Cubes
 - [!] Chapter 13 - Cylinders
+- [ ] João, are you sure that rotations are correct on cylinders?
 - [ ] Need to check third test on page 181, and norm at cyl.
 - [ ] upgrade atod ft
 - [ ] Reorganize Makefile sources.
