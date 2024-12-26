@@ -46,10 +46,10 @@ t_color	ft_lighting_shadow(t_canvas *canvas, t_comp comp)
 	double	light_dot_normal;
 
 	ef_color = ft_operator(comp.shape->material.color, '*', canvas->light.color);
-	lightv = ft_norm_vector(ft_operator(canvas->light.coord, '-', comp.over_point));
 	ambient = ft_scalar_tuple(ef_color, comp.shape->material.ambient);
 	if (comp.in_shadow == true)
 		return (ambient);
+	lightv = ft_norm_vector(ft_operator(canvas->light.coord, '-', comp.over_point));
 	light_dot_normal = ft_dotprod_vector(lightv, comp.normalv);
 	reflect_dot_eye = 0;
 	if (light_dot_normal < 0)

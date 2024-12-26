@@ -185,7 +185,7 @@ void	ft_intersection_plane(t_interlst **lst, t_ray ray, t_shapes *shap);
 
 //Chapter 13 - Cylinder
 void	ft_intersection_cyl(t_interlst **lst, t_ray ray, t_shapes *shap);
-
+t_tuple	ft_normal_at_cyl(t_shapes *shape, t_tuple w_point);
 
 
 //TESTING/////////////////////////////////////////////
