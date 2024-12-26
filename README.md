@@ -21,7 +21,7 @@ TO-DO list
 - [0] Chapter 11 - Reflection and Refraction
 - [0] Chapter 12 - Cubes
 - [!] Chapter 13 - Cylinders
-- [ ] Verify light specular norm
+- [ ] Ivan - adjust specular and minimum light values to never be in the dark, and accept different light colors
 - [ ] upgrade atod ft
 - [ ] Reorganize Makefile sources.
 - [ ] Norminette previous chapters 1 to 6(kinda) .
