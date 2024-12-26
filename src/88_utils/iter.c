@@ -17,6 +17,8 @@ t_iter	ft_iter(int n)
 	h.b = n;
 	h.cc = n;
 	h.d = n;
+	h.inter_one = n;
+	h.inter_two = n;
 	return (h);
 }
 
