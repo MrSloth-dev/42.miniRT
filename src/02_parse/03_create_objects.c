@@ -268,9 +268,7 @@ int	ft_create_cylinder(t_canvas *canvas, char **split)
 			ft_printf(2, "Error, cylinder norm value is wrong\n"), 0);
 	shape->cyl.size.diameter = ft_atod(split[3]) / 2;
 	shape->cyl.size.height = ft_atod(split[4]);
-
 	ft_get_transf_obj(shape, shape->cyl.coord, shape->cyl.norm, (t_tuple) {shape->cyl.size.diameter, shape->cyl.size.height, shape->cyl.size.diameter, 0});
-
 	ft_lstadd_back(&canvas->objects, ft_lstnew(shape));
 	return (0);
 }
