@@ -21,8 +21,7 @@ TO-DO list
 - [0] Chapter 11 - Reflection and Refraction
 - [0] Chapter 12 - Cubes
 - [!] Chapter 13 - Cylinders
-- [ ] João, are you sure that rotations are correct on cylinders?
-- [ ] Need to check third test on page 181, and norm at cyl.
+- [ ] Verify light specular norm
 - [ ] upgrade atod ft
 - [ ] Reorganize Makefile sources.
 - [ ] Norminette previous chapters 1 to 6(kinda) .
@@ -30,6 +29,9 @@ TO-DO list
 - [ ] Make it robust
 - [ ] Program name are "miniRT" ?
 - [ ] Finish
+
+PARSE ISSUES
+- [ ] cy 2.0,6.5,-1.50,-10 -0.2,0.0,0.7 3 2 0,255,0 -> not valid, check if split has right number of parameters when splited
 
 
 At the end of project (or in advanced state)

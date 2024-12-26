@@ -28,8 +28,8 @@
 
 
 #define STEP 1
-//#define ROUND_ERROR 0.000001
-#define ROUND_ERROR 0.00001
+#define ROUND_ERROR 0.000001
+//#define ROUND_ERROR 0.00001
 #define ERR_INPUT 1
 #define ERR_MLX 2
 
