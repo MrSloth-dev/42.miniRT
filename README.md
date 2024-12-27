@@ -26,16 +26,15 @@ TO-DO list
 PARSER ISSUES
 - [x] Make parser great again.
     - [ ] Again.
+- [ ] Camera parser must be integrated with world and view transformation.
 - [ ] cy 2.0,6.5,-1.50,-10 -0.2,0.0,0.7 3 2 0,255,0
         not valid, check if split has right number of parameters when splited
-- [ ] block double vars on colors, only alow ints
-- [ ] upgrade atod ft
+- [ ] block double vars on colors (0 - 255), only alow ints
 - [ ] Limit Light,Ambient and Camera to 0 to 1
-- [ ] Camera parser must be integrated with world and view transformation.
 - [ ] After parse, need to copy ambient color and intensity to materials
 - [ ] Ensure that program do not have leaks, or crash, if we don't have objects.
         Program must run, and show black window without any objects
-        
+- [ ] upgrade atod ft - better conversion (training only purposes, not priority
 
 At the end of project (or in advanced state)
 - [ ] Remove wildcards from Makefile
