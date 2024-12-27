@@ -132,6 +132,7 @@ typedef struct s_material
 {
 	t_color	color; //0 -1
 	double	ambient; //0- 1
+	t_color	ambient_color;
 	double	diffuse; // 0-1
 	double	specular; // 0 -1
 	double	shininess; //10 -200 (bigger the number lower the shininess)
