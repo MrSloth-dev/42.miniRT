@@ -1,3 +1,4 @@
+#include "libft.h"
 #include "minirt.h"
 #include <fcntl.h>
 
@@ -64,9 +65,25 @@ int	ft_parse_objects(t_canvas *canvas)
 	return (error);
 }
 
+void	ft_set_objects_material_color(t_canvas *canvas)
+{
+	t_list *cur;
+
+	if (!canvas->objects && !canvas->objects->cont)
+		return ;
+	cur = canvas->objects;
+	while (cur && cur->cont)
+	{
+		((t_shapes *)cur->cont)->material.ambient_color = canvas->ambient.color;
+		//ft_print_tuple(canvas->ambient.color, "ambient color");
+		cur = cur->next;
+	}
+}
+
 int	ft_parser(t_canvas *canvas)
 {
 	ft_parse_objects(canvas);
+	ft_set_objects_material_color(canvas);
 	return (1);
 }
 
