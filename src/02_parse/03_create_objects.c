@@ -64,7 +64,7 @@ int	ft_create_ambient(t_canvas *canvas, char **split)
 		ft_atod(color_split[2]), 3};
 	if (ft_check_null_split(color_split)
 		&& ft_rgb_check(amb.color))
-		canvas->ambient.color = ft_scalar_tuple(ft_scalar_tuple(amb.color, amb.ratio), 1.0f / 25.5f);
+		canvas->ambient.color = ft_scalar_tuple(ft_scalar_tuple(amb.color, amb.ratio), 0.1f / 25.5f);
 	else
 		return (ft_free_split(color_split),
 			ft_printf(2, "Error, ambient format is wrong\n"), 0);
