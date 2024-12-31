@@ -12,6 +12,9 @@
 
 #include "minirt.h"
 
+// verify if point to render is a shadowed point - page 113
+// to do this, we create a ray between point, and light,
+// and simply verify if has intersections to objects in our world
 bool	ft_is_shadowed(t_canvas *canvas, t_tuple point)
 {
 	double		distance;

@@ -146,9 +146,6 @@ typedef struct s_shapes
 		t_plane		pla;
 		t_cylinder	cyl;
 		t_sphere	sph;
-		// t_cone		cone;
-		// t_cube		cube;
-		// t_triangle	triangle;
 	};
 	t_matrix		inverted;
 	t_matrix		transform;
