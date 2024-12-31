@@ -12,19 +12,23 @@
 
 #include "minirt.h"
 
-void	ft_custom_pixel_put(t_canvas *canvas, t_iter h, t_tuple color)
+//put our colored pixel, to our mlx image.
+// we convert a color in 
+// tuple format {0 - 1, 0 - 1, 0 - 1} 
+// to intteger like 0xFFFFFF
+// The STEP is our upscale option, for test with lower resolutions
+void	ft_custom_pixel_put(t_canvas *canvas, t_iter *h, t_tuple color)
 {
-	h.y_step = 0;
-	while (h.y_step < STEP)
+	h->y_step = 0;
+	while (h->y_step < STEP)
 	{
-		h.x_step = 0;
-		while (h.x_step < STEP)
+		h->x_step = 0;
+		while (h->x_step < STEP)
 		{
-			h.x_step++;
-			ft_pixel_put(canvas->img, h.x + h.x_step, h.y + h.y_step,
+			ft_pixel_put(canvas->img, h->x + h->x_step++, h->y + h->y_step,
 				ft_get_mlx_color(color));
 		}
-		h.y_step++;
+		h->y_step++;
 	}
 }
 
@@ -40,24 +44,9 @@ void	ft_render(t_canvas *canvas, t_camera cam)
 		h.x = 0;
 		while (h.x < IMG_W)
 		{
-			/*if (h.y >= 110 || (h.y >= 100 && h.x > 100))*/
-			/*	break ;*/
-
 			ray = ft_ray_for_pixel(cam, h.x, h.y);
 			color = ft_color_at(canvas, ray);
-
-			/*ft_print_tuple(color, "color");*/
-			/*printf("x = %d, y = %d\n", h.x, h.y);*/
-			/*printf("\n__________________________\n\n");*/
-			/**/
-
-						// LINES COMMENTED, test page 105
-			// if (h.x == 5 && h.y == 5)
-			// {
-			// 	printf("\nx = %d, y = %d\n", h.x, h.y);
-			// 	ft_print_tuple(color, "color test");
-			// }
-			ft_custom_pixel_put(canvas, h, color);
+			ft_custom_pixel_put(canvas, &h, color);
 			h.x += STEP;
 		}
 		h.y += STEP;

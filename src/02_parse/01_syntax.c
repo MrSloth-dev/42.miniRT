@@ -90,6 +90,7 @@ int	ft_check_syntax(t_canvas *canvas, char *file)
 		split = ft_split_charset(line, WHITESPACE);
 		if (split && *split)
 			error = ft_syntax_line(split, canvas);
+		// this var must sum result in every iteration
 		ft_free_split(split);
 		line = ft_free(line);
 		line = get_next_line(fd);

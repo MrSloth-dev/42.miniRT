@@ -24,7 +24,7 @@ TO-DO list
 - [ ] Finish
 
 PARSER ISSUES
-- [x] Make parser great again.
+- [x] Make parser great again
     - [ ] Again.
 - [ ] Camera parser must be integrated with world and view transformation.
 - [ ] cy 2.0,6.5,-1.50,-10 -0.2,0.0,0.7 3 2 0,255,0
@@ -35,6 +35,8 @@ PARSER ISSUES
 - [ ] Ensure that program do not have leaks, or crash, if we don't have objects.
         Program must run, and show black window without any objects
 - [ ] upgrade atod ft - better conversion (training only purposes, not priority
+- [ ] file in folder like "teste/.rt" must NOT OPEN.
+- [ ] on ft_check_syntax verify my comment
 
 At the end of project (or in advanced state)
 - [ ] Remove wildcards from Makefile
