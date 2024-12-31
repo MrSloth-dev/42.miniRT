@@ -1,5 +1,6 @@
 #include "minirt.h"
 
+// verify if intersection is a cap of cylinder - page 186
 static bool	ft_is_a_cyl_cap(t_ray ray, double intersect)
 {
 	double	x;
@@ -10,6 +11,7 @@ static bool	ft_is_a_cyl_cap(t_ray ray, double intersect)
 	return (x * x + z * z <= 1);
 }
 
+// verify if is a cap of cylinder, and add intersection to list - page 186
 static void	ft_intersect_cyl_caps(t_interlst **lst, t_ray ray, t_shapes *shap)
 {
 	double	inter_one;
@@ -22,8 +24,10 @@ static void	ft_intersect_cyl_caps(t_interlst **lst, t_ray ray, t_shapes *shap)
 	if (ft_is_a_cyl_cap(ray, inter_two))
 		ft_lstadd_sort_inter(lst, inter_two, shap);
 }
+
 //truncate cylinder - page 184
-static void	ft_cyl_limits_and_intersect(t_interlst **lst, t_ray ray, t_shapes *shap, t_iter *h)
+static void	ft_cyl_limits_and_intersect(t_interlst **lst, t_ray ray,
+					t_shapes *shap, t_iter *h)
 {
 	double	temp;
 	double	y_one;
@@ -43,6 +47,10 @@ static void	ft_cyl_limits_and_intersect(t_interlst **lst, t_ray ray, t_shapes *s
 		ft_lstadd_sort_inter(lst, h->inter_two, shap);
 }
 
+// intersect cilinder circular wall, and caps - page 178 to 188
+// if  h.a its aprox zero, the ray its paralel to cilinder wall
+// if discriminnt is minor than zero, there is no wall intersection
+// call to check if intersect a wall of cylinder
 void	ft_intersection_cyl(t_interlst **lst, t_ray ray, t_shapes *shap)
 {
 	t_iter	h;
@@ -70,4 +78,3 @@ void	ft_intersection_cyl(t_interlst **lst, t_ray ray, t_shapes *shap)
 	}
 	ft_intersect_cyl_caps(lst, ray, shap);
 }
-//ft_lstadd_sort_inter(lst, 1, shap); //for begginer tests on cyl intersection
