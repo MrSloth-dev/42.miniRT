@@ -26,10 +26,10 @@
 #define IMG_H 389
 #define IMG_W 700
 
-
 #define STEP 1
 #define ROUND_ERROR 0.000001
 //#define ROUND_ERROR 0.00001
+//
 #define ERR_INPUT 1
 #define ERR_MLX 2
 
@@ -163,7 +163,7 @@ t_color		ft_lighting_shadow(t_canvas *canvas, t_comp comp);
 
 
 // Chapter 7 - Making a Scene
-t_comp		ft_prepare_comp(t_inter *inter, t_ray ray);
+t_comp		ft_prepare_comp(t_inter *inter, t_ray ray, t_canvas *canvas);
 t_color		ft_shade_hit(t_canvas *canvas, t_comp comp);
 t_interlst	*ft_intersect_world(t_canvas *canvas, t_ray ray);
 t_color	ft_color_at(t_canvas *canvas, t_ray ray);
