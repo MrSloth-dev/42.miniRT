@@ -38,138 +38,6 @@ void	test_render_scene_shadow(t_canvas *canvas)
 	ft_render(canvas, (t_camera)canvas->camera);
 }
 
-void	test_inter_cyl_178(t_canvas *canvas)
-{
-//parse
-//cy 1.0,0.0,0.0	0.0,1.0,0.0	2	30	255,255,255
-//cy 0.0,0.0,0.0	0.0,1.0,0.0	2	40	255,255,255
-//cy 0.0,0.0,-5.0	1.0,1.0,1.0	2	50	255,255,255
-
-//intersect cyl only this to add intersect
-//ft_lstadd_sort_inter(lst, 1, shap);
-	t_shapes	*_1 = (t_shapes *)canvas->objects->cont;
-	t_shapes	*_2 = (t_shapes *)canvas->objects->next->cont;
-	t_shapes	*_3 = (t_shapes *)canvas->objects->next->next->cont;
-
-	ft_print_tuple(_1->cyl.coord, "cyl origin");
-	ft_print_tuple(_1->cyl.norm, "cyl norm");
-	printf("cyl diameter %f\n", _1->cyl.size.diameter);
-	printf("cyl height %f\n\n", _1->cyl.size.height);
-	ft_print_tuple(_2->cyl.coord, "cyl origin");
-	ft_print_tuple(_2->cyl.norm, "cyl norm");
-	printf("cyl diameter %f\n", _2->cyl.size.diameter);
-	printf("cyl height %f\n\n", _2->cyl.size.height);
-	ft_print_tuple(_3->cyl.coord, "cyl origin");
-	ft_print_tuple(_3->cyl.norm, "cyl norm");
-	printf("cyl diameter %f\n", _3->cyl.size.diameter);
-	printf("cyl height %f\n", _3->cyl.size.height);
-
-	t_interlst	*lst;
-	t_ray		ray;
-
-	lst = NULL;
-	ray = ft_create_ray(_1->cyl.coord, _1->cyl.norm);
-	ft_intersection_cyl(&lst, ray, _1);
-	ft_print_intersections(lst);
-
-	lst = NULL;
-	ray = ft_create_ray(_2->cyl.coord, _2->cyl.norm);
-	ft_intersection_cyl(&lst, ray, _2);
-	ft_print_intersections(lst);
-
-	lst = NULL;
-	ray = ft_create_ray(_3->cyl.coord, _3->cyl.norm);
-	ft_intersection_cyl(&lst, ray, _3);
-	ft_print_intersections(lst);
-}
-
-void	test_inter_cyl_180(t_canvas *canvas)
-{
-//parse
-/*cy 1.0,0.0,-5.0		0.0,0.0,1.0	2	1000	255,255,255*/
-/*cy 0.0,0.0,-5.0		0.0,0.0,1.0	2	1000	255,255,255*/
-/*cy 0.5,0.0,-5.0		0.1,1.0,1.0	2	1000	255,255,255*/
-/**/
-	t_shapes	*_1 = (t_shapes *)canvas->objects->cont;
-	t_shapes	*_2 = (t_shapes *)canvas->objects->next->cont;
-	t_shapes	*_3 = (t_shapes *)canvas->objects->next->next->cont;
-	ft_print_tuple(_1->cyl.coord, "cyl origin");
-	ft_print_tuple(_1->cyl.norm, "cyl norm");
-	printf("cyl diameter %f\n", _1->cyl.size.diameter);
-	printf("cyl height %f\n\n", _1->cyl.size.height);
-	ft_print_tuple(_2->cyl.coord, "cyl origin");
-	ft_print_tuple(_2->cyl.norm, "cyl norm");
-	printf("cyl diameter %f\n", _2->cyl.size.diameter);
-	printf("cyl height %f\n\n", _2->cyl.size.height);
-	ft_print_tuple(_3->cyl.coord, "cyl origin");
-	ft_print_tuple(_3->cyl.norm, "cyl norm");
-	printf("cyl diameter %f\n", _3->cyl.size.diameter);
-	printf("cyl height %f\n", _3->cyl.size.height);
-	t_interlst	*lst;
-	t_ray		ray;
-
-	lst = NULL;
-	ray = ft_create_ray(_1->cyl.coord, _1->cyl.norm);
-	ft_intersection_cyl(&lst, ray, _1);
-	ft_print_intersections(lst);
-
-	lst = NULL;
-	ray = ft_create_ray(_2->cyl.coord, _2->cyl.norm);
-	ft_intersection_cyl(&lst, ray, _2);
-	ft_print_intersections(lst);
-
-	lst = NULL;
-	t_tuple pos = (t_tuple){0.5, 0, -5, 1};
-	t_tuple dir = (t_tuple){0.1, 1, 1, 0};
-	_3->cyl.coord = pos;
-	_3->cyl.norm = ft_norm_vector(dir);
-	ray = ft_create_ray(_3->cyl.coord, _3->cyl.norm);
-	ft_intersection_cyl(&lst, ray, _3);
-	ft_print_intersections(lst);
-}
-
-void	test_normal_at_cyl_181(t_canvas *canvas)
-{
-//parse
-	t_shapes	*_1 = (t_shapes *)canvas->objects->cont;
-	t_shapes	*_2 = (t_shapes *)canvas->objects->next->cont;
-	t_shapes	*_3 = (t_shapes *)canvas->objects->next->next->cont;
-	ft_print_tuple(_1->cyl.coord, "cyl origin");
-	ft_print_tuple(_1->cyl.norm, "cyl norm");
-	printf("cyl diameter %f\n", _1->cyl.size.diameter);
-	printf("cyl height %f\n\n", _1->cyl.size.height);
-	ft_print_tuple(_2->cyl.coord, "cyl origin");
-	ft_print_tuple(_2->cyl.norm, "cyl norm");
-	printf("cyl diameter %f\n", _2->cyl.size.diameter);
-	printf("cyl height %f\n\n", _2->cyl.size.height);
-	ft_print_tuple(_3->cyl.coord, "cyl origin");
-	ft_print_tuple(_3->cyl.norm, "cyl norm");
-	printf("cyl diameter %f\n", _3->cyl.size.diameter);
-	printf("cyl height %f\n", _3->cyl.size.height);
-
-	t_interlst	*lst;
-	t_ray		ray;
-
-	lst = NULL;
-	ray = ft_create_ray(_1->cyl.coord, _1->cyl.norm);
-	ft_intersection_cyl(&lst, ray, _1);
-	ft_print_intersections(lst);
-
-	lst = NULL;
-	ray = ft_create_ray(_2->cyl.coord, _2->cyl.norm);
-	ft_intersection_cyl(&lst, ray, _2);
-	ft_print_intersections(lst);
-
-	lst = NULL;
-	t_tuple pos = (t_tuple){0.5, 0, -5, 1};
-	t_tuple dir = (t_tuple){0.1, 1, 1, 0};
-	_3->cyl.coord = pos;
-	_3->cyl.norm = ft_norm_vector(dir);
-	ray = ft_create_ray(_3->cyl.coord, _3->cyl.norm);
-	ft_intersection_cyl(&lst, ray, _3);
-	ft_print_intersections(lst);
-}
-
 int	main(int argc, char *argv[])
 {
 	t_canvas canvas;
@@ -180,8 +48,6 @@ int	main(int argc, char *argv[])
 	ft_refreshframe(&canvas);
 
 	test_render_scene_shadow(&canvas);
-	//test_inter_cyl_178(&canvas);
-	//test_inter_cyl_180(&canvas);
 
 	test_mlx_end(&canvas);
 	(void)argc;
@@ -192,10 +58,9 @@ int	main(int argc, char *argv[])
 
 void	test_list()
 {
-
-	
-
 	/*
+	test_inter_cyl_178(&canvas);
+	test_inter_cyl_180(&canvas);
 	test_inter_plane_123();
 	test_plane_125(&canvas);
 	test_inter_plane_123();
