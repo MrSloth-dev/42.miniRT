@@ -29,10 +29,10 @@ t_matrix ft_rotate_matrix_y(double rad)
 	t_matrix	m;
 
 	m = ft_create_matrix(4, 4, 1);
-		m.data[0][0] = cos(rad);
-		m.data[0][2] = sin(rad);
-		m.data[2][0] = -sin(rad);
-		m.data[2][2] = cos(rad);
+	m.data[0][0] = cos(rad);
+	m.data[0][2] = sin(rad);
+	m.data[2][0] = -sin(rad);
+	m.data[2][2] = cos(rad);
 	return (m);
 }
 

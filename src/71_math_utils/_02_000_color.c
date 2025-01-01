@@ -17,6 +17,8 @@ t_color	ft_color_int_to_rgb(int color)
 	return (col);
 }
 
+//convert color tuple like red (10, 0, 0) 
+//to int 0xff0000 to paint pixels on mlx lib.
 int	ft_get_mlx_color(t_color color)
 {
 	if (color.x > 10)
@@ -29,4 +31,3 @@ int	ft_get_mlx_color(t_color color)
 	| (int)(color.y * 25.5f) << 8
 	| (int)(color.z * 25.5f));
 }
-/* convert color tuple like red (10, 0, 0) to int 0xff0000 to paint pixels on mlx lib.*/
