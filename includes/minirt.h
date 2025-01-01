@@ -159,18 +159,18 @@ t_tuple		ft_reflect(t_tuple incoming, t_tuple normal);
 t_material	ft_create_material(void);
 void		ft_material_to_shape(t_material m, t_shapes *shape);
 t_color		ft_lighting(t_material m, t_tuple point, t_light light, t_camera camera, t_tuple normal);
-t_color	ft_lighting_shadow(t_canvas *canvas, t_comp comp);
+t_color		ft_lighting_shadow(t_canvas *canvas, t_comp comp);
 
 
 // Chapter 7 - Making a Scene
-t_comp	ft_prepare_comp(t_inter *inter, t_ray ray);
-t_color	ft_shade_hit(t_canvas *canvas, t_comp comp);
-t_interlst	*ft_inter_world(t_canvas *canvas, t_ray ray);
+t_comp		ft_prepare_comp(t_inter *inter, t_ray ray);
+t_color		ft_shade_hit(t_canvas *canvas, t_comp comp);
+t_interlst	*ft_intersect_world(t_canvas *canvas, t_ray ray);
 t_color	ft_color_at(t_canvas *canvas, t_ray ray);
 t_matrix	ft_view_transformation(t_tuple from, t_tuple to, t_tuple up);
 // page 101
-t_camera	ft_create_world_camera(double h_size, double v_size, double fov);
-void		ft_create_world_camera_test(double h_size, double v_size, t_canvas *canvas);
+t_camera	ft_create_world_camera_old(double h_size, double v_size, double fov);
+void		ft_create_world_camera(double h_size, double v_size, t_canvas *canvas);
 t_ray		ft_ray_for_pixel(t_camera cam, double px, double py);
 void		ft_render(t_canvas *canvas, t_camera cam);
 

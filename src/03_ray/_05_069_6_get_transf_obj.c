@@ -11,7 +11,7 @@ t_matrix	ft_get_rotation_obj(t_tuple orien)
 		rotate = ft_rotate_matrix_z(orien.x * M_PI / 2);
 	if (orien.y)
 	{
-		rotate_y = ft_rotate_matrix_y( orien.y * M_PI / 2);
+		rotate_y = ft_rotate_matrix_y(orien.y * M_PI / 2);
 		if (orien.x)
 			rotate = ft_matrix_mult(rotate, rotate_y);
 		else
@@ -28,11 +28,12 @@ t_matrix	ft_get_rotation_obj(t_tuple orien)
 	return (rotate);
 }
 
-void ft_get_transf_obj(t_shapes *s, t_tuple coord, t_tuple orientation, t_tuple scale)
+void	ft_get_transf_obj(t_shapes *s, t_tuple coord,
+		t_tuple orientation, t_tuple scale)
 {
-	t_matrix translation;
-	t_matrix scaled;
-	t_matrix rotation;
+	t_matrix	translation;
+	t_matrix	scaled;
+	t_matrix	rotation;
 
 	scaled = ft_create_matrix(4, 4, 1);
 	translation = ft_translation_matrix(coord.x, coord.y, coord.z);
@@ -47,4 +48,3 @@ void ft_get_transf_obj(t_shapes *s, t_tuple coord, t_tuple orientation, t_tuple 
 	s->transposed = ft_transpose_matrix(s->transform);
 	s->inverted = ft_invert_matrix(s->transform);
 }
-

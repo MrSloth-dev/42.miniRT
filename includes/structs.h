@@ -211,4 +211,8 @@ typedef struct s_comp
 	t_tuple		normalv;
 	bool		inside;
 	bool		in_shadow;
+	t_color		efective_color;
+	t_color		specular;
+	t_color		ambient;
+	t_color		diffuse;
 } t_comp;

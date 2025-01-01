@@ -29,7 +29,7 @@ void	test_mlx_end(t_canvas *canvas)
 void	test_render_scene_shadow(t_canvas *canvas)
 {
 	//put inside create camera of parser
-	ft_create_world_camera_test(IMG_W, IMG_H, canvas);
+	ft_create_world_camera(IMG_W, IMG_H, canvas);
 	canvas->camera.transf = ft_view_transformation(canvas->camera.coord,
 					ft_add_tuple(canvas->camera.coord, canvas->camera.norm),
 									(t_tuple){0, 1, 0, 0});

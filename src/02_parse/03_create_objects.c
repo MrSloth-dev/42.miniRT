@@ -99,6 +99,7 @@ int	ft_create_camera(t_canvas *canvas, char **split)
 		return (ft_free_split(norm_split),
 			ft_printf(2, "Error, camera norm value is wrong\n"), 0);
 	canvas->camera.fov = ft_atod(split[3]) * M_PI / 180;
+	canvas->camera.field_v = canvas->camera.fov;
 	return (0);
 }
 
