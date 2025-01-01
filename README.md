@@ -13,9 +13,12 @@ TO-DO list
 - [x] Chapter 7 - Scene
 - [x] Chapter 8 - Shadows
 - [x] Chapter 9 - Planes
-- [!] Chapter 13 - Cylinders
+- [x] Chapter 13 - Cylinders
 - [x] Ivan - adjust specular and minimum light values 
         to never be in the dark, and accept different light colors in ambient
+- [ ] Ivan - continue norminette and documentation.
+- [ ] Ivan - do miro program scheme
+- [ ] Ivan - do miro maths scheme
 - [ ] Ivan - check for edge cases on ambient color.
 - [ ] Norminette previous chapters 1 to 6(kinda) .
 - [x] Make it work
@@ -37,6 +40,7 @@ PARSER ISSUES
 - [ ] upgrade atod ft - better conversion (training only purposes, not priority
 - [ ] file in folder like "teste/.rt" must NOT OPEN.
 - [ ] on ft_check_syntax verify my comment
+- [ ] argc must be "2"
 
 At the end of project (or in advanced state)
 - [ ] Remove wildcards from Makefile

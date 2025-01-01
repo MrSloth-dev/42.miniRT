@@ -7,7 +7,7 @@
  * @param ray origin ray
  * @return struct that is needed for computation
  */
-t_comp	ft_prepare_comp(t_inter *hit, t_ray ray)
+t_comp	ft_prepare_comp(t_inter *hit, t_ray ray, t_canvas *canvas)
 {
 	t_comp	temp;
 
@@ -25,5 +25,6 @@ t_comp	ft_prepare_comp(t_inter *hit, t_ray ray)
 	}
 	else
 		temp.inside = false;
+	temp.in_shadow = ft_is_shadowed(canvas, temp.over_point);
 	return (temp);
 }
