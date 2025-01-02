@@ -20,6 +20,9 @@ TO-DO list
 - [ ] Ivan - do miro program scheme
 - [ ] Ivan - do miro maths scheme
 - [ ] Ivan - check for edge cases on ambient color.
+- [ ] Ivan - on "comp" struct, change "ambient" var name to "ambient_on_object"
+- [ ] Ivan - on ray_for_pixel, save ray.pos on render at the beggining.
+- [ ] Ivan - on lighting ft, change lightv to light_vector
 - [ ] Norminette previous chapters 1 to 6(kinda) .
 - [x] Make it work
 - [ ] Make it robust
