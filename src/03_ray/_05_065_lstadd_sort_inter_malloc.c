@@ -39,7 +39,9 @@ void	ft_lstadd_sort_inter(t_interlst **lst, double value, t_shapes *shape)
 	t_inter		*node;
 	t_interlst	*new;
 
-	if (value < 0)
+	if ((value < 0)
+		|| (lst && *lst
+		&& value > ((t_inter *)(*lst)->cont)->value))
 		return ;
 	node = ft_create_inter(value, shape);
 	new = ft_lstnew(node);
