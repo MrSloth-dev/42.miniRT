@@ -12,7 +12,7 @@ t_color	ft_color_at(t_canvas *canvas, t_ray ray)
 	head = lst;
 	hit = ft_hit_inter(&lst);
 	if (!hit)
-		return (ft_free_objects(head), (t_color){-1, 0, 0, 3}); //why negative value here?
+		return (ft_free_objects(head), (t_color){0, 0, 0, 3});
 	comp = ft_prepare_comp(hit, ray, canvas);
 	color = ft_lighting_shadow(canvas, comp);
 	return (ft_free_objects(head), color);

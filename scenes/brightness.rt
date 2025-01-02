@@ -1,0 +1,17 @@
+A 0.2 255,255,255
+
+# Light placed at the left of the camera
+
+#C 0.0,5,-20 0,0,1 70
+
+#L -50,3,-20 0.6 10,0,255
+
+#sp 0,1.5,0 5 255,0,255
+
+# Light placed at the right of the camera
+
+C 0.0,3,-20 -1,0,1 70
+
+L 50,5,-20 0.6 255,0,0
+
+sp -12,3,0 5 255,0,255

@@ -23,6 +23,10 @@ TO-DO list
 - [ ] Ivan - on "comp" struct, change "ambient" var name to "ambient_on_object"
 - [ ] Ivan - on ray_for_pixel, save ray.pos on render at the beggining.
 - [ ] Ivan - on lighting ft, change lightv to light_vector
+- [ ] Edite scenes on scene folder for evaluation
+        - done cylinders.rt
+        - done random.rt
+- [ ] Setup strings on screen for commands
 - [ ] Norminette previous chapters 1 to 6(kinda) .
 - [x] Make it work
 - [ ] Make it robust
@@ -44,6 +48,7 @@ PARSER ISSUES
 - [ ] file in folder like "teste/.rt" must NOT OPEN.
 - [ ] on ft_check_syntax verify my comment
 - [ ] argc must be "2"
+- [ ] ignore lines starting by #
 
 At the end of project (or in advanced state)
 - [ ] Remove wildcards from Makefile
