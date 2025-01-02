@@ -26,18 +26,6 @@ void	test_mlx_end(t_canvas *canvas)
 	ft_free_canvas(canvas);
 }
 
-void	test_render_scene_shadow(t_canvas *canvas)
-{
-	//put inside create camera of parser
-	ft_create_world_camera(IMG_W, IMG_H, canvas);
-	canvas->camera.transf = ft_view_transformation(canvas->camera.coord,
-					ft_add_tuple(canvas->camera.coord, canvas->camera.norm),
-									(t_tuple){0, 1, 0, 0});
-	ft_print_tuple(canvas->camera.norm, "camera norm");
-	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
-	ft_render(canvas, (t_camera)canvas->camera);
-}
-
 int	main(int argc, char *argv[])
 {
 	t_canvas canvas;
@@ -47,7 +35,8 @@ int	main(int argc, char *argv[])
 	test_mlx_start(&canvas);
 	ft_refreshframe(&canvas);
 
-	test_render_scene_shadow(&canvas);
+	ft_render(&canvas);
+
 
 	test_mlx_end(&canvas);
 	(void)argc;
