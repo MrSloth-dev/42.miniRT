@@ -39,12 +39,13 @@ void	ft_render(t_canvas *canvas)
 	t_ray	ray;
 
 	h = ft_iter(0);
+	ray.pos = ft_mult_matrix_tuple(canvas->camera.inverted, (t_tuple){0, 0, 0, 1});
 	while (h.y < IMG_H)
 	{
 		h.x = 0;
 		while (h.x < IMG_W)
 		{
-			ray = ft_ray_for_pixel(canvas->camera, h.x, h.y);
+			ft_ray_for_pixel(canvas->camera, h.x, h.y, &ray);
 			color = ft_color_at(canvas, ray);
 			ft_custom_pixel_put(canvas, &h, color);
 			h.x += STEP;

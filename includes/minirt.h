@@ -170,7 +170,7 @@ t_color		ft_color_at(t_canvas *canvas, t_ray ray);
 t_matrix	ft_view_transformation(t_tuple from, t_tuple to, t_tuple up);
 t_camera	ft_create_world_camera_old(double h_size, double v_size, double fov);
 void		ft_create_world_camera(double h_size, double v_size, t_canvas *canvas);
-t_ray		ft_ray_for_pixel(t_camera cam, double px, double py);
+void		ft_ray_for_pixel(t_camera cam, double px, double py, t_ray *ray);
 void		ft_render(t_canvas *canvas);
 
 //Chapter 8 - Shaddows

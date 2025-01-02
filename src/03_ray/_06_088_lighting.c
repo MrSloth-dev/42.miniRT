@@ -4,7 +4,7 @@ static void	ft_set_ambient_and_efective_color(t_canvas *canvas, t_comp *comp)
 {
 	comp->efective_color = ft_operator(comp->shape->material.color,
 			'*', canvas->light.color);
-	comp->ambient = ft_operator(comp->efective_color,
+	comp->ambient_on_object = ft_operator(comp->efective_color,
 			'*', comp->shape->material.ambient_color);
 }
 
@@ -37,7 +37,7 @@ t_color	ft_lighting_shadow(t_canvas *canvas, t_comp comp)
 
 	ft_set_ambient_and_efective_color(canvas, &comp);
 	if (comp.in_shadow == true)
-		return (comp.ambient);
+		return (comp.ambient_on_object);
 	lightv = ft_norm_vector(ft_sub_tuple(canvas->light.coord, comp.over_point));
 	light_dot_normal = ft_dotprod_vector(lightv, comp.normalv);
 	reflect_dot_eye = 0;
@@ -53,6 +53,6 @@ t_color	ft_lighting_shadow(t_canvas *canvas, t_comp comp)
 	}
 	comp.specular = ft_get_final_specular(reflect_dot_eye, canvas, &comp);
 	return (ft_add_tuple(
-			ft_add_tuple(comp.specular, comp.ambient),
+			ft_add_tuple(comp.specular, comp.ambient_on_object),
 			comp.diffuse));
 }

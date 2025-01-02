@@ -213,6 +213,6 @@ typedef struct s_comp
 	bool		in_shadow;
 	t_color		efective_color;
 	t_color		specular;
-	t_color		ambient;
+	t_color		ambient_on_object;
 	t_color		diffuse;
 } t_comp;

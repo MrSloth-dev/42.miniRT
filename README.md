@@ -17,11 +17,11 @@ TO-DO list
 - [x] Ivan - adjust specular and minimum light values 
         to never be in the dark, and accept different light colors in ambient
 - [ ] Ivan - continue norminette and documentation.
-- [ ] Ivan - do miro program scheme
-- [ ] Ivan - do miro maths scheme
+- [!] Ivan - do miro program scheme
+- [ ] Ivan - do sketchup rays scheme
 - [ ] Ivan - check for edge cases on ambient color.
-- [ ] Ivan - on "comp" struct, change "ambient" var name to "ambient_on_object"
-- [ ] Ivan - on ray_for_pixel, save ray.pos on render at the beggining.
+- [x] Ivan - on "comp" struct, change "ambient" var name to "ambient_on_object"
+- [x] Ivan - on ray_for_pixel, save ray.pos on render at the beggining.
 - [ ] Ivan - on lighting ft, change lightv to light_vector
 - [ ] Edite scenes on scene folder for evaluation
         - done cylinders.rt
