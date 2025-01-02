@@ -100,6 +100,12 @@ int	ft_create_camera(t_canvas *canvas, char **split)
 			ft_printf(2, "Error, camera norm value is wrong\n"), 0);
 	canvas->camera.fov = ft_atod(split[3]) * M_PI / 180;
 	canvas->camera.field_v = canvas->camera.fov;
+	ft_create_world_camera(IMG_W, IMG_H, canvas);
+	canvas->camera.transf = ft_view_transformation(canvas->camera.coord,
+					ft_add_tuple(canvas->camera.coord, canvas->camera.norm),
+									(t_tuple){0, 1, 0, 0});
+	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
+
 	return (0);
 }
 
@@ -277,7 +283,7 @@ int	ft_create_cylinder(t_canvas *canvas, char **split)
 	shape->cyl.size.max = shape->cyl.size.height / 2;
 	shape->cyl.size.min = -shape->cyl.size.max; 
 	ft_get_transf_obj(shape, shape->cyl.coord, shape->cyl.norm,
-		   (t_tuple) {shape->cyl.size.diameter, shape->cyl.size.height, shape->cyl.size.diameter, 0});
+		   (t_tuple) {shape->cyl.size.diameter, 1, shape->cyl.size.diameter, 0});
 	ft_lstadd_back(&canvas->objects, ft_lstnew(shape));
 	return (0);
 }

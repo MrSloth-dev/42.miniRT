@@ -32,7 +32,7 @@ void	ft_custom_pixel_put(t_canvas *canvas, t_iter *h, t_tuple color)
 	}
 }
 
-void	ft_render(t_canvas *canvas, t_camera cam)
+void	ft_render(t_canvas *canvas)
 {
 	t_iter	h;
 	t_tuple	color;
@@ -44,7 +44,7 @@ void	ft_render(t_canvas *canvas, t_camera cam)
 		h.x = 0;
 		while (h.x < IMG_W)
 		{
-			ray = ft_ray_for_pixel(cam, h.x, h.y);
+			ray = ft_ray_for_pixel(canvas->camera, h.x, h.y);
 			color = ft_color_at(canvas, ray);
 			ft_custom_pixel_put(canvas, &h, color);
 			h.x += STEP;

@@ -166,27 +166,26 @@ t_color		ft_lighting_shadow(t_canvas *canvas, t_comp comp);
 t_comp		ft_prepare_comp(t_inter *inter, t_ray ray, t_canvas *canvas);
 t_color		ft_shade_hit(t_canvas *canvas, t_comp comp);
 t_interlst	*ft_intersect_world(t_canvas *canvas, t_ray ray);
-t_color	ft_color_at(t_canvas *canvas, t_ray ray);
+t_color		ft_color_at(t_canvas *canvas, t_ray ray);
 t_matrix	ft_view_transformation(t_tuple from, t_tuple to, t_tuple up);
-// page 101
 t_camera	ft_create_world_camera_old(double h_size, double v_size, double fov);
 void		ft_create_world_camera(double h_size, double v_size, t_canvas *canvas);
 t_ray		ft_ray_for_pixel(t_camera cam, double px, double py);
-void		ft_render(t_canvas *canvas, t_camera cam);
+void		ft_render(t_canvas *canvas);
 
 //Chapter 8 - Shaddows
-bool	ft_is_shadowed(t_canvas *canvas, t_tuple point);
+bool		ft_is_shadowed(t_canvas *canvas, t_tuple point);
 t_color		OLD_ft_lighting_shadow(t_material m, t_tuple point, t_light light, t_camera camera, t_tuple normal, bool in_shadow);
 
-t_color	ft_lighting_shadow(t_canvas *canvas, t_comp comp);
-t_color	ft_shade_hit_shadow(t_canvas *canvas, t_comp comp);
+t_color		ft_lighting_shadow(t_canvas *canvas, t_comp comp);
+t_color		ft_shade_hit_shadow(t_canvas *canvas, t_comp comp);
 
 //Chapter 9 - Plane
-void	ft_intersection_plane(t_interlst **lst, t_ray ray, t_shapes *shap);
+void		ft_intersection_plane(t_interlst **lst, t_ray ray, t_shapes *shap);
 
 //Chapter 13 - Cylinder
-void	ft_intersection_cyl(t_interlst **lst, t_ray ray, t_shapes *shap);
-t_tuple	ft_normal_at_cyl(t_shapes *shape, t_tuple w_point);
+void		ft_intersection_cyl(t_interlst **lst, t_ray ray, t_shapes *shap);
+t_tuple		ft_normal_at_cyl(t_shapes *shape, t_tuple w_point);
 
 
 //TESTING/////////////////////////////////////////////
