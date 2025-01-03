@@ -91,7 +91,7 @@ $(NAME): $(OBJS) $(HEADER)
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
 	@make -C $(PRINTDIR) -s
 	@make -C $(LIBX_DIR) -s
-	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME) -DDEBUG=1
+	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME) -DDEBUG=0
 	@printf "$(GREEN)$(NAME) created$(CLR_RMV) ✅\n"
 
 LIBX_DIR = minilibx-linux
