@@ -10,18 +10,21 @@ int	ft_check_file(char *file)
 	int fd;
 
 	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (close(fd), ft_printf(2, "Error\nFile not found\n"), 0);
+	close(fd);
 	len = ft_strlen(file);
-	if (fd == -1 || (!file || !ft_strchr(file, '.') || len < 4))
-		return (close(fd), ft_printf(2, "Error\n File not valid\n"), 0);
-	if (len > 4 && file[len - 4] == '/')
-		return (close(fd), ft_printf(2, "Error\n File not valid\n"), 0);
+	ft_printf(2, "file = %s\n", file); 
+	if (!ft_strchr(file, '.') || len < 4)
+		return (ft_printf(2, "Error\nFile what not valid\n"), 0);
+	if (len > 4 && file[len - 3] == '/')
+		return (ft_printf(2, "Error\nFile not valid sneaker basterd!\n"), 0);
 	dotindex = 0;
 	while (file && file[dotindex] != '.')
 		dotindex++;
-	if (dotindex == len - 3)
-		if (file[dotindex + 1] == 'r' && file[dotindex + 2] == 't')
-		return (close(fd), ft_printf(2, "File Accepted!\n"), 1);
-	return (close(fd),ft_printf(2, "Error\n File not valid\n"), 0);
+	if (dotindex == len - 3 && file[dotindex + 1] == 'r' && file[dotindex + 2] == 't')
+		return (ft_printf(1, "File Accepted!\n"), 1);
+	return (ft_printf(2, "Error\n File not valid end of line\n"), 0);
 }
 
 int	ft_parse_line(char **split, t_canvas *canvas)
@@ -63,6 +66,8 @@ int	ft_parse_objects(t_canvas *canvas)
 		// error += ft_parse_line(split, canvas);
 		ft_free_split(split);
 		line = ft_free(line);
+		if (error)
+			break ;
 		line = get_next_line(fd);
 	}
 	line = ft_free(line);
@@ -81,7 +86,6 @@ void	ft_set_objects_material_color(t_canvas *canvas)
 	{
 		((t_shapes *)cur->cont)->material.ambient_color = canvas->ambient.color;
 		((t_shapes *)cur->cont)->selected = false;
-		//ft_print_tuple(canvas->ambient.color, "ambient color");
 		cur = cur->next;
 	}
 }

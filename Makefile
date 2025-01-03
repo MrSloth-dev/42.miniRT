@@ -6,7 +6,7 @@ NAME = miniRT
 CC = cc
 CFLAGS = -Iincludes -g
 EFLAGS = -Wall -Wextra -Werror
-MLXFLAGS = -O3 -ffast-math -march=native -Lminilibx-linux -lm -lmlx -lX11 -lXext -pg
+MLXFLAGS = -O3 -ffast-math -march=native -Lminilibx-linux -lm -lmlx -lX11 -lXext -g
 
 CLR_RMV = \033[0m
 RED	    = \033[1;31m
@@ -91,7 +91,7 @@ $(NAME): $(OBJS) $(HEADER)
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
 	@make -C $(PRINTDIR) -s
 	@make -C $(LIBX_DIR) -s
-	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME)
+	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME) -DDEBUG=1
 	@printf "$(GREEN)$(NAME) created$(CLR_RMV) ✅\n"
 
 LIBX_DIR = minilibx-linux
@@ -106,6 +106,8 @@ $(LIBX_DIR) : $(LIBX_HEADER)
 
 libx : $(LIBX_DIR) $(LIBX_HEADER)
 
+p :
+	./parser_testing/parser_testing.sh
 .PHONY: norm
 norm:
 	@norminette | grep -E 'Error:|rror!'
