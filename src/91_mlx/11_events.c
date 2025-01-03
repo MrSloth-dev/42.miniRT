@@ -80,6 +80,6 @@ int	ft_refreshframe(void *ptr)
 	canvas->img->addr = mlx_get_data_addr(canvas->img->img,
 			&canvas->img->bits_per_pixel,
 			&canvas->img->size_line, &canvas->img->endian);
-	ft_render(canvas, canvas->camera);
+	ft_render(canvas);
 	return (0);
 }
