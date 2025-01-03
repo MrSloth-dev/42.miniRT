@@ -10,10 +10,12 @@ void	ft_init_canvas(t_canvas *canvas)
 	canvas->help = 0;
 	canvas->step = STEP;
 	ft_bzero(canvas->char_step, 2);
-	canvas->drag = 0;
-	canvas->mouse_x = 0;
-	canvas->mouse_y = 0;
-	canvas->mouse_calc = 0;
+
+	canvas->mouse_drag = 0;
+	canvas->mouse_prev_x = -1;
+	canvas->mouse_sum_x = 0;
+	canvas->mouse_prev_y = -1;
+	canvas->mouse_sum_y = 0;
 
 	canvas->objects = NULL;
 	canvas->light = ft_init_light((t_tuple){0, 0, 0, 0}, 0.0f, (t_color){0, 0, 0, 0});

@@ -106,6 +106,9 @@ int		ft_handle_key_hook(int key, t_canvas *canvas);
 int		ft_free_mlx(t_canvas *canvas);
 void	ft_menu(t_canvas *canvas);
 
+//events
+int	mouse_motion(int x, int y, t_canvas *canvas);
+
 // Chapter 1 - Tuples, Points and Vectors
 void		ft_tuple_init(t_tuple *tuple, t_point coord, int type);
 t_tuple		ft_add_tuple(t_tuple tuple1, t_tuple tuple2);
