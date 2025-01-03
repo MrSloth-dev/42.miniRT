@@ -39,5 +39,7 @@ void	ft_free_objects(t_objects *list)
 void	ft_free_canvas(t_canvas *canvas)
 {
 	ft_free_objects(canvas->objects);
+	ft_free(canvas->img);
+	ft_free(canvas->mlx);
 }
 

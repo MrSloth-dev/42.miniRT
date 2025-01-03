@@ -1,12 +1,12 @@
 #include "minirt.h"
 
+
 void	ft_mlx_init(t_canvas *canvas)
 {
 	canvas->mlx = mlx_init();
 	if (canvas->mlx == NULL)
 		exit(ERR_MLX);
-	canvas->name = "minirt";
-	canvas->win = mlx_new_window(canvas->mlx, WIN_W, WIN_H, canvas->name);
+	canvas->win = mlx_new_window(canvas->mlx, WIN_W, WIN_H, "miniRT");
 	if (canvas->win == NULL)
 	{
 		mlx_destroy_display(canvas->mlx);
