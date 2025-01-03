@@ -38,14 +38,16 @@ t_matrix	ft_transform_camera(t_matrix m, int key)
 }
 int	key_handler(int keysym, t_canvas *canvas)
 {
-	if (keysym == XK_Escape || keysym == XK_q)
+	if (keysym == XK_Escape)
 		close_handler(canvas);
 	else if (keysym == XK_h)
 			canvas->help = !canvas->help;
 	else
 	{
-		if (keysym == XK_r)
-		canvas->camera.transf = ft_transform_camera(canvas->camera.transf, keysym);
+		if (keysym == XK_r) // Maybe add reset to objects also
+			canvas->camera.transf = canvas->camera.reset;
+		else
+			canvas->camera.transf = ft_transform_camera(canvas->camera.transf, keysym);
 		canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
 	}
 	ft_refreshframe(canvas);
