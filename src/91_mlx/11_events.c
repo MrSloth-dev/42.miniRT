@@ -103,64 +103,16 @@ int	mouse_handler_release(int mousecode, int x, int y, t_canvas *canvas)
 	(void)x;
 	(void)y;
 	if (mousecode == 3)
-	{
-		canvas->drag = 0;
-		printf("release\n");
-	}
+		canvas->mouse_drag = 0;
 	return (0);
 }
 
-t_matrix	ft_transform_camera_mouse(t_matrix m, int key)
-{
-	if (key == 1)
-		return (ft_matrix_mult(m, ft_rotate_matrix_y(M_PI / 20)));
-	else if (key == 2)
-		return (ft_matrix_mult(m, ft_rotate_matrix_y(-M_PI / 20)));
-	else if (key == 3)
-		return (ft_matrix_mult(m, ft_rotate_matrix_x(-M_PI / 20)));
-	else if (key == 4)
-		return (ft_matrix_mult(m, ft_rotate_matrix_x(M_PI / 20)));
-	return (m);
-}
-
-int	mouse_motion(int x, int y, t_canvas *canvas)
-{
-	(void)y;
-	if (canvas->drag == 1)
-	{
-		if (canvas->mouse_x == 0)
-			canvas->mouse_x = x;
-		else if (canvas->mouse_calc == 1)
-			canvas->mouse_x = x;
-
-		printf("canvas mouse x = %d\n", canvas->mouse_x);
-		if (canvas->mouse_x > 200)
-		{
-			printf("x = %d, mouse_x = %d\n", x, canvas->mouse_x);
-			canvas->camera.transf = ft_transform_camera_mouse(canvas->camera.transf, 2);
-			canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
-			canvas->mouse_x = 0;
-		}
-		else if (canvas->mouse_x < -200)
-		{
-			printf("x = %d, mouse_x = %d\n", x, canvas->mouse_x);
-			canvas->camera.transf = ft_transform_camera_mouse(canvas->camera.transf, 1);
-			canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
-			canvas->mouse_x = 0;
-		}
-
-	}
-	return (0);
-}
 
 
 int	mouse_handler(int mousecode, int x, int y, t_canvas *canvas)
 {
-	if (mousecode == 3) // 5
-	{
-		canvas->drag = 1;
-		printf("press\n");
-	}
+	if (mousecode == 3)
+		canvas->mouse_drag = 1;
 	if (mousecode == 1) // 4
 		ft_select_obj(x, y, canvas);
 	else if (mousecode == 4) // 5

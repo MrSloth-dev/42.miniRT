@@ -187,10 +187,11 @@ typedef struct s_canvas
 	t_cylinder	*cylinder;
 	t_count		count;
 
-	int			drag;
-	int			mouse_calc;
-	int			mouse_x;
-	int			mouse_y;
+	int			mouse_drag;
+	int			mouse_prev_x;
+	int			mouse_sum_x;
+	int			mouse_prev_y;
+	int			mouse_sum_y;
 }	t_canvas;
 
 typedef struct s_iter
