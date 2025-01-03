@@ -21,23 +21,26 @@
 #define YELLOW "\e[1;3;93m"
 #define RESET "\e[0m"
 
-#define WIN_H 450
-#define WIN_W 900
+#define WIN_H 700 / 1.8
+#define WIN_W 700
 
-#define IMG_H 450
-#define IMG_W 900
+#define IMG_H 700 / 1.8
+#define IMG_W 700
 
 #define HEIGHT_POS 16
 #define W_POS 12
 #define TEXT_H_ZONE 300
 #define TEXT_W_ZONE 250
 
-#define STEP 2
+#define STEP 9
 #define ROUND_ERROR 0.000001
 //#define ROUND_ERROR 0.00001
 //
 #define ERR_INPUT 1
 #define ERR_MLX 2
+
+#define EVENT_MOUSE_MOTION  6   // Detect mouse movement
+#define MASK_POINTER_MOTION (1L << 6) // Event mask for motion detection
 
 #define T_VECTOR 0
 #define T_POINT 1
@@ -92,7 +95,9 @@ int		ft_create_cylinder(t_canvas *canvas, char **split);
 int		ft_setup(t_canvas *canvas);
 int		ft_refreshframe(void *ptr);
 int		close_handler(t_canvas *canvas);
-int		mouse_handler(int mousecode, t_canvas *canvas);
+int		mouse_handler(int mousecode, int x, int y, t_canvas *canvas);
+int		mouse_handler_release(int mousecode, int x, int y, t_canvas *canvas);
+int		mouse_motion(int x, int y, t_canvas *canvas);
 int		key_handler(int keysym, t_canvas *canvas);
 void		ft_mlx_init(t_canvas *canvas);
 void		ft_pixel_put(t_img *data, int x, int y, int color);
@@ -177,6 +182,7 @@ t_color		ft_color_at(t_canvas *canvas, t_ray ray);
 t_matrix	ft_view_transformation(t_tuple from, t_tuple to, t_tuple up);
 t_camera	ft_create_world_camera_old(double h_size, double v_size, double fov);
 void		ft_create_world_camera(double h_size, double v_size, t_canvas *canvas);
+void	ft_update_world_camera(t_canvas *canvas);
 void		ft_ray_for_pixel(t_camera cam, double px, double py, t_ray *ray);
 void		ft_render(t_canvas *canvas);
 
