@@ -4,8 +4,8 @@ static void	ft_set_ambient_and_efective_color(t_canvas *canvas, t_comp *comp)
 {
 	comp->efective_color = ft_operator(comp->shape->material.color,
 			'*', canvas->light.color);
-	comp->ambient_on_object = ft_operator(comp->efective_color,
-			'*', comp->shape->material.ambient_color);
+	comp->ambient_on_object = ft_add_tuple(ft_operator(comp->efective_color,
+			'*', comp->shape->material.ambient_color), comp->ambient_on_object);
 }
 
 static void	ft_set_diffuse_and_specular_to_black(t_comp *comp)

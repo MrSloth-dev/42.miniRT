@@ -61,20 +61,19 @@ void	ft_intersection_cyl(t_interlst **lst, t_ray ray, t_shapes *shap)
 	h.a = ray.dir.x * ray.dir.x + ray.dir.z * ray.dir.z;
 	if (!(h.a < ROUND_ERROR && h.a > -ROUND_ERROR))
 	{
-		while (1)
+		h.b = 2 * ray.pos.x * ray.dir.x + 2 * ray.pos.z * ray.dir.z;
+		h.cc = ray.pos.x * ray.pos.x + ray.pos.z * ray.pos.z - 1;
+		discriminant = h.b * h.b - 4 * h.a * h.cc;
+		if (discriminant < 0)
 		{
-			h.b = 2 * ray.pos.x * ray.dir.x + 2 * ray.pos.z * ray.dir.z;
-			h.cc = ray.pos.x * ray.pos.x + ray.pos.z * ray.pos.z - 1;
-			discriminant = h.b * h.b - 4 * h.a * h.cc;
-			if (discriminant < 0)
-				break ;
-			two_a = 2 * h.a;
-			sqrt_discriminant = sqrt(discriminant);
-			h.inter_one = (-h.b - sqrt_discriminant) / two_a;
-			h.inter_two = (-h.b + sqrt_discriminant) / two_a;
-			ft_cyl_limits_and_intersect(lst, ray, shap, &h);
-			break ;
+			ft_intersect_cyl_caps(lst, ray, shap);
+			return ;
 		}
+		two_a = 2 * h.a;
+		sqrt_discriminant = sqrt(discriminant);
+		h.inter_one = (-h.b - sqrt_discriminant) / two_a;
+		h.inter_two = (-h.b + sqrt_discriminant) / two_a;
+		ft_cyl_limits_and_intersect(lst, ray, shap, &h);
 	}
 	ft_intersect_cyl_caps(lst, ray, shap);
 }

@@ -98,8 +98,7 @@ int	ft_create_camera(t_canvas *canvas, char **split)
 	else
 		return (ft_free_split(norm_split),
 			ft_printf(2, "Error, camera norm value is wrong\n"), 0);
-	canvas->camera.fov = ft_atod(split[3]) * M_PI / 180;
-	canvas->camera.field_v = canvas->camera.fov;
+	canvas->camera.field_v = ft_atod(split[3]) * M_PI / 180;
 	ft_create_world_camera(IMG_W, IMG_H, canvas);
 	canvas->camera.transf = ft_view_transformation(canvas->camera.coord,
 					ft_add_tuple(canvas->camera.coord, canvas->camera.norm),

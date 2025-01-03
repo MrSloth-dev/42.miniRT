@@ -1,0 +1,342 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  Ts/call  Ts/call  name    
+ 21.10      4.83     4.83                             ft_set_transf_ray
+ 19.44      9.28     4.45                             ft_mult_matrix_tuple
+ 11.53     11.92     2.64                             ft_intersect_world
+  7.47     13.63     1.71                             ft_intersection_sphere
+  5.11     14.80     1.17                             ft_pixel_put
+  4.76     15.89     1.09                             ft_intersection_cyl
+  4.67     16.96     1.07                             ft_dotprod_vector
+  3.15     17.68     0.72                             ft_is_a_cyl_cap
+  2.75     18.31     0.63                             ft_get_mlx_color
+  2.23     18.82     0.51                             ft_custom_pixel_put
+  1.97     19.27     0.45                             ft_assert
+  1.83     19.69     0.42                             ft_ray_for_pixel
+  1.53     20.04     0.35                             ft_intersect_cyl_caps
+  1.44     20.37     0.33                             ft_render
+  1.31     20.67     0.30                             ft_sub_tuple
+  1.18     20.94     0.27                             ft_lighting_shadow
+  1.18     21.21     0.27                             ft_operator
+  0.96     21.43     0.22                             ft_norm_vector
+  0.66     21.58     0.15                             ft_color_at
+  0.61     21.72     0.14                             ft_transpose_matrix
+  0.57     21.85     0.13                             ft_prepare_comp
+  0.48     21.96     0.11                             ft_cyl_limits_and_intersect
+  0.44     22.06     0.10                             ft_is_shadowed
+  0.39     22.15     0.09                             _init
+  0.35     22.23     0.08                             ft_set_ambient_and_efective_color
+  0.31     22.30     0.07                             ft_intersection_plane
+  0.31     22.37     0.07                             ft_reflect
+  0.26     22.43     0.06                             ft_hit_inter
+  0.26     22.49     0.06                             ft_lstadd_sort_inter
+  0.22     22.54     0.05                             ft_distance_ray
+  0.22     22.59     0.05                             ft_normal_at_cyl
+  0.17     22.63     0.04                             ft_create_inter
+  0.17     22.67     0.04                             ft_normal_at_plane
+  0.13     22.70     0.03                             ft_free
+  0.13     22.73     0.03                             ft_normal_at_sph
+  0.09     22.75     0.02                             ft_free_objects
+  0.09     22.77     0.02                             ft_get_final_specular
+  0.09     22.79     0.02                             ft_lstnew
+  0.09     22.81     0.02                             ft_magn_tuple
+  0.09     22.83     0.02                             ft_neg_tuple
+  0.09     22.85     0.02                             ft_put_intersection_on_lst
+  0.09     22.87     0.02                             ft_scalar_tuple
+  0.04     22.88     0.01                             ft_add_tuple
+  0.04     22.89     0.01                             ft_iter
+  0.00     22.89     0.00       42     0.00     0.00  ft_cleanfile
+  0.00     22.89     0.00       42     0.00     0.00  get_next_line
+  0.00     22.89     0.00        1     0.00     0.00  test_mlx_end
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2022 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 4 byte(s) for 0.04% of 22.89 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     21.1    4.83    0.00                 ft_set_transf_ray [1]
+-----------------------------------------------
+                                                 <spontaneous>
+[2]     19.4    4.45    0.00                 ft_mult_matrix_tuple [2]
+-----------------------------------------------
+                                                 <spontaneous>
+[3]     11.5    2.64    0.00                 ft_intersect_world [3]
+-----------------------------------------------
+                                                 <spontaneous>
+[4]      7.5    1.71    0.00                 ft_intersection_sphere [4]
+-----------------------------------------------
+                                                 <spontaneous>
+[5]      5.1    1.17    0.00                 ft_pixel_put [5]
+-----------------------------------------------
+                                                 <spontaneous>
+[6]      4.8    1.09    0.00                 ft_intersection_cyl [6]
+-----------------------------------------------
+                                                 <spontaneous>
+[7]      4.7    1.07    0.00                 ft_dotprod_vector [7]
+-----------------------------------------------
+                                                 <spontaneous>
+[8]      3.1    0.72    0.00                 ft_is_a_cyl_cap [8]
+-----------------------------------------------
+                                                 <spontaneous>
+[9]      2.8    0.63    0.00                 ft_get_mlx_color [9]
+-----------------------------------------------
+                                                 <spontaneous>
+[10]     2.2    0.51    0.00                 ft_custom_pixel_put [10]
+-----------------------------------------------
+                                                 <spontaneous>
+[11]     2.0    0.45    0.00                 ft_assert [11]
+-----------------------------------------------
+                                                 <spontaneous>
+[12]     1.8    0.42    0.00                 ft_ray_for_pixel [12]
+-----------------------------------------------
+                                                 <spontaneous>
+[13]     1.5    0.35    0.00                 ft_intersect_cyl_caps [13]
+-----------------------------------------------
+                                                 <spontaneous>
+[14]     1.4    0.33    0.00                 ft_render [14]
+-----------------------------------------------
+                                                 <spontaneous>
+[15]     1.3    0.30    0.00                 ft_sub_tuple [15]
+-----------------------------------------------
+                                                 <spontaneous>
+[16]     1.2    0.27    0.00                 ft_lighting_shadow [16]
+-----------------------------------------------
+                                                 <spontaneous>
+[17]     1.2    0.27    0.00                 ft_operator [17]
+-----------------------------------------------
+                                                 <spontaneous>
+[18]     1.0    0.22    0.00                 ft_norm_vector [18]
+-----------------------------------------------
+                                                 <spontaneous>
+[19]     0.7    0.15    0.00                 ft_color_at [19]
+-----------------------------------------------
+                                                 <spontaneous>
+[20]     0.6    0.14    0.00                 ft_transpose_matrix [20]
+-----------------------------------------------
+                                                 <spontaneous>
+[21]     0.6    0.13    0.00                 ft_prepare_comp [21]
+-----------------------------------------------
+                                                 <spontaneous>
+[22]     0.5    0.11    0.00                 ft_cyl_limits_and_intersect [22]
+-----------------------------------------------
+                                                 <spontaneous>
+[23]     0.4    0.10    0.00                 ft_is_shadowed [23]
+-----------------------------------------------
+                                                 <spontaneous>
+[24]     0.4    0.09    0.00                 _init [24]
+-----------------------------------------------
+                                                 <spontaneous>
+[25]     0.3    0.08    0.00                 ft_set_ambient_and_efective_color [25]
+-----------------------------------------------
+                                                 <spontaneous>
+[26]     0.3    0.07    0.00                 ft_intersection_plane [26]
+-----------------------------------------------
+                                                 <spontaneous>
+[27]     0.3    0.07    0.00                 ft_reflect [27]
+-----------------------------------------------
+                                                 <spontaneous>
+[28]     0.3    0.06    0.00                 ft_hit_inter [28]
+-----------------------------------------------
+                                                 <spontaneous>
+[29]     0.3    0.06    0.00                 ft_lstadd_sort_inter [29]
+-----------------------------------------------
+                                                 <spontaneous>
+[30]     0.2    0.05    0.00                 ft_distance_ray [30]
+-----------------------------------------------
+                                                 <spontaneous>
+[31]     0.2    0.05    0.00                 ft_normal_at_cyl [31]
+-----------------------------------------------
+                                                 <spontaneous>
+[32]     0.2    0.04    0.00                 ft_create_inter [32]
+-----------------------------------------------
+                                                 <spontaneous>
+[33]     0.2    0.04    0.00                 ft_normal_at_plane [33]
+-----------------------------------------------
+                                                 <spontaneous>
+[34]     0.1    0.03    0.00                 ft_free [34]
+-----------------------------------------------
+                                                 <spontaneous>
+[35]     0.1    0.03    0.00                 ft_normal_at_sph [35]
+-----------------------------------------------
+                                                 <spontaneous>
+[36]     0.1    0.02    0.00                 ft_free_objects [36]
+-----------------------------------------------
+                                                 <spontaneous>
+[37]     0.1    0.02    0.00                 ft_get_final_specular [37]
+-----------------------------------------------
+                                                 <spontaneous>
+[38]     0.1    0.02    0.00                 ft_lstnew [38]
+-----------------------------------------------
+                                                 <spontaneous>
+[39]     0.1    0.02    0.00                 ft_magn_tuple [39]
+-----------------------------------------------
+                                                 <spontaneous>
+[40]     0.1    0.02    0.00                 ft_neg_tuple [40]
+-----------------------------------------------
+                                                 <spontaneous>
+[41]     0.1    0.02    0.00                 ft_put_intersection_on_lst [41]
+-----------------------------------------------
+                                                 <spontaneous>
+[42]     0.1    0.02    0.00                 ft_scalar_tuple [42]
+-----------------------------------------------
+                                                 <spontaneous>
+[43]     0.0    0.01    0.00                 ft_add_tuple [43]
+-----------------------------------------------
+                                                 <spontaneous>
+[44]     0.0    0.01    0.00                 ft_iter [44]
+-----------------------------------------------
+                0.00    0.00      42/42          get_next_line [46]
+[45]     0.0    0.00    0.00      42         ft_cleanfile [45]
+-----------------------------------------------
+                0.00    0.00      21/42          ft_parse_objects [124]
+                0.00    0.00      21/42          ft_check_syntax [65]
+[46]     0.0    0.00    0.00      42         get_next_line [46]
+                0.00    0.00      42/42          ft_cleanfile [45]
+-----------------------------------------------
+                0.00    0.00       1/1           main [185]
+[47]     0.0    0.00    0.00       1         test_mlx_end [47]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2022 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [24] _init                   [3] ft_intersect_world     [35] ft_normal_at_sph
+  [43] ft_add_tuple            [6] ft_intersection_cyl    [17] ft_operator
+  [11] ft_assert              [26] ft_intersection_plane   [5] ft_pixel_put
+  [45] ft_cleanfile            [4] ft_intersection_sphere [21] ft_prepare_comp
+  [19] ft_color_at             [8] ft_is_a_cyl_cap (_13_177_intersection_cyl.c) [41] ft_put_intersection_on_lst (_05_065_lstadd_sort_inter_malloc.c)
+  [32] ft_create_inter (_05_065_lstadd_sort_inter_malloc.c) [23] ft_is_shadowed [12] ft_ray_for_pixel
+  [10] ft_custom_pixel_put    [44] ft_iter                [27] ft_reflect
+  [22] ft_cyl_limits_and_intersect (_13_177_intersection_cyl.c) [16] ft_lighting_shadow [14] ft_render
+  [30] ft_distance_ray        [29] ft_lstadd_sort_inter   [42] ft_scalar_tuple
+   [7] ft_dotprod_vector      [38] ft_lstnew              [25] ft_set_ambient_and_efective_color (_06_088_lighting.c)
+  [34] ft_free                [39] ft_magn_tuple           [1] ft_set_transf_ray
+  [36] ft_free_objects         [2] ft_mult_matrix_tuple   [15] ft_sub_tuple
+  [37] ft_get_final_specular (_06_088_lighting.c) [40] ft_neg_tuple [20] ft_transpose_matrix
+   [9] ft_get_mlx_color       [18] ft_norm_vector         [46] get_next_line
+  [28] ft_hit_inter           [31] ft_normal_at_cyl       [47] test_mlx_end
+  [13] ft_intersect_cyl_caps (_13_177_intersection_cyl.c) [33] ft_normal_at_plane

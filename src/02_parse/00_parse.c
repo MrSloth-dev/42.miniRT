@@ -78,6 +78,7 @@ void	ft_set_objects_material_color(t_canvas *canvas)
 	while (cur && cur->cont)
 	{
 		((t_shapes *)cur->cont)->material.ambient_color = canvas->ambient.color;
+		((t_shapes *)cur->cont)->selected = false;
 		//ft_print_tuple(canvas->ambient.color, "ambient color");
 		cur = cur->next;
 	}

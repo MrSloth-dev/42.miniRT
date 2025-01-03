@@ -152,6 +152,7 @@ typedef struct s_shapes
 	t_matrix		transform;
 	t_matrix		transposed;
 	t_material		material;
+	bool			selected;
 }	t_shapes;
 
 typedef struct s_inter
@@ -183,6 +184,11 @@ typedef struct s_canvas
 	t_plane		*plane;
 	t_cylinder	*cylinder;
 	t_count		count;
+
+	int			drag;
+	int			mouse_calc;
+	int			mouse_x;
+	int			mouse_y;
 }	t_canvas;
 
 typedef struct s_iter
@@ -218,4 +224,5 @@ typedef struct s_comp
 	t_color		specular;
 	t_color		ambient_on_object;
 	t_color		diffuse;
+	bool		selected;
 } t_comp;
