@@ -24,6 +24,26 @@ void	test_mlx_end(t_canvas *canvas)
 	mlx_hook(canvas->win, ButtonPress, ButtonPressMask, mouse_handler, canvas);
 	mlx_hook(canvas->win, DestroyNotify, StructureNotifyMask, close_handler, canvas);
 	mlx_hook(canvas->win, DestroyNotify, 0l, &close_handler, &canvas);
+	int	i;
+
+	i = 8;
+	mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - 6 - HEIGHT_POS * i--, 0xFFFFFF,
+		"Keyboard commands:");
+	mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, 0xFFFFFF,
+		"\"Esc\"   -> exit");
+	mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, 0xFFFFFF,
+		"w a s d -> camera moove");
+	mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, 0xFFFFFF,
+		"q e     -> select object"); //change brightness in object, to sum in lighting function
+	mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, 0xFFFFFF,
+		"x       -> abort selection"); //reset color vars sum
+	mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, 0xFFFFFF,
+		"h j k l -> object moove");
+	mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, 0xFFFFFF,
+		"u i     -> adjust radius / height"); 
+	mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, 0xFFFFFF,
+		"r g b   -> adjust red-green-blue color"); 
+
 	mlx_loop(canvas->mlx);
 	ft_free_canvas(canvas);
 }
