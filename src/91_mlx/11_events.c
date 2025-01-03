@@ -176,8 +176,6 @@ int	close_handler(t_canvas *canvas)
 	mlx_destroy_window(canvas->mlx, canvas->win);
 	mlx_destroy_display(canvas->mlx);
 	ft_free_canvas(canvas);
-	free(canvas->img);
-	free(canvas->mlx);
 	exit (0);
 }
 

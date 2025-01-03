@@ -1,3 +1,4 @@
+#include "ft_printf.h"
 #include "libft.h"
 #include "minirt.h"
 #include <fcntl.h>
@@ -9,17 +10,18 @@ int	ft_check_file(char *file)
 	int fd;
 
 	fd = open(file, O_RDONLY);
-	printf("%d\n", fd);
 	len = ft_strlen(file);
 	if (fd == -1 || (!file || !ft_strchr(file, '.') || len < 4))
-	 return (close(fd), perror("Error, file not valid\n"), 0);
+		return (close(fd), ft_printf(2, "Error, file not valid\n"), 0);
+	if (len > 4 && file[len - 4] == '/')
+		return (close(fd), ft_printf(2, "Error, file not valid\n"), 0);
 	dotindex = 0;
 	while (file && file[dotindex] != '.')
 		dotindex++;
 	if (dotindex == len - 3)
 		if (file[dotindex + 1] == 'r' && file[dotindex + 2] == 't')
 		return (close(fd), ft_printf(2, "File Accepted!\n"), 1);
-	return (close(fd), perror("Error, file not valid\n"), 0);
+	return (close(fd),ft_printf(2, "Error, file not valid\n"), 0);
 }
 
 int	ft_parse_line(char **split, t_canvas *canvas)

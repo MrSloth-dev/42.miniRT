@@ -21,6 +21,7 @@
 #define YELLOW "\e[1;3;93m"
 #define RESET "\e[0m"
 
+#define DEBUG 1
 #define WIN_H 700 / 1.8
 #define WIN_W 700
 
@@ -99,8 +100,8 @@ int		mouse_handler(int mousecode, int x, int y, t_canvas *canvas);
 int		mouse_handler_release(int mousecode, int x, int y, t_canvas *canvas);
 int		mouse_motion(int x, int y, t_canvas *canvas);
 int		key_handler(int keysym, t_canvas *canvas);
-void		ft_mlx_init(t_canvas *canvas);
-void		ft_pixel_put(t_img *data, int x, int y, int color);
+void	ft_mlx_init(t_canvas *canvas);
+void	ft_pixel_put(t_img *data, int x, int y, int color);
 int		ft_handle_key_hook(int key, t_canvas *canvas);
 int		ft_free_mlx(t_canvas *canvas);
 void	ft_menu(t_canvas *canvas);
