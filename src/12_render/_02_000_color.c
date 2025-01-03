@@ -27,6 +27,12 @@ int	ft_get_mlx_color(t_color color)
 		color.y = 10;
 	if (color.z > 10)
 		color.z = 10;
+	if (color.x < 0)
+		color.x = 0;
+	if (color.y < 0)
+		color.y = 0;
+	if (color.z < 0)
+		color.z = 0;
 	return ((int)(color.x * 25.5f) << 16
 	| (int)(color.y * 25.5f) << 8
 	| (int)(color.z * 25.5f));
