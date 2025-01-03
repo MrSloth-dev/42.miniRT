@@ -47,7 +47,7 @@ void	ft_render(t_canvas *canvas)
 		{
 			ft_ray_for_pixel(canvas->camera, h.x, h.y, &ray);
 			color = ft_color_at(canvas, ray);
-			if (h.x < TEXT_W_ZONE && h.y > IMG_H - TEXT_H_ZONE)
+			if (canvas->help && h.x < TEXT_W_ZONE && h.y > IMG_H - TEXT_H_ZONE)
 				color = ft_add_tuple(color, (t_tuple){-1, -1, -1, 3});
 			ft_custom_pixel_put(canvas, &h, color);
 			h.x += STEP;

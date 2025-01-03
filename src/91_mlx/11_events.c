@@ -30,14 +30,21 @@ t_matrix	ft_transform_camera(t_matrix m, int key)
 		return(ft_matrix_mult(m, ft_rotate_matrix_y(M_PI / 10)));
 	else if (key== XK_Left)
 		return(ft_matrix_mult(m, ft_rotate_matrix_y(-M_PI / 10)));
+	else if (key== XK_Up)
+		return(ft_matrix_mult(m, ft_rotate_matrix_y(-M_PI / 10)));
+	else if (key== XK_Down)
+		return(ft_matrix_mult(m, ft_rotate_matrix_y(-M_PI / 10)));
 	return (m);
 }
 int	key_handler(int keysym, t_canvas *canvas)
 {
 	if (keysym == XK_Escape || keysym == XK_q)
 		close_handler(canvas);
+	else if (keysym == XK_h)
+			canvas->help = !canvas->help;
 	else
 	{
+		if (keysym == XK_r)
 		canvas->camera.transf = ft_transform_camera(canvas->camera.transf, keysym);
 		canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
 	}
@@ -67,6 +74,7 @@ int	close_handler(t_canvas *canvas)
 	exit (0);
 }
 
+
 int	ft_refreshframe(void *ptr)
 {
 	t_canvas *canvas;
@@ -78,5 +86,6 @@ int	ft_refreshframe(void *ptr)
 			&canvas->img->bits_per_pixel,
 			&canvas->img->size_line, &canvas->img->endian);
 	ft_render(canvas);
+	ft_menu(canvas);
 	return (0);
 }
