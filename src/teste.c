@@ -20,6 +20,7 @@ void	test_mlx_start(t_canvas *canvas)
 
 void	test_mlx_end(t_canvas *canvas)
 {
+	mlx_do_key_autorepeatoff(canvas->mlx);
 	mlx_hook(canvas->win, KeyPress, KeyPressMask, key_handler, canvas);
 	mlx_hook(canvas->win, ButtonPress, ButtonPressMask, mouse_handler, canvas);
 	mlx_hook(canvas->win, DestroyNotify, StructureNotifyMask, close_handler, canvas);
