@@ -14,34 +14,46 @@
 
 t_matrix	ft_transform_camera(t_matrix m, int key)
 {
-	if (key== XK_a)
-		return(ft_matrix_mult(m, ft_translation_matrix(1, 0, 0)));
-	else if (key== XK_d)
-		return(ft_matrix_mult(m, ft_translation_matrix(-1, 0, 0)));
-	else if (key== XK_w)
-		return(ft_matrix_mult(m, ft_translation_matrix(0, 0, -1)));
-	else if (key== XK_s)
-		return(ft_matrix_mult(m, ft_translation_matrix(0, 0, 1)));
-	else if (key== XK_space)
-		return(ft_matrix_mult(m, ft_translation_matrix(0, -1, 0)));
-	else if (key== XK_c)
-		return(ft_matrix_mult(m, ft_translation_matrix(0, 1, 0)));
-	else if (key== XK_Right)
-		return(ft_matrix_mult(m, ft_rotate_matrix_y(M_PI / 10)));
-	else if (key== XK_Left)
-		return(ft_matrix_mult(m, ft_rotate_matrix_y(-M_PI / 10)));
-	else if (key== XK_Up)
-		return(ft_matrix_mult(m, ft_rotate_matrix_y(-M_PI / 10)));
-	else if (key== XK_Down)
-		return(ft_matrix_mult(m, ft_rotate_matrix_y(-M_PI / 10)));
+	if (key == XK_a)
+		return (ft_matrix_mult(m, ft_translation_matrix(1, 0, 0)));
+	else if (key == XK_d)
+		return (ft_matrix_mult(m, ft_translation_matrix(-1, 0, 0)));
+	else if (key == XK_w)
+		return (ft_matrix_mult(m, ft_translation_matrix(0, 0, -1)));
+	else if (key == XK_s)
+		return (ft_matrix_mult(m, ft_translation_matrix(0, 0, 1)));
+	else if (key == XK_space)
+		return (ft_matrix_mult(m, ft_translation_matrix(0, -1, 0)));
+	else if (key == XK_c)
+		return (ft_matrix_mult(m, ft_translation_matrix(0, 1, 0)));
+	else if (key == XK_Right)
+		return (ft_matrix_mult(m, ft_rotate_matrix_y(M_PI / 20)));
+	else if (key == XK_Left)
+		return (ft_matrix_mult(m, ft_rotate_matrix_y(-M_PI / 20)));
+	else if (key == XK_Up)
+		return (ft_matrix_mult(m, ft_rotate_matrix_x(-M_PI / 20)));
+	else if (key == XK_Down)
+		return (ft_matrix_mult(m, ft_rotate_matrix_x(M_PI / 20)));
 	return (m);
 }
+
+bool	ft_change_step(int keysym, t_canvas *canvas)
+{
+	if (keysym == XK_o && canvas->step > 1)
+		return (canvas->step--, true);
+	if (keysym == XK_p && canvas->step < 9)
+		return (canvas->step++, true);
+	return (false);
+}
+
 int	key_handler(int keysym, t_canvas *canvas)
 {
 	if (keysym == XK_Escape)
 		close_handler(canvas);
 	else if (keysym == XK_h)
-			canvas->help = !canvas->help;
+		canvas->help = !canvas->help;
+	else if (ft_change_step(keysym, canvas))
+		;
 	else
 	{
 		if (keysym == XK_r) // Maybe add reset to objects also

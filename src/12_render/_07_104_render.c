@@ -20,10 +20,10 @@
 void	ft_custom_pixel_put(t_canvas *canvas, t_iter *h, t_tuple color)
 {
 	h->y_step = 0;
-	while (h->y_step < STEP)
+	while (h->y_step < canvas->step)
 	{
 		h->x_step = 0;
-		while (h->x_step < STEP)
+		while (h->x_step < canvas->step)
 		{
 			ft_pixel_put(canvas->img, h->x + h->x_step++, h->y + h->y_step,
 				ft_get_mlx_color(color));
@@ -50,9 +50,9 @@ void	ft_render(t_canvas *canvas)
 			if (canvas->help && h.x < TEXT_W_ZONE && h.y > IMG_H - TEXT_H_ZONE)
 				color = ft_add_tuple(color, (t_tuple){-1, -1, -1, 3});
 			ft_custom_pixel_put(canvas, &h, color);
-			h.x += STEP;
+			h.x += canvas->step;
 		}
-		h.y += STEP;
+		h.y += canvas->step;
 	}
 	mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img->img, 0, 0);
 }
