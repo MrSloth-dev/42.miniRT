@@ -17,6 +17,7 @@ void	ft_init_canvas(t_canvas *canvas)
 	canvas->mouse_prev_y = -1;
 	canvas->mouse_sum_y = 0;
 	canvas->object_selected = NULL;
+	canvas->light_selected = 0;
 
 	canvas->objects = NULL;
 	canvas->light = ft_init_light((t_tuple){0, 0, 0, 0}, 0.0f, (t_color){0, 0, 0, 0});

@@ -12,87 +12,85 @@
 
 #include "minirt.h"
 
-static bool	ft_change_obj_dimension(int keysym, t_canvas *canvas)
+bool	ft_camera_transform(int keysym, t_canvas *canvas)
 {
-	if (keysym == XK_0)
-		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0},
-				 (t_tuple){1.1, 1.1, 1.1, 0});
-	else if (keysym == XK_9)
-		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0},
-				 (t_tuple){0.9, 0.9, 0.9, 0});
-	else if (keysym == XK_8 && canvas->object_selected->type == CYLINDER)
-		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0},
-				 (t_tuple){1, 1.2, 1, 0});
-	else if (keysym == XK_7 && canvas->object_selected->type == CYLINDER)
-		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0},
-				 (t_tuple){1, 0.8, 1, 0});
+	if (keysym == XK_r) // Maybe add reset to objects also
+		canvas->camera.transf = canvas->camera.reset;
+	else if (!canvas->object_selected && !canvas->light_selected)
+		canvas->camera.transf = ft_transform_camera_key(canvas->camera.transf, keysym);
 	else
 		return (false);
+	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
 	return (true);
 }
 
-static bool	ft_change_obj_position(int keysym, t_canvas *canvas)
+bool	ft_change_light_position(int keysym, t_canvas *canvas)
 {
 	if (keysym == XK_w)
-		ft_get_transf_obj(canvas->object_selected, (t_tuple){0, 0.3, 0, 0}, (t_tuple){0},
-				 (t_tuple){1, 1, 1, 0});
+		canvas->light.coord = ft_add_tuple(canvas->light.coord,
+				     (t_tuple){0, 0.2, 0, 0});
 	else if (keysym == XK_s)
-		ft_get_transf_obj(canvas->object_selected, (t_tuple){0, -0.3, 0, 0}, (t_tuple){0},
-				 (t_tuple){1, 1, 1, 0});
-	else if (keysym == XK_a )
-		ft_get_transf_obj(canvas->object_selected, (t_tuple){-0.3, 0, 0, 0}, (t_tuple){0},
-				 (t_tuple){1, 1, 1, 0});
+		canvas->light.coord = ft_add_tuple(canvas->light.coord,
+				     (t_tuple){0, -0.2, 0, 0});
+	else if (keysym == XK_a)
+		canvas->light.coord = ft_add_tuple(canvas->light.coord,
+				     (t_tuple){-0.2, 0, 0, 0});
 	else if (keysym == XK_d)
-		ft_get_transf_obj(canvas->object_selected, (t_tuple){0.3, 0, 0, 0}, (t_tuple){0},
-				 (t_tuple){1, 1, 1, 0});
+		canvas->light.coord = ft_add_tuple(canvas->light.coord,
+				     (t_tuple){0.2, 0, 0, 0});
 	else if (keysym == XK_q)
-		ft_get_transf_obj(canvas->object_selected, (t_tuple){0, 0, 0.3, 0}, (t_tuple){0},
-				 (t_tuple){1, 1, 1, 0});
+		canvas->light.coord = ft_add_tuple(canvas->light.coord,
+				     (t_tuple){0, 0, 0.2, 0});
 	else if (keysym == XK_e)
-		ft_get_transf_obj(canvas->object_selected, (t_tuple){0, 0, -0.3, 0}, (t_tuple){0},
-				 (t_tuple){1, 1, 1, 0});
+		canvas->light.coord = ft_add_tuple(canvas->light.coord,
+				     (t_tuple){0, 0, -0.2, 0});
 	else
 		return (false);
-	return (true);
+	return (true) ;
 }
 
-static bool	ft_change_obj_rotation(int keysym, t_canvas *canvas)
+bool	ft_change_light_color(int keysym, t_canvas *canvas)
 {
-	if (keysym == XK_Left )
-		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){-0.3, 0, 0, 0},
-				 (t_tuple){1, 1, 1, 0});
-	else if (keysym == XK_Right)
-		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0.3, 0, 0, 0},
-				 (t_tuple){1, 1, 1, 0});
-	else if (keysym == XK_Up)
-		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0, 0, 0.3, 0},
-				 (t_tuple){1, 1, 1, 0});
-	else if (keysym == XK_Down)
-		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0, 0, -0.3, 0},
-				 (t_tuple){1, 1, 1, 0});
-	else
-		return (false);
-	return (true);
-}
-
-bool	ft_change_obj_propriety(int keysym, t_canvas *canvas, bool state)
-{
-	if (canvas->object_selected)
+	if (keysym == XK_Up)
 	{
-		state = true;
-		if (ft_change_obj_dimension(keysym, canvas))
+		canvas->light.color = ft_add_tuple(canvas->light.color,
+					 (t_tuple){0.5, 0.5, 0.5, 3});
+		canvas->light.intensity = ft_add_tuple(canvas->light.intensity,
+					 (t_tuple){0.006, 0.006, 0.006, 3});
+	}
+	else if (keysym == XK_Down)
+	{
+		canvas->light.color = ft_add_tuple(canvas->light.color,
+					 (t_tuple){-0.5, -0.5, -0.5, 3});
+		canvas->light.intensity = ft_add_tuple(canvas->light.intensity,
+					 (t_tuple){-0.006, -0.006, -0.006, 3});
+	}
+	else
+		return (false);
+	return (true);
+}
+
+bool	ft_light_transform(int keysym, t_canvas *canvas)
+{
+	if (keysym == XK_l)
+	{
+		if (canvas->object_selected)
+			ft_clear_select(canvas);
+		canvas->light_selected = 1;
+		return (true);
+	}
+	else if (canvas->light_selected == 1)
+	{
+		if (ft_change_light_position(keysym, canvas))
 			;
-		else if (ft_change_obj_position(keysym, canvas))
-			;
-		else if (canvas->object_selected->type != SPHERE 
-				&& ft_change_obj_rotation(keysym, canvas))
+		else if (ft_change_light_color(keysym, canvas))
 			;
 		else
-			state = false;
+			return (false);
+		return (true); 
 	}
-	return (state);
+	return (false);
 }
-
 
 int	key_handler(int keysym, t_canvas *canvas)
 {
@@ -100,20 +98,16 @@ int	key_handler(int keysym, t_canvas *canvas)
 		close_handler(canvas);
 	else if (keysym == XK_h)
 		canvas->help = !canvas->help;
+	else if (ft_light_transform(keysym, canvas))
+		;
 	else if (ft_change_resolution(keysym, canvas))
 		;
 	else if (ft_change_obj_propriety(keysym, canvas, false))
 		;
+	else if (ft_camera_transform(keysym, canvas))
+		;
 	else if (keysym == XK_x)
 		ft_clear_select(canvas);
-	else
-	{
-		if (keysym == XK_r) // Maybe add reset to objects also
-			canvas->camera.transf = canvas->camera.reset;
-		else if (!canvas->object_selected)
-			canvas->camera.transf = ft_transform_camera_key(canvas->camera.transf, keysym);
-		canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
-	}
 	return (0);
 }
 
