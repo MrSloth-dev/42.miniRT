@@ -20,11 +20,16 @@
 #define YELLOW "\e[1;3;93m"
 #define RESET "\e[0m"
 
-#define WIN_H 389
-#define WIN_W 700
+#define WIN_H 450
+#define WIN_W 900
 
-#define IMG_H 389
-#define IMG_W 700
+#define IMG_H 450
+#define IMG_W 900
+
+#define HEIGHT_POS 12
+#define W_POS 12
+#define TEXT_H_ZONE 120
+#define TEXT_W_ZONE 250
 
 #define STEP 1
 #define ROUND_ERROR 0.000001
