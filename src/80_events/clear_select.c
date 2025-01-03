@@ -25,4 +25,5 @@ void	ft_clear_select(t_canvas *canvas)
 		cur = cur->next;
 	}
 	canvas->object_selected = NULL;
+	canvas->light_selected = 0;
 }

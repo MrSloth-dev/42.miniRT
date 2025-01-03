@@ -49,6 +49,7 @@ PARSER ISSUES
 - [ ] on ft_check_syntax verify my comment
 - [ ] argc must be "2"
 - [ ] ignore lines starting by #
+- [ ] check if lines after lines with # are considered
 
 At the end of project (or in advanced state)
 - [ ] Remove wildcards from Makefile

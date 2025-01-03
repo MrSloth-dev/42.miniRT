@@ -193,6 +193,7 @@ typedef struct s_canvas
 	int			mouse_prev_y;
 	int			mouse_sum_y;
 	t_shapes	*object_selected;
+	int			light_selected;
 }	t_canvas;
 
 typedef struct s_iter

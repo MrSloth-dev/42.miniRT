@@ -41,9 +41,13 @@ void	ft_menu(t_canvas *canvas)
 		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
 				 "Press 'h' for help");
 		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i, WHITE,
-				 "Resolution pixel:");
-		mlx_string_put(canvas->mlx, canvas->win, W_POS + 110 , WIN_H - HEIGHT_POS * i--, WHITE,
+				 "Pixel upscale:");
+		mlx_string_put(canvas->mlx, canvas->win, W_POS + 110 , WIN_H - HEIGHT_POS * i, WHITE,
+				 "1x ");
+		mlx_string_put(canvas->mlx, canvas->win, W_POS + 125 , WIN_H - HEIGHT_POS * i--, WHITE,
 				 canvas->char_step);
+
+
 	}
 		
 }
