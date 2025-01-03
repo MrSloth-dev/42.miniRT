@@ -105,6 +105,7 @@ int	ft_create_camera(t_canvas *canvas, char **split)
 					ft_add_tuple(canvas->camera.coord, canvas->camera.norm),
 									(t_tuple){0, 1, 0, 0});
 	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
+	canvas->camera.reset = canvas->camera.transf;
 
 	return (0);
 }

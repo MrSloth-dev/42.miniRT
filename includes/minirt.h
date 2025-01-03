@@ -15,6 +15,7 @@
 
 #include "structs.h"
 
+#define WHITE 0xFFFFFF
 #define RED "\e[1;3;31m"
 #define GREEN "\e[1;3;32m"
 #define YELLOW "\e[1;3;93m"
