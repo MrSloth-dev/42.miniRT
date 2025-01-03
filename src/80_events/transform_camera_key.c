@@ -27,6 +27,5 @@ t_matrix	ft_transform_camera_key(t_matrix m, int key)
 		return (ft_matrix_mult(m, ft_rotate_matrix_z(-M_PI / 20)));
 	else if (key == XK_e)
 		return (ft_matrix_mult(m, ft_rotate_matrix_z(M_PI / 20)));
-
 	return (m);
 }
