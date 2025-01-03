@@ -16,30 +16,48 @@ int	key_handler(int keysym, t_canvas *canvas)
 {
 	if (keysym == XK_Escape || keysym == XK_q)
 		close_handler(canvas);
-	else if (keysym == XK_A)
-		canvas->camera.norm.x++;
+	else if (keysym == XK_a)
+	{
+		printf("Hello\n");
+		canvas->camera.coord.x--;
+		canvas->camera.transf = ft_view_transformation(canvas->camera.coord, ft_add_tuple(canvas->camera.coord, canvas->camera.norm), (t_tuple){0, 1, 0, 0});
+		canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
+	}
+	else if (keysym == XK_d)
+	{
+		printf("Hello\n");
+		canvas->camera.coord.x++;
+		canvas->camera.transf = ft_view_transformation(canvas->camera.coord, ft_add_tuple(canvas->camera.coord, canvas->camera.norm), (t_tuple){0, 1, 0, 0});
+		canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
+	}
+	else if (keysym == XK_w)
+	{
+		printf("Hello\n");
+		canvas->camera.coord.z++;
+		canvas->camera.transf = ft_view_transformation(canvas->camera.coord, ft_add_tuple(canvas->camera.coord, canvas->camera.norm), (t_tuple){0, 1, 0, 0});
+		canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
+	}
+	else if (keysym == XK_s)
+	{
+		printf("Hello\n");
+		canvas->camera.coord.z--;
+		canvas->camera.transf = ft_view_transformation(canvas->camera.coord, ft_add_tuple(canvas->camera.coord, canvas->camera.norm), (t_tuple){0, 1, 0, 0});
+		canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
+	}
 	ft_refreshframe(canvas);
 	return (0);
 }
-//
-// int	mouse_handler(int mousecode, int x, int y, t_canvas *canvas)
-// {
-// 	if (mousecode == 4)
-// 	{
-// 		canvas->scale *= 0.9;
-// 		if (canvas->mousetrack)
-// 		{
-// 			canvas->offset_x += (0.75 * (x - (double)IMG_WIDTH / 2)
-// 					/ IMG_WIDTH * canvas->scale);
-// 			canvas->offset_y += (0.75 * (y - (double)IMG_HEIGHT / 2)
-// 					/ IMG_HEIGHT * canvas->scale);
-// 		}
-// 	C
-// 	else if (mousecode == 5)
-// 		canvas->scale /= 0.9C
-// 	ft_refreshframe(canvas);
-// 	return (0);
-// }
+
+int	mouse_handler(int mousecode, t_canvas *canvas)
+{
+	if (mousecode == 1) // 4
+		printf("Left click\n");
+	else if (mousecode == 3) // 5
+		printf("Right click\n");
+	(void)canvas;
+	ft_refreshframe(canvas);
+	return (0);
+}
 
 int	close_handler(t_canvas *canvas)
 {
@@ -52,13 +70,16 @@ int	close_handler(t_canvas *canvas)
 	exit (0);
 }
 
-int	ft_refreshframe(t_canvas *canvas)
+int	ft_refreshframe(void *ptr)
 {
+	t_canvas *canvas;
+
+	canvas = ptr;
 	mlx_destroy_image(canvas->mlx, canvas->img->img);
 	canvas->img->img = mlx_new_image(canvas->mlx, IMG_W, IMG_H);
 	canvas->img->addr = mlx_get_data_addr(canvas->img->img,
 			&canvas->img->bits_per_pixel,
 			&canvas->img->size_line, &canvas->img->endian);
-	// ft_renderimage(canvas);
+	ft_render(canvas, canvas->camera);
 	return (0);
 }

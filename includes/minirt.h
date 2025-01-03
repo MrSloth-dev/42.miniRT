@@ -84,9 +84,9 @@ int		ft_create_cylinder(t_canvas *canvas, char **split);
 
 //minilibx
 int		ft_setup(t_canvas *canvas);
-int		ft_refreshframe(t_canvas *canvas);
+int		ft_refreshframe(void *ptr);
 int		close_handler(t_canvas *canvas);
-int		mouse_handler(int mousecode, int x, int y, t_canvas *canvas);
+int		mouse_handler(int mousecode, t_canvas *canvas);
 int		key_handler(int keysym, t_canvas *canvas);
 void		ft_mlx_init(t_canvas *canvas);
 void		ft_pixel_put(t_img *data, int x, int y, int color);

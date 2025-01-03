@@ -6,7 +6,7 @@ NAME = minirt
 CC = cc
 CFLAGS = -Iincludes -g
 EFLAGS = -Wall -Wextra -Werror
-MLXFLAGS = -Ofast -Lminilibx-linux -lm -lmlx -lX11 -lXext
+MLXFLAGS = -O3 -ffast-math -march=native -Lminilibx-linux -lm -lmlx -lX11 -lXext -pg
 
 CLR_RMV = \033[0m
 RED	    = \033[1;31m
