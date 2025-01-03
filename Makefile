@@ -147,21 +147,12 @@ fclean: clean
 	@make fclean -C $(PRINTDIR) -s
 	@printf "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✅\n"
 
-
 .PHONY: re
 re : fclean all
 
-MAIN_T = src/teste.c
-NAME_T = $(NAME)_te
 .PHONY: te
 te : re
-	rm -fr $(NAME)_te
-	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
-	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
-	@make -C $(PRINTDIR) -s
-	@make -C $(LIBX_DIR) -s
-	@$(CC) $(MAIN_T) $(CFLAGS) $(EFLAGS) $(OBJS) $(MLXFLAGS) $(GNL) $(PRINTFT) -o $(NAME_T)
-	./$(NAME)_te teste.rt
+	./$(NAME) teste.rt
 
 .SILENT: re all clean fclean
 

@@ -16,19 +16,21 @@ void	ft_menu(t_canvas *canvas)
 		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
 				 "o p     -> adjust resolution:");
 		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-				 "w a s d -> camera move");
+				 "w a s d q e -> camera move");
 		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
 				 "Space/c -> camera move up and down");
 		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
 				 "r       --> reset camera position");
 		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-				 "q e     -> select object"); //change brightness in object, to sum in lighting function
+				 "mouse left click -> select object"); //change brightness in object, to sum in lighting function
 		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
 				 "x       -> abort selection"); //reset color vars sum
 		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
 				 "h j k l -> object moove");
 		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-				 "u i     -> adjust radius / height"); 
+				 "9 0     -> adjust scale");
+		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
+				 "8 9     -> adjust cylinder height"); 
 		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
 				 "r g b   -> adjust red-green-blue color"); 
 	}

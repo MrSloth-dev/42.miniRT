@@ -9,7 +9,7 @@ void	ft_mlx_end(t_canvas *canvas)
 	mlx_hook(canvas->win, KeyPress, KeyPressMask, key_handler, canvas);
 	mlx_hook(canvas->win, ButtonPress, ButtonPressMask, mouse_handler, canvas);
 	mlx_hook(canvas->win, ButtonRelease, ButtonReleaseMask, mouse_handler_release, canvas);
-	mlx_hook(canvas->win, EVENT_MOUSE_MOTION, MASK_POINTER_MOTION, mouse_motion, canvas);
+	mlx_hook(canvas->win, MotionNotify, CWBackingStore, mouse_motion, canvas);
 	mlx_hook(canvas->win, DestroyNotify, StructureNotifyMask, close_handler, canvas);
 	mlx_hook(canvas->win, DestroyNotify, 0l, &close_handler, &canvas);
 	mlx_loop_hook(canvas->mlx, ft_refreshframe, canvas);
