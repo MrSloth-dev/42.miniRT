@@ -12,36 +12,33 @@
 
 #include "minirt.h"
 
+t_matrix	ft_transform_camera(t_matrix m, int key)
+{
+	if (key== XK_a)
+		return(ft_matrix_mult(m, ft_translation_matrix(1, 0, 0)));
+	else if (key== XK_d)
+		return(ft_matrix_mult(m, ft_translation_matrix(-1, 0, 0)));
+	else if (key== XK_w)
+		return(ft_matrix_mult(m, ft_translation_matrix(0, 0, -1)));
+	else if (key== XK_s)
+		return(ft_matrix_mult(m, ft_translation_matrix(0, 0, 1)));
+	else if (key== XK_space)
+		return(ft_matrix_mult(m, ft_translation_matrix(0, -1, 0)));
+	else if (key== XK_c)
+		return(ft_matrix_mult(m, ft_translation_matrix(0, 1, 0)));
+	else if (key== XK_Right)
+		return(ft_matrix_mult(m, ft_rotate_matrix_y(M_PI / 10)));
+	else if (key== XK_Left)
+		return(ft_matrix_mult(m, ft_rotate_matrix_y(-M_PI / 10)));
+	return (m);
+}
 int	key_handler(int keysym, t_canvas *canvas)
 {
 	if (keysym == XK_Escape || keysym == XK_q)
 		close_handler(canvas);
-	else if (keysym == XK_a)
+	else
 	{
-		printf("Hello\n");
-		canvas->camera.coord.x--;
-		canvas->camera.transf = ft_view_transformation(canvas->camera.coord, ft_add_tuple(canvas->camera.coord, canvas->camera.norm), (t_tuple){0, 1, 0, 0});
-		canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
-	}
-	else if (keysym == XK_d)
-	{
-		printf("Hello\n");
-		canvas->camera.coord.x++;
-		canvas->camera.transf = ft_view_transformation(canvas->camera.coord, ft_add_tuple(canvas->camera.coord, canvas->camera.norm), (t_tuple){0, 1, 0, 0});
-		canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
-	}
-	else if (keysym == XK_w)
-	{
-		printf("Hello\n");
-		canvas->camera.coord.z++;
-		canvas->camera.transf = ft_view_transformation(canvas->camera.coord, ft_add_tuple(canvas->camera.coord, canvas->camera.norm), (t_tuple){0, 1, 0, 0});
-		canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
-	}
-	else if (keysym == XK_s)
-	{
-		printf("Hello\n");
-		canvas->camera.coord.z--;
-		canvas->camera.transf = ft_view_transformation(canvas->camera.coord, ft_add_tuple(canvas->camera.coord, canvas->camera.norm), (t_tuple){0, 1, 0, 0});
+		canvas->camera.transf = ft_transform_camera(canvas->camera.transf, keysym);
 		canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
 	}
 	ft_refreshframe(canvas);
