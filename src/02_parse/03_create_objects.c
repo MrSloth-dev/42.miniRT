@@ -265,7 +265,6 @@ int	ft_create_cylinder(t_canvas *canvas, char **split)
 		return (ft_free_split(color_split),
 			ft_printf(2, "Error, cylinder color format is wrong\n"), 0);
 
-	ft_print_tuple(shape->material.color, "cyl color");
 	ft_free_split(color_split);
 	norm_split = ft_split(split[2], ',');
 	norm = (t_tuple){ft_atod(norm_split[0]), ft_atod(norm_split[1]),

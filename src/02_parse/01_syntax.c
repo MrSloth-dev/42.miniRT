@@ -2,10 +2,8 @@
 
 int	ft_syntax_ambient(t_canvas *canvas, char **split)
 {
-	// char	**color_split;
 	if (!split)
 		return (0);
-	ft_printf(2, RED"_ambient\n"RESET);
 	if (ft_count_members(split) != 3)
 		return (ft_printf(2, "Error, ambient format is wrong\n"), 0);
 	canvas->count.ambient++;
@@ -14,7 +12,6 @@ int	ft_syntax_ambient(t_canvas *canvas, char **split)
 
 int	ft_syntax_camera(t_canvas *canvas, char **split)
 {
-	ft_printf(2, RED"_camera\n"RESET);
 	if (ft_count_members(split) != 4)
 		return (ft_printf(2, "Error, camera format is wrong\n"), 0);
 	canvas->count.camera++;
@@ -23,7 +20,6 @@ int	ft_syntax_camera(t_canvas *canvas, char **split)
 
 int	ft_syntax_light(t_canvas *canvas, char **split)
 {
-	ft_printf(2, RED"_light\n"RESET);
 	if (ft_count_members(split) != 4)
 		return (ft_printf(2, "Error, light format is wrong\n"), 0);
 	canvas->count.light++;
@@ -32,7 +28,6 @@ int	ft_syntax_light(t_canvas *canvas, char **split)
 
 int	ft_syntax_sphere(t_canvas *canvas, char **split)
 {
-	ft_printf(2, RED"_sphere\n"RESET);
 	if (ft_count_members(split) != 4)
 		return (ft_printf(2, "Error, sphere format is wrong\n"), 0);
 	(void)canvas;
@@ -41,7 +36,6 @@ int	ft_syntax_sphere(t_canvas *canvas, char **split)
 
 int	ft_syntax_plane(t_canvas *canvas, char **split)
 {
-	ft_printf(2, RED"_plane\n"RESET);
 	if (ft_count_members(split) != 4)
 		return (ft_printf(2, "Error, plane format is wrong\n"), 0);
 	canvas->count.plane++;
@@ -50,7 +44,6 @@ int	ft_syntax_plane(t_canvas *canvas, char **split)
 
 int	ft_syntax_cylinder(t_canvas *canvas, char **split)
 {
-	ft_printf(2, RED"_cylinder\n"RESET);
 	if (ft_count_members(split) != 6)
 		return (ft_printf(2, "Error, cylinder format is wrong\n"), 0);
 	canvas->count.cylinder++;

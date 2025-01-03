@@ -22,7 +22,7 @@ int	main(int argc, char *argv[])
 	t_canvas	canvas;
 
 	if (argc != 2)
-		return (ft_printf(2, "Error in argv!\n"), 1);
+		return (ft_printf(2, "Error\n Argv!\n"), 1);
 	ft_init_canvas(&canvas);
 	if (ft_parse(&canvas, argv[1]) == 0)
 		return (1);
