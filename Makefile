@@ -2,7 +2,7 @@
 #                                     CONFIG                                   #
 ################################################################################
 
-NAME = minirt
+NAME = miniRT
 CC = cc
 CFLAGS = -Iincludes -g
 EFLAGS = -Wall -Wextra -Werror
