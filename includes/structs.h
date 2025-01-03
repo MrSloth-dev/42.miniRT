@@ -77,6 +77,7 @@ typedef struct s_camera
 	double			v_size;
 	double			field_v;
 	t_matrix		transf;
+	t_matrix		reset;
 	t_matrix		inverted;
 	double			px_size;
 	double			half_view;
