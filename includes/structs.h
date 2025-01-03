@@ -164,6 +164,8 @@ typedef struct s_inter
 typedef struct s_canvas
 {
 	void		*mlx;
+	double		height;
+	double		width;
 	char		*program;
 	char		*name;
 	char		*file;
