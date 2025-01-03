@@ -12,55 +12,87 @@
 
 #include "minirt.h"
 
-t_matrix	ft_transform_camera(t_matrix m, int key)
+static bool	ft_change_obj_dimension(int keysym, t_canvas *canvas)
 {
-	if (key == XK_a)
-		return (ft_matrix_mult(m, ft_translation_matrix(1, 0, 0)));
-	else if (key == XK_d)
-		return (ft_matrix_mult(m, ft_translation_matrix(-1, 0, 0)));
-	else if (key == XK_w)
-		return (ft_matrix_mult(m, ft_translation_matrix(0, 0, -1)));
-	else if (key == XK_s)
-		return (ft_matrix_mult(m, ft_translation_matrix(0, 0, 1)));
-	else if (key == XK_space)
-		return (ft_matrix_mult(m, ft_translation_matrix(0, -1, 0)));
-	else if (key == XK_c)
-		return (ft_matrix_mult(m, ft_translation_matrix(0, 1, 0)));
-	else if (key == XK_Right)
-		return (ft_matrix_mult(m, ft_rotate_matrix_y(M_PI / 20)));
-	else if (key == XK_Left)
-		return (ft_matrix_mult(m, ft_rotate_matrix_y(-M_PI / 20)));
-	else if (key == XK_Up)
-		return (ft_matrix_mult(m, ft_rotate_matrix_x(-M_PI / 20)));
-	else if (key == XK_Down)
-		return (ft_matrix_mult(m, ft_rotate_matrix_x(M_PI / 20)));
-	return (m);
+	if (keysym == XK_0)
+		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0},
+				 (t_tuple){1.1, 1.1, 1.1, 0});
+	else if (keysym == XK_9)
+		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0},
+				 (t_tuple){0.9, 0.9, 0.9, 0});
+	else if (keysym == XK_8 && canvas->object_selected->type == CYLINDER)
+		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0},
+				 (t_tuple){1, 1.2, 1, 0});
+	else if (keysym == XK_7 && canvas->object_selected->type == CYLINDER)
+		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0},
+				 (t_tuple){1, 0.8, 1, 0});
+	else
+		return (false);
+	return (true);
 }
 
-
-
-bool	ft_change_step(int keysym, t_canvas *canvas)
+static bool	ft_change_obj_position(int keysym, t_canvas *canvas)
 {
-	if (keysym == XK_o && canvas->step > 1)
-		return (canvas->step--, true);
-	if (keysym == XK_p && canvas->step < 9)
-		return (canvas->step++, true);
-	return (false);
+	if (keysym == XK_w)
+		ft_get_transf_obj(canvas->object_selected, (t_tuple){0, 0.3, 0, 0}, (t_tuple){0},
+				 (t_tuple){1, 1, 1, 0});
+	else if (keysym == XK_s)
+		ft_get_transf_obj(canvas->object_selected, (t_tuple){0, -0.3, 0, 0}, (t_tuple){0},
+				 (t_tuple){1, 1, 1, 0});
+	else if (keysym == XK_a )
+		ft_get_transf_obj(canvas->object_selected, (t_tuple){-0.3, 0, 0, 0}, (t_tuple){0},
+				 (t_tuple){1, 1, 1, 0});
+	else if (keysym == XK_d)
+		ft_get_transf_obj(canvas->object_selected, (t_tuple){0.3, 0, 0, 0}, (t_tuple){0},
+				 (t_tuple){1, 1, 1, 0});
+	else if (keysym == XK_q)
+		ft_get_transf_obj(canvas->object_selected, (t_tuple){0, 0, 0.3, 0}, (t_tuple){0},
+				 (t_tuple){1, 1, 1, 0});
+	else if (keysym == XK_e)
+		ft_get_transf_obj(canvas->object_selected, (t_tuple){0, 0, -0.3, 0}, (t_tuple){0},
+				 (t_tuple){1, 1, 1, 0});
+	else
+		return (false);
+	return (true);
 }
 
-void	ft_clear_select(t_canvas *canvas)
+static bool	ft_change_obj_rotation(int keysym, t_canvas *canvas)
 {
-	t_list *cur;
+	if (keysym == XK_Left )
+		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){-0.3, 0, 0, 0},
+				 (t_tuple){1, 1, 1, 0});
+	else if (keysym == XK_Right)
+		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0.3, 0, 0, 0},
+				 (t_tuple){1, 1, 1, 0});
+	else if (keysym == XK_Up)
+		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0, 0, 0.3, 0},
+				 (t_tuple){1, 1, 1, 0});
+	else if (keysym == XK_Down)
+		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0, 0, -0.3, 0},
+				 (t_tuple){1, 1, 1, 0});
+	else
+		return (false);
+	return (true);
+}
 
-	if (!canvas->objects && !canvas->objects->cont)
-		return ;
-	cur = canvas->objects;
-	while (cur && cur->cont)
+bool	ft_change_obj_propriety(int keysym, t_canvas *canvas, bool state)
+{
+	if (canvas->object_selected)
 	{
-		((t_shapes *)cur->cont)->selected = false;
-		cur = cur->next;
+		state = true;
+		if (ft_change_obj_dimension(keysym, canvas))
+			;
+		else if (ft_change_obj_position(keysym, canvas))
+			;
+		else if (canvas->object_selected->type != SPHERE 
+				&& ft_change_obj_rotation(keysym, canvas))
+			;
+		else
+			state = false;
 	}
+	return (state);
 }
+
 
 int	key_handler(int keysym, t_canvas *canvas)
 {
@@ -68,7 +100,9 @@ int	key_handler(int keysym, t_canvas *canvas)
 		close_handler(canvas);
 	else if (keysym == XK_h)
 		canvas->help = !canvas->help;
-	else if (ft_change_step(keysym, canvas))
+	else if (ft_change_resolution(keysym, canvas))
+		;
+	else if (ft_change_obj_propriety(keysym, canvas, false))
 		;
 	else if (keysym == XK_x)
 		ft_clear_select(canvas);
@@ -76,26 +110,11 @@ int	key_handler(int keysym, t_canvas *canvas)
 	{
 		if (keysym == XK_r) // Maybe add reset to objects also
 			canvas->camera.transf = canvas->camera.reset;
-		else
-			canvas->camera.transf = ft_transform_camera(canvas->camera.transf, keysym);
+		else if (!canvas->object_selected)
+			canvas->camera.transf = ft_transform_camera_key(canvas->camera.transf, keysym);
 		canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
 	}
 	return (0);
-}
-
-void	ft_select_obj(int x, int y, t_canvas *canvas)
-{
-	t_ray	ray;
-	t_interlst *lst;
-	t_inter	*hit;
-
-	ray.pos = ft_mult_matrix_tuple(canvas->camera.inverted, (t_tuple){0, 0, 0, 1});
-	ft_ray_for_pixel(canvas->camera, x, y, &ray);
-	lst = ft_intersect_world(canvas, ray);
-	hit = ft_hit_inter(&lst);
-	ft_clear_select(canvas);
-	if (hit)
-		hit->shape->selected = true;
 }
 
 int	mouse_handler_release(int mousecode, int x, int y, t_canvas *canvas)
@@ -106,8 +125,6 @@ int	mouse_handler_release(int mousecode, int x, int y, t_canvas *canvas)
 		canvas->mouse_drag = 0;
 	return (0);
 }
-
-
 
 int	mouse_handler(int mousecode, int x, int y, t_canvas *canvas)
 {

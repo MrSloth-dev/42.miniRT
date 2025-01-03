@@ -40,9 +40,6 @@
 #define ERR_INPUT 1
 #define ERR_MLX 2
 
-#define EVENT_MOUSE_MOTION  6   // Detect mouse movement
-#define MASK_POINTER_MOTION (1L << 6) // Event mask for motion detection
-
 #define T_VECTOR 0
 #define T_POINT 1
 #define WHITESPACE " \t\n\r\v\f"
@@ -108,6 +105,10 @@ void	ft_menu(t_canvas *canvas);
 
 //events
 int	mouse_motion(int x, int y, t_canvas *canvas);
+bool	ft_change_resolution(int keysym, t_canvas *canvas);
+void	ft_clear_select(t_canvas *canvas);
+void	ft_select_obj(int x, int y, t_canvas *canvas);
+t_matrix	ft_transform_camera_key(t_matrix m, int key);
 
 // Chapter 1 - Tuples, Points and Vectors
 void		ft_tuple_init(t_tuple *tuple, t_point coord, int type);
