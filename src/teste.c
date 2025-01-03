@@ -17,6 +17,7 @@ void	test_mlx_start(t_canvas *canvas)
 {
 	ft_mlx_init(canvas);
 }
+
 void	test_mlx_end(t_canvas *canvas)
 {
 	mlx_do_key_autorepeatoff(canvas->mlx);
