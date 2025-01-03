@@ -18,6 +18,9 @@ void	ft_menu(t_canvas *canvas)
 		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
 				 "Space/c -> camera move up and down");
 		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
+		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, 0xFFFFFF,
+				 "r       --> reset camera position");
+		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
 				 "q e     -> select object"); //change brightness in object, to sum in lighting function
 		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
 				 "x       -> abort selection"); //reset color vars sum
