@@ -22,6 +22,7 @@ for file in ${test_files[@]}; do
 	else
 		((failed++))
 	fi
+	echo ""
 done
 echo "Total tests -> ${total}"
 echo "Passed tests -> ${passed}"

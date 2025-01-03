@@ -21,7 +21,9 @@
 #define YELLOW "\e[1;3;93m"
 #define RESET "\e[0m"
 
+#ifndef DEBUG
 #define DEBUG 1
+#endif
 #define WIN_H 700 / 1.8
 #define WIN_W 700
 
@@ -35,8 +37,6 @@
 
 #define STEP 9
 #define ROUND_ERROR 0.000001
-//#define ROUND_ERROR 0.00001
-//
 #define ERR_INPUT 1
 #define ERR_MLX 2
 
