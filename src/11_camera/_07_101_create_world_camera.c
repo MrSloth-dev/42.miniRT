@@ -12,6 +12,26 @@
 
 #include "minirt.h"
 
+void	ft_update_world_camera(t_canvas *canvas)
+{
+	double		aspect;
+
+	canvas->camera.half_view = tan(canvas->camera.field_v / 2);
+	aspect = canvas->camera.h_size / canvas->camera.v_size;
+	if (aspect >= 1)
+	{
+		canvas->camera.half_width = canvas->camera.half_view;
+		canvas->camera.half_height = canvas->camera.half_view / aspect;
+	}
+	else
+	{
+		canvas->camera.half_width = canvas->camera.half_view * aspect;
+		canvas->camera.half_height = canvas->camera.half_view;
+	}
+	canvas->camera.px_size
+		= (canvas->camera.half_width * 2) / canvas->camera.h_size;
+}
+
 void	ft_create_world_camera(double h_size, double v_size, t_canvas *canvas)
 {
 	double		aspect;

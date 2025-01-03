@@ -13,6 +13,10 @@ t_comp	ft_prepare_comp(t_inter *hit, t_ray ray, t_canvas *canvas)
 
 	temp.value = hit->value;
 	temp.shape = hit->shape;
+	if (temp.shape->selected == true)
+		temp.ambient_on_object = (t_color){1.5, 1.5, 1.5, 3};
+	else
+		temp.ambient_on_object = (t_color){0, 0, 0, 3};
 	temp.eyev = ft_neg_tuple(ray.dir);
 	temp.point = ft_distance_ray(ray, temp.value);
 	temp.normalv = ft_normal_at(temp.shape, temp.point);
