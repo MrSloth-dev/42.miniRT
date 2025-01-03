@@ -92,7 +92,7 @@ int		ft_create_plane(t_canvas *canvas, char **split);
 int		ft_create_cylinder(t_canvas *canvas, char **split);
 
 //minilibx
-int		ft_setup(t_canvas *canvas);
+int		ft_setup(t_canvas *canvas, char *argv[]);
 int		ft_refreshframe(void *ptr);
 int		close_handler(t_canvas *canvas);
 int		mouse_handler(int mousecode, int x, int y, t_canvas *canvas);
