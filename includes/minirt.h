@@ -26,12 +26,12 @@
 #define IMG_H 450
 #define IMG_W 900
 
-#define HEIGHT_POS 12
+#define HEIGHT_POS 16
 #define W_POS 12
-#define TEXT_H_ZONE 120
+#define TEXT_H_ZONE 200
 #define TEXT_W_ZONE 250
 
-#define STEP 1
+#define STEP 2
 #define ROUND_ERROR 0.000001
 //#define ROUND_ERROR 0.00001
 //
@@ -97,6 +97,7 @@ void		ft_mlx_init(t_canvas *canvas);
 void		ft_pixel_put(t_img *data, int x, int y, int color);
 int		ft_handle_key_hook(int key, t_canvas *canvas);
 int		ft_free_mlx(t_canvas *canvas);
+void	ft_menu(t_canvas *canvas);
 
 // Chapter 1 - Tuples, Points and Vectors
 void		ft_tuple_init(t_tuple *tuple, t_point coord, int type);
