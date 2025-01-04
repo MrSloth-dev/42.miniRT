@@ -7,7 +7,6 @@ static void	ft_change_light(t_canvas *canvas)
 
 	up_color = (t_tuple){0.5, 0.5, 0.5, 3};
 	up_inten = (t_tuple){0.006, 0.006, 0.006, 3};
-
 	if (canvas->shift_press == -1)
 	{
 		up_color = ft_neg_tuple(up_color);
@@ -42,7 +41,7 @@ static void	ft_change_light_value(t_canvas *canvas, char color)
 bool	ft_change_light_color(int keysym, t_canvas *canvas)
 {
 	if (keysym == XK_t)
-		ft_change_light(canvas);	
+		ft_change_light(canvas);
 	else if (keysym == XK_r)
 		ft_change_light_value(canvas, 'r');
 	else if (keysym == XK_g)

@@ -14,7 +14,7 @@
 
 void	ft_clear_select(t_canvas *canvas)
 {
-	t_list *cur;
+	t_list	*cur;
 
 	if (!canvas->objects && !canvas->objects->cont)
 		return ;
