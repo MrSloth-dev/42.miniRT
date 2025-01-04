@@ -97,14 +97,14 @@ $(NAME): $(OBJS) $(HEADER)
 LIBX_DIR = minilibx-linux
 LIBX_HEADER = $(LIBX_DIR)/mlx.h
 
-.PHONY: libx $(LIBX_HEADER)
+.PHONY: libx
 .SILENT: $(LIBX_DIR)
-$(LIBX_DIR) : $(LIBX_HEADER)
-	@wget -q https://cdn.intra.42.fr/document/document/22621/minilibx-linux.tgz
-	@tar xf minilibx-linux.tgz
-	@rm -fr minilibx-linux.tgz
+$(LIBX_DIR) :
+	@wget -q https://cdn.intra.42.fr/document/document/29544/minilibx-linux.tgz && \
+	tar xf minilibx-linux.tgz && \
+	rm -fr minilibx-linux.tgz
 
-libx : $(LIBX_DIR) $(LIBX_HEADER)
+libx : $(LIBX_DIR)
 
 p :
 	./parser_testing/parser_testing.sh
