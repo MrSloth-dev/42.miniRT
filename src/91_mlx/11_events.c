@@ -135,7 +135,7 @@ int	mouse_handler(int mousecode, int x, int y, t_canvas *canvas)
 
 int	close_handler(t_canvas *canvas)
 {
-	mlx_destroy_image(canvas->mlx, canvas->img->img);
+	mlx_destroy_image(canvas->mlx, canvas->img.img);
 	mlx_destroy_window(canvas->mlx, canvas->win);
 	mlx_destroy_display(canvas->mlx);
 	ft_free_canvas(canvas);
@@ -147,11 +147,11 @@ int	ft_refreshframe(void *ptr)
 	t_canvas *canvas;
 
 	canvas = ptr;
-	mlx_destroy_image(canvas->mlx, canvas->img->img);
-	canvas->img->img = mlx_new_image(canvas->mlx, IMG_W, IMG_H);
-	canvas->img->addr = mlx_get_data_addr(canvas->img->img,
-			&canvas->img->bits_per_pixel,
-			&canvas->img->size_line, &canvas->img->endian);
+	mlx_destroy_image(canvas->mlx, canvas->img.img);
+	canvas->img.img = mlx_new_image(canvas->mlx, IMG_W, IMG_H);
+	canvas->img.addr = mlx_get_data_addr(canvas->img.img,
+			&canvas->img.bits_per_pixel,
+			&canvas->img.size_line, &canvas->img.endian);
 	ft_update_world_camera(canvas);
 	ft_render(canvas);
 	ft_menu(canvas);
