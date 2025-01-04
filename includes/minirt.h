@@ -35,7 +35,7 @@
 #define TEXT_H_ZONE 300
 #define TEXT_W_ZONE 250
 
-#define STEP 9
+#define STEP 15
 #define ROUND_ERROR 0.000001
 #define ERR_INPUT 1
 #define ERR_MLX 2

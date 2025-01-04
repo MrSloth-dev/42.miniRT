@@ -16,7 +16,7 @@ bool	ft_change_resolution(int keysym, t_canvas *canvas)
 {
 	if (keysym == XK_p && canvas->step > 1)
 		return (canvas->step--, true);
-	if (keysym == XK_o && canvas->step < 9)
+	if (keysym == XK_o && canvas->step < 19)
 		return (canvas->step++, true);
 	return (false);
 }
