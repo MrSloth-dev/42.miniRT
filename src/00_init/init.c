@@ -12,5 +12,5 @@ void	ft_init_canvas(t_canvas *canvas)
 		canvas->step = STEP;
 	canvas->mouse_prev_x = -1;
 	canvas->mouse_prev_y = -1;
-	canvas->shift_press = -1;
+	canvas->shift_press = 1;
 }

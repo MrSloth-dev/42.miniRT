@@ -49,7 +49,7 @@ bool	ft_light_transform(int keysym, t_canvas *canvas)
 int	key_release(int keysym, t_canvas *canvas)
 {
 	if (keysym == XK_Shift_L)
-		canvas->shift_press = -1;
+		canvas->shift_press = 1;
 	return (0);
 }
 
@@ -60,7 +60,7 @@ int	key_handler(int keysym, t_canvas *canvas)
 	else if (keysym == XK_h)
 		canvas->help = !canvas->help;
 	if (keysym == XK_Shift_L)
-		canvas->shift_press = 1;
+		canvas->shift_press = -1;
 	else if (ft_light_transform(keysym, canvas))
 		;
 	else if (ft_change_resolution(keysym, canvas))
