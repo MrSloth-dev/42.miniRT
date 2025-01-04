@@ -23,6 +23,7 @@ TO-DO list
 - [ ] Ivan - continue norminette and documentation.
 - [ ] Ivan - do sketchup rays scheme
 - [ ] Ivan - check for edge cases on ambient color.
+- [ ] verify when apply changes to size of objects, or position of camera - check perspective
 - [ ] Edite scenes on scene folder for evaluation
         - done cylinders.rt
         - done random.rt

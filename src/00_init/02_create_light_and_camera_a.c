@@ -15,6 +15,6 @@ t_camera	ft_create_camera_a(t_tuple pos, t_tuple norm, float fov) // this must g
 
 	camera.coord = pos;
 	camera.norm = norm;
-	camera.fov = fov;
+	camera.field_v = fov;
 	return (camera);
 }

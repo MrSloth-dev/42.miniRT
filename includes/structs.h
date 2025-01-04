@@ -71,7 +71,6 @@ typedef struct s_camera
 	// VARS ON PARSING
 	t_tuple			coord;
 	t_tuple			norm;//[0-1]
-	double			fov; //0-180
 	//VARS ON BOOK PAGE 100
 	double			h_size;
 	double			v_size;
@@ -83,6 +82,7 @@ typedef struct s_camera
 	double			half_view;
 	double			half_width;
 	double			half_height;
+	double			aspect;
 }	t_camera;
 
 typedef struct s_light
@@ -163,19 +163,19 @@ typedef struct s_inter
 
 typedef struct s_canvas
 {
+// mlx lib vars
 	void		*mlx;
+	void		*win;
+	t_img		img;
 	double		height;
 	double		width;
 	char		*program;
 	char		*name;
 	char		*file;
-	void		*win;
-	t_img		img;
 	char		*gnl_rest;
 	double		scale;
 	int			help;
 	int			step;
-	char		char_step[3];
 	t_img		*menu;
 	t_ambient	ambient;
 	t_camera	camera;
@@ -187,14 +187,15 @@ typedef struct s_canvas
 	t_plane		*plane;
 	t_cylinder	*cylinder;
 	t_count		count;
-
-	int			mouse_drag;
-	int			mouse_prev_x;
-	int			mouse_sum_x;
-	int			mouse_prev_y;
-	int			mouse_sum_y;
+// vars for event handle
+	char		char_step[3];
+	int		mouse_drag;
+	int		mouse_prev_x;
+	int		mouse_sum_x;
+	int		mouse_prev_y;
+	int		mouse_sum_y;
 	t_shapes	*object_selected;
-	int			light_selected;
+	int		light_selected;
 }	t_canvas;
 
 typedef struct s_iter
