@@ -6,6 +6,7 @@ void	ft_mlx_end(t_canvas *canvas)
 {
 	mlx_do_key_autorepeatoff(canvas->mlx);
 	mlx_hook(canvas->win, KeyPress, KeyPressMask, key_handler, canvas);
+	mlx_hook(canvas->win, KeyRelease, KeyReleaseMask, key_release, canvas);
 	mlx_hook(canvas->win, ButtonPress, ButtonPressMask, mouse_handler, canvas);
 	mlx_hook(canvas->win, ButtonRelease, ButtonReleaseMask, mouse_handler_release, canvas);
 	mlx_hook(canvas->win, MotionNotify, CWBackingStore, mouse_motion, canvas);

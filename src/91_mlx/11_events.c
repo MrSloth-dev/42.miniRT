@@ -24,52 +24,6 @@ bool	ft_camera_transform(int keysym, t_canvas *canvas)
 	return (true);
 }
 
-bool	ft_change_light_position(int keysym, t_canvas *canvas)
-{
-	if (keysym == XK_w)
-		canvas->light.coord = ft_add_tuple(canvas->light.coord,
-				     (t_tuple){0, 0.2, 0, 0});
-	else if (keysym == XK_s)
-		canvas->light.coord = ft_add_tuple(canvas->light.coord,
-				     (t_tuple){0, -0.2, 0, 0});
-	else if (keysym == XK_a)
-		canvas->light.coord = ft_add_tuple(canvas->light.coord,
-				     (t_tuple){-0.2, 0, 0, 0});
-	else if (keysym == XK_d)
-		canvas->light.coord = ft_add_tuple(canvas->light.coord,
-				     (t_tuple){0.2, 0, 0, 0});
-	else if (keysym == XK_q)
-		canvas->light.coord = ft_add_tuple(canvas->light.coord,
-				     (t_tuple){0, 0, 0.2, 0});
-	else if (keysym == XK_e)
-		canvas->light.coord = ft_add_tuple(canvas->light.coord,
-				     (t_tuple){0, 0, -0.2, 0});
-	else
-		return (false);
-	return (true) ;
-}
-
-bool	ft_change_light_color(int keysym, t_canvas *canvas)
-{
-	if (keysym == XK_Up)
-	{
-		canvas->light.color = ft_add_tuple(canvas->light.color,
-					 (t_tuple){0.5, 0.5, 0.5, 3});
-		canvas->light.intensity = ft_add_tuple(canvas->light.intensity,
-					 (t_tuple){0.006, 0.006, 0.006, 3});
-	}
-	else if (keysym == XK_Down)
-	{
-		canvas->light.color = ft_add_tuple(canvas->light.color,
-					 (t_tuple){-0.5, -0.5, -0.5, 3});
-		canvas->light.intensity = ft_add_tuple(canvas->light.intensity,
-					 (t_tuple){-0.006, -0.006, -0.006, 3});
-	}
-	else
-		return (false);
-	return (true);
-}
-
 bool	ft_light_transform(int keysym, t_canvas *canvas)
 {
 	if (keysym == XK_l)
@@ -92,12 +46,21 @@ bool	ft_light_transform(int keysym, t_canvas *canvas)
 	return (false);
 }
 
+int	key_release(int keysym, t_canvas *canvas)
+{
+	if (keysym == XK_Shift_L)
+		canvas->shift_press = -1;
+	return (0);
+}
+
 int	key_handler(int keysym, t_canvas *canvas)
 {
 	if (keysym == XK_Escape)
 		close_handler(canvas);
 	else if (keysym == XK_h)
 		canvas->help = !canvas->help;
+	if (keysym == XK_Shift_L)
+		canvas->shift_press = 1;
 	else if (ft_light_transform(keysym, canvas))
 		;
 	else if (ft_change_resolution(keysym, canvas))
