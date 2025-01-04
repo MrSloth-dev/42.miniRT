@@ -3,30 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: username <username@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 13:35:53 by joao-pol          #+#    #+#             */
-/*   Updated: 2024/05/07 15:47:47 by joao-pol         ###   ########.fr       */
+/*   Created: 2024/05/10 17:01:14 by username          #+#    #+#             */
+/*   Updated: 2024/05/14 14:50:00 by isilva-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
-#include <fcntl.h>
-#include <stdlib.h>
 
-void	ft_bzero(char *s, size_t n);
-void	*ft_calloc(size_t nmemb, size_t size);
-char	*ft_strdup(char *str);
-int		ft_strlen(char *str);
-char	*get_next_line(int fd);
-char	*ft_cleanfile(char *str);
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4096
+# endif
+
+char	*get_next_line(int fd, char **rest);
+char	*ft_strchr_gnl(char *s, int c);
+size_t	ft_strlen_gnl(const char *s);
+char	*ft_substr_gnl(char const *line, unsigned int start, size_t len);
+char	*ft_strdup_gnl(const char *src);
+char	*ft_strjoin_gnl(const char *line, char const *buf);
+
 #endif

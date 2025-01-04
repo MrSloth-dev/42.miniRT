@@ -171,6 +171,7 @@ typedef struct s_canvas
 	char		*file;
 	void		*win;
 	t_img		*img;
+	char		*gnl_rest;
 	double		scale;
 	int			help;
 	int			step;

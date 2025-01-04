@@ -3,94 +3,82 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 13:39:02 by joao-pol          #+#    #+#             */
-/*   Updated: 2024/05/07 15:47:45 by joao-pol         ###   ########.fr       */
+/*   Created: 2024/05/17 10:43:54 by isilva-t          #+#    #+#             */
+/*   Updated: 2024/05/17 11:10:58 by isilva-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_concatenate(char *buffer, char *str);
-static int		ft_check_newline(char *file);
-static char	*ft_free_gnl(char **buffer, char **file);
-
-char	*get_next_line(int fd)
+static char	*ft_search_new_line(int fd, char *buf, char *backup_static)
 {
-	static char	*file = NULL;
-	int			i;
-	char		*buffer;
-	char		*final;
+	int		read_check;
+	char	*temp_to_free;
 
-	i = 1;
-	if (fd < 0 || BUFFER_SIZE < 0)
-		return (NULL);
-	buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
-	if (!buffer)
-		return (NULL);
-	while (!ft_check_newline(file) && i > 0)
+	read_check = 1;
+	while (read_check)
 	{
-		i = read(fd, buffer, BUFFER_SIZE);
-		if (i < 0)
-			return (ft_free_gnl(&buffer, &file));
-		buffer[i] = '\0';
-		file = ft_concatenate(buffer, file);
+		read_check = read(fd, buf, BUFFER_SIZE);
+		if (read_check == -1)
+			return (NULL);
+		else if (read_check == 0)
+			break ;
+		buf[read_check] = '\0';
+		if (!backup_static)
+			backup_static = ft_strdup_gnl("");
+		temp_to_free = backup_static;
+		backup_static = ft_strjoin_gnl(temp_to_free, buf);
+		if (!backup_static)
+			return (NULL);
+		free (temp_to_free);
+		temp_to_free = NULL;
+		if (ft_strchr_gnl(buf, '\n'))
+			break ;
 	}
-	final = ft_strdup(file);
-	file = ft_cleanfile(file);
-	free(buffer);
-	return (final);
+	return (backup_static);
 }
 
-static int	ft_check_newline(char *file)
+static char	*ft_rest_to_next_call(char *line)
 {
-	int	i;
+	int		i;
+	char	*rest;
 
 	i = 0;
-	if (!file)
-		return (0);
-	while (file[i])
-	{
-		if (file[i] == '\n')
-			return (1);
+	while (line[i] && line[i] != '\n')
 		i++;
+	if (line[i] == '\0')
+		return (NULL);
+	rest = ft_substr_gnl(line, i + 1, ft_strlen_gnl(line) - i);
+	if (!rest)
+		return (NULL);
+	if (rest[0] == '\0')
+	{
+		free (rest);
+		rest = NULL;
+		return (NULL);
 	}
-	return (0);
+	line[i + 1] = '\0';
+	return (rest);
 }
 
-static char	*ft_free_gnl(char **buffer, char **file)
+char	*get_next_line(int fd, char **rest)
 {
-	free(*buffer);
-	free(*file);
-	*file = NULL;
-	return (NULL);
-}
+	char		*buf;
+	char		*line;
+	static char	*backup;
 
-static char	*ft_concatenate(char *buffer, char *file)
-{
-	int			i;
-	int			j;
-	int			len;
-	char		*result;
-
-	if (!buffer)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	if (!file)
-		file = ft_calloc(1, sizeof(char));
-	len = ft_strlen(buffer) + ft_strlen(file);
-	result = ft_calloc((len + 1), sizeof(char));
-	if (!result)
+	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!buf)
 		return (NULL);
-	j = 0;
-	i = 0;
-	while (file[i])
-	{
-		result[i] = file[i];
-		i++;
-	}
-	while (buffer[j])
-		result[i++] = buffer[j++];
-	free(file);
-	return (result);
+	line = ft_search_new_line(fd, buf, backup);
+	free (buf);
+	if (!line)
+		return (NULL);
+	backup = ft_rest_to_next_call(line);
+	*rest = backup;
+	return (line);
 }

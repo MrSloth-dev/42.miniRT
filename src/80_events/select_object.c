@@ -28,4 +28,5 @@ void	ft_select_obj(int x, int y, t_canvas *canvas)
 		canvas->object_selected = (t_shapes *)hit->shape;
 		hit->shape->selected = true;
 	}
+	ft_free_objects(lst);
 }

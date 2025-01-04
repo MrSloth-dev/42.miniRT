@@ -1,7 +1,4 @@
-#include "ft_printf.h"
-#include "libft.h"
 #include "minirt.h"
-#include <fcntl.h>
 
 int	ft_check_file(char *file)
 {
@@ -55,8 +52,8 @@ int	ft_parse_objects(t_canvas *canvas)
 
 	error = 1;
 	fd = open(canvas->file, O_RDONLY);
-	line = get_next_line(fd);
-	while (*line)
+	line = get_next_line(fd, &canvas->gnl_rest);
+	while (line)
 	{
 		split = ft_split_charset(line, WHITESPACE);
 		if (split && *split)
@@ -64,11 +61,11 @@ int	ft_parse_objects(t_canvas *canvas)
 		// ok, if i don't have error on last line, and have error in other?
 		// i think you can do like this:
 		// error += ft_parse_line(split, canvas);
-		ft_free_split(split);
 		line = ft_free(line);
+		ft_free_split(split);
 		if (error)
 			break ;
-		line = get_next_line(fd);
+		line = get_next_line(fd, &canvas->gnl_rest);
 	}
 	line = ft_free(line);
 	close(fd);
@@ -79,7 +76,7 @@ void	ft_set_objects_material_color(t_canvas *canvas)
 {
 	t_list *cur;
 
-	if (!canvas->objects && !canvas->objects->cont)
+	if (!canvas->objects)
 		return ;
 	cur = canvas->objects;
 	while (cur && cur->cont)
