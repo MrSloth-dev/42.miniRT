@@ -13,15 +13,6 @@ void	ft_mlx_init(t_canvas *canvas)
 		free(canvas->mlx);
 		exit(ERR_MLX);
 	}
-	/*canvas->img = (t_img *)malloc(sizeof(t_img));*/
-	/*if (!canvas->img)*/
-	/*{*/
-	/*	mlx_destroy_image(canvas->mlx, canvas->img);*/
-	/*	mlx_destroy_window(canvas->mlx, canvas->win);*/
-	/*	mlx_destroy_display(canvas->mlx);*/
-	/*	free(canvas->mlx);*/
-	/*	exit (ERR_MLX);*/
-	/*}*/
 	canvas->img.img = mlx_new_image(canvas->mlx, IMG_W, IMG_H);
 	canvas->img.addr = mlx_get_data_addr(canvas->img.img,
 			&canvas->img.bits_per_pixel, &canvas->img.size_line,

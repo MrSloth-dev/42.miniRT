@@ -36,16 +36,24 @@ void	ft_menu(t_canvas *canvas)
 	}
 	else
 	{
-		canvas->char_step[0] = canvas->step + '0';
 		i = 2;
 		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
 				 "Press 'h' for help");
 		mlx_string_put(canvas->mlx, canvas->win, W_POS, WIN_H - HEIGHT_POS * i, WHITE,
 				 "Pixel upscale:");
-		mlx_string_put(canvas->mlx, canvas->win, W_POS + 110 , WIN_H - HEIGHT_POS * i, WHITE,
-				 "1x ");
-		mlx_string_put(canvas->mlx, canvas->win, W_POS + 125 , WIN_H - HEIGHT_POS * i--, WHITE,
+		if (canvas->step > 9)
+		{
+			canvas->char_step[0] = '1';
+			canvas->char_step[1] = canvas->step - 10 + '0';
+		}
+		else
+		{
+			canvas->char_step[0] = '0';
+			canvas->char_step[1] = canvas->step + '0';
+		}
+		mlx_string_put(canvas->mlx, canvas->win, W_POS + 105 , WIN_H - HEIGHT_POS * i--, WHITE,
 				 canvas->char_step);
+		
 
 
 	}
