@@ -32,7 +32,7 @@
 
 #define HEIGHT_POS 16
 #define W_POS 12
-#define TEXT_H_ZONE 280
+#define TEXT_H_ZONE 900 / 1.8
 #define TEXT_W_ZONE 250
 
 #define STEP 15
