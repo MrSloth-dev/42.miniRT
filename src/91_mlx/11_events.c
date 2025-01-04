@@ -14,10 +14,11 @@
 
 bool	ft_camera_transform(int keysym, t_canvas *canvas)
 {
-	if (keysym == XK_z) // Maybe add reset to objects also
+	if (keysym == XK_z)
 		canvas->camera.transf = canvas->camera.reset;
 	else if (!canvas->object_selected && !canvas->light_selected)
-		canvas->camera.transf = ft_transform_camera_key(canvas->camera.transf, keysym);
+		canvas->camera.transf = ft_transform_camera_key(
+				canvas->camera.transf, keysym);
 	else
 		return (false);
 	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
@@ -41,7 +42,7 @@ bool	ft_light_transform(int keysym, t_canvas *canvas)
 			;
 		else
 			return (false);
-		return (true); 
+		return (true);
 	}
 	return (false);
 }
@@ -87,11 +88,11 @@ int	mouse_handler(int mousecode, int x, int y, t_canvas *canvas)
 {
 	if (mousecode == 3)
 		canvas->mouse_drag = 1;
-	if (mousecode == 1) // 4
+	if (mousecode == 1)
 		ft_select_obj(x, y, canvas);
-	else if (mousecode == 4) // 5
+	else if (mousecode == 4)
 		canvas->camera.field_v -= M_PI / 30;
-	else if (mousecode == 5) // 5
+	else if (mousecode == 5)
 		canvas->camera.field_v += M_PI / 30;
 	return (0);
 }

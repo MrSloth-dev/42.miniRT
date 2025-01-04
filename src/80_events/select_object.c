@@ -14,11 +14,12 @@
 
 void	ft_select_obj(int x, int y, t_canvas *canvas)
 {
-	t_ray	ray;
-	t_interlst *lst;
-	t_inter	*hit;
+	t_ray		ray;
+	t_interlst	*lst;
+	t_inter		*hit;
 
-	ray.pos = ft_mult_matrix_tuple(canvas->camera.inverted, (t_tuple){0, 0, 0, 1});
+	ray.pos = ft_mult_matrix_tuple(canvas->camera.inverted,
+			(t_tuple){0, 0, 0, 1});
 	ft_ray_for_pixel(canvas->camera, x, y, &ray);
 	lst = ft_intersect_world(canvas, ray);
 	hit = ft_hit_inter(&lst);
