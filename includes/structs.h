@@ -189,6 +189,7 @@ typedef struct s_canvas
 	t_count		count;
 // vars for event handle
 	char		char_step[3];
+	int		shift_press;
 	int		mouse_drag;
 	int		mouse_prev_x;
 	int		mouse_sum_x;
