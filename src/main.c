@@ -2,7 +2,6 @@
 #include "minirt.h"
 #include <unistd.h>
 
-
 void	ft_mlx_end(t_canvas *canvas)
 {
 	mlx_do_key_autorepeatoff(canvas->mlx);
@@ -27,7 +26,10 @@ int	main(int argc, char *argv[])
 	if (ft_parse(&canvas, argv[1]) == 0)
 		return (1);
 	if (DEBUG)
+	{
+		ft_free_canvas(&canvas);
 		return (0);
+	}
 	ft_mlx_init(&canvas);
 	ft_refreshframe(&canvas);
 	ft_mlx_end(&canvas);

@@ -9,6 +9,7 @@ void	ft_init_canvas(t_canvas *canvas)
 	canvas->count.light = 0;
 	canvas->help = 0;
 	canvas->step = STEP;
+	canvas->ambient.color = (t_color){0, 0, 0, 3};
 	ft_bzero(canvas->char_step, 2);
 
 	canvas->mouse_drag = 0;
@@ -18,6 +19,10 @@ void	ft_init_canvas(t_canvas *canvas)
 	canvas->mouse_sum_y = 0;
 	canvas->object_selected = NULL;
 	canvas->light_selected = 0;
+
+	canvas->img = NULL;
+	canvas->mlx = NULL;
+	canvas->gnl_rest = NULL;
 
 	canvas->objects = NULL;
 	canvas->light = ft_init_light((t_tuple){0, 0, 0, 0}, 0.0f, (t_color){0, 0, 0, 0});
