@@ -175,7 +175,7 @@ typedef struct s_canvas
 	double		scale;
 	int			help;
 	int			step;
-	char		char_step[2];
+	char		char_step[3];
 	t_img		*menu;
 	t_ambient	ambient;
 	t_camera	camera;
