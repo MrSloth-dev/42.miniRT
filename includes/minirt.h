@@ -110,6 +110,9 @@ void	ft_clear_select(t_canvas *canvas);
 void	ft_select_obj(int x, int y, t_canvas *canvas);
 t_matrix	ft_transform_camera_key(t_matrix m, int key);
 bool	ft_change_obj_propriety(int keysym, t_canvas *canvas, bool state);
+bool	ft_change_light_position(int keysym, t_canvas *canvas);
+bool	ft_change_light_color(int keysym, t_canvas *canvas);
+int	key_release(int keysym, t_canvas *canvas);
 
 // Chapter 1 - Tuples, Points and Vectors
 void		ft_tuple_init(t_tuple *tuple, t_point coord, int type);
