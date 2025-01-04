@@ -132,7 +132,7 @@ vgdb :
 
 .PHONY: va
 va : re
-	valgrind $(VALGRINDFLAGS) ./$(NAME) input.rt
+	valgrind $(VALGRINDFLAGS) ./$(NAME) teste.rt
 
 .PHONY: clean
 clean:

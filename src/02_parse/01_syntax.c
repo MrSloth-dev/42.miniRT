@@ -77,8 +77,8 @@ int	ft_check_syntax(t_canvas *canvas, char *file)
 	(void)canvas;
 	error = 1;
 	fd = open(file, O_RDONLY);
-	line = get_next_line(fd);
-	while (*line && ft_strlen(line) > 0)
+	line = get_next_line(fd, &canvas->gnl_rest);
+	while (line && ft_strlen(line) > 0)
 	{
 		split = ft_split_charset(line, WHITESPACE);
 		if (split && *split)
@@ -86,7 +86,7 @@ int	ft_check_syntax(t_canvas *canvas, char *file)
 		// this var must sum result in every iteration
 		ft_free_split(split);
 		line = ft_free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd, &canvas->gnl_rest);
 	}
 	line = ft_free(line);
 	close(fd);
