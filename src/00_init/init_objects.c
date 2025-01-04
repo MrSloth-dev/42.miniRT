@@ -15,7 +15,7 @@ t_camera	ft_init_camera(t_tuple coord, t_tuple norm, int fov)
 
 	new.coord = coord;
 	new.norm = norm;
-	new.fov = fov;
+	new.field_v = fov;
 	return (new);
 }
 
