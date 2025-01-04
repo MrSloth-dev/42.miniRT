@@ -30,9 +30,8 @@ int	main(int argc, char *argv[])
 	{
 		ft_free_canvas(&canvas);
 		return (0);
-	}
-	ft_mlx_init(&canvas);
-	ft_refreshframe(&canvas);
-	ft_mlx_end(&canvas);
+	// ft_mlx_init(&canvas);
+	// ft_refreshframe(&canvas);
+	// ft_mlx_end(&canvas);
 	return (0);
 }

@@ -1,19 +1,19 @@
 #include "minirt.h"
 
-int	ft_check_file(char *file)
+static int	ft_check_file(char *file)
 {
-	int dotindex;
-	int len;
-	int fd;
+	int	dotindex;
+	int	len;
+	int	fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (close(fd), ft_printf(2, "Error\nFile not found\n"), 0);
 	close(fd);
 	len = ft_strlen(file);
-	ft_printf(2, "file = %s\n", file); 
-	if (!ft_strchr(file, '.') || len < 4)
-		return (ft_printf(2, "Error\nFile what not valid\n"), 0);
+	ft_printf(2, "%s\n", ft_strrchr(file, '/'));
+	if (!ft_strchr(file, '.') || len < 4 || !ft_strchr(ft_strrchr(file, '/'), '.'))
+		return (ft_printf(2, "Error\nFile not wtf valid\n"), 0);
 	if (len > 4 && file[len - 3] == '/')
 		return (ft_printf(2, "Error\nFile not valid sneaker basterd!\n"), 0);
 	dotindex = 0;
@@ -24,7 +24,7 @@ int	ft_check_file(char *file)
 	return (ft_printf(2, "Error\n File not valid end of line\n"), 0);
 }
 
-int	ft_parse_line(char **split, t_canvas *canvas)
+static int	ft_parse_line(char **split, t_canvas *canvas)
 {
 	if (*split[0] == 'A')
 		return (ft_create_ambient(canvas, split));
@@ -43,7 +43,7 @@ int	ft_parse_line(char **split, t_canvas *canvas)
 	return (1);
 }
 
-int	ft_parse_objects(t_canvas *canvas)
+static int	ft_parse_objects(t_canvas *canvas)
 {
 	char	**split;
 	char	*line;
@@ -72,7 +72,7 @@ int	ft_parse_objects(t_canvas *canvas)
 	return (error);
 }
 
-void	ft_set_objects_material_color(t_canvas *canvas)
+static void	ft_set_objects_material_color(t_canvas *canvas)
 {
 	t_list *cur;
 
@@ -87,7 +87,7 @@ void	ft_set_objects_material_color(t_canvas *canvas)
 	}
 }
 
-int	ft_parser(t_canvas *canvas)
+static int	ft_parser_elements(t_canvas *canvas)
 {
 	ft_parse_objects(canvas);
 	ft_set_objects_material_color(canvas);
@@ -99,7 +99,7 @@ int	ft_parse(t_canvas *canvas, char *file)
 	canvas->file = file;
 	if (ft_check_file(file)
 		&& ft_check_syntax(canvas, file)
-		&& ft_parser(canvas))
+		&& ft_parser_elements(canvas))
 		return (1);
 	return (0);
 }
