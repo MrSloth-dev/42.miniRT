@@ -14,12 +14,12 @@ void	ft_draw_square(t_canvas *canvas,t_tuple start, t_tuple sides, int color)
 	{
 		while (x < (int)(sides.x + start.x))
 		{
-			ft_pixel_put(canvas->img, x, y, color);
+			ft_pixel_put(&canvas->img, x, y, color);
 			x++;
 		}
 		x = start.x;
 		y++;
 	}
-	mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img->img, 0, 0);
+	mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img.img, 0, 0);
 }
 
