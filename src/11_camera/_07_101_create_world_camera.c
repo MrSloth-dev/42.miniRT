@@ -14,18 +14,15 @@
 
 void	ft_update_world_camera(t_canvas *canvas)
 {
-	double		aspect;
-
 	canvas->camera.half_view = tan(canvas->camera.field_v / 2);
-	aspect = canvas->camera.h_size / canvas->camera.v_size;
-	if (aspect >= 1)
+	if (canvas->camera.aspect >= 1)
 	{
 		canvas->camera.half_width = canvas->camera.half_view;
-		canvas->camera.half_height = canvas->camera.half_view / aspect;
+		canvas->camera.half_height = canvas->camera.half_view / canvas->camera.aspect;
 	}
 	else
 	{
-		canvas->camera.half_width = canvas->camera.half_view * aspect;
+		canvas->camera.half_width = canvas->camera.half_view * canvas->camera.aspect;
 		canvas->camera.half_height = canvas->camera.half_view;
 	}
 	canvas->camera.px_size
@@ -34,22 +31,20 @@ void	ft_update_world_camera(t_canvas *canvas)
 
 void	ft_create_world_camera(double h_size, double v_size, t_canvas *canvas)
 {
-	double		aspect;
-
 	canvas->camera.h_size = h_size;
 	canvas->camera.v_size = v_size;
 	canvas->camera.transf = ft_create_matrix(4, 4, 1);
 	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
 	canvas->camera.half_view = tan(canvas->camera.field_v / 2);
-	aspect = canvas->camera.h_size / canvas->camera.v_size;
-	if (aspect >= 1)
+	canvas->camera.aspect = canvas->camera.h_size / canvas->camera.v_size;
+	if (canvas->camera.aspect >= 1)
 	{
 		canvas->camera.half_width = canvas->camera.half_view;
-		canvas->camera.half_height = canvas->camera.half_view / aspect;
+		canvas->camera.half_height = canvas->camera.half_view / canvas->camera.aspect;
 	}
 	else
 	{
-		canvas->camera.half_width = canvas->camera.half_view * aspect;
+		canvas->camera.half_width = canvas->camera.half_view * canvas->camera.aspect;
 		canvas->camera.half_height = canvas->camera.half_view;
 	}
 	canvas->camera.px_size
