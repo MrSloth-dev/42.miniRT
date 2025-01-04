@@ -17,7 +17,6 @@ static void	ft_change_light(t_canvas *canvas)
 	canvas->light.intensity = ft_add_tuple(canvas->light.intensity, up_inten);
 }
 
-
 static void	ft_change_light_value(t_canvas *canvas, char color)
 {
 	double	intensity_change;
@@ -42,9 +41,7 @@ static void	ft_change_light_value(t_canvas *canvas, char color)
 
 bool	ft_change_light_color(int keysym, t_canvas *canvas)
 {
-	if (keysym == XK_Up)
-		ft_change_light(canvas);	
-	else if (keysym == XK_Down)
+	if (keysym == XK_t)
 		ft_change_light(canvas);	
 	else if (keysym == XK_r)
 		ft_change_light_value(canvas, 'r');
