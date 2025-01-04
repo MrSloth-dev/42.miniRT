@@ -14,7 +14,7 @@
 
 bool	ft_camera_transform(int keysym, t_canvas *canvas)
 {
-	if (keysym == XK_r) // Maybe add reset to objects also
+	if (keysym == XK_c) // Maybe add reset to objects also
 		canvas->camera.transf = canvas->camera.reset;
 	else if (!canvas->object_selected && !canvas->light_selected)
 		canvas->camera.transf = ft_transform_camera_key(canvas->camera.transf, keysym);

@@ -24,15 +24,15 @@
 #ifndef DEBUG
 #define DEBUG 1
 #endif
-#define WIN_H 700 / 1.8
-#define WIN_W 700
+#define WIN_H 900 / 1.8
+#define WIN_W 900
 
-#define IMG_H 700 / 1.8
-#define IMG_W 700
+#define IMG_H 900 / 1.8
+#define IMG_W 900
 
 #define HEIGHT_POS 16
 #define W_POS 12
-#define TEXT_H_ZONE 300
+#define TEXT_H_ZONE 280
 #define TEXT_W_ZONE 250
 
 #define STEP 15
