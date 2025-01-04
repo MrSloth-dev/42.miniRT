@@ -7,12 +7,11 @@ static int	ft_check_file(char *file)
 	int	fd;
 
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
+	if (fd == -1 || !file)
 		return (close(fd), ft_printf(2, "Error\nFile not found\n"), 0);
 	close(fd);
 	len = ft_strlen(file);
-	ft_printf(2, "%s\n", ft_strrchr(file, '/'));
-	if (!ft_strchr(file, '.') || len < 4 || !ft_strchr(ft_strrchr(file, '/'), '.'))
+	if (!ft_strchr(file, '.') || len < 4)
 		return (ft_printf(2, "Error\nFile not wtf valid\n"), 0);
 	if (len > 4 && file[len - 3] == '/')
 		return (ft_printf(2, "Error\nFile not valid sneaker basterd!\n"), 0);
