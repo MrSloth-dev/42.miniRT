@@ -1,28 +1,5 @@
 #include "minirt.h"
 
-static void	ft_set_color(t_canvas *canvas, double r, double g, double b)
-{
-	t_objects	*cur;
-	t_shapes	*cur_shape;
-	double		dance;
-
-	dance = canvas->disco_dance;
-	canvas->light.color = (t_tuple){r, g, b, 3};
-	cur = canvas->objects;
-	while (cur)
-	{
-		cur_shape = cur->cont;
-		if (cur_shape->type != PLANE)
-		{
-			ft_get_transf_obj(cur_shape,
-				(t_tuple){dance, dance, dance, 0},
-				(t_tuple){0}, (t_tuple){1, 1, 1, 0});
-		}
-		cur = cur->next;
-	}
-	canvas->disco_dance = -dance;
-}
-
 static void	ft_backup_light_ambient(t_canvas *canvas, char to_do)
 {
 	if (to_do == 'b')
@@ -39,6 +16,16 @@ static void	ft_backup_light_ambient(t_canvas *canvas, char to_do)
 	}
 }
 
+static void	ft_strob_disco(t_canvas *canvas,
+			t_color *up_color, t_color *up_inten)
+{
+	*up_color = ft_neg_tuple(*up_color);
+	*up_inten = ft_neg_tuple(*up_inten);
+	canvas->light.color = ft_add_tuple(canvas->light.color, *up_color);
+	canvas->light.intensity = ft_add_tuple(canvas->light.intensity, *up_inten);
+	ft_refreshframe(canvas);
+}
+
 static bool	ft_set_local_step(t_canvas *canvas, unsigned int *local_step)
 {
 	if (canvas->step == 1 || canvas->shift_press == 1)
@@ -50,42 +37,6 @@ static bool	ft_set_local_step(t_canvas *canvas, unsigned int *local_step)
 	else
 		*local_step = canvas->step * 5000000;
 	return (true);
-}
-
-void	ft_change_color_type(t_canvas *canvas, int *type)
-{
-	double		hi;
-	double		lo;
-
-	hi = 10;
-	lo = 2;
-	//canvas->ambient.color = canvas->ambient.prev_color;	
-	*type = *type + 1;
-	if (*type == 1)
-		ft_set_color(canvas, hi, lo, lo);
-	else if (*type == 2)
-		ft_set_color(canvas, lo, hi, hi);
-	else if (*type == 3)
-		ft_set_color(canvas, lo, lo, hi);
-	else if (*type == 4)
-		ft_set_color(canvas, hi, hi, lo);
-	else if (*type == 5)
-		ft_set_color(canvas, lo, hi, lo);
-	else if (*type == 6)
-		ft_set_color(canvas, hi, lo, hi);
-	else if (*type == 7)
-		ft_set_color(canvas, hi + 10, hi + 10, hi + 10);
-	if (*type == 7)
-		*type = 0;
-}
-
-void	ft_strob_disco(t_canvas *canvas, t_color *up_color, t_color *up_inten)
-{
-	*up_color = ft_neg_tuple(*up_color);
-	*up_inten = ft_neg_tuple(*up_inten);
-	canvas->light.color = ft_add_tuple(canvas->light.color, *up_color);
-	canvas->light.intensity = ft_add_tuple(canvas->light.intensity, *up_inten);
-	ft_refreshframe(canvas);
 }
 
 void	ft_make_disco_dancing(t_canvas *canvas,
@@ -105,7 +56,7 @@ void	ft_make_disco_dancing(t_canvas *canvas,
 	while (1)
 	{
 		if (change++ == 0)
-			ft_change_color_type(canvas, &type);
+			ft_change_color_disco(canvas, &type);
 		if (canvas->step > 2 && change == strob)
 			ft_strob_disco(canvas, &up_color, &up_inten);
 		if (change == local_step)
