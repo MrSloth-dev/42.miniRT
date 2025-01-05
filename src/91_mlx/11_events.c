@@ -54,6 +54,7 @@ int	key_release(int keysym, t_canvas *canvas)
 	return (0);
 }
 
+
 int	key_handler(int keysym, t_canvas *canvas)
 {
 	if (keysym == XK_Escape)
@@ -62,6 +63,8 @@ int	key_handler(int keysym, t_canvas *canvas)
 		canvas->help = !canvas->help;
 	if (keysym == XK_Shift_L)
 		canvas->shift_press = -1;
+	else if (ft_make_disco(keysym, canvas))
+		;
 	else if (ft_light_transform(keysym, canvas))
 		;
 	else if (ft_change_resolution(keysym, canvas))

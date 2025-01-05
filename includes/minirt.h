@@ -12,6 +12,7 @@
 #include "../minilibx-linux/mlx.h"
 #include <X11/keysym.h>
 #include <X11/X.h>
+#include <limits.h>
 
 #include "structs.h"
 
@@ -114,6 +115,7 @@ bool	ft_change_light_position(int keysym, t_canvas *canvas);
 bool	ft_change_light_color(int keysym, t_canvas *canvas);
 int	key_release(int keysym, t_canvas *canvas);
 bool	ft_change_object_color(int keysym, t_canvas *canvas);
+bool	ft_make_disco(int key, t_canvas *canvas);
 
 // Chapter 1 - Tuples, Points and Vectors
 void		ft_tuple_init(t_tuple *tuple, t_point coord, int type);
