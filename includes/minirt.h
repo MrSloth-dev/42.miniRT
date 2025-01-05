@@ -92,11 +92,6 @@ int		ft_create_cylinder(t_canvas *canvas, char **split);
 
 //minilibx
 int		ft_setup(t_canvas *canvas, char *argv[]);
-int		ft_refreshframe(void *ptr);
-int		close_handler(t_canvas *canvas);
-int		mouse_handler(int mousecode, int x, int y, t_canvas *canvas);
-int		mouse_handler_release(int mousecode, int x, int y, t_canvas *canvas);
-int		mouse_motion(int x, int y, t_canvas *canvas);
 int		key_handler(int keysym, t_canvas *canvas);
 void	ft_mlx_init(t_canvas *canvas);
 void	ft_pixel_put(t_img *data, int x, int y, int color);
@@ -104,18 +99,27 @@ int		ft_handle_key_hook(int key, t_canvas *canvas);
 int		ft_free_mlx(t_canvas *canvas);
 void	ft_menu(t_canvas *canvas);
 
-//events
-int	mouse_motion(int x, int y, t_canvas *canvas);
-bool	ft_change_resolution(int keysym, t_canvas *canvas);
-void	ft_clear_select(t_canvas *canvas);
-void	ft_select_obj(int x, int y, t_canvas *canvas);
+//events minilibx
+int			key_handler(int keysym, t_canvas *canvas);
+int			key_release(int keysym, t_canvas *canvas);
+int			mouse_handler(int mousecode, int x, int y, t_canvas *canvas);
+int			mouse_handler_release(int mousecode,
+				int x, int y, t_canvas *canvas);
+int			mouse_motion(int x, int y, t_canvas *canvas);
+int			close_handler(t_canvas *canvas);
+int			ft_refreshframe(void *ptr);
+bool		ft_make_disco(int key, t_canvas *canvas);
+void		ft_change_color_disco(t_canvas *canvas, int *type);
+bool		ft_light_transform(int keysym, t_canvas *canvas);
+bool		ft_change_light_position(int keysym, t_canvas *canvas);
+bool		ft_change_light_color(int keysym, t_canvas *canvas);
+bool		ft_change_resolution(int keysym, t_canvas *canvas);
+bool		ft_change_obj_propriety(int keysym, t_canvas *canvas, bool state);
+bool		ft_change_object_color(int keysym, t_canvas *canvas);
+bool		ft_camera_transform(int keysym, t_canvas *canvas);
 t_matrix	ft_transform_camera_key(t_matrix m, int key);
-bool	ft_change_obj_propriety(int keysym, t_canvas *canvas, bool state);
-bool	ft_change_light_position(int keysym, t_canvas *canvas);
-bool	ft_change_light_color(int keysym, t_canvas *canvas);
-int	key_release(int keysym, t_canvas *canvas);
-bool	ft_change_object_color(int keysym, t_canvas *canvas);
-bool	ft_make_disco(int key, t_canvas *canvas);
+void		ft_select_obj(int x, int y, t_canvas *canvas);
+void		ft_clear_select(t_canvas *canvas);
 
 // Chapter 1 - Tuples, Points and Vectors
 void		ft_tuple_init(t_tuple *tuple, t_point coord, int type);
