@@ -24,7 +24,7 @@ void	test_mlx_end(t_canvas *canvas)
 	mlx_hook(canvas->win, KeyPress, KeyPressMask, key_handler, canvas);
 	mlx_hook(canvas->win, ButtonPress, ButtonPressMask, mouse_handler, canvas);
 	mlx_hook(canvas->win, ButtonRelease, ButtonReleaseMask, mouse_handler_release, canvas);
-	mlx_hook(canvas->win, EVENT_MOUSE_MOTION, MASK_POINTER_MOTION, mouse_motion, canvas);
+	mlx_hook(canvas->win, MotionNotify, CWBackingStore, mouse_motion, canvas);
 	mlx_hook(canvas->win, DestroyNotify, StructureNotifyMask, close_handler, canvas);
 	mlx_hook(canvas->win, DestroyNotify, 0l, &close_handler, &canvas);
 	mlx_loop_hook(canvas->mlx, ft_refreshframe, canvas);
@@ -170,21 +170,21 @@ void	test_render_scene_shadow(t_canvas *canvas)
 // 	ft_print_intersections(lst);
 // }
 
-int	main(int argc, char *argv[])
-{
-	t_canvas canvas;
-
-	if (argc != 2)
-		return 1;
-	ft_init_canvas(&canvas);
-	if (ft_parse(&canvas, argv[1]) == 0)
-		return 1;
-	test_mlx_start(&canvas);
-	ft_refreshframe(&canvas);
-	test_mlx_end(&canvas);
-	ft_free_canvas(&canvas);
-	return (0);
-}
+/*int	main(int argc, char *argv[])*/
+/*{*/
+/*	t_canvas canvas;*/
+/**/
+/*	if (argc != 2)*/
+/*		return 1;*/
+/*	ft_init_canvas(&canvas);*/
+/*	if (ft_parse(&canvas, argv[1]) == 0)*/
+/*		return 1;*/
+/*	test_mlx_start(&canvas);*/
+/*	ft_refreshframe(&canvas);*/
+/*	test_mlx_end(&canvas);*/
+/*	ft_free_canvas(&canvas);*/
+/*	return (0);*/
+/*}*/
 
 void	test_list()
 {
