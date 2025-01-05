@@ -67,7 +67,6 @@ bool	ft_change_obj_propriety(int keysym, t_canvas *canvas, bool state)
 {
 	if (canvas->object_selected)
 	{
-		mlx_do_key_autorepeaton(canvas->mlx);
 		state = true;
 		if (ft_change_obj_dimension(keysym, canvas))
 			;
@@ -79,10 +78,7 @@ bool	ft_change_obj_propriety(int keysym, t_canvas *canvas, bool state)
 		else if (ft_change_object_color(keysym, canvas))
 			;
 		else
-		{
-			mlx_do_key_autorepeatoff(canvas->mlx);
 			state = false;
-		}
 	}
 	return (state);
 }
