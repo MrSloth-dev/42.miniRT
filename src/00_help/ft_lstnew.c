@@ -19,7 +19,7 @@ t_list	*ft_lstnew(void *cont)
 	new = (t_list *)malloc(sizeof(t_list));
 	if (new == NULL)
 		return (NULL);
-	new->cont= cont;
+	new->cont = cont;
 	new->next = NULL;
 	return (new);
 }

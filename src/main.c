@@ -1,6 +1,4 @@
-#include "libft.h"
 #include "minirt.h"
-#include <unistd.h>
 
 void	ft_mlx_end(t_canvas *canvas)
 {
@@ -8,9 +6,11 @@ void	ft_mlx_end(t_canvas *canvas)
 	mlx_hook(canvas->win, KeyPress, KeyPressMask, key_handler, canvas);
 	mlx_hook(canvas->win, KeyRelease, KeyReleaseMask, key_release, canvas);
 	mlx_hook(canvas->win, ButtonPress, ButtonPressMask, mouse_handler, canvas);
-	mlx_hook(canvas->win, ButtonRelease, ButtonReleaseMask, mouse_handler_release, canvas);
+	mlx_hook(canvas->win, ButtonRelease, ButtonReleaseMask,
+		mouse_handler_release, canvas);
 	mlx_hook(canvas->win, MotionNotify, CWBackingStore, mouse_motion, canvas);
-	mlx_hook(canvas->win, DestroyNotify, StructureNotifyMask, close_handler, canvas);
+	mlx_hook(canvas->win, DestroyNotify, StructureNotifyMask,
+		close_handler, canvas);
 	mlx_hook(canvas->win, DestroyNotify, 0l, &close_handler, &canvas);
 	mlx_loop_hook(canvas->mlx, ft_refreshframe, canvas);
 	mlx_loop(canvas->mlx);

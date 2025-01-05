@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-t_matrix ft_rotate_matrix_x(double rad)
+t_matrix	ft_rotate_matrix_x(double rad)
 {
 	t_matrix	m;
 
@@ -24,7 +24,7 @@ t_matrix ft_rotate_matrix_x(double rad)
 	return (m);
 }
 
-t_matrix ft_rotate_matrix_y(double rad)
+t_matrix	ft_rotate_matrix_y(double rad)
 {
 	t_matrix	m;
 
@@ -36,7 +36,7 @@ t_matrix ft_rotate_matrix_y(double rad)
 	return (m);
 }
 
-t_matrix ft_rotate_matrix_z(double rad)
+t_matrix	ft_rotate_matrix_z(double rad)
 {
 	t_matrix	m;
 

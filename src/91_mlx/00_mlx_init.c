@@ -1,6 +1,5 @@
 #include "minirt.h"
 
-
 void	ft_mlx_init(t_canvas *canvas)
 {
 	canvas->mlx = mlx_init();

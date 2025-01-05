@@ -39,7 +39,8 @@ void	ft_render(t_canvas *canvas)
 	t_ray	ray;
 
 	h = ft_iter(0);
-	ray.pos = ft_mult_matrix_tuple(canvas->camera.inverted, (t_tuple){0, 0, 0, 1});
+	ray.pos = ft_mult_matrix_tuple(canvas->camera.inverted,
+			(t_tuple){0, 0, 0, 1});
 	while (h.y < IMG_H)
 	{
 		h.x = 0;

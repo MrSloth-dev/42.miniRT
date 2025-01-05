@@ -48,11 +48,8 @@ void	ft_get_transf_obj(t_shapes *s, t_tuple coord,
 		scaled = ft_scale_matrix(scale.x, scale.y, scale.z);
 	if (s->type == CYLINDER)
 	{
-		//if (scale.y != 1)
-		//{
-			s->cyl.size.max = s->cyl.size.max * scale.y;
-			s->cyl.size.min = -s->cyl.size.max;
-		//}
+		s->cyl.size.max = s->cyl.size.max * scale.y;
+		s->cyl.size.min = -s->cyl.size.max;
 		scaled = ft_scale_matrix(scale.x, 1, scale.z);
 	}
 	if (s->type != SPHERE)
