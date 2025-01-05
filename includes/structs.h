@@ -64,6 +64,7 @@ typedef struct s_ambient
 {
 	double				ratio;
 	t_color				color;
+	t_color				prev_color;
 }	t_ambient;
 
 typedef struct s_camera
@@ -90,6 +91,8 @@ typedef struct s_light
 	t_tuple			coord;
 	t_color			color;
 	t_tuple			intensity;
+	t_color			prev_color;
+	t_color			prev_intensity;
 }	t_light;
 
 typedef struct s_sphere
@@ -197,6 +200,8 @@ typedef struct s_canvas
 	int		mouse_sum_y;
 	t_shapes	*object_selected;
 	int		light_selected;
+	int		disco_color;
+	double		disco_dance;
 }	t_canvas;
 
 typedef struct s_iter
