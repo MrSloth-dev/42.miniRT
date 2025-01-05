@@ -18,11 +18,13 @@ void	ft_update_world_camera(t_canvas *canvas)
 	if (canvas->camera.aspect >= 1)
 	{
 		canvas->camera.half_width = canvas->camera.half_view;
-		canvas->camera.half_height = canvas->camera.half_view / canvas->camera.aspect;
+		canvas->camera.half_height = canvas->camera.half_view
+			/ canvas->camera.aspect;
 	}
 	else
 	{
-		canvas->camera.half_width = canvas->camera.half_view * canvas->camera.aspect;
+		canvas->camera.half_width = canvas->camera.half_view
+			* canvas->camera.aspect;
 		canvas->camera.half_height = canvas->camera.half_view;
 	}
 	canvas->camera.px_size
@@ -40,11 +42,13 @@ void	ft_create_world_camera(double h_size, double v_size, t_canvas *canvas)
 	if (canvas->camera.aspect >= 1)
 	{
 		canvas->camera.half_width = canvas->camera.half_view;
-		canvas->camera.half_height = canvas->camera.half_view / canvas->camera.aspect;
+		canvas->camera.half_height = canvas->camera.half_view
+			/ canvas->camera.aspect;
 	}
 	else
 	{
-		canvas->camera.half_width = canvas->camera.half_view * canvas->camera.aspect;
+		canvas->camera.half_width = canvas->camera.half_view
+			* canvas->camera.aspect;
 		canvas->camera.half_height = canvas->camera.half_view;
 	}
 	canvas->camera.px_size
