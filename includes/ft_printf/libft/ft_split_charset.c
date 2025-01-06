@@ -23,7 +23,7 @@ char	**ft_split_charset(char *str, char *charset)
 	auto char **split = {0};
 	auto int i = 0;
 	auto int j = 0;
-	if (str == NULL || count == -1)
+	if (str == NULL || count <= 0)
 		return (NULL);
 	split = ft_calloc(count + 1, sizeof(char *));
 	if (!split)
