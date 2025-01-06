@@ -1,3 +1,4 @@
+#include "ft_printf.h"
 #include "minirt.h"
 
 int	ft_syntax_ambient(t_canvas *canvas, char **split)
@@ -67,6 +68,16 @@ int	ft_syntax_line(char **split, t_canvas *canvas)
 	return (1);
 }
 
+int	ft_check_count(t_canvas *canvas)
+{
+	if (canvas->count.light > 1)
+		return (ft_printf(2, "Error\nMore than one light"), 1);
+	if(canvas->count.camera > 1)
+		return (ft_printf(2, "Error\nMore than one camera"), 1);
+	if(canvas->count.ambient > 1)
+		return (ft_printf(2, "Error\nMore than one ambient"), 1);
+	return (0);
+}
 int	ft_check_syntax(t_canvas *canvas, char *file)
 {
 	char	**split;
@@ -78,7 +89,7 @@ int	ft_check_syntax(t_canvas *canvas, char *file)
 	error = 1;
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd, &canvas->gnl_rest);
-	while (line && ft_strlen(line) > 0)
+	while (line && ft_strlen(line) > 0 && error == 1)
 	{
 		split = ft_split_charset(line, WHITESPACE);
 		if (split && *split)
@@ -87,6 +98,9 @@ int	ft_check_syntax(t_canvas *canvas, char *file)
 		ft_free_split(split);
 		line = ft_free(line);
 		line = get_next_line(fd, &canvas->gnl_rest);
+		error = ft_check_count(canvas);
+		if (error == 0)
+			break;
 	}
 	line = ft_free(line);
 	close(fd);
