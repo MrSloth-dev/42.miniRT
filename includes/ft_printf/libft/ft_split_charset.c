@@ -25,7 +25,8 @@ char	**ft_split_charset(char *str, char *charset)
 	auto int j = 0;
 	if (str == NULL || count == -1)
 		return (NULL);
-	split = malloc((count + 1) * sizeof (char *));
+	split = ft_calloc(count + 1, 1);
+	//split = malloc((count + 1) * sizeof (char *));
 	if (!split)
 		return (NULL);
 	while (str[i])
