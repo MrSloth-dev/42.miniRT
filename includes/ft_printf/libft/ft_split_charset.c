@@ -25,8 +25,7 @@ char	**ft_split_charset(char *str, char *charset)
 	auto int j = 0;
 	if (str == NULL || count == -1)
 		return (NULL);
-	split = ft_calloc(count + 1, 1);
-	//split = malloc((count + 1) * sizeof (char *));
+	split = ft_calloc(count + 1, sizeof(char *));
 	if (!split)
 		return (NULL);
 	while (str[i])
@@ -71,7 +70,7 @@ static	char	*ft_strdupword(char *str, char *charset)
 	auto int len = 0;
 	auto char *dup = (NULL);
 	auto int i = 0;
-	while (str[i] && !ft_strchr(charset, str[len]))
+	while (str[len] && !ft_strchr(charset, str[len]))
 		len++;
 	dup = malloc((len + 1) * sizeof(char));
 	if (!dup)
@@ -98,8 +97,11 @@ static void	*ft_free_split(char **str, size_t index)
 	size_t	j;
 
 	j = 0;
-	while (j++ < index)
+	while (j < index)
+	{
 		free(str[j]);
+		str[j++] = NULL;
+	}
 	free(*str);
 	return (NULL);
 }
