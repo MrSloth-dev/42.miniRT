@@ -25,6 +25,7 @@ local invalid_files_dir="${script_dir}"/invalid_files
 local total=0
 local passed=0
 local failed=0
+
 for file in $(find "$invalid_files_dir" -type f); do
 		((total++))
 		echo -e "Test ${total} :'${file}'"
@@ -52,7 +53,7 @@ local invalid_syntax_dir="${script_dir}"/invalid_syntax
 local total=0
 local passed=0
 local failed=0
-for file in $(find "$invalid_files_dir" -type f); do
+for file in $(find "$invalid_syntax_dir" -type f); do
 		((total++))
 		echo -e "Test ${total} :'${file}'"
 		std_err=$(${bin} "${file}" 2>&1)
@@ -73,6 +74,7 @@ if [[ ${passed} -eq ${total} ]]; then
 fi
 }
 
-
 echo -e "Testing Invalid files"
 invalid_files
+echo -e "\nTesting Invalid files\n"
+invalid_syntax

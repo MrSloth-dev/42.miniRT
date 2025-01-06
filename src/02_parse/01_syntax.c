@@ -55,11 +55,11 @@ int	ft_syntax_line(char **split, t_canvas *canvas)
 {
 	if (!split)
 		return (1);
-	if (*split[0] == 'A')
+	if (!ft_strcmp(*split, "A"))
 		return (ft_syntax_ambient(canvas, split));
-	else if (*split[0] == 'C')
+	else if (!ft_strcmp(*split, "C"))
 		return (ft_syntax_camera(canvas, split));
-	else if (*split[0] == 'L')
+	else if (!ft_strcmp(*split, "L"))
 		return (ft_syntax_light(canvas, split));
 	else if (!ft_strcmp(*split, "sp"))
 		return (ft_syntax_sphere(canvas, split));
@@ -73,11 +73,11 @@ int	ft_syntax_line(char **split, t_canvas *canvas)
 int	ft_check_count(t_canvas *canvas)
 {
 	if (canvas->count.light > 1)
-		return (ft_printf(2, "Error\nMore than one light"), 0);
+		return (ft_printf(2, "Error\nMore than one light\n"), 0);
 	if(canvas->count.camera > 1)
-		return (ft_printf(2, "Error\nMore than one camera"), 0);
+		return (ft_printf(2, "Error\nMore than one camera\n"), 0);
 	if(canvas->count.ambient > 1)
-		return (ft_printf(2, "Error\nMore than one ambient"), 0);
+		return (ft_printf(2, "Error\nMore than one ambient\n"), 0);
 	return (1);
 }
 
@@ -86,24 +86,25 @@ int	ft_check_syntax(t_canvas *canvas, char *file)
 	char	**split;
 	char	*line;
 	int		fd;
-	int		error;
+	int		ok;
 
-	error = 1;
+	ok = 1;
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd, &canvas->gnl_rest);
-	while (line && ft_strlen(line) > 0 && error == 1)
+	while (line && ft_strlen(line) > 0 && ok)
 	{
 		split = ft_split_charset(line, WHITESPACE);
 		if (split && *split)
-			error = ft_syntax_line(split, canvas);
+			ok = ft_syntax_line(split, canvas);
 		// this var must sum result in every iteration
 		ft_free_split(split);
 		line = ft_free(line);
 		line = get_next_line(fd, &canvas->gnl_rest);
-		error = ft_check_count(canvas);
+		ok = ft_check_count(canvas);
 	}
 	if (canvas->count.light < 1 || canvas->count.camera < 1 || canvas->count.ambient < 1)
 		return (ft_printf(2, "Error\nMust have at least one light, camera and ambient\n"), 0);
 	line = ft_free(line);
-	return (close(fd), error);
+	canvas->gnl_rest = ft_free(canvas->gnl_rest);
+	return (close(fd), ok);
 }

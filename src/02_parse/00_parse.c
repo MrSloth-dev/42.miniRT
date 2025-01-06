@@ -25,11 +25,11 @@ static int	ft_check_file(char *file)
 
 static int	ft_parse_line(char **split, t_canvas *canvas)
 {
-	if (*split[0] == 'A')
+	if (!ft_strcmp(*split, "A"))
 		return (ft_create_ambient(canvas, split));
-	else if (*split[0] == 'C')
+	else if (!ft_strcmp(*split, "C"))
 		return (ft_create_camera(canvas, split));
-	else if (*split[0] == 'L')
+	else if (!ft_strcmp(*split, "L"))
 		return (ft_create_light(canvas, split));
 	else if (!ft_strcmp(*split, "sp"))
 		return (ft_create_sphere(canvas, split));
@@ -47,28 +47,24 @@ static int	ft_parse_objects(t_canvas *canvas)
 	char	**split;
 	char	*line;
 	int		fd;
-	int		error;
+	int		ok;
 
-	error = 1;
+	ok = 1;
 	fd = open(canvas->file, O_RDONLY);
 	line = get_next_line(fd, &canvas->gnl_rest);
-	while (line)
+	while (line && *line && ok)
 	{
 		split = ft_split_charset(line, WHITESPACE);
-		if (split)
-			error = ft_parse_line(split, canvas);
-		// ok, if i don't have error on last line, and have error in other?
-		// i think you can do like this:
-		// error += ft_parse_line(split, canvas);
-		line = ft_free(line);
+		if (split && *split)
+			ok = ft_parse_line(split, canvas);
 		ft_free_split(split);
-		if (error)
-			break ;
+		line = ft_free(line);
 		line = get_next_line(fd, &canvas->gnl_rest);
 	}
 	line = ft_free(line);
+	canvas->gnl_rest = ft_free(canvas->gnl_rest);
 	close(fd);
-	return (error);
+	return (ok);
 }
 
 static void	ft_set_objects_material_color(t_canvas *canvas)
@@ -88,9 +84,9 @@ static void	ft_set_objects_material_color(t_canvas *canvas)
 
 static int	ft_parser_elements(t_canvas *canvas)
 {
-	ft_parse_objects(canvas);
-	ft_set_objects_material_color(canvas);
-	return (1);
+	if (ft_parse_objects(canvas))
+		return (ft_set_objects_material_color(canvas), 1);
+	return (0);
 }
 
 int	ft_parse(t_canvas *canvas, char *file)
