@@ -53,24 +53,118 @@ t_shapes	*ft_create_default_shape(int type)
 	return (new);
 }
 
-int	ft_create_ambient(t_canvas *canvas, char **split)
+double	ft_get_double(char *str, char *element, t_canvas *canvas)
 {
-	char	**color_split;
-	t_ambient amb;
+	double	value;
 
-	amb.ratio = ft_atod(split[1]);
-	color_split = ft_split(split[2], ',');
-	amb.color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
-		ft_atod(color_split[2]), 3};
-	if (ft_check_null_split(color_split)
-		&& ft_rgb_check(amb.color))
-		canvas->ambient.color = ft_scalar_tuple(ft_scalar_tuple(amb.color, amb.ratio), 0.1f / 25.5f);
-	else
-		return (ft_free_split(color_split),
-			ft_printf(2, "Error, ambient format is wrong\n"), 0);
-	return (ft_free_split(color_split), 0);
+	value = ft_atod(str);
+	if (value == -43.42)
+		return (ft_printf(2, "Error\n%s ratio format is wrong\n", element),
+			ft_free_objects(canvas->objects), value);
+	return (value);
 }
 
+int	ft_check_values(double a, double b, double c)
+{
+	if (ft_is_float_equal(a, -43.42)
+		|| ft_is_float_equal(b, -43.42)
+		|| ft_is_float_equal(c, -43.42))
+		return (0);
+	return (1);
+}
+t_tuple	ft_get_coord(char *str, char *element, t_canvas *canvas)
+{
+	char	**coord_split;
+	t_tuple	coord;
+
+	coord_split = ft_split(str, ',');
+	coord = (t_color){ft_atod(coord_split[0]), ft_atod(coord_split[1]),
+		ft_atod(coord_split[2]), 3};
+	if (ft_check_null_split(coord_split)
+		&& ft_check_values(coord.x, coord.y, coord.z))
+		return (ft_free_split(coord_split), coord);
+	else
+		return (ft_free_split(coord_split),
+			ft_printf(2, "Error\n%s coord format is wrong\n", element),
+			ft_free_objects(canvas->objects),
+			(t_color){-43.32, -43.32, -43.32, 0});
+}
+
+t_color	ft_get_color(char *str, char *element, t_canvas *canvas)
+{
+	char	**color_split;
+	t_color	color;
+
+	color_split = ft_split(str, ',');
+	color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
+		ft_atod(color_split[2]), 3};
+	if (ft_check_null_split(color_split)
+		&& ft_rgb_check(color))
+		return (ft_free_split(color_split), color);
+	else
+		return (ft_free_split(color_split),
+			ft_printf(2, "Error\n%s color format is wrong\n", element),
+			ft_free_objects(canvas->objects),
+			(t_color){-43.32, -43.32, -43.32, 0});
+}
+
+/**
+ * @brief 
+ *
+ * @param canvas 
+ * @param split splitted line
+ * @return 1 if valid 0 if not valid
+ */
+int	ft_create_ambient(t_canvas *canvas, char **split)
+{
+	t_ambient	amb;
+
+	amb.ratio = ft_get_double(split[1], "Ambient", canvas);
+	if (amb.ratio < 0 || amb.ratio > 1)
+		return (ft_printf(2, "Error\nAmbient value is out of bounds[0,1]\n"), 0);
+	amb.color = ft_get_color(split[2], "Ambient", canvas);
+	if (amb.color.w == 0)
+		return (0);
+	canvas->ambient.color = ft_scalar_tuple(ft_scalar_tuple(amb.color,
+				amb.ratio), 0.1f / 25.5f);
+	return (1);
+}
+
+/**
+ * @brief 
+ *
+ * @param canvas 
+ * @param split splitted line
+ * @return 1 if valid 0 if not valid
+ */
+int	ft_create_light(t_canvas *canvas, char **split)
+{
+	t_light light;
+	double	bright;
+
+	bright = ft_get_double(split[2], "Light", canvas);
+	if (bright != -43.42 && (bright < 0 || bright > 1))
+		return (ft_printf(2, "Error\nLight value is out of bounds[0,1]\n"), 0);
+	else if (bright == -43.42)
+		return (0);
+	light.coord = ft_get_coord(split[1], "Light", canvas);
+	light.color = ft_get_color(split[3], "Light", canvas);
+	if (light.color.w == 0 || light.coord.w == 0)
+		return (0);
+	light.color = ft_scalar_tuple(light.color, bright);
+	light.color = ft_scalar_tuple(light.color, 1.0f / 25.5f);
+	light.intensity = ft_scalar_tuple(light.color, bright / 90);
+	canvas->light = light;
+	return (1);
+}
+
+/**
+ * @brief 
+ *
+ * @param canvas 
+ * @param split splitted line
+ * @return 1 if valid 0 if not valid
+ */
 int	ft_create_camera(t_canvas *canvas, char **split)
 {
 	char	**coord_split;
@@ -106,45 +200,17 @@ int	ft_create_camera(t_canvas *canvas, char **split)
 	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
 	canvas->camera.reset = canvas->camera.transf;
 
-	return (0);
+	return (1);
 }
 
-int	ft_create_light(t_canvas *canvas, char **split)
-{
-	char	**coord_split;
-	t_light light;
-	char	**color_split;
-	double	bright;
 
-	coord_split = ft_split(split[1], ',');
-	light.coord = (t_tuple){ft_atod(coord_split[0]), ft_atod(coord_split[1]),
-		ft_atod(coord_split[2]), 1};
-	if (ft_check_null_split(coord_split) && ft_vector_check(light.coord))
-		light.coord = light.coord;
-	else
-		return (ft_free_split(coord_split),
-			ft_printf(2, "Error, light format is wrong\n"), 0);
-	ft_free_split(coord_split);
-	color_split = ft_split(split[3], ',');
-	light.color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
-		ft_atod(color_split[2]), 3};
-	bright = ft_atod(split[2]);
-	light.color = ft_scalar_tuple(light.color, bright);
-	if (ft_check_null_split(color_split) && ft_rgb_check(light.color))
-	{
-		light.color = ft_scalar_tuple(light.color, 1.0f / 25.5f);
-		light.intensity = ft_scalar_tuple(light.color, bright / 90);
-	}
-	else
-		return (ft_free_split(color_split),
-			ft_printf(2, "Error, light format is wrong\n"), 0);
-	ft_free_split(color_split);
-	//ft_print_tuple(light.color, "light color?");
-	//exit (1);
-	canvas->light = light;
-	return (0);
-}
-
+/**
+ * @brief 
+ *
+ * @param canvas 
+ * @param split splitted line
+ * @return 1 if valid 0 if not valid
+ */
 int	ft_create_sphere(t_canvas *canvas, char **split)
 {
 	char	**coord_split;
@@ -180,9 +246,16 @@ int	ft_create_sphere(t_canvas *canvas, char **split)
 
 	ft_get_transf_obj(shape, coord, (t_tuple) {0}, (t_tuple){shape->sph.diameter, shape->sph.diameter, shape->sph.diameter, 0});
 	ft_lstadd_back(&canvas->objects, ft_lstnew(shape));
-	return (0);
+	return (1);
 }
 
+/**
+ * @brief 
+ *
+ * @param canvas 
+ * @param split splitted line
+ * @return 1 if valid 0 if not valid
+ */
 int	ft_create_plane(t_canvas *canvas, char **split)
 {
 	char	**coord_split;
@@ -228,11 +301,17 @@ int	ft_create_plane(t_canvas *canvas, char **split)
 			ft_printf(2, "Error, plane norm value is wrong\n"), 0);
 	shape->material.ambient = shape->material.ambient;
 	ft_get_transf_obj(shape, shape->pla.coord, shape->pla.norm, (t_tuple) {1, 1, 1, 0});
-
 	ft_lstadd_back(&canvas->objects, ft_lstnew(shape));
-	return (canvas->count.plane++, 0);
+	return (1);
 }
 
+/**
+ * @brief 
+ *
+ * @param canvas 
+ * @param split splitted line
+ * @return 1 if valid 0 if not valid
+ */
 int	ft_create_cylinder(t_canvas *canvas, char **split)
 {
 	char	**coord_split;
@@ -284,5 +363,5 @@ int	ft_create_cylinder(t_canvas *canvas, char **split)
 	ft_get_transf_obj(shape, shape->cyl.coord, shape->cyl.norm,
 		   (t_tuple) {shape->cyl.size.diameter, 1, shape->cyl.size.diameter, 0});
 	ft_lstadd_back(&canvas->objects, ft_lstnew(shape));
-	return (0);
+	return (1);
 }

@@ -5,7 +5,8 @@
 NAME = miniRT
 CC = cc
 CFLAGS = -Iincludes -g
-EFLAGS = -Wall -Wextra -Werror 
+EFLAGS = -Wall -Wextra -Werror
+MFLAGS = -fsanitize=undefined -fno-omit-frame-pointer -fsanitize=memory
 MLXFLAGS = -O3 -ffast-math -march=native -Lminilibx-linux -lm -lmlx -lX11 -lXext -g
 
 CLR_RMV = \033[0m
@@ -91,7 +92,7 @@ $(NAME): $(OBJS) $(HEADER)
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
 	@make -C $(PRINTDIR) -s
 	@make -C $(LIBX_DIR) -s
-	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME) -DDEBUG=0
+	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME) -D DEBUG=0
 	@printf "$(GREEN)$(NAME) created$(CLR_RMV) ✅\n"
 
 LIBX_DIR = minilibx-linux
@@ -139,6 +140,16 @@ clean:
 	@ $(RM) -f $(OBJS)
 	@make clean -C $(PRINTDIR) -s
 	@ printf "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✅\n"
+
+.PHONY: debug
+debug: $(OBJS) $(HEADER)
+	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
+	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
+	@make -C $(PRINTDIR) -s
+	@make -C $(LIBX_DIR) -s
+	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME) -D DEBUG=1
+	@printf "$(GREEN)$(NAME) created$(CLR_RMV) ✅\n"
+	@make p
 
 
 .PHONY: fclean
