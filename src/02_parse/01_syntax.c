@@ -53,6 +53,8 @@ int	ft_syntax_cylinder(t_canvas *canvas, char **split)
 
 int	ft_syntax_line(char **split, t_canvas *canvas)
 {
+	if (!split)
+		return (1);
 	if (*split[0] == 'A')
 		return (ft_syntax_ambient(canvas, split));
 	else if (*split[0] == 'C')
@@ -78,6 +80,7 @@ int	ft_check_count(t_canvas *canvas)
 		return (ft_printf(2, "Error\nMore than one ambient"), 0);
 	return (1);
 }
+
 int	ft_check_syntax(t_canvas *canvas, char *file)
 {
 	char	**split;
@@ -85,14 +88,13 @@ int	ft_check_syntax(t_canvas *canvas, char *file)
 	int		fd;
 	int		error;
 
-	(void)canvas;
 	error = 1;
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd, &canvas->gnl_rest);
 	while (line && ft_strlen(line) > 0)
 	{
 		split = ft_split_charset(line, WHITESPACE);
-		if (split && *split)
+		if (split)
 			error = ft_syntax_line(split, canvas);
 		// this var must sum result in every iteration
 		ft_free_split(split);
@@ -102,7 +104,8 @@ int	ft_check_syntax(t_canvas *canvas, char *file)
 		if (error == 0)
 			break;
 	}
+	if (canvas->count.light < 1 || canvas->count.camera < 1 || canvas->count.ambient < 1)
+		return (ft_printf(2, "Error\nMust have at least one light, camera and ambient\n"), 0);
 	line = ft_free(line);
-	close(fd);
-	return (error);
+	return (close(fd), error);
 }

@@ -20,13 +20,13 @@ static	char	*ft_strdupword(char *str, char *charset);
 char	**ft_split_charset(char *str, char *charset)
 {
 	auto int count = count_words(str, charset);
-	auto char **split = NULL;
+	auto char **split = {0};
 	auto int i = 0;
 	auto int j = 0;
 	if (str == NULL || count == -1)
 		return (NULL);
 	split = malloc((count + 1) * sizeof (char *));
-	if (!split || count == -1)
+	if (!split)
 		return (NULL);
 	while (str[i])
 	{
