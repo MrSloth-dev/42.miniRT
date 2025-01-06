@@ -184,11 +184,6 @@ typedef struct s_canvas
 	t_camera	camera;
 	t_light		light;
 	t_objects	*objects;
-
-
-	t_sphere	*sphere;
-	t_plane		*plane;
-	t_cylinder	*cylinder;
 	t_count		count;
 // vars for event handle
 	char		char_step[3];

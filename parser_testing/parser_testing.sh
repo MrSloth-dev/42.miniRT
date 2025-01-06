@@ -11,7 +11,6 @@ set -uo pipefail
 trap 'rm -f ./gmon.out' EXIT
 
 script_dir=$(dirname "$(realpath $0)")
-invalid_dir="${script_dir}"/invalid
 
 bin="/home/mrsloth/CommonCore/4.miniRT/miniRT"
 if [[ ! -e "${bin}" ]]; then
@@ -20,11 +19,13 @@ if [[ ! -e "${bin}" ]]; then
 	exit 1
 fi
 
-## These tests should fail
-total=0
-passed=0
-failed=0
-for file in $(find "$invalid_dir" -type f); do
+invalid_files () {
+local invalid_files_dir="${script_dir}"/invalid_files
+## These tests should fail, invalid names
+local total=0
+local passed=0
+local failed=0
+for file in $(find "$invalid_files_dir" -type f); do
 		((total++))
 		echo -e "Test ${total} :'${file}'"
 		std_err=$(${bin} "${file}" 2>&1)
@@ -43,4 +44,6 @@ echo "Failed tests -> ${failed}"
 if [[ ${passed} -eq ${total} ]]; then
 	echo "All tests Passed!"
 fi
+}
 
+invalid_files

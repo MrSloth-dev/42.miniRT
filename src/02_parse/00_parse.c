@@ -13,14 +13,14 @@ static int	ft_check_file(char *file)
 	len = ft_strlen(file);
 	if (!ft_strchr(file, '.') || len < 4)
 		return (ft_printf(2, "Error\nFile not wtf valid\n"), 0);
-	if (len > 4 && file[len - 3] == '/')
-		return (ft_printf(2, "Error\nFile not valid sneaker basterd!\n"), 0);
-	dotindex = 0;
+	if (len > 4 && file[len - 4] == '/')
+		return (ft_printf(2, "Error\nFile not valid\n"), 0);
+	dotindex = len;
 	while (file && file[dotindex] != '.')
-		dotindex++;
+		dotindex--;
 	if (dotindex == len - 3 && file[dotindex + 1] == 'r' && file[dotindex + 2] == 't')
 		return (ft_printf(1, "File Accepted!\n"), 1);
-	return (ft_printf(2, "Error\n File not valid end of line\n"), 0);
+	return (ft_printf(2, "Error\n File not valid\n"), 0);
 }
 
 static int	ft_parse_line(char **split, t_canvas *canvas)
