@@ -10,8 +10,20 @@ int	ft_count_members (char **split)
 	return (count);
 }
 
+int	ft_count_split(char **split)
+{
+	int	count;
+
+	count  = 0;
+	while(*split++)
+		count++;
+	return (count);
+}
+
 int	ft_check_null_split(char **split)
 {
+	if (ft_count_split(split) != 3)
+		return (0);
 	while(*split)
 	{
 
