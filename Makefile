@@ -5,7 +5,7 @@
 NAME = miniRT
 CC = cc
 CFLAGS = -Iincludes -g
-EFLAGS = -Wall -Wextra -Werror -fsanitize=undefined -fno-omit-frame-pointer -fsanitize=memory
+EFLAGS = -Wall -Wextra -Werror 
 MLXFLAGS = -O3 -ffast-math -march=native -Lminilibx-linux -lm -lmlx -lX11 -lXext -g
 
 CLR_RMV = \033[0m
