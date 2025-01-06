@@ -30,8 +30,7 @@ void	*ft_free_split(char **split)
 		split[i] = ft_free(split[i]);
 		i++;
 	}
-	if (split)
-		split = ft_free(split);
+	split = ft_free(split);
 	return (NULL);
 }
 
