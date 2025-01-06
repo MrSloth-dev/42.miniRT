@@ -91,18 +91,16 @@ int	ft_check_syntax(t_canvas *canvas, char *file)
 	error = 1;
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd, &canvas->gnl_rest);
-	while (line && ft_strlen(line) > 0)
+	while (line && ft_strlen(line) > 0 && error == 1)
 	{
 		split = ft_split_charset(line, WHITESPACE);
-		if (split)
+		if (split && *split)
 			error = ft_syntax_line(split, canvas);
 		// this var must sum result in every iteration
 		ft_free_split(split);
 		line = ft_free(line);
 		line = get_next_line(fd, &canvas->gnl_rest);
 		error = ft_check_count(canvas);
-		if (error == 0)
-			break;
 	}
 	if (canvas->count.light < 1 || canvas->count.camera < 1 || canvas->count.ambient < 1)
 		return (ft_printf(2, "Error\nMust have at least one light, camera and ambient\n"), 0);
