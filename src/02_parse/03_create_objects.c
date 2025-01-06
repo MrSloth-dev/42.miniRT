@@ -5,13 +5,13 @@
 
 int	ft_vector_check(t_tuple tuple)
 {
-	if (tuple.x == -43.42)
+	if (ft_is_float_equal(tuple.x, -43.42))
 		return (0);
-	if (tuple.y == -43.42)
+	if (ft_is_float_equal(tuple.y, -43.42))
 		return (0);
-	if (tuple.z == -43.42)
+	if (ft_is_float_equal(tuple.z, -43.42))
 		return (0);
-	if (tuple.w == -43.42)
+	if (ft_is_float_equal(tuple.w, -43.42))
 		return (0);
 	return (1);
 }
@@ -58,7 +58,7 @@ double	ft_get_double(char *str, char *element, t_canvas *canvas)
 	double	value;
 
 	value = ft_atod(str);
-	if (value == -43.42)
+	if (ft_is_float_equal(value, -43.42))
 		return (ft_printf(2, "Error\n%s ratio format is wrong\n", element),
 			ft_free_objects(canvas->objects), value);
 	return (value);
@@ -72,6 +72,25 @@ int	ft_check_values(double a, double b, double c)
 		return (0);
 	return (1);
 }
+
+t_tuple	ft_get_norm(char *str, char *element, t_canvas *canvas)
+{
+	char	**norm_split;
+	t_tuple	norm;
+
+	norm_split = ft_split(str, ',');
+	norm = (t_color){ft_atod(norm_split[0]), ft_atod(norm_split[1]),
+		ft_atod(norm_split[2]), 3};
+	if (ft_check_null_split(norm_split)
+		&& ft_vector_check(norm))
+		return (ft_free_split(norm_split), norm);
+	else
+		return (ft_free_split(norm_split),
+			ft_printf(2, "Error\n%s normal format is wrong\n", element),
+			ft_free_objects(canvas->objects),
+			(t_tuple){-43.42, -43.42, -43.42, -1});
+}
+
 t_tuple	ft_get_coord(char *str, char *element, t_canvas *canvas)
 {
 	char	**coord_split;
@@ -87,7 +106,7 @@ t_tuple	ft_get_coord(char *str, char *element, t_canvas *canvas)
 		return (ft_free_split(coord_split),
 			ft_printf(2, "Error\n%s coord format is wrong\n", element),
 			ft_free_objects(canvas->objects),
-			(t_color){-43.32, -43.32, -43.32, 0});
+			(t_color){-43.42, -43.42, -43.42, -1});
 }
 
 t_color	ft_get_color(char *str, char *element, t_canvas *canvas)
@@ -98,14 +117,18 @@ t_color	ft_get_color(char *str, char *element, t_canvas *canvas)
 	color_split = ft_split(str, ',');
 	color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
 		ft_atod(color_split[2]), 3};
-	if (ft_check_null_split(color_split)
-		&& ft_rgb_check(color))
+	if (ft_check_null_split(color_split))
 		return (ft_free_split(color_split), color);
+	else if (!ft_rgb_check(color))
+		return (ft_free_split(color_split),
+			ft_printf(2, "Error\n%s color is out of bounds [0-255]\n", element),
+			ft_free_objects(canvas->objects),
+			(t_color){-43.42, -43.42, -43.42, -1});
 	else
 		return (ft_free_split(color_split),
 			ft_printf(2, "Error\n%s color format is wrong\n", element),
 			ft_free_objects(canvas->objects),
-			(t_color){-43.32, -43.32, -43.32, 0});
+			(t_color){-43.42, -43.42, -43.42, -1});
 }
 
 /**
@@ -123,7 +146,7 @@ int	ft_create_ambient(t_canvas *canvas, char **split)
 	if (amb.ratio < 0 || amb.ratio > 1)
 		return (ft_printf(2, "Error\nAmbient value is out of bounds[0,1]\n"), 0);
 	amb.color = ft_get_color(split[2], "Ambient", canvas);
-	if (amb.color.w == 0)
+	if (amb.color.w == -1)
 		return (0);
 	canvas->ambient.color = ft_scalar_tuple(ft_scalar_tuple(amb.color,
 				amb.ratio), 0.1f / 25.5f);
@@ -149,7 +172,7 @@ int	ft_create_light(t_canvas *canvas, char **split)
 		return (0);
 	light.coord = ft_get_coord(split[1], "Light", canvas);
 	light.color = ft_get_color(split[3], "Light", canvas);
-	if (light.color.w == 0 || light.coord.w == 0)
+	if (light.color.w == -1 || light.coord.w == -1)
 		return (0);
 	light.color = ft_scalar_tuple(light.color, bright);
 	light.color = ft_scalar_tuple(light.color, 1.0f / 25.5f);
@@ -167,42 +190,25 @@ int	ft_create_light(t_canvas *canvas, char **split)
  */
 int	ft_create_camera(t_canvas *canvas, char **split)
 {
-	char	**coord_split;
-	t_camera cam;
-	char	**norm_split;
+	t_camera	cam;
 
-	coord_split = ft_split(split[1], ',');
-	cam.coord = (t_tuple){ft_atod(coord_split[0]), ft_atod(coord_split[1]),
-		ft_atod(coord_split[2]), 1};
-	if (ft_check_null_split(coord_split) && ft_vector_check(cam.coord))
-		ft_free_split(coord_split);
-	else
-		return (ft_free_split(coord_split),
-			ft_printf(2, "Error, camera coord values is wrong\n"), 0);
+	cam.coord = ft_get_coord(split[1], "Camera", canvas);
 	canvas->camera.coord = cam.coord;
-	norm_split = ft_split(split[2], ',');
-	cam.norm = (t_tuple){ft_atod(norm_split[0]), ft_atod(norm_split[1]),
-		ft_atod(norm_split[2]), 0};
-	if (ft_check_null_split(norm_split)
-		&& ft_norm_check(cam.norm))
-	{
-		canvas->camera.norm = cam.norm;
-		ft_free_split(norm_split);
-	}
-	else
-		return (ft_free_split(norm_split),
-			ft_printf(2, "Error, camera norm value is wrong\n"), 0);
-	canvas->camera.field_v = ft_atod(split[3]) * M_PI / 180;
+	cam.norm = ft_get_norm(split[2], "Camera", canvas);
+	if (cam.coord.w == -1 || cam.norm.w == -1)
+		return (0);
+	canvas->camera.field_v = ft_get_double(split[3], "Camera", canvas);
+	if (canvas->camera.field_v == -42.43)
+		return (0);
+	canvas->camera.field_v *= M_PI / 180;
 	ft_create_world_camera(IMG_W, IMG_H, canvas);
 	canvas->camera.transf = ft_view_transformation(canvas->camera.coord,
-					ft_add_tuple(canvas->camera.coord, canvas->camera.norm),
-									(t_tuple){0, 1, 0, 0});
+			ft_add_tuple(canvas->camera.coord, canvas->camera.norm),
+			(t_tuple){0, 1, 0, 0});
 	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
 	canvas->camera.reset = canvas->camera.transf;
-
 	return (1);
 }
-
 
 /**
  * @brief 
