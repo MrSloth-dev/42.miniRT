@@ -12,7 +12,7 @@ trap 'rm -f ./gmon.out' EXIT
 
 script_dir=$(dirname "$(realpath $0)")
 
-bin="/home/mrsloth/CommonCore/4.miniRT/miniRT"
+bin="${script_dir}/../miniRT"
 if [[ ! -e "${bin}" ]]; then
 	echo "${bin}"
 	echo "No binary found"
@@ -46,4 +46,33 @@ if [[ ${passed} -eq ${total} ]]; then
 fi
 }
 
+invalid_syntax () {
+local invalid_syntax_dir="${script_dir}"/invalid_syntax
+## These tests should fail, invalid names
+local total=0
+local passed=0
+local failed=0
+for file in $(find "$invalid_files_dir" -type f); do
+		((total++))
+		echo -e "Test ${total} :'${file}'"
+		std_err=$(${bin} "${file}" 2>&1)
+		exit_code=$?
+		if [[ $exit_code -eq 0 ]]; then
+			echo -e "${RED} ${std_err} ${CLR_RMV}"
+			((failed++))
+		else
+			((passed++))
+			echo -e "${GREEN} ${std_err} ${CLR_RMV}"
+		fi
+done
+echo "Total tests -> ${total}"
+echo "Passed tests -> ${passed}"
+echo "Failed tests -> ${failed}"
+if [[ ${passed} -eq ${total} ]]; then
+	echo "All tests Passed!"
+fi
+}
+
+
+echo -e "Testing Invalid files"
 invalid_files
