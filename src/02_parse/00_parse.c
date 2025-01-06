@@ -55,7 +55,7 @@ static int	ft_parse_objects(t_canvas *canvas)
 	while (line)
 	{
 		split = ft_split_charset(line, WHITESPACE);
-		if (split && *split)
+		if (split)
 			error = ft_parse_line(split, canvas);
 		// ok, if i don't have error on last line, and have error in other?
 		// i think you can do like this:
