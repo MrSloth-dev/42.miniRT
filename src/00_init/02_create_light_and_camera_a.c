@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   02_create_light_and_camera_a.c                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/03 14:59:15 by joao-pol          #+#    #+#             */
+/*   Updated: 2025/01/06 10:02:52 by isilva-t         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_light	ft_create_light_a(t_tuple pos, t_color color, float bright) // this must go to the parser
