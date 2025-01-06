@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   02_key_handler.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/06 09:58:55 by isilva-t          #+#    #+#             */
+/*   Updated: 2025/01/06 09:58:57 by isilva-t         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 int	key_handler(int keysym, t_canvas *canvas)
 {
+	mlx_do_key_autorepeaton(canvas->mlx);
 	if (keysym == XK_Escape)
 		close_handler(canvas);
 	else if (keysym == XK_h)
