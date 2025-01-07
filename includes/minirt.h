@@ -218,6 +218,8 @@ void		ft_create_world_camera(double h_size,
 void		ft_update_world_camera(t_canvas *canvas);
 void		ft_ray_for_pixel(t_camera cam, double px, double py, t_ray *ray);
 void		ft_render(t_canvas *canvas);
+void		draw_axis(t_canvas *canvas);
+void		ft_draw_line(t_canvas *c, t_ln_pt data, int color);
 
 //Chapter 8 - Shaddows
 bool		ft_is_shadowed(t_canvas *canvas, t_tuple point);

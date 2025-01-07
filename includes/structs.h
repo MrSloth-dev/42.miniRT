@@ -14,6 +14,28 @@
 
 #include <stdbool.h>
 
+typedef struct s_pt
+{
+	int		x;
+	int		y;
+}			t_pt;
+
+typedef struct s_ln_pt
+{
+// vars for draw_line algorithm
+	int		delta_x;
+	int		delta_y;
+	int		x_direction;
+	int		y_direction;
+	int		err;
+	int		e2;
+	int		y_str;
+	int		x_str;
+// points to use on draw_line
+	t_pt	actual;
+	t_pt	next;
+}			t_ln_pt;
+
 typedef struct s_matrix
 {
 	int			rows;
@@ -209,6 +231,10 @@ typedef struct s_canvas
 	int			light_selected;
 	int			disco_color;
 	double		disco_dance;
+// vars for shown axis
+	t_ln_pt	local_x;
+	t_ln_pt	local_y;
+	t_ln_pt local_z;
 }	t_canvas;
 
 typedef struct s_iter
@@ -246,3 +272,5 @@ typedef struct s_comp
 	t_color		diffuse;
 	bool		selected;
 }	t_comp;
+
+
