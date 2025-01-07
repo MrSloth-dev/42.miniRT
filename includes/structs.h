@@ -165,6 +165,8 @@ typedef struct s_shapes
 	t_matrix		inverted;
 	t_matrix		transform;
 	t_matrix		transposed;
+	t_matrix		rotate;
+	t_matrix		inv_rotate;
 	t_material		material;
 	bool			selected;
 }	t_shapes;
