@@ -56,14 +56,14 @@ void	ft_get_transf_obj(t_shapes *s, t_tuple coord,
 	t_matrix	rotation;
 
 	ft_setup_vars(&translation, &scaled, &rotation, &coord);
-	if (s->type == SPHERE)
+	if (s->type != PLANE)
 		scaled = ft_scale_matrix(scale.x, scale.y, scale.z);
-	if (s->type == CYLINDER)
-	{
-		s->cyl.size.max = s->cyl.size.max * scale.y;
-		s->cyl.size.min = -s->cyl.size.max;
-		scaled = ft_scale_matrix(scale.x, 1, scale.z);
-	}
+	/*if (s->type == CYLINDER)*/
+	/*{*/
+	/*	s->cyl.size.max = s->cyl.size.max * scale.y;*/
+	/*	s->cyl.size.min = -s->cyl.size.max;*/
+	/*	scaled = ft_scale_matrix(scale.x, 1, scale.z);*/
+	/*}*/
 	if (s->type != SPHERE)
 		rotation = ft_get_rotation_obj(orientation);
 	s->transform = ft_matrix_mult(s->transform, translation);

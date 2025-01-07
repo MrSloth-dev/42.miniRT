@@ -64,9 +64,9 @@ int	ft_create_cylinder(t_canvas *canvas, char **split)
 		return (0);
 	shape->material.color = ft_scalar_tuple(shape->material.color, 1 / 255.f);
 	shape->cyl.size.max = shape->cyl.size.height / 2;
-	shape->cyl.size.min = -shape->cyl.size.max;
+	shape->cyl.size.min = -shape->cyl.size.height / 2;
 	ft_get_transf_obj(shape, shape->cyl.coord, shape->cyl.norm,
-		(t_tuple){shape->cyl.size.diameter, 1, shape->cyl.size.diameter, 0});
+		(t_tuple){shape->cyl.size.diameter, shape->cyl.size.diameter, shape->cyl.size.diameter, 0});
 	ft_lstadd_back(&canvas->objects, ft_lstnew(shape));
 	return (1);
 }
