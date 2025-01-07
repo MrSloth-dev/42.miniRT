@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   00_parse.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/07 00:34:19 by joao-pol          #+#    #+#             */
+/*   Updated: 2025/01/07 00:34:19 by joao-pol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 static int	ft_check_file(char *file)
@@ -18,7 +30,8 @@ static int	ft_check_file(char *file)
 	dotindex = len;
 	while (file && file[dotindex] != '.')
 		dotindex--;
-	if (dotindex == len - 3 && file[dotindex + 1] == 'r' && file[dotindex + 2] == 't')
+	if (dotindex == len - 3 && file[dotindex + 1] == 'r'
+		&& file[dotindex + 2] == 't')
 		return (ft_printf(1, "File Accepted!\n"), 1);
 	return (ft_printf(2, "Error\n File not valid\n"), 0);
 }
@@ -69,7 +82,7 @@ static int	ft_parse_objects(t_canvas *canvas)
 
 static void	ft_set_objects_material_color(t_canvas *canvas)
 {
-	t_list *cur;
+	t_list	*cur;
 
 	if (!canvas->objects)
 		return ;
@@ -82,19 +95,12 @@ static void	ft_set_objects_material_color(t_canvas *canvas)
 	}
 }
 
-static int	ft_parser_elements(t_canvas *canvas)
-{
-	if (ft_parse_objects(canvas))
-		return (ft_set_objects_material_color(canvas), 1);
-	return (0);
-}
-
 int	ft_parse(t_canvas *canvas, char *file)
 {
 	canvas->file = file;
 	if (ft_check_file(file)
 		&& ft_check_syntax(canvas, file)
-		&& ft_parser_elements(canvas))
-		return (1);
+		&& ft_parse_objects(canvas))
+		return (ft_set_objects_material_color(canvas), 1);
 	return (0);
 }
