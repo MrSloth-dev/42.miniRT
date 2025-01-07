@@ -68,7 +68,6 @@ static bool	ft_space_c_keys(t_camera *camera, int key)
 }
 void	ft_transform_camera_key(t_canvas *canvas, int key)
 {
-	//ft_matrix_mult(m, ft_scale_matrix(1.1, 1, 1.1));
 	if (ft_camera_wasd_keys(&canvas->camera, key))
 		;
 	else if (ft_camera_rotate_keys(&canvas->camera, key))
@@ -77,5 +76,4 @@ void	ft_transform_camera_key(t_canvas *canvas, int key)
 		;
 	else
 		return ;
-	//return (m);
 }
