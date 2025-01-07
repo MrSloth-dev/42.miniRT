@@ -62,7 +62,6 @@ static void	ft_drag_mouse(t_canvas *canvas, int condition)
 
 int	mouse_motion(int x, int y, t_canvas *canvas)
 {
-	(void)y;
 	if (canvas->mouse_drag == 1)
 	{
 		if (canvas->mouse_prev_x == -1)
