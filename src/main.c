@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/07 00:44:29 by joao-pol          #+#    #+#             */
+/*   Updated: 2025/01/07 00:44:31 by joao-pol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 void	ft_mlx_end(t_canvas *canvas)
@@ -17,6 +29,18 @@ void	ft_mlx_end(t_canvas *canvas)
 	ft_free_canvas(canvas);
 }
 
+int	ft_count_objects(t_canvas *canvas)
+{
+	int	count;
+
+	count = 0;
+	count += canvas->count.sphere;
+	count += canvas->count.plane;
+	count += canvas->count.cylinder;
+	ft_printf(2, "%d\n", count);
+	return (count);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_canvas	canvas;
@@ -24,9 +48,9 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		return (ft_printf(2, "Error\n Argv!\n"), 1);
 	ft_init_canvas(&canvas);
-	if (ft_parse(&canvas, argv[1]) == 0)
+	if (ft_parse(&canvas, argv[1]) == 0 || ft_count_objects(&canvas) == 0)
 		return (1);
-	if (DEBUG)
+	if (DEBUG && ft_count_objects(&canvas) == 0)
 		return (0);
 	ft_mlx_init(&canvas);
 	ft_refreshframe(&canvas);

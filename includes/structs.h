@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/07 02:01:59 by joao-pol          #+#    #+#             */
+/*   Updated: 2025/01/07 02:03:24 by joao-pol         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 #include <stdbool.h>
@@ -24,16 +36,16 @@ typedef struct s_tuple
 	int		w;
 }	t_tuple;
 
-typedef t_tuple t_color;
+typedef t_tuple	t_color;
 
 typedef struct s_limit
 {
 	double	min;
 	double	max;
 }	t_limit;
-typedef t_list t_interlst;
+typedef t_list	t_interlst;
 
-typedef t_list t_objects;
+typedef t_list	t_objects;
 
 typedef struct s_img
 {
@@ -52,12 +64,12 @@ typedef struct s_count
 	int			sphere;
 	int			plane;
 	int			cylinder;
-} t_count;
+}	t_count;
 
 typedef struct s_ray
 {
-	t_tuple pos;
-	t_tuple dir;
+	t_tuple	pos;
+	t_tuple	dir;
 }	t_ray;
 
 typedef struct s_ambient
@@ -113,7 +125,7 @@ typedef struct s_cyl_size
 	double				height;
 	double				min;
 	double				max;
-} t_cyl_size;
+}	t_cyl_size;
 
 typedef struct s_cylinder
 {
@@ -127,20 +139,17 @@ enum e_type
 	PLANE,
 	CYLINDER,
 	SPHERE,
-	// CONE,
-	// CUBE,
-	// TRIANGLE
 };
 
 typedef struct s_material
 {
-	t_color	color; //0 -1
-	double	ambient; //0- 1
+	t_color	color; //0 - 1
+	double	ambient; //0 - 1
 	t_color	ambient_color;
-	double	diffuse; // 0-1
-	double	specular; // 0 -1
-	double	shininess; //10 -200 (bigger the number lower the shininess)
-} t_material;
+	double	diffuse; // 0 - 1
+	double	specular; // 0 - 1
+	double	shininess; //10 - 200 (bigger the number lower the shininess)
+}	t_material;
 
 typedef struct s_shapes
 {
@@ -160,13 +169,12 @@ typedef struct s_shapes
 
 typedef struct s_inter
 {
-	double	value;
-	t_shapes *shape;
+	double		value;
+	t_shapes	*shape;
 }	t_inter;
 
 typedef struct s_canvas
 {
-// mlx lib vars
 	void		*mlx;
 	void		*win;
 	t_img		img;
@@ -187,15 +195,15 @@ typedef struct s_canvas
 	t_count		count;
 // vars for event handle
 	char		char_step[3];
-	int		shift_press;
-	int		mouse_drag;
-	int		mouse_prev_x;
-	int		mouse_sum_x;
-	int		mouse_prev_y;
-	int		mouse_sum_y;
+	int			shift_press;
+	int			mouse_drag;
+	int			mouse_prev_x;
+	int			mouse_sum_x;
+	int			mouse_prev_y;
+	int			mouse_sum_y;
 	t_shapes	*object_selected;
-	int		light_selected;
-	int		disco_color;
+	int			light_selected;
+	int			disco_color;
 	double		disco_dance;
 }	t_canvas;
 
@@ -233,4 +241,4 @@ typedef struct s_comp
 	t_color		ambient_on_object;
 	t_color		diffuse;
 	bool		selected;
-} t_comp;
+}	t_comp;
