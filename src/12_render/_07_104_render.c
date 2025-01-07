@@ -55,5 +55,7 @@ void	ft_render(t_canvas *canvas)
 		}
 		h.y += canvas->step;
 	}
+	draw_axis(canvas);
+
 	mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img.img, 0, 0);
 }
