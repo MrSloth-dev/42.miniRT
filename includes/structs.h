@@ -91,6 +91,8 @@ typedef struct s_camera
 	t_matrix		transf;
 	t_matrix		reset;
 	t_matrix		inverted;
+	t_matrix		rotate;
+	t_matrix		inv_rotate;
 	double			px_size;
 	double			half_view;
 	double			half_width;
