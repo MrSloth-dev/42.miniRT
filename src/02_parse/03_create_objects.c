@@ -25,6 +25,8 @@ t_shapes	*ft_create_default_shape(int type)
 	new->inverted = ft_create_matrix(4, 4, 1);
 	new->transposed = ft_create_matrix(4, 4, 1);
 	new->transform = ft_create_matrix(4, 4, 1);
+	new->rotate = ft_create_matrix(4, 4, 1);
+	new->inv_rotate = ft_create_matrix(4, 4, 1);
 	return (new);
 }
 
@@ -87,6 +89,8 @@ int	ft_create_light(t_canvas *canvas, char **split)
  */
 int	ft_create_camera(t_canvas *canvas, char **split)
 {
+	canvas->camera.rotate = ft_create_matrix(4, 4, 1);
+	canvas->camera.inv_rotate = ft_create_matrix(4, 4, 1);
 	canvas->camera.coord = ft_get_coord(split[1], "Camera", canvas);
 	canvas->camera.norm = ft_get_norm(split[2], "Camera", canvas);
 	if (canvas->camera.coord.w == -1 || canvas->camera.norm.w == -1)
@@ -100,8 +104,6 @@ int	ft_create_camera(t_canvas *canvas, char **split)
 	canvas->camera.transf = ft_view_transformation(canvas->camera.coord,
 			ft_add_tuple(canvas->camera.coord, canvas->camera.norm),
 			(t_tuple){0, 1, 0, 0});
-	canvas->camera.rotate = ft_create_matrix(4, 4, 1);
-	canvas->camera.inv_rotate = ft_create_matrix(4, 4, 1);
 	canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
 	canvas->camera.reset = canvas->camera.transf;
 	return (1);

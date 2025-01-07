@@ -194,6 +194,7 @@ t_ray		ft_scale_ray(t_tuple scaling, t_ray ray);
 t_ray		ft_set_transf_ray(t_ray ray, t_matrix inverted);
 t_matrix	ft_translation_matrix(double x, double y, double z);
 t_matrix	ft_scale_matrix(double x, double y, double z);
+t_matrix	ft_get_rotation_obj(t_tuple orien);
 void		ft_get_transf_obj(t_shapes *s,
 				t_tuple coord, t_tuple orientation, t_tuple scale);
 void		ft_lstadd_sort_inter(t_interlst **lst,

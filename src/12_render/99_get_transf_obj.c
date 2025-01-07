@@ -59,7 +59,12 @@ void	ft_get_transf_obj(t_shapes *s, t_tuple coord,
 	if (s->type != PLANE)
 		scaled = ft_scale_matrix(scale.x, scale.y, scale.z);
 	if (s->type != SPHERE)
+	{
 		rotation = ft_get_rotation_obj(orientation);
+		s->rotate = ft_matrix_mult(s->rotate, rotation);
+		s->inv_rotate = ft_invert_matrix(s->rotate);
+		
+	}
 	s->transform = ft_matrix_mult(s->transform, translation);
 	s->transform = ft_matrix_mult(s->transform, rotation);
 	s->transform = ft_matrix_mult(s->transform, scaled);
