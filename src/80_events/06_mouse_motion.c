@@ -12,34 +12,41 @@
 
 #include "minirt.h"
 
-static t_matrix	ft_transf_cam_mouse(t_matrix m, int key)
+static bool	ft_transf_cam_mouse(t_camera *camera, int key)
 {
+	t_matrix	rotate;
+
 	if (key == 1)
-		return (ft_matrix_mult(m, ft_rotate_matrix_y(M_PI / 20)));
+		rotate = ft_rotate_matrix_y(M_PI / 20);
 	else if (key == 2)
-		return (ft_matrix_mult(m, ft_rotate_matrix_y(-M_PI / 20)));
+		rotate = ft_rotate_matrix_y(-M_PI / 20);
 	else if (key == 3)
-		return (ft_matrix_mult(m, ft_rotate_matrix_x(-M_PI / 20)));
+		rotate = ft_rotate_matrix_x(-M_PI / 20);
 	else if (key == 4)
-		return (ft_matrix_mult(m, ft_rotate_matrix_x(M_PI / 20)));
-	return (m);
+		rotate = ft_rotate_matrix_x(M_PI / 20);
+	else
+		return (false);
+	camera->transf = ft_matrix_mult(camera->transf, rotate);
+	camera->rotate = ft_matrix_mult(camera->rotate, rotate);
+	camera->inv_rotate = ft_invert_matrix(camera->rotate);
+	return (true);
 }
 
 static void	ft_drag_mouse(t_canvas *canvas, int condition)
 {
-	if (canvas->mouse_sum_x > 50)
-		canvas->camera.transf = ft_transf_cam_mouse(canvas->camera.transf, 1);
-	else if (canvas->mouse_sum_x < -50)
-		canvas->camera.transf = ft_transf_cam_mouse(canvas->camera.transf, 2);
+	if (canvas->mouse_sum_x > 50 )
+		ft_transf_cam_mouse(&canvas->camera, 1);
+	else if (canvas->mouse_sum_x < -50 )
+		ft_transf_cam_mouse(&canvas->camera, 2);
 	else
 		condition = (1 << 3) | condition;
 	if (canvas->mouse_sum_y > 50)
-		canvas->camera.transf = ft_transf_cam_mouse(canvas->camera.transf, 4);
+		ft_transf_cam_mouse(&canvas->camera, 4);
 	else if (canvas->mouse_sum_y < -50)
-		canvas->camera.transf = ft_transf_cam_mouse(canvas->camera.transf, 3);
+		ft_transf_cam_mouse(&canvas->camera, 3);
 	else
 		condition = (1 << 2) | condition;
-	if (condition)
+	if (condition > 0)
 		canvas->camera.inverted = ft_invert_matrix(canvas->camera.transf);
 	if (!((condition >> 3) & 1))
 	{

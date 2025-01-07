@@ -137,7 +137,7 @@ bool		ft_change_resolution(int keysym, t_canvas *canvas);
 bool		ft_change_obj_propriety(int keysym, t_canvas *canvas, bool state);
 bool		ft_change_object_color(int keysym, t_canvas *canvas);
 bool		ft_camera_transform(int keysym, t_canvas *canvas);
-t_matrix	ft_transform_camera_key(t_matrix m, int key);
+void		ft_transform_camera_key(t_canvas *canvas, int key);
 void		ft_select_obj(int x, int y, t_canvas *canvas);
 void		ft_clear_select(t_canvas *canvas);
 
