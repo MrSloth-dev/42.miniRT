@@ -12,7 +12,6 @@
 
 #include "minirt.h"
 
-
 static bool	ft_camera_wasd_keys(t_camera *camera, int key)
 {
 	if (key != XK_a && key != XK_d && key != XK_w && key != XK_s)

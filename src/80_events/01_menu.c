@@ -117,4 +117,13 @@ void	ft_menu(t_canvas *canvas)
 		i = 2;
 		ft_small_menu_info(canvas, i);
 	}
+	mlx_string_put(canvas->mlx, canvas->win, canvas->local_x.next.x
+		+ canvas->local_x.x_str,
+		canvas->local_x.next.y + canvas->local_x.y_str, WHITE, "X");
+	mlx_string_put(canvas->mlx, canvas->win, canvas->local_y.next.x
+		+ canvas->local_y.x_str,
+		canvas->local_y.next.y + canvas->local_y.y_str, WHITE, "Y");
+	mlx_string_put(canvas->mlx, canvas->win, canvas->local_z.next.x
+		+ canvas->local_z.x_str,
+		canvas->local_z.next.y + canvas->local_z.y_str, WHITE, "Z");
 }
