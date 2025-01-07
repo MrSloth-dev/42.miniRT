@@ -33,7 +33,7 @@ static bool	ft_change_obj_dimension(int keysym, t_canvas *canvas)
 	{
 		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0},
 			(t_tuple){scale, scale, scale, 0});
-		if (canvas->object_selected->type == CYLINDER)
+if (canvas->object_selected->type == CYLINDER)
 			ft_change_cyl_spec(canvas->object_selected, scale);
 	}
 	else if (keysym == XK_2 && canvas->object_selected->type == CYLINDER)
@@ -50,47 +50,51 @@ static bool	ft_change_obj_dimension(int keysym, t_canvas *canvas)
 	return (true);
 }
 
-static bool	ft_change_obj_position(int keysym, t_canvas *canvas)
+static bool	ft_change_obj_position(int keysym, t_shapes *obj_sel)
 {
+	if (keysym != XK_w && keysym != XK_s && keysym != XK_a
+			&& keysym != XK_d && keysym != XK_q && keysym != XK_e)
+		return (false);
+	if (obj_sel->type != SPHERE)
+		obj_sel->transform = ft_matrix_mult(obj_sel->transform, obj_sel->inv_rotate);
 	if (keysym == XK_w)
-		ft_get_transf_obj(canvas->object_selected,
-			(t_tuple){0, 0.3, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
+		obj_sel->transform = ft_matrix_mult(obj_sel->transform, ft_translation_matrix(0, 0.3, 0));
 	else if (keysym == XK_s)
-		ft_get_transf_obj(canvas->object_selected,
-			(t_tuple){0, -0.3, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
+		obj_sel->transform = ft_matrix_mult(obj_sel->transform, ft_translation_matrix(0, -0.3, 0));
 	else if (keysym == XK_a)
-		ft_get_transf_obj(canvas->object_selected,
-			(t_tuple){-0.3, 0, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
+		obj_sel->transform = ft_matrix_mult(obj_sel->transform, ft_translation_matrix(-0.3, 0, 0));
 	else if (keysym == XK_d)
-		ft_get_transf_obj(canvas->object_selected,
-			(t_tuple){0.3, 0, 0, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
+		obj_sel->transform = ft_matrix_mult(obj_sel->transform, ft_translation_matrix(0.3, 0, 0));
 	else if (keysym == XK_q)
-		ft_get_transf_obj(canvas->object_selected,
-			(t_tuple){0, 0, 0.3, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
+		obj_sel->transform = ft_matrix_mult(obj_sel->transform, ft_translation_matrix(0, 0, -0.3));
 	else if (keysym == XK_e)
-		ft_get_transf_obj(canvas->object_selected,
-			(t_tuple){0, 0, -0.3, 0}, (t_tuple){0}, (t_tuple){1, 1, 1, 0});
+		obj_sel->transform = ft_matrix_mult(obj_sel->transform, ft_translation_matrix(0, 0, 0.3));
 	else
 		return (false);
+	obj_sel->transform = ft_matrix_mult(obj_sel->transform, obj_sel->rotate);
+	obj_sel->transposed = ft_transpose_matrix(obj_sel->transform);
+	obj_sel->inverted = ft_invert_matrix(obj_sel->transform);
 	return (true);
 }
 
-static bool	ft_change_obj_rotation(int keysym, t_canvas *canvas)
+static bool	ft_change_obj_rotation(int keysym, t_shapes *obj_sel)
 {
+	t_matrix	rotate;
+
 	if (keysym == XK_Left)
-		ft_get_transf_obj(canvas->object_selected,
-			(t_tuple){0}, (t_tuple){-0.3, 0, 0, 0}, (t_tuple){1, 1, 1, 0});
+		rotate = ft_rotate_matrix_x(-0.1);
 	else if (keysym == XK_Right)
-		ft_get_transf_obj(canvas->object_selected,
-			(t_tuple){0}, (t_tuple){0.3, 0, 0, 0}, (t_tuple){1, 1, 1, 0});
+		rotate = ft_rotate_matrix_x(0.1);
 	else if (keysym == XK_Up)
-		ft_get_transf_obj(canvas->object_selected,
-			(t_tuple){0}, (t_tuple){0, 0, 0.3, 0}, (t_tuple){1, 1, 1, 0});
+		rotate = ft_rotate_matrix_z(0.1);
 	else if (keysym == XK_Down)
-		ft_get_transf_obj(canvas->object_selected,
-			(t_tuple){0}, (t_tuple){0, 0, -0.3, 0}, (t_tuple){1, 1, 1, 0});
+		rotate = ft_rotate_matrix_z(-0.1);
 	else
 		return (false);
+	obj_sel->transform = ft_matrix_mult(obj_sel->transform, rotate);
+	obj_sel->rotate = ft_matrix_mult(obj_sel->rotate, rotate);
+	obj_sel->inv_rotate = ft_invert_matrix(obj_sel->rotate);
+	obj_sel->inverted = ft_invert_matrix(obj_sel->transform);
 	return (true);
 }
 
@@ -101,10 +105,10 @@ bool	ft_change_obj_propriety(int keysym, t_canvas *canvas, bool state)
 		state = true;
 		if (ft_change_obj_dimension(keysym, canvas))
 			;
-		else if (ft_change_obj_position(keysym, canvas))
+		else if (ft_change_obj_position(keysym, canvas->object_selected))
 			;
 		else if (canvas->object_selected->type != SPHERE
-			&& ft_change_obj_rotation(keysym, canvas))
+			&& ft_change_obj_rotation(keysym, canvas->object_selected))
 			;
 		else if (ft_change_object_color(keysym, canvas))
 			;
