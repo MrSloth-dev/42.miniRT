@@ -18,7 +18,7 @@
 
 int		ft_printf(int fd, const char *str, ...);
 int		ft_atoi(const char *str);
-double		ft_atod(const char *str);
+double	ft_atod(const char *str);
 int		ft_uputnbr_fd(int nb, int fd);
 int		ft_putchar_fd(char c, int fd);
 int		ft_putnbr_fd(int nb, int fd);
