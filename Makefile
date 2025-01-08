@@ -112,7 +112,8 @@ p :
 	./parser_testing/parser_testing.sh
 .PHONY: norm
 norm:
-	@norminette | grep -E 'Error:|rror!'
+	@norminette src | grep -E 'Error:|rror!'
+	@norminette includes | grep -E 'Error:|rror!'
 
 .PHONY: gdb
 gdb : re
