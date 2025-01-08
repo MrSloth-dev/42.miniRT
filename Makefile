@@ -8,6 +8,7 @@ CFLAGS = -Iincludes -g
 EFLAGS = -Wall -Wextra -Werror
 MFLAGS = -fsanitize=undefined -fno-omit-frame-pointer -fsanitize=memory
 MLXFLAGS = -O3 -ffast-math -march=native -Lminilibx-linux -lm -lmlx -lX11 -lXext -g
+STEP ?= 2
 
 CLR_RMV = \033[0m
 RED	    = \033[1;31m
@@ -66,7 +67,7 @@ PARSE = $(PARSEDIR)/00_parse.c \
 
 MLX = $(MLXDIR)/00_mlx_init.c \
 	$(MLXDIR)/01_pixel_put.c \
-	$(MLXDIR)/11_events.c \
+	$(MLXDIR)/11_events.STEc \
 	$(MLXDIR)/91_free_mlx.c \
 
 # SRCS =	$(HELPER) $(INIT) $(OPER) $(PARSE) $(MLX)
@@ -77,7 +78,7 @@ OBJ_DIR = obj
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(EFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(EFLAGS) -D STEP=$(STEP) -c $< -o $@
 
 
 ################################################################################
@@ -92,7 +93,7 @@ $(NAME): $(OBJS) $(HEADER)
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
 	@make -C $(PRINTDIR) -s
 	@make -C $(LIBX_DIR) -s
-	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME)
+	@$(CC) $(MAIN)  $(CFLAGS) $(EFLAGS) -D STEP=$(STEP) $(OBJS) $(INCLUDES) -o $(NAME)
 	@printf "$(GREEN)$(NAME) created$(CLR_RMV) ✅\n"
 
 LIBX_DIR = minilibx-linux
@@ -122,7 +123,6 @@ gdb : re
 	@tmux send-keys -t Gdb.2 'nvim .gdbinit' C-m
 	@tmux select-pane -t Gdb.1
 
-
 .PHONY: vgdb
 vgdb :
 	@tmux new-window  -n vGdb
@@ -132,8 +132,14 @@ vgdb :
 	@tmux select-pane -t vGdb.1
 
 .PHONY: va
-va : re
-	valgrind $(VALGRINDFLAGS) ./$(NAME) scenes/teste.rt
+va : fclean $(OBJS) $(HEADER)
+	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
+	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
+	@make -C $(PRINTDIR) -s
+	@make -C $(LIBX_DIR) -s
+	@echo "STEP=$(STEP)"
+	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME)  
+	@echo -n valgrind $(VALGRINDFLAGS) ./$(NAME) scenes/ ; read args; valgrind $(VALGRINDFLAGS) ./$(NAME) scenes/$$args
 
 .PHONY: clean
 clean:
@@ -163,7 +169,7 @@ re : fclean all
 
 .PHONY: te
 te : re
-	./$(NAME) scenes/teste.rt
+	@echo -n ./$(NAME) scenes/; read args; ./miniRT scenes/$$args
 
 .SILENT: re all clean fclean
 
