@@ -24,7 +24,7 @@ static int	ft_check_file(char *file)
 	close(fd);
 	len = ft_strlen(file);
 	if (!ft_strchr(file, '.') || len < 4)
-		return (ft_printf(2, "Error\nFile not wtf valid\n"), 0);
+		return (ft_printf(2, "Error\nFile not valid\n"), 0);
 	if (len > 4 && file[len - 4] == '/')
 		return (ft_printf(2, "Error\nFile not valid\n"), 0);
 	dotindex = len;
