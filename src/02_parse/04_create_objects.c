@@ -29,7 +29,7 @@ int	ft_create_plane(t_canvas *canvas, char **split)
 	if (shape->pla.norm.w == -1
 		|| shape->pla.coord.w == -1
 		|| shape->material.color.w == -1)
-		return (0);
+		return (ft_free(shape), 0);
 	shape->material.color = ft_scalar_tuple(shape->material.color, 1 / 255.f);
 	if (ft_is_tuples_equal(shape->pla.norm, (t_tuple){0}))
 		shape->pla.norm = (t_tuple){0, 1, 0, 0};
@@ -61,7 +61,7 @@ int	ft_create_cylinder(t_canvas *canvas, char **split)
 		|| shape->material.color.w == -1
 		||shape->cyl.size.height == -43.42 || shape->cyl.size.height <= 0
 		||shape->cyl.size.diameter == -43.42 || shape->cyl.size.diameter <= 0)
-		return (0);
+		return (ft_free(shape), 0);
 	shape->material.color = ft_scalar_tuple(shape->material.color, 1 / 255.f);
 	shape->cyl.size.max = shape->cyl.size.height / 2;
 	shape->cyl.size.min = -shape->cyl.size.height / 2;

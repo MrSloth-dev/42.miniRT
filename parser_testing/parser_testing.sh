@@ -29,7 +29,7 @@ local failed=0
 for file in $(find "$invalid_files_dir" -type f); do
 		((total++))
 		echo -e "Test ${total} :'${file}'"
-		std_err=$(${bin} "${file}" 2>&1)
+		std_err=$(valgrind -q --leak-check=full  --show-leak-kinds=all --track-origins=yes --track-fds=yes --show-below-main=no ${bin} "${file}" 2>&1)
 		exit_code=$?
 		if [[ $exit_code -eq 0 ]]; then
 			echo -e "${RED} ${std_err} ${CLR_RMV}"
@@ -56,7 +56,7 @@ local failed=0
 for file in $(find "$invalid_syntax_dir" -type f); do
 		((total++))
 		echo -e "Test ${total} :'${file}'"
-		std_err=$(${bin} "${file}" 2>&1)
+		std_err=$(valgrind -q --leak-check=full  --show-leak-kinds=all --track-origins=yes --track-fds=yes --show-below-main=no ${bin} "${file}" 2>&1)
 		exit_code=$?
 		if [[ $exit_code -eq 0 ]]; then
 			echo -e "${RED} ${std_err} ${CLR_RMV}"

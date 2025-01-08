@@ -28,6 +28,10 @@ t_tuple	ft_get_norm(char *str, char *element, t_canvas *canvas)
 	char	**norm_split;
 	t_tuple	norm;
 
+	if (!ft_check_commas(str))
+		return (ft_printf(2, "Error\n%s norm format is wrong\n", element),
+			ft_free_objects(canvas->objects),
+			(t_tuple){-43.42, -43.42, -43.42, -1});
 	norm_split = ft_split(str, ',');
 	norm = (t_color){ft_atod(norm_split[0]), ft_atod(norm_split[1]),
 		ft_atod(norm_split[2]), 0};
@@ -46,6 +50,10 @@ t_tuple	ft_get_coord(char *str, char *element, t_canvas *canvas)
 	char	**coord_split;
 	t_tuple	coord;
 
+	if (!ft_check_commas(str))
+		return (ft_printf(2, "Error\n%s coord format is wrong\n", element),
+			ft_free_objects(canvas->objects),
+			(t_tuple){-43.42, -43.42, -43.42, -1});
 	coord_split = ft_split(str, ',');
 	coord = (t_color){ft_atod(coord_split[0]), ft_atod(coord_split[1]),
 		ft_atod(coord_split[2]), 1};
@@ -64,6 +72,10 @@ t_color	ft_get_color(char *str, char *element, t_canvas *canvas)
 	char	**color_split;
 	t_color	color;
 
+	if (!ft_check_commas(str))
+		return (ft_printf(2, "Error\n%s color format is wrong\n", element),
+			ft_free_objects(canvas->objects),
+			(t_color){-43.42, -43.42, -43.42, -1});
 	color_split = ft_split(str, ',');
 	color = (t_color){ft_atod(color_split[0]), ft_atod(color_split[1]),
 		ft_atod(color_split[2]), 3};

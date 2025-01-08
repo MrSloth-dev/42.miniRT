@@ -9,6 +9,7 @@ EFLAGS = -Wall -Wextra -Werror
 MFLAGS = -fsanitize=undefined -fno-omit-frame-pointer -fsanitize=memory
 MLXFLAGS = -O3 -ffast-math -march=native -Lminilibx-linux -lm -lmlx -lX11 -lXext -g
 STEP ?= 2
+DEBUG ?= 0
 
 CLR_RMV = \033[0m
 RED	    = \033[1;31m
@@ -78,7 +79,7 @@ OBJ_DIR = obj
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(EFLAGS) -D STEP=$(STEP) -c $< -o $@
+	@$(CC) $(CFLAGS) $(EFLAGS) -D STEP=$(STEP) -D DEBUG=$(DEBUG) -c $< -o $@
 
 
 ################################################################################
@@ -148,13 +149,17 @@ clean:
 	@make clean -C $(PRINTDIR) -s
 	@ printf "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✅\n"
 
-.PHONY: debug
-debug: $(OBJS) $(HEADER)
+.PHONY: cleandebug
+debug : fclean cleandebug
+
+.PHONY: cleandebug
+cleandebug: $(OBJS) $(HEADER)
+
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
 	@make -C $(PRINTDIR) -s
 	@make -C $(LIBX_DIR) -s
-	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME) -D DEBUG=1
+	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME) -D DEBUG=$(DEBUG)
 	@printf "$(GREEN)$(NAME) created$(CLR_RMV) ✅\n"
 	@make p
 

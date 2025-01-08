@@ -32,7 +32,7 @@ static int	ft_check_file(char *file)
 		dotindex--;
 	if (dotindex == len - 3 && file[dotindex + 1] == 'r'
 		&& file[dotindex + 2] == 't')
-		return (ft_printf(1, "File Accepted!\n"), 1);
+		return (1);
 	return (ft_printf(2, "Error\n File not valid\n"), 0);
 }
 
