@@ -20,6 +20,15 @@ bool	ft_camera_transform(int keysym, t_canvas *canvas)
 		canvas->camera.rotate = ft_create_matrix(4, 4, 1);
 		canvas->camera.inv_rotate = ft_create_matrix(4, 4, 1);
 	}
+	if (keysym == XK_k && canvas->objects)
+	{
+		canvas->camera.transf = ft_view_transformation(canvas->camera.coord,
+				ft_add_tuple(canvas->camera.coord,
+				ft_sub_tuple(((t_shapes *)canvas->objects->cont)->cyl.coord, canvas->camera.coord)),
+				(t_tuple){0, 1, 0, 0});
+		canvas->camera.rotate = ft_create_matrix(4, 4, 1);
+		canvas->camera.inv_rotate = ft_create_matrix(4, 4, 1);
+	}
 	else if (!canvas->object_selected && !canvas->light_selected)
 		ft_transform_camera_key(canvas, keysym);
 	else
