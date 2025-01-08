@@ -16,7 +16,7 @@ void	ft_init_canvas(t_canvas *canvas)
 {
 	*canvas = (t_canvas){0};
 	if (STEP > 19 || STEP < 1)
-		canvas->step = 19;
+		canvas->step = 2;
 	else
 		canvas->step = STEP;
 	canvas->mouse_prev_x = -1;
