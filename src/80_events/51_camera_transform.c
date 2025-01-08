@@ -24,7 +24,8 @@ bool	ft_camera_transform(int keysym, t_canvas *canvas)
 	{
 		canvas->camera.transf = ft_view_transformation(canvas->camera.coord,
 				ft_add_tuple(canvas->camera.coord,
-				ft_sub_tuple(((t_shapes *)canvas->objects->cont)->cyl.coord, canvas->camera.coord)),
+					ft_sub_tuple(((t_shapes *)canvas->objects->cont)->cyl.coord,
+						canvas->camera.coord)),
 				(t_tuple){0, 1, 0, 0});
 		canvas->camera.rotate = ft_create_matrix(4, 4, 1);
 		canvas->camera.inv_rotate = ft_create_matrix(4, 4, 1);
