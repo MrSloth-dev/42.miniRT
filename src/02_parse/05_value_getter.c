@@ -19,7 +19,8 @@ double	ft_get_double(char *str, char *element, t_canvas *canvas)
 	(void)canvas;
 	value = ft_atod(str);
 	if (ft_is_float_equal(value, -43.42))
-		return (ft_printf(2, "Error\n%s ratio format is wrong\n", element), value);
+		return (ft_printf(2, "Error\n%s ratio format is wrong\n", element),
+			value);
 	return (value);
 }
 
