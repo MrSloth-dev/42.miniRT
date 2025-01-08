@@ -46,7 +46,10 @@
 # define TEXT_H_ZONE 500
 # define TEXT_W_ZONE 250
 
-# define STEP 15
+# ifndef STEP
+#  define STEP 2
+# endif
+
 # define ROUND_ERROR 0.000001
 # define ERR_INPUT 1
 # define ERR_MLX 2
