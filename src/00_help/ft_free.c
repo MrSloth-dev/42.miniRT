@@ -37,20 +37,23 @@ void	*ft_free_split(char **split)
 void	ft_free_objects(t_objects *list)
 {
 	t_objects	*temp;
+	t_list		*cur;
 
-	while (list)
+	cur = list;
+	while (cur)
 	{
-		temp = list;
-		list = list->next;
-		ft_free(temp->cont);
-		ft_free(temp);
+		temp = cur;
+		cur = cur->next;
+		temp->cont = ft_free(temp->cont);
+		temp = ft_free(temp);
 	}
-	ft_free(list);
+	cur = ft_free(cur);
 }
 
 void	ft_free_canvas(t_canvas *canvas)
 {
 	ft_free_objects(canvas->objects);
+	canvas->objects = NULL;
 	ft_free(canvas->mlx);
 	ft_free(canvas->gnl_rest);
 }
