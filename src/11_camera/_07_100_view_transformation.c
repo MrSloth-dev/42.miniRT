@@ -18,10 +18,14 @@ t_matrix	ft_view_transformation(t_tuple from, t_tuple to, t_tuple up)
 	t_tuple		forward;
 	t_tuple		left;
 	t_tuple		true_up;
+	t_tuple		upn;
 
 	m = ft_create_matrix(4, 4, 1);
+	upn = ft_norm_vector(up);
 	forward = ft_norm_vector(ft_sub_tuple(to, from));
-	left = ft_crossprod_vector(forward, ft_norm_vector(up));
+	if (ft_magn_tuple(ft_crossprod_vector(forward, upn)) == 0)
+		upn = (t_tuple){0, 0, 1, 0};
+	left = ft_crossprod_vector(forward, upn);
 	true_up = ft_crossprod_vector(left, forward);
 	ft_set_matrix_values(&m, (double [4][4])
 	{{left.x, left.y, left.z, 0},
