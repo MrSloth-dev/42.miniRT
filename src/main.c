@@ -29,7 +29,7 @@ void	ft_mlx_end(t_canvas *canvas)
 	ft_free_canvas(canvas);
 }
 
-int	ft_count_objects(t_canvas *canvas)
+static int	ft_count_objects(t_canvas *canvas)
 {
 	int	count;
 
@@ -46,11 +46,12 @@ int	main(int argc, char *argv[])
 	t_canvas	canvas;
 
 	if (argc != 2)
-		return (ft_printf(2, "Error\n Argv!\n"), 1);
+		return (ft_printf(2, "Error\nUsage: ./miniRT <path/to/file.rt>\n"), 1);
 	ft_init_canvas(&canvas);
-	if (ft_parse(&canvas, argv[1]) == 0 || ft_count_objects(&canvas) == 0)
+	if (ft_parse(&canvas, argv[1]) == 0
+		|| (DEBUG && ft_count_objects(&canvas) == 0))
 		return (1);
-	if (DEBUG && ft_count_objects(&canvas) == 0)
+	if (DEBUG)
 		return (0);
 	ft_mlx_init(&canvas);
 	ft_refreshframe(&canvas);

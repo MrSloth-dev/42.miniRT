@@ -20,28 +20,29 @@ TO-DO list
 - [x] Ivan - on ray_for_pixel, save ray.pos on render at the beggining.
 - [x] Ivan - on lighting ft, change lightv to light_vector
 - [!] Ivan - do miro program scheme
-- [ ] Ivan - continue norminette and documentation.
+- [x] Ivan - continue norminette and documentation.
 - [ ] Ivan - do sketchup rays scheme
 - [ ] Ivan - check for edge cases on ambient color.
 - [ ] verify when apply changes to size of objects, or position of camera - check perspective
-- [ ] Edite scenes on scene folder for evaluation
+- [ ] Edit scenes on scene folder for evaluation
         - done cylinders.rt
         - done random.rt
-- [ ] Setup strings on screen for commands
+- [x] Setup strings on screen for commands
 - [x] Norminette previous chapters 1 to 6(kinda) .
 - [x] Make it work
-- [ ] Make it robust
+- [x] Make it robust
 - [ ] Program name are "miniRT" ?
 - [ ] Finish
 
 PARSER ISSUES
 - [x] Make parser great again
     - [ ] Again.
-- [ ] Camera parser must be integrated with world and view transformation.
-- [ ] cy 2.0,6.5,-1.50,-10 -0.2,0.0,0.7 3 2 0,255,0
+- [x] Camera parser must be integrated with world and view transformation.
+- [x] cy 2.0,6.5,-1.50,-10 -0.2,0.0,0.7 3 2 0,255,0
         not valid, check if split has right number of parameters when splited
 - [ ] block double vars on colors (0 - 255), only alow ints
-- [ ] Limit Light,Ambient and Camera between 0 to 1
+        - [x] Isn't needed, the converstion into the mlx colors still correctly
+- [x] Limit Light,Ambient and Camera between 0 to 1
 - [ ] After parse, need to copy ambient color and intensity to materials
 - [ ] Ensure that program do not have leaks, or crash, if we don't have objects.
         Program must run, and show black window without any objects
