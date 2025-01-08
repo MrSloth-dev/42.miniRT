@@ -12,10 +12,12 @@
 
 #include "minirt.h"
 
-static void	ft_change_cyl_spec(t_shapes *cyl_selected, double scl)
+static void	ft_change_cyl_spec(t_shapes *cyl_selected, double scl, int invert)
 {
 	if (!cyl_selected)
 		return ;
+	if (invert && scl < 0)
+		scl += 0.1;
 	cyl_selected->cyl.size.height *= scl;
 	cyl_selected->cyl.size.max = cyl_selected->cyl.size.height / 2;
 	cyl_selected->cyl.size.min = -cyl_selected->cyl.size.max;
@@ -34,16 +36,16 @@ static bool	ft_change_obj_dimension(int keysym, t_canvas *canvas)
 		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0},
 			(t_tuple){scale, scale, scale, 0});
 		if (canvas->object_selected->type == CYLINDER)
-			ft_change_cyl_spec(canvas->object_selected, scale);
+			ft_change_cyl_spec(canvas->object_selected, scale, 0);
 	}
 	else if (keysym == XK_2 && canvas->object_selected->type == CYLINDER)
-		ft_change_cyl_spec(canvas->object_selected, scale);
+		ft_change_cyl_spec(canvas->object_selected, scale, 0);
 	else if (keysym == XK_3 && canvas->object_selected->type == CYLINDER)
 	{
 		inverted_scale = 1 - (double)canvas->shift_press / 10;
 		ft_get_transf_obj(canvas->object_selected, (t_tuple){0}, (t_tuple){0},
 			(t_tuple){scale, scale, scale, 0});
-		ft_change_cyl_spec(canvas->object_selected, inverted_scale);
+		ft_change_cyl_spec(canvas->object_selected, inverted_scale, 1);
 	}
 	else
 		return (false);
