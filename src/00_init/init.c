@@ -19,6 +19,10 @@ void	ft_init_canvas(t_canvas *canvas)
 		canvas->step = 2;
 	else
 		canvas->step = STEP;
+	if (DEBUG != 1)
+		canvas->debug = 0;
+	else
+		canvas->debug = 1;
 	canvas->mouse_prev_x = -1;
 	canvas->mouse_prev_y = -1;
 	canvas->shift_press = 1;

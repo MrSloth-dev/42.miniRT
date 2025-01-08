@@ -1,0 +1,127 @@
+00_HELP = src/00_help
+	$(00_HELP)/ft_lstadd_front.c \ 
+	$(00_HELP)/ft_lstsize.c \ 
+	$(00_HELP)/ft_lstadd_back.c \ 
+	$(00_HELP)/ft_lstnew.c \ 
+	$(00_HELP)/assert.c \ 
+	$(00_HELP)/ft_free.c \ 
+
+00_INIT = src/00_init
+	$(00_INIT)/_06_085_1_create_material.c \ 
+	$(00_INIT)/init_objects.c \ 
+	$(00_INIT)/init_objects_fixed.c \ 
+	$(00_INIT)/init.c \ 
+
+01_OPER = src/01_oper
+
+02_PARSE = src/02_parse
+	$(02_PARSE)/00_parse.c \ 
+	$(02_PARSE)/01_syntax.c \ 
+	$(02_PARSE)/01_syntax_help.c \ 
+	$(02_PARSE)/02_syntax_helper.c \ 
+	$(02_PARSE)/03_create_objects.c \ 
+	$(02_PARSE)/04_create_objects.c \ 
+	$(02_PARSE)/05_value_getter.c \ 
+	$(02_PARSE)/06_value_checker.c \ 
+
+88_UTILS = src/88_utils
+	$(88_UTILS)/00_set_tuple.c \ 
+	$(88_UTILS)/iter.c \ 
+
+91_MLX = src/91_mlx
+	$(91_MLX)/00_mlx_init.c \ 
+	$(91_MLX)/01_pixel_put.c \ 
+	$(91_MLX)/91_free_mlx.c \ 
+
+WARNING = src/WARNING
+
+80_EVENTS = src/80_events
+	$(80_EVENTS)/03_key_release.c \ 
+	$(80_EVENTS)/05_mouse_handler_release.c \ 
+	$(80_EVENTS)/07_close_handler.c \ 
+	$(80_EVENTS)/08_refreshframe.c \ 
+	$(80_EVENTS)/11_make_disco.c \ 
+	$(80_EVENTS)/12_change_color_disco.c \ 
+	$(80_EVENTS)/21_light_transform.c \ 
+	$(80_EVENTS)/22_change_light_position.c \ 
+	$(80_EVENTS)/23_change_light_color.c \ 
+	$(80_EVENTS)/31_change_resolution.c \ 
+	$(80_EVENTS)/42_change_object_color.c \ 
+	$(80_EVENTS)/61_select_object.c \ 
+	$(80_EVENTS)/62_clear_select.c \ 
+	$(80_EVENTS)/01_menu.c \ 
+	$(80_EVENTS)/02_key_handler.c \ 
+	$(80_EVENTS)/04_mouse_handler.c \ 
+	$(80_EVENTS)/06_mouse_motion.c \ 
+	$(80_EVENTS)/41_change_obj_properties.c \ 
+	$(80_EVENTS)/43_select_transform.c \ 
+	$(80_EVENTS)/51_camera_transform.c \ 
+	$(80_EVENTS)/52_transform_camera_key.c \ 
+
+11_CAMERA = src/11_camera
+	$(11_CAMERA)/_07_101_create_world_camera.c \ 
+	$(11_CAMERA)/_07_100_view_transformation.c \ 
+
+12_RENDER = src/12_render
+	$(12_RENDER)/_07_104_ray_for_pixel.c \ 
+	$(12_RENDER)/_08_101_is_shadowed.c \ 
+	$(12_RENDER)/_02_000_color.c \ 
+	$(12_RENDER)/_06_088_lighting.c \ 
+	$(12_RENDER)/_07_093_intersect_world.c \ 
+	$(12_RENDER)/_07_094_prepare_comp.c \ 
+	$(12_RENDER)/_07_097_color_at.c \ 
+	$(12_RENDER)/_09_112_normal_at.c \ 
+	$(12_RENDER)/98_draw_axis.c \ 
+	$(12_RENDER)/98_draw_axis_utils.c \ 
+	$(12_RENDER)/99_get_transf_obj.c \ 
+	$(12_RENDER)/_07_104_render.c \ 
+
+13_INTERSECTIONS = src/13_intersections
+	$(13_INTERSECTIONS)/_09_119_intersection_plane.c \ 
+	$(13_INTERSECTIONS)/_05_062_intersection_sphere.c \ 
+	$(13_INTERSECTIONS)/_05_065_hit_inter.c \ 
+	$(13_INTERSECTIONS)/_05_065_lstadd_sort_inter_malloc.c \ 
+	$(13_INTERSECTIONS)/_13_177_intersection_cyl.c \ 
+
+71_TUPLE_OPER = src/71_tuple_oper
+	$(71_TUPLE_OPER)/_01_000_tuple_init.c \ 
+	$(71_TUPLE_OPER)/_01_005_add_tuple.c \ 
+	$(71_TUPLE_OPER)/_01_005_is_float_equal.c \ 
+	$(71_TUPLE_OPER)/_01_005_is_tuples_equal.c \ 
+	$(71_TUPLE_OPER)/_01_005_operator.c \ 
+	$(71_TUPLE_OPER)/_01_006_sub_tuple.c \ 
+	$(71_TUPLE_OPER)/_01_007_neg_tuple.c \ 
+	$(71_TUPLE_OPER)/_01_007_scalar_tuple.c \ 
+	$(71_TUPLE_OPER)/_01_008_magn_tuple.c \ 
+	$(71_TUPLE_OPER)/_01_010_norm_vector.c \ 
+	$(71_TUPLE_OPER)/_01_011_crossprod_vector.c \ 
+	$(71_TUPLE_OPER)/_01_010_dotprod_vector.c \ 
+
+72_MATRIX_TRANSF = src/72_matrix_transf
+	$(72_MATRIX_TRANSF)/_03_000_print_matrix.c \ 
+	$(72_MATRIX_TRANSF)/_03_026_create_matrix.c \ 
+	$(72_MATRIX_TRANSF)/_03_026_set_matrix_values.c \ 
+	$(72_MATRIX_TRANSF)/_03_027_are_matrixes_equal.c \ 
+	$(72_MATRIX_TRANSF)/_03_030_matrix_mult.c \ 
+	$(72_MATRIX_TRANSF)/_03_030_mult_matrix_tuple.c \ 
+	$(72_MATRIX_TRANSF)/_03_032_transpose_matrix.c \ 
+	$(72_MATRIX_TRANSF)/_03_034_determinant.c \ 
+	$(72_MATRIX_TRANSF)/_03_035_1_submatrix.c \ 
+	$(72_MATRIX_TRANSF)/_03_035_2_minor.c \ 
+	$(72_MATRIX_TRANSF)/_03_036_cofactor.c \ 
+	$(72_MATRIX_TRANSF)/_03_039_invert_matrix.c \ 
+	$(72_MATRIX_TRANSF)/_04_044_translation_matrix.c \ 
+	$(72_MATRIX_TRANSF)/_04_045_translate.c \ 
+	$(72_MATRIX_TRANSF)/_04_046_scale.c \ 
+	$(72_MATRIX_TRANSF)/_04_046_scale_matrix.c \ 
+	$(72_MATRIX_TRANSF)/_04_047_rotation.c \ 
+	$(72_MATRIX_TRANSF)/_04_047_rotation_matrix.c \ 
+
+73_RAY = src/73_ray
+	$(73_RAY)/_05_058_create_ray.c \ 
+	$(73_RAY)/_05_058_distance_ray.c \ 
+	$(73_RAY)/_05_069_1_translate_ray.c \ 
+	$(73_RAY)/_05_069_2_scale_ray.c \ 
+	$(73_RAY)/_05_069_3_set_transf_ray.c \ 
+	$(73_RAY)/_06_083_reflect.c \ 
+

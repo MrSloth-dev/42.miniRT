@@ -18,6 +18,8 @@ void	ft_select_obj(int x, int y, t_canvas *canvas)
 	t_interlst	*lst;
 	t_inter		*hit;
 
+	if (!canvas->objects)
+		return ;
 	ray.pos = ft_mult_matrix_tuple(canvas->camera.inverted,
 			(t_tuple){0, 0, 0, 1});
 	ft_ray_for_pixel(canvas->camera, x, y, &ray);

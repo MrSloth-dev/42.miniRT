@@ -23,7 +23,6 @@ void	ft_mlx_end(t_canvas *canvas)
 	mlx_hook(canvas->win, MotionNotify, CWBackingStore, mouse_motion, canvas);
 	mlx_hook(canvas->win, DestroyNotify, StructureNotifyMask,
 		close_handler, canvas);
-	mlx_hook(canvas->win, DestroyNotify, 0l, &close_handler, &canvas);
 	mlx_loop_hook(canvas->mlx, ft_refreshframe, canvas);
 	mlx_loop(canvas->mlx);
 	ft_free_canvas(canvas);
@@ -49,10 +48,10 @@ int	main(int argc, char *argv[])
 		return (ft_printf(2, "Error\nUsage: ./miniRT <path/to/file.rt>\n"), 1);
 	ft_init_canvas(&canvas);
 	if (ft_parse(&canvas, argv[1]) == 0
-		|| (DEBUG && ft_count_objects(&canvas) == 0))
-		return (1);
-	if (DEBUG)
-		return (0);
+		|| (canvas.debug && ft_count_objects(&canvas) == 0))
+		return (ft_free_canvas(&canvas), 1);
+	if (canvas.debug)
+		return (ft_free_canvas(&canvas), 0);
 	ft_mlx_init(&canvas);
 	ft_refreshframe(&canvas);
 	ft_mlx_end(&canvas);
