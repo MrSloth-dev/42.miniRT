@@ -20,6 +20,7 @@ t_shapes	*ft_create_default_shape(int type)
 	t_shapes	*new;
 
 	new = malloc(sizeof(t_shapes));
+	*new = (t_shapes){0};
 	new->type = type;
 	new->material = ft_create_material();
 	new->inverted = ft_create_matrix(4, 4, 1);

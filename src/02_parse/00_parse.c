@@ -50,8 +50,6 @@ static int	ft_parse_line(char **split, t_canvas *canvas)
 		return (ft_create_plane(canvas, split));
 	else if (!ft_strcmp(*split, "cy"))
 		return (ft_create_cylinder(canvas, split));
-	else
-		return (1);
 	return (1);
 }
 

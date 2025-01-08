@@ -128,9 +128,9 @@ gdb : re
 .PHONY: vgdb
 vgdb :
 	@tmux new-window  -n vGdb
-	@tmux send-keys 'valgrind -q --vgdb-error=0 ./minirt_te teste.rt' C-m Escape
+	@tmux send-keys 'valgrind -q --vgdb-error=0 ./minirt_te scenes/eval/04_camera_position_3.rt' C-m Escape
 	@tmux split-window -h
-	@tmux send-keys -t Gdb.2 'gdbtui ./minirt' C-m
+	@tmux send-keys -t Gdb.2 'gdbtui ./minirt scenes/eval/04_camera_position_3.rt' C-m
 	@tmux select-pane -t vGdb.1
 
 .PHONY: va
