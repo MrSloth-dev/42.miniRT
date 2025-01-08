@@ -232,9 +232,9 @@ typedef struct s_canvas
 	int			disco_color;
 	double		disco_dance;
 // vars for shown axis
-	t_ln_pt	local_x;
-	t_ln_pt	local_y;
-	t_ln_pt local_z;
+	t_ln_pt		local_x;
+	t_ln_pt		local_y;
+	t_ln_pt		local_z;
 }	t_canvas;
 
 typedef struct s_iter
@@ -272,5 +272,3 @@ typedef struct s_comp
 	t_color		diffuse;
 	bool		selected;
 }	t_comp;
-
-

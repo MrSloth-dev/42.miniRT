@@ -235,7 +235,7 @@ void		ft_intersection_cyl(t_interlst **lst, t_ray ray, t_shapes *shap);
 t_tuple		ft_normal_at_cyl(t_shapes *shape, t_tuple w_point);
 
 //TESTING/////////////////////////////////////////////
-void	test_ft_is_tuples_equal(void);
+void		test_ft_is_tuples_equal(void);
 void		test_ft_sub_tuple(void);
 void		ft_print_tuple(t_tuple tuple, char *name);
 void		ft_draw_square(t_canvas *canvas, t_tuple start,

@@ -133,7 +133,7 @@ vgdb :
 
 .PHONY: va
 va : re
-	valgrind $(VALGRINDFLAGS) ./$(NAME) teste.rt
+	valgrind $(VALGRINDFLAGS) ./$(NAME) scenes/teste.rt
 
 .PHONY: clean
 clean:
@@ -163,7 +163,7 @@ re : fclean all
 
 .PHONY: te
 te : re
-	./$(NAME) teste.rt
+	./$(NAME) scenes/teste.rt
 
 .SILENT: re all clean fclean
 
