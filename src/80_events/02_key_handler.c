@@ -27,7 +27,7 @@ int	key_handler(int keysym, t_canvas *canvas)
 		;
 	else if (ft_change_resolution(keysym, canvas))
 		;
-	else if (ft_change_obj_propriety(keysym, canvas, false))
+	else if (ft_change_obj_properties(keysym, canvas, false))
 		;
 	else if (ft_camera_transform(keysym, canvas))
 		;

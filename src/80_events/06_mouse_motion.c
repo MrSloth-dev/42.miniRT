@@ -34,9 +34,9 @@ static bool	ft_transf_cam_mouse(t_camera *camera, int key)
 
 static void	ft_drag_mouse(t_canvas *canvas, int condition)
 {
-	if (canvas->mouse_sum_x > 50 )
+	if (canvas->mouse_sum_x > 50)
 		ft_transf_cam_mouse(&canvas->camera, 1);
-	else if (canvas->mouse_sum_x < -50 )
+	else if (canvas->mouse_sum_x < -50)
 		ft_transf_cam_mouse(&canvas->camera, 2);
 	else
 		condition = (1 << 3) | condition;

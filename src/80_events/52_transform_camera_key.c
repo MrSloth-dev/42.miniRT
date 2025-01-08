@@ -18,13 +18,17 @@ static bool	ft_camera_wasd_keys(t_camera *camera, int key)
 		return (false);
 	camera->transf = ft_matrix_mult(camera->transf, camera->inv_rotate);
 	if (key == XK_a)
-		camera->transf = ft_matrix_mult(camera->transf, ft_translation_matrix(1, 0, 0));
+		camera->transf = ft_matrix_mult(camera->transf,
+				ft_translation_matrix(1, 0, 0));
 	else if (key == XK_d)
-		camera->transf = ft_matrix_mult(camera->transf, ft_translation_matrix(-1, 0, 0));
+		camera->transf = ft_matrix_mult(camera->transf,
+				ft_translation_matrix(-1, 0, 0));
 	else if (key == XK_w)
-		camera->transf = ft_matrix_mult(camera->transf, ft_translation_matrix(0, 0, -1));
+		camera->transf = ft_matrix_mult(camera->transf,
+				ft_translation_matrix(0, 0, -1));
 	else if (key == XK_s)
-		camera->transf = ft_matrix_mult(camera->transf, ft_translation_matrix(0, 0, 1));
+		camera->transf = ft_matrix_mult(camera->transf,
+				ft_translation_matrix(0, 0, 1));
 	camera->transf = ft_matrix_mult(camera->transf, camera->rotate);
 	return (true);
 }
@@ -59,12 +63,15 @@ static bool	ft_space_c_keys(t_camera *camera, int key)
 		return (false);
 	camera->transf = ft_matrix_mult(camera->transf, camera->inv_rotate);
 	if (key == XK_space)
-		camera->transf = ft_matrix_mult(camera->transf, ft_translation_matrix(0, -1, 0));
+		camera->transf = ft_matrix_mult(camera->transf,
+				ft_translation_matrix(0, -1, 0));
 	else if (key == XK_c)
-		camera->transf = ft_matrix_mult(camera->transf, ft_translation_matrix(0, 1, 0));
+		camera->transf = ft_matrix_mult(camera->transf,
+				ft_translation_matrix(0, 1, 0));
 	camera->transf = ft_matrix_mult(camera->transf, camera->rotate);
 	return (true);
 }
+
 void	ft_transform_camera_key(t_canvas *canvas, int key)
 {
 	if (ft_camera_wasd_keys(&canvas->camera, key))

@@ -6,7 +6,7 @@
 /*   By: joao-pol <joao-pol@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 01:01:55 by joao-pol          #+#    #+#             */
-/*   Updated: 2025/01/07 02:04:38 by joao-pol         ###   ########.fr       */
+/*   Updated: 2025/01/08 02:07:21 by joao-pol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,8 @@ bool		ft_light_transform(int keysym, t_canvas *canvas);
 bool		ft_change_light_position(int keysym, t_canvas *canvas);
 bool		ft_change_light_color(int keysym, t_canvas *canvas);
 bool		ft_change_resolution(int keysym, t_canvas *canvas);
-bool		ft_change_obj_propriety(int keysym, t_canvas *canvas, bool state);
+bool		ft_change_obj_properties(int keysym, t_canvas *canvas, bool state);
+t_matrix	ft_sel_transform(int keysym, t_matrix transform);
 bool		ft_change_object_color(int keysym, t_canvas *canvas);
 bool		ft_camera_transform(int keysym, t_canvas *canvas);
 void		ft_transform_camera_key(t_canvas *canvas, int key);
