@@ -128,7 +128,7 @@ int	ft_create_sphere(t_canvas *canvas, char **split)
 		|| shape->material.color.w == -1
 		|| shape->sph.diameter == -43.42
 		|| shape->sph.diameter <= 0)
-		return (0);
+		return (ft_free(shape), 0);
 	shape->material.color = ft_scalar_tuple(shape->material.color,
 			1.0f / 255.0f);
 	ft_get_transf_obj(shape, shape->sph.coord, (t_tuple){0},

@@ -89,6 +89,7 @@ void		ft_add_object(void **head, void *object);
 int			ft_count_members(char **split);
 int			ft_check_null_split(char **split);
 int			ft_check_syntax(t_canvas *canvas, char *file);
+int			ft_check_commas(char *str);
 int			ft_parse(t_canvas *canvas, char *file);
 int			ft_syntax_ambient(t_canvas *canvas, char **split);
 int			ft_syntax_camera(t_canvas *canvas, char **split);
