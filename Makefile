@@ -9,7 +9,7 @@ EFLAGS = -Wall -Wextra -Werror
 MFLAGS = -fsanitize=undefined -fno-omit-frame-pointer -fsanitize=memory
 MLXFLAGS = -O3 -ffast-math -march=native -Lminilibx-linux -lm -lmlx -lX11 -lXext -g
 STEP ?= 2
-DEBUG ?= 0
+DEBUG ?= 05k
 
 CLR_RMV = \033[0m
 RED	    = \033[1;31m
@@ -209,12 +209,9 @@ $(LIBX_DIR) :
 
 libx : $(LIBX_DIR)
 
-p :
-	./parser_testing/parser_testing.sh
 .PHONY: norm
 norm:
-	@norminette src | grep -E 'Error:|rror!'
-	@norminette includes | grep -E 'Error:|rror!'
+	@norminette src includes | grep -E 'Error:|rror!'
 
 .PHONY: gdb
 gdb : re
@@ -236,8 +233,8 @@ vgdb :
 .PHONY: va
 va : fclean $(OBJS) $(HEADER)
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
-	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
 	@make -C $(PRINTDIR) -s
+	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
 	@make -C $(LIBX_DIR) -s
 	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME) 
 	@echo -n valgrind $(VALGRINDFLAGS) ./$(NAME) scenes/ ; read args; valgrind $(VALGRINDFLAGS) ./$(NAME) scenes/$$args
