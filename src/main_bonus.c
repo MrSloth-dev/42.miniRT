@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "minirt_bonus.h"
 
 void	ft_mlx_end(t_canvas *canvas)
 {
@@ -51,7 +51,9 @@ int	ft_refreshframe(void *ptr)
 			&canvas->img.bits_per_pixel,
 			&canvas->img.size_line, &canvas->img.endian);
 	ft_update_world_camera(canvas);
-	ft_render(canvas);
+	ft_render_bonus(canvas);
+	draw_axis(canvas);
+	mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img.img, 0, 0);
 	ft_menu(canvas);
 	return (0);
 }

@@ -3,6 +3,7 @@
 ################################################################################
 
 NAME = miniRT
+NAME_BONUS = minirt
 CC = cc
 CFLAGS = -Iincludes -g
 EFLAGS = -Wall -Wextra -Werror
@@ -39,6 +40,7 @@ vpath %.c src
 
 HEADER = minirt.h ft_printf.h
 MAIN = src/main.c
+MAIN_BONUS = src/main_bonus.c
 PRINTDIR = ./includes/ft_printf/
 PRINTFT = ./includes/ft_printf/libftprintf.a
 GNLDIR = ./includes/get_next_line/
@@ -56,7 +58,6 @@ GNL  = $(GNLFT) $(GNLUFT)
 	$(00_HELPDIR)/ft_free.c
 
 00_INITDIR = src/00_init
-
 00_INIT = $(00_INITDIR)/_06_085_1_create_material.c \
 	$(00_INITDIR)/init_objects.c \
 	$(00_INITDIR)/init_objects_fixed.c \
@@ -85,7 +86,6 @@ GNL  = $(GNLFT) $(GNLUFT)
 80_EVENTS = $(80_EVENTSDIR)/03_key_release.c \
 	$(80_EVENTSDIR)/05_mouse_handler_release.c \
 	$(80_EVENTSDIR)/07_close_handler.c \
-	$(80_EVENTSDIR)/08_refreshframe.c \
 	$(80_EVENTSDIR)/11_make_disco.c \
 	$(80_EVENTSDIR)/12_change_color_disco.c \
 	$(80_EVENTSDIR)/21_light_transform.c \
@@ -171,12 +171,19 @@ GNL  = $(GNLFT) $(GNLUFT)
 	$(73_RAYDIR)/_05_069_3_set_transf_ray.c \
 	$(73_RAYDIR)/_06_083_reflect.c
 
-SRCS = $(00_HELP) $(00_INIT) $(01_OPER) $(02_PARSE) $(88_UTILS) $(91_MLX) $(80_EVENTS) $(11_CAMERA) $(12_RENDER) $(13_INTERSECTIONS) $(71_TUPLE_OPER) $(72_MATRIX_TRANSF) $(73_RAY)
+SRCS = $(00_HELP) $(00_INIT) $(01_OPER) $(02_PARSE) $(88_UTILS) $(91_MLX) \
+       $(80_EVENTS) $(11_CAMERA) $(12_RENDER) $(13_INTERSECTIONS) \
+       $(71_TUPLE_OPER) $(72_MATRIX_TRANSF) $(73_RAY)
+
+SRCS_BONUS = src/99_bonus/_07_104_render_bonus.c
 
 INCLUDES = $(MLXFLAGS) $(GNL) $(PRINTFT)
 
 OBJ_DIR = obj
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
+
+OBJS_BONUS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS) $(SRCS_BONUS))
+
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(EFLAGS) -D STEP=$(STEP) -D DEBUG=$(DEBUG) -c $< -o $@
@@ -187,7 +194,18 @@ $(OBJ_DIR)/%.o: %.c
 ################################################################################
 
 .PHONY: all
-all: $(NAME)
+all: $(NAME_BONUS)
+
+$(NAME_BONUS): $(OBJS_BONUS) $(HEADER)
+	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
+	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
+	@make -C $(PRINTDIR) -s
+	@make -C $(LIBX_DIR) -s
+	@$(CC) $(MAIN_BONUS)  $(CFLAGS) $(EFLAGS) -D STEP=$(STEP) $(OBJS_BONUS) $(INCLUDES) -o $(NAME_BONUS)
+	@printf "$(GREEN)$(NAME) created$(CLR_RMV) ✅\n"
+
+.PHONY: mandatory
+mandatory: $(NAME)
 
 $(NAME): $(OBJS) $(HEADER)
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
@@ -196,6 +214,7 @@ $(NAME): $(OBJS) $(HEADER)
 	@make -C $(LIBX_DIR) -s
 	@$(CC) $(MAIN)  $(CFLAGS) $(EFLAGS) -D STEP=$(STEP) $(OBJS) $(INCLUDES) -o $(NAME)
 	@printf "$(GREEN)$(NAME) created$(CLR_RMV) ✅\n"
+
 
 LIBX_DIR = minilibx-linux
 LIBX_HEADER = $(LIBX_DIR)/mlx.h
@@ -209,30 +228,6 @@ $(LIBX_DIR) :
 
 libx : $(LIBX_DIR)
 
-p :
-	./parser_testing/parser_testing.sh
-.PHONY: norm
-norm:
-	@norminette src | grep -E 'Error:|rror!'
-	@norminette includes | grep -E 'Error:|rror!'
-
-.PHONY: gdb
-gdb : re
-	@tmux set-option remain-on-exit off
-	@tmux new-window  -n Gdb
-	@tmux send-keys 'gdbtui ./minirt' C-m Escape
-	@tmux split-window -h -l 30
-	@tmux send-keys -t Gdb.2 'nvim .gdbinit' C-m
-	@tmux select-pane -t Gdb.1
-
-.PHONY: vgdb
-vgdb :
-	@tmux new-window  -n vGdb
-	@tmux send-keys 'valgrind -q --vgdb-error=0 ./minirt_te scenes/eval/04_camera_position_3.rt' C-m Escape
-	@tmux split-window -h
-	@tmux send-keys -t Gdb.2 'gdbtui ./minirt scenes/eval/04_camera_position_3.rt' C-m
-	@tmux select-pane -t vGdb.1
-
 .PHONY: va
 va : fclean $(OBJS) $(HEADER)
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
@@ -244,37 +239,17 @@ va : fclean $(OBJS) $(HEADER)
 
 .PHONY: clean
 clean:
-	@ $(RM) -f $(OBJS)
+	@ $(RM) -f $(OBJS) $(OBJS_BONUS)
 	@make clean -C $(PRINTDIR) -s
 	@ printf "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✅\n"
 
-.PHONY: cleandebug
-debug : fclean cleandebug
-
-.PHONY: cleandebug
-cleandebug: $(OBJS) $(HEADER)
-
-	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
-	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
-	@make -C $(PRINTDIR) -s
-	@make -C $(LIBX_DIR) -s
-	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME) -D DEBUG=$(DEBUG)
-	@printf "$(GREEN)$(NAME) created$(CLR_RMV) ✅\n"
-	@make p
-
-
 .PHONY: fclean
 fclean: clean
-	@ $(RM) $(OBJ_DIR) $(NAME)
+	@ $(RM) $(OBJ_DIR) $(NAME) $(NAME_BONUS)
 	@make fclean -C $(PRINTDIR) -s
 	@printf "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✅\n"
 
 .PHONY: re
 re : fclean all
 
-.PHONY: te
-te : re
-	@echo -n ./$(NAME) scenes/; read args; ./miniRT scenes/$$args
-
 .SILENT: re all clean fclean
-
