@@ -101,10 +101,39 @@ static void	ft_small_menu_info(t_canvas *canvas, int i)
 		canvas->char_step);
 }
 
+static void	ft_print_selection(t_canvas *canvas)
+{
+	if (canvas->object_selected)
+	{
+		if (canvas->object_selected->type == SPHERE)
+			mlx_string_put(canvas->mlx, canvas->win,
+				IMG_W / 2 - 65, WIN_H - HEIGHT_POS - 15, WHITE,
+				"   SPHERE Selected");
+		else if (canvas->object_selected->type == PLANE)
+			mlx_string_put(canvas->mlx, canvas->win,
+				IMG_W / 2 - 65, WIN_H - HEIGHT_POS - 15, WHITE,
+				"   PLANE Selected");
+		else if (canvas->object_selected->type == CYLINDER)
+			mlx_string_put(canvas->mlx, canvas->win,
+				IMG_W / 2 - 65, WIN_H - HEIGHT_POS - 15, WHITE,
+				"  CYLINDER Selected");
+	}
+	else if (canvas->light_selected)
+		mlx_string_put(canvas->mlx, canvas->win,
+			IMG_W / 2 - 65, WIN_H - HEIGHT_POS - 15, WHITE,
+			"   LIGHT Selected");
+	else
+		return ;
+	mlx_string_put(canvas->mlx, canvas->win,
+		IMG_W / 2 - 65, WIN_H - HEIGHT_POS, WHITE,
+		" 'x' key to unselect");
+}
+
 void	ft_menu(t_canvas *canvas)
 {
 	int	i;
 
+	ft_print_selection(canvas);
 	if (canvas->help)
 	{
 		i = 22;
