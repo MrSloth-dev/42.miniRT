@@ -247,6 +247,7 @@ clean:
 fclean: clean
 	@ $(RM) $(OBJ_DIR) $(NAME) $(NAME_BONUS)
 	@make fclean -C $(PRINTDIR) -s
+	@make clean -C $(LIBX_DIR) -s
 	@printf "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✅\n"
 
 .PHONY: re
