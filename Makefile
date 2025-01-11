@@ -231,7 +231,6 @@ va : fclean $(OBJS) $(HEADER)
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
 	@make -C $(PRINTDIR) -s
-	@make -C $(LIBX_DIR) -s
 	@$(CC) $(MAIN) $(CFLAGS) $(EFLAGS) $(OBJS) $(INCLUDES) -o $(NAME) 
 	@echo -n valgrind $(VALGRINDFLAGS) ./$(NAME) scenes/ ; read args; valgrind $(VALGRINDFLAGS) ./$(NAME) scenes/$$args
 
@@ -245,7 +244,6 @@ clean:
 fclean: clean
 	@ $(RM) $(OBJ_DIR) $(NAME) $(NAME_BONUS)
 	@make fclean -C $(PRINTDIR) -s
-	@make clean -C $(LIBX_DIR) -s
 	@printf "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✅\n"
 
 .PHONY: re
