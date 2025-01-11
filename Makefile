@@ -194,7 +194,7 @@ $(OBJ_DIR)/%.o: %.c
 ################################################################################
 
 .PHONY: all
-all: $(NAME_BONUS)
+all: $(NAME)
 
 $(NAME_BONUS): $(OBJS_BONUS) $(HEADER)
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
