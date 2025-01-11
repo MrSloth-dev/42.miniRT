@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include <raylib.h>
 
 static void	set_data_to_draw_line(t_ln_pt *data)
 {
@@ -29,7 +30,9 @@ static void	set_data_to_draw_line(t_ln_pt *data)
 
 void	ft_draw_line(t_canvas *c, t_ln_pt data, int color)
 {
+	(void)c;
 	set_data_to_draw_line(&data);
+	t_color	colore = ft_color_int_to_rgb(color);
 	while (data.actual.x != data.next.x || data.actual.y != data.next.y)
 	{
 		data.e2 = 2 * data.err;
@@ -43,6 +46,6 @@ void	ft_draw_line(t_canvas *c, t_ln_pt data, int color)
 			data.err += data.delta_x;
 			data.actual.y += data.y_direction;
 		}
-		ft_pixel_put(&c->img, data.actual.x, data.actual.y, color);
+		DrawPixel(data.actual.x, data.actual.y, (Color){colore.x, colore.y, colore.z, 255});
 	}
 }

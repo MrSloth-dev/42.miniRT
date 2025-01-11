@@ -11,81 +11,50 @@
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include <raylib.h>
 
 static void	ft_top_menu_options(t_canvas *canvas, int *j, int i)
 {
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE, "Press 'h' to close help");
-	i--;
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - 6 - HEIGHT_POS * i--, WHITE, "Keyboard commands:");
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE, "\"Esc\"       --> exit");
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-		"o p         --> adjust pixel upscale");
+	(void)canvas;
+	DrawText("Press 'h' to close help", W_POS, WIN_H - HEIGHT_POS * i--, 5, RAYWHITE);
+	DrawText("Keyboard commands:", W_POS, WIN_H - 6 - HEIGHT_POS * i--, 5, RAYWHITE);
+	DrawText("\"Esc\"       --> exit", W_POS, WIN_H  - HEIGHT_POS * i--, 5, RAYWHITE);
+	DrawText("o p         --> adjust pixel upscale", W_POS, WIN_H  - HEIGHT_POS * i--, 5, RAYWHITE);
 	*j = --i;
 }
 
 static void	ft_general_options(t_canvas *canvas, int *j, int i)
 {
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-		"w a s d q e --> move");
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-		"Arrow keys  --> rotate");
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-		"Space/c     --> camera move up / down");
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-		"z           --> reset camera position");
-	i--;
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-		"mouse left click --> select object");
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-		"l           --> select light");
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-		"x           --> abort selection");
+	(void)canvas;
+	DrawText("w a s d q e --> move", W_POS, WIN_H - HEIGHT_POS * i--, 5, RAYWHITE);
+	DrawText("Arrow keys  --> rotate", W_POS, WIN_H - HEIGHT_POS * i--, 5, RAYWHITE);
+	DrawText("Space/c     --> camera move up / down", W_POS, WIN_H - HEIGHT_POS * i--, 5, RAYWHITE);
+	DrawText("z           --> reset camera position", W_POS, WIN_H - HEIGHT_POS * i--, 5, RAYWHITE);
+	DrawText("mouse left click --> select object", W_POS, WIN_H - HEIGHT_POS * i--, 5, RAYWHITE);
+	DrawText("l           --> select light", W_POS, WIN_H - HEIGHT_POS * i--, 5, RAYWHITE);
+	DrawText("x           --> abort selection", W_POS, WIN_H - HEIGHT_POS * i--, 5, RAYWHITE);
 	*j = --i;
 }
 
 static void	ft_last_options(t_canvas *canvas, int *j, int i)
 {
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-		"Left Shift hold --> subtract enable");
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-		"r g b      --> adjust R-G-B color");
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-		"t    --> adjust bright object/light");
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-		"1 2 3      --> adjust dimensions");
+	(void)canvas;
+	DrawText("Left Shift hold --> subtract enable", W_POS, WIN_H - HEIGHT_POS * i--, 5, RAYWHITE);
+	DrawText("r g b      --> adjust R-G-B color", W_POS, WIN_H - HEIGHT_POS * i--, 5, RAYWHITE);
+	DrawText("t    --> adjust bright object/light", W_POS, WIN_H - HEIGHT_POS * i--, 5, RAYWHITE);
+	DrawText("1 2 3      --> adjust dimensions", W_POS, WIN_H - HEIGHT_POS * i--, 5, RAYWHITE);
 	i--;
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-		"Left shift + 0        --> SURPRISE!");
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-		"(only with pixel upscale minimum 2)");
+	DrawText("1 2 3      --> adjust dimensions", W_POS, WIN_H - HEIGHT_POS * i--, 5, RAYWHITE);
+	DrawText("Left shift + 0        --> SURPRISE!", W_POS, WIN_H - HEIGHT_POS * i--, 5, RAYWHITE);
+	DrawText("(only with pixel upscale minimum 2)", W_POS, WIN_H - HEIGHT_POS * i--, 5, RAYWHITE);
 	*j = --i;
 }
 
 static void	ft_small_menu_info(t_canvas *canvas, int i)
 {
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i--, WHITE,
-		"Press 'h' for help");
-	mlx_string_put(canvas->mlx, canvas->win,
-		W_POS, WIN_H - HEIGHT_POS * i, WHITE,
-		"Pixel upscale:");
+	(void)canvas;
+	DrawText( "Press 'h' for help", W_POS, WIN_H - HEIGHT_POS * i--, 5,RAYWHITE);
+	DrawText( "Pixel upscale:", W_POS, WIN_H - HEIGHT_POS * i, 5,RAYWHITE);
 	if (canvas->step > 9)
 	{
 		canvas->char_step[0] = '1';
@@ -96,9 +65,7 @@ static void	ft_small_menu_info(t_canvas *canvas, int i)
 		canvas->char_step[0] = '0';
 		canvas->char_step[1] = canvas->step + '0';
 	}
-	mlx_string_put(canvas->mlx, canvas->win, W_POS + 105,
-		WIN_H - HEIGHT_POS * i--, WHITE,
-		canvas->char_step);
+	DrawText( canvas->char_step, W_POS + 105, WIN_H - HEIGHT_POS * i--, 5,RAYWHITE);
 }
 
 static void	ft_print_selection(t_canvas *canvas)
@@ -106,27 +73,17 @@ static void	ft_print_selection(t_canvas *canvas)
 	if (canvas->object_selected)
 	{
 		if (canvas->object_selected->type == SPHERE)
-			mlx_string_put(canvas->mlx, canvas->win,
-				IMG_W / 2 - 65, WIN_H - HEIGHT_POS - 15, WHITE,
-				"   SPHERE Selected");
+			DrawText( "   SPHERE Selected", IMG_W / 2 - 65, WIN_H - HEIGHT_POS - 15, 5,RAYWHITE);
 		else if (canvas->object_selected->type == PLANE)
-			mlx_string_put(canvas->mlx, canvas->win,
-				IMG_W / 2 - 65, WIN_H - HEIGHT_POS - 15, WHITE,
-				"   PLANE Selected");
+			DrawText( "   PLANE Selected", IMG_W / 2 - 65, WIN_H - HEIGHT_POS - 15, 5,RAYWHITE);
 		else if (canvas->object_selected->type == CYLINDER)
-			mlx_string_put(canvas->mlx, canvas->win,
-				IMG_W / 2 - 65, WIN_H - HEIGHT_POS - 15, WHITE,
-				"  CYLINDER Selected");
+			DrawText( "  CYLINDER Selected", IMG_W / 2 - 65, WIN_H - HEIGHT_POS - 15, 5,RAYWHITE);
 	}
 	else if (canvas->light_selected)
-		mlx_string_put(canvas->mlx, canvas->win,
-			IMG_W / 2 - 65, WIN_H - HEIGHT_POS - 15, WHITE,
-			"   LIGHT Selected");
+		DrawText( "   LIGHT Selected", IMG_W / 2 - 65, WIN_H - HEIGHT_POS - 15, 5,RAYWHITE);
 	else
 		return ;
-	mlx_string_put(canvas->mlx, canvas->win,
-		IMG_W / 2 - 65, WIN_H - HEIGHT_POS, WHITE,
-		" 'x' key to unselect");
+	DrawText( " 'x' key to unselect", IMG_W / 2 - 65, WIN_H - HEIGHT_POS, 5,RAYWHITE);
 }
 
 void	ft_menu(t_canvas *canvas)
@@ -146,13 +103,7 @@ void	ft_menu(t_canvas *canvas)
 		i = 2;
 		ft_small_menu_info(canvas, i);
 	}
-	mlx_string_put(canvas->mlx, canvas->win, canvas->local_x.next.x
-		+ canvas->local_x.x_str,
-		canvas->local_x.next.y + canvas->local_x.y_str, WHITE, "X");
-	mlx_string_put(canvas->mlx, canvas->win, canvas->local_y.next.x
-		+ canvas->local_y.x_str,
-		canvas->local_y.next.y + canvas->local_y.y_str, WHITE, "Y");
-	mlx_string_put(canvas->mlx, canvas->win, canvas->local_z.next.x
-		+ canvas->local_z.x_str,
-		canvas->local_z.next.y + canvas->local_z.y_str, WHITE, "Z");
+	DrawText( "X", canvas->local_x.next.x + canvas->local_x.x_str, canvas->local_x.next.y + canvas->local_x.y_str, 5,RAYWHITE);
+	DrawText( "Y", canvas->local_y.next.x + canvas->local_y.x_str, canvas->local_y.next.y + canvas->local_y.y_str, 5,RAYWHITE);
+	DrawText( "Z", canvas->local_z.next.x + canvas->local_z.x_str, canvas->local_z.next.y + canvas->local_z.y_str, 5,RAYWHITE);
 }

@@ -5,10 +5,10 @@
 NAME = miniRT
 NAME_BONUS = minirt
 CC = cc
-CFLAGS = -Iincludes -g
+CFLAGS = -Iincludes -g -lraylib
 EFLAGS = -Wall -Wextra -Werror
 MFLAGS = -fsanitize=undefined -fno-omit-frame-pointer -fsanitize=memory
-MLXFLAGS = -O3 -ffast-math -march=native -Lminilibx-linux -lm -lmlx -lX11 -lXext -g
+MLXFLAGS = -O3 -ffast-math -march=native -lm -g
 STEP ?= 2
 DEBUG ?= 0
 
@@ -200,7 +200,6 @@ $(NAME_BONUS): $(OBJS_BONUS) $(HEADER)
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
 	@make -C $(PRINTDIR) -s
-	@make -C $(LIBX_DIR) -s
 	@$(CC) $(MAIN_BONUS)  $(CFLAGS) $(EFLAGS) -D STEP=$(STEP) $(OBJS_BONUS) $(INCLUDES) -o $(NAME_BONUS)
 	@printf "$(GREEN)$(NAME) created$(CLR_RMV) ✅\n"
 
@@ -211,7 +210,6 @@ $(NAME): $(OBJS) $(HEADER)
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)$(NAME) $(CLR_RMV)...\n"
 	@make -C $(PRINTDIR) -s
-	@make -C $(LIBX_DIR) -s
 	@$(CC) $(MAIN)  $(CFLAGS) $(EFLAGS) -D STEP=$(STEP) $(OBJS) $(INCLUDES) -o $(NAME)
 	@printf "$(GREEN)$(NAME) created$(CLR_RMV) ✅\n"
 

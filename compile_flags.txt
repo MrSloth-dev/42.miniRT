@@ -1,5 +1,4 @@
 -Iincludes
--Iminilibx-linux
 -Wall
 -Werror
 -Wextra

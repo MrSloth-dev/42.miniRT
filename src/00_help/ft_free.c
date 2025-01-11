@@ -54,6 +54,5 @@ void	ft_free_canvas(t_canvas *canvas)
 {
 	ft_free_objects(canvas->objects);
 	canvas->objects = NULL;
-	ft_free(canvas->mlx);
 	ft_free(canvas->gnl_rest);
 }

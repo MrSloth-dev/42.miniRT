@@ -14,7 +14,6 @@
 
 int	key_handler(int keysym, t_canvas *canvas)
 {
-	mlx_do_key_autorepeaton(canvas->mlx);
 	if (keysym == XK_Escape)
 		close_handler(canvas);
 	else if (keysym == XK_h)

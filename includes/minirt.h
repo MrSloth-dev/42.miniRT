@@ -20,9 +20,7 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 # include <math.h>
-# include "../minilibx-linux/mlx.h"
 # include <X11/keysym.h>
-# include <X11/X.h>
 
 # include "structs.h"
 
@@ -47,7 +45,7 @@
 # define TEXT_W_ZONE 250
 
 # ifndef STEP
-#  define STEP 2
+#  define STEP 19
 # endif
 
 # define ROUND_ERROR 0.000001

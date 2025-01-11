@@ -14,7 +14,6 @@
 
 int	key_release(int keysym, t_canvas *canvas)
 {
-	mlx_do_key_autorepeaton(canvas->mlx);
 	if (keysym == XK_Shift_L)
 		canvas->shift_press = 1;
 	return (0);

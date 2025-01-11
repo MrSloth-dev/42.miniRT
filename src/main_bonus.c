@@ -11,22 +11,23 @@
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
+#include <raylib.h>
 
-void	ft_mlx_end(t_canvas *canvas)
-{
-	mlx_do_key_autorepeatoff(canvas->mlx);
-	mlx_hook(canvas->win, KeyPress, KeyPressMask, key_handler, canvas);
-	mlx_hook(canvas->win, KeyRelease, KeyReleaseMask, key_release, canvas);
-	mlx_hook(canvas->win, ButtonPress, ButtonPressMask, mouse_handler, canvas);
-	mlx_hook(canvas->win, ButtonRelease, ButtonReleaseMask,
-		mouse_handler_release, canvas);
-	mlx_hook(canvas->win, MotionNotify, CWBackingStore, mouse_motion, canvas);
-	mlx_hook(canvas->win, DestroyNotify, StructureNotifyMask,
-		close_handler, canvas);
-	mlx_loop_hook(canvas->mlx, ft_refreshframe, canvas);
-	mlx_loop(canvas->mlx);
-	ft_free_canvas(canvas);
-}
+// void	ft_mlx_end(t_canvas *canvas)
+// {
+// 	mlx_do_key_autorepeatoff(canvas->mlx);
+// 	mlx_hook(canvas->win, KeyPress, KeyPressMask, key_handler, canvas);
+// 	mlx_hook(canvas->win, KeyRelease, KeyReleaseMask, key_release, canvas);
+// 	mlx_hook(canvas->win, ButtonPress, ButtonPressMask, mouse_handler, canvas);
+// 	mlx_hook(canvas->win, ButtonRelease, ButtonReleaseMask,
+// 		mouse_handler_release, canvas);
+// 	mlx_hook(canvas->win, MotionNotify, CWBackingStore, mouse_motion, canvas);
+// 	mlx_hook(canvas->win, DestroyNotify, StructureNotifyMask,
+// 		close_handler, canvas);
+// 	mlx_loop_hook(canvas->mlx, ft_refreshframe, canvas);
+// 	mlx_loop(canvas->mlx);
+// 	ft_free_canvas(canvas);
+// }
 
 static int	ft_count_objects(t_canvas *canvas)
 {
@@ -45,19 +46,21 @@ int	ft_refreshframe(void *ptr)
 	t_canvas	*canvas;
 
 	canvas = ptr;
-	mlx_destroy_image(canvas->mlx, canvas->img.img);
-	canvas->img.img = mlx_new_image(canvas->mlx, IMG_W, IMG_H);
-	canvas->img.addr = mlx_get_data_addr(canvas->img.img,
-			&canvas->img.bits_per_pixel,
-			&canvas->img.size_line, &canvas->img.endian);
 	ft_update_world_camera(canvas);
 	ft_render_bonus(canvas);
 	draw_axis(canvas);
-	mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img.img, 0, 0);
-	ft_menu(canvas);
+	// mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img.img, 0, 0);
+	// ft_menu(canvas);
 	return (0);
 }
 
+void	InitRL()
+{
+	const int	screenWidth = WIN_W;
+	const int	screenHeight = WIN_H;
+	InitWindow(screenWidth, screenHeight, "miniRT");
+	SetTargetFPS(30);
+}
 int	main(int argc, char *argv[])
 {
 	t_canvas	canvas;
@@ -70,8 +73,16 @@ int	main(int argc, char *argv[])
 		return (ft_free_canvas(&canvas), 1);
 	if (canvas.debug)
 		return (ft_free_canvas(&canvas), 0);
-	ft_mlx_init(&canvas);
+	InitRL();
+	while (!WindowShouldClose())
+	{
+	BeginDrawing();
+	ClearBackground(RAYWHITE);
 	ft_refreshframe(&canvas);
-	ft_mlx_end(&canvas);
+	EndDrawing();
+	}
+	CloseWindow();
+	// ft_mlx_init(&canvas);
+	// ft_mlx_end(&canvas);
 	return (0);
 }

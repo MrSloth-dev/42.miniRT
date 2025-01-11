@@ -34,7 +34,7 @@ t_tuple	ft_get_norm(char *str, char *element, t_canvas *canvas)
 		return (ft_printf(2, "Error\n%s norm format is wrong\n", element),
 			(t_tuple){-43.42, -43.42, -43.42, -1});
 	norm_split = ft_split(str, ',');
-	norm = (t_color){ft_atod(norm_split[0]), ft_atod(norm_split[1]),
+	norm = (t_tuple){ft_atod(norm_split[0]), ft_atod(norm_split[1]),
 		ft_atod(norm_split[2]), 0};
 	if (ft_check_null_split(norm_split)
 		&& ft_norm_check(norm))
@@ -55,7 +55,7 @@ t_tuple	ft_get_coord(char *str, char *element, t_canvas *canvas)
 		return (ft_printf(2, "Error\n%s coord format is wrong\n", element),
 			(t_tuple){-43.42, -43.42, -43.42, -1});
 	coord_split = ft_split(str, ',');
-	coord = (t_color){ft_atod(coord_split[0]), ft_atod(coord_split[1]),
+	coord = (t_tuple){ft_atod(coord_split[0]), ft_atod(coord_split[1]),
 		ft_atod(coord_split[2]), 1};
 	if (ft_check_null_split(coord_split)
 		&& ft_check_values(coord.x, coord.y, coord.z))
@@ -63,7 +63,7 @@ t_tuple	ft_get_coord(char *str, char *element, t_canvas *canvas)
 	else
 		return (ft_free_split(coord_split),
 			ft_printf(2, "Error\n%s coord format is wrong\n", element),
-			(t_color){-43.42, -43.42, -43.42, -1});
+			(t_tuple){-43.42, -43.42, -43.42, -1});
 }
 
 t_color	ft_get_color(char *str, char *element, t_canvas *canvas)

@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minirt.h"
 #include "minirt_bonus.h"
+#include <raylib.h>
 
 //put our colored pixel, to our mlx image.
 // we convert a color in 
@@ -20,14 +22,12 @@
 void	ft_custom_pixel_put_bonus(t_canvas *canvas, t_iter *h, t_tuple color)
 {
 	h->y_step = 0;
+	color = ft_scalar_tuple(color, 25.f);
 	while (h->y_step < canvas->step)
 	{
 		h->x_step = 0;
 		while (h->x_step < canvas->step)
-		{
-			ft_pixel_put(&canvas->img, h->x + h->x_step++, h->y + h->y_step,
-				ft_get_mlx_color(color));
-		}
+			DrawPixel(h->x + h->x_step++, h->y + h->y_step, (Color){color.x, color.y, color.z, 255});
 		h->y_step++;
 	}
 }
