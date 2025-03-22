@@ -1,6 +1,7 @@
 # miniRT - My First Ray Tracer
 
 A simple ray tracer built in C using the MiniLibX graphics library.
+This project was developed in a group, by João Barbosa and Ivan Teixeira.
 
 ## Overview
 
@@ -65,5 +66,6 @@ make demo
 
 This project was developed with the help of "The Ray Tracer Challenge" book by Jamis Buck, which provided valuable insights into the mathematics and implementation details of ray tracing.
 
-[-> PROGRAM SCHEME <-](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/map.jpg)
+Here you can see a big picture of program implementation:
+![-> PROGRAM SCHEME <-](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/map.jpg)
 
