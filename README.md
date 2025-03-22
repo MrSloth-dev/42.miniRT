@@ -26,6 +26,9 @@ This project is an introduction to the beautiful world of ray tracing, allowing 
 ## Screenshots
 
 ![https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/01.png](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/01.png)
+![https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/02.png](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/02.png)
+![https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/03.png](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/03.png)
+![https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/04.png](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/04.png)
 
 ## Controls
 
