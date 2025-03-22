@@ -46,7 +46,7 @@ make demo
 ## Usage
 
 ```bash
-./miniRT scenes/example.rt
+./minirt scenes/example.rt
 ```
 
 ## Basic Controls
