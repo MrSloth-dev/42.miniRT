@@ -26,19 +26,8 @@ This project is an introduction to the beautiful world of ray tracing, allowing 
 ## Screenshots
 
 ![https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/01.png](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/01.png)
-![https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/02.png](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/02.png)
 ![https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/03.png](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/03.png)
-![https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/04.png](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/04.png)
-
-## Controls
-
-- **ESC**: Exit program
-- **Arrow keys**: Rotate camera
-- **W/A/S/D**: Move camera
-- **Space/C**: Move camera up/down
-- **Mouse click**: Select objects
-- **H**: Toggle help menu
-- **Z**: Reset camera position
+![https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/02.png](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/02.png)
 
 ## Installation
 
@@ -58,6 +47,19 @@ make demo
 ```bash
 ./miniRT scenes/example.rt
 ```
+
+## Basic Controls
+
+- **H**: Toggle help menu
+- **ESC**: Exit program
+- **Arrow keys**: Rotate camera
+- **W/A/S/D**: Move camera
+- **Space/C**: Move camera up/down
+- **Left Mouse click**: Select objects
+- **Right Mouse click and hold**: Drag image
+- **Z**: Reset camera position
+
+![https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/04.png](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/04.png)
 
 ## Acknowledgments
 
