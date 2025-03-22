@@ -65,5 +65,5 @@ make demo
 
 This project was developed with the help of "The Ray Tracer Challenge" book by Jamis Buck, which provided valuable insights into the mathematics and implementation details of ray tracing.
 
-![https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/map.jpg](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/map.jpg)
+[-> PROGRAM SCHEME <-](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/map.jpg)
 
