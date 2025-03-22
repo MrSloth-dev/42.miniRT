@@ -25,7 +25,7 @@ This project is an introduction to the beautiful world of ray tracing, allowing 
 
 ## Screenshots
 
-![Ray Traced Scene Example](https://via.placeholder.com/800x600)
+[Alt Text](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/01.png)
 
 ## Controls
 
