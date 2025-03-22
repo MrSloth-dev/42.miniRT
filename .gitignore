@@ -1,0 +1,6 @@
+minilibx-linux/
+obj/
+minirt
+miniRT
+*.o
+*.a

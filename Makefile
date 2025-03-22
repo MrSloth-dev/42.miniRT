@@ -194,7 +194,7 @@ $(OBJ_DIR)/%.o: %.c
 ################################################################################
 
 .PHONY: all
-all: $(NAME_BONUS)
+all: libx $(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJS_BONUS) $(HEADER)
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
@@ -204,8 +204,12 @@ $(NAME_BONUS): $(OBJS_BONUS) $(HEADER)
 	@$(CC) $(MAIN_BONUS)  $(CFLAGS) $(EFLAGS) -D STEP=$(STEP) $(OBJS_BONUS) $(INCLUDES) -o $(NAME_BONUS)
 	@printf "$(GREEN)$(NAME) created$(CLR_RMV) ✅\n"
 
+.PHONY: demo
+demo:
+	./minirt scenes/demo.rt
+
 .PHONY: mandatory
-mandatory: $(NAME)
+mandatory: libx $(NAME)
 
 $(NAME): $(OBJS) $(HEADER)
 	@printf "$(GREEN)Compilation $(CLR_RMV)of $(YELLOW)libft$(CLR_RMV)...\n"
@@ -222,9 +226,19 @@ LIBX_HEADER = $(LIBX_DIR)/mlx.h
 .PHONY: libx
 .SILENT: $(LIBX_DIR)
 $(LIBX_DIR) :
-	@wget -q https://cdn.intra.42.fr/document/document/29544/minilibx-linux.tgz && \
-	tar xf minilibx-linux.tgz && \
-	rm -fr minilibx-linux.tgz
+	@if [ ! -d $(LIBX_DIR) ]; then \
+		printf "$(YELLOW)Extracting minilibx...$(CLR_RMV)...  "; \
+		tar xf minilibx-linux.tgz; \
+		printf "$(GREEN)minilibx extracted$(CLR_RMV) ✅\n"; \
+	fi
+	
+.PHONY: rmlibx
+rmlibx:
+	@if [  -d $(LIBX_DIR) ]; then \
+		printf "$(YELLOW)Deleting minilibx...$(CLR_RMV)  "; \
+		rm -rf $(LIBX_DIR); \
+		printf "$(GREEN)minilibx deleted$(CLR_RMV) ✅\n"; \
+	fi
 
 libx : $(LIBX_DIR)
 
@@ -241,13 +255,14 @@ va : fclean $(OBJS) $(HEADER)
 clean:
 	@ $(RM) -f $(OBJS) $(OBJS_BONUS)
 	@make clean -C $(PRINTDIR) -s
+	@if [  -d $(LIBX_DIR) ]; then \
+	make clean -C $(LIBX_DIR) -s; fi
 	@ printf "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✅\n"
 
 .PHONY: fclean
-fclean: clean
+fclean: clean rmlibx
 	@ $(RM) $(OBJ_DIR) $(NAME) $(NAME_BONUS)
 	@make fclean -C $(PRINTDIR) -s
-	@make clean -C $(LIBX_DIR) -s
 	@printf "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✅\n"
 
 .PHONY: re
