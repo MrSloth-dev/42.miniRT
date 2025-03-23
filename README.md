@@ -26,7 +26,7 @@ This project is an introduction to the beautiful world of ray tracing, allowing 
 
 ## Screenshots
 
-![./assets/01.png](.assets/01.png)
+![./assets/01.png](./assets/01.png)
 ![./assets/03.png](./assets/03.png)
 ![./assets/02.png](./assets/02.png)
 
