@@ -26,9 +26,9 @@ This project is an introduction to the beautiful world of ray tracing, allowing 
 
 ## Screenshots
 
-![https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/01.png](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/01.png)
-![https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/03.png](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/03.png)
-![https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/02.png](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/02.png)
+![./assets/01.png](.assets/01.png)
+![./assets/03.png](./assets/03.png)
+![./assets/02.png](./assets/02.png)
 
 ## Installation
 
@@ -60,12 +60,12 @@ make demo
 - **Right Mouse click and hold**: Drag image
 - **Z**: Reset camera position
 
-![https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/04.png](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/04.png)
+![./assets/04.png](./assets/04.png)
 
 ## Acknowledgments
 
 This project was developed with the help of "The Ray Tracer Challenge" book by Jamis Buck, which provided valuable insights into the mathematics and implementation details of ray tracing.
 
 Here you can see a big picture of program implementation:
-![-> PROGRAM SCHEME <-](https://github.com/MrSloth-dev/42.miniRT/blob/main/assets/map.jpg)
+![-> PROGRAM SCHEME <-](./assets/map.jpg)
 
