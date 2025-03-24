@@ -1,4 +1,4 @@
-# 🌟miniRT - My First Ray Tracer
+# 🩻miniRT - My First Ray Tracer
 
 A simple ray tracer built in C using the MiniLibX graphics library.
 This project was developed in a group, by João Barbosa and Ivan Teixeira.
