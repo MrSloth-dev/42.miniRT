@@ -38,7 +38,7 @@ This project is an introduction to the beautiful world of ray tracing, allowing 
 
 
 ![./assets/01.png](./assets/01.png)
-![./assets/03.png](./assets/03.epng)
+![./assets/03.png](./assets/03.png)
 ![./assets/02.png](./assets/02.png)
 
 ## ⚡ How To Install
